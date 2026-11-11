@@ -15,7 +15,7 @@ info() { echo "  $*" >&2; }
 wbm_fetch() {
     local url="$1" out="$2" attempt=0 max=3 code
     while (( attempt < max )); do
-        code=$(curl -s -o "$out" -w '%{http_code}' "$url")
+        code=$(curl -sL -o "$out" -w '%{http_code}' "$url")
         case "$code" in
             200) return 0 ;;
             429) info "rate-limited, waiting 30s..."; sleep 30 ;;
@@ -93,7 +93,7 @@ while IFS= read -r asset_path; do
         mkdir -p "$asset_dir"
         asset_url="https://web.archive.org/web/${timestamp}id_/$DOMAIN$asset_path"
         if wbm_fetch "$asset_url" "$local_path"; then
-            (( assets_downloaded++ ))
+            (( assets_downloaded++ )) || true
         else
             info "warning: could not download $asset_path"
             rm -f "$local_path"
