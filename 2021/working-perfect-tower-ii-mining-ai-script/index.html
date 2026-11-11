@@ -6,15 +6,15 @@
 	<meta http-equiv="Cache-control" content="private,max-age:9800">
 	<meta name="description" content="Planet Earth's most widely read blog." /> 
 	<meta name="robots" content="index,follow,noarchive" />
-<link rel="icon" href="http://trilema.com/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-	<link rel="stylesheet" href="http://trilema.com/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
 
-<style type="text/css">  body {      	background: #fff url('http://trilema.com/wp-content/themes/trilema/images/bg_oct2009.jpg') no-repeat center top; }  </style>
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_oct2009.jpg') no-repeat center top; }  </style>
 
-	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://trilema.com/feed/atom/" />
-	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="http://trilema.com/feed/" />
-	<link rel="pingback" href="http://trilema.com/xmlrpc.php" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
 		<title>Working Perfect Tower II Mining AI Script on Trilema - A blog by Mircea Popescu.</title>
 	<style type="text/css">
 						ol.footnotes li {list-style-type:lower-roman;}
@@ -30,7 +30,7 @@
 	<div id="mask_head_ie"></div>
 	<div id="base2">
 		<div id="header">
-			<div id="blogtitle"><a href="http://trilema.com">Trilema</a></div>
+			<div id="blogtitle"><a href="/">Trilema</a></div>
 			<div id="subtitle">Aici este pragul cel de sus,<br />unde v-o zis tati ca'ti da cu capul.
 </div>
 
@@ -41,7 +41,7 @@
 		</div>
 		<div id="mask_foot"></div>
 		<div id="container">
-<div id="content">        <div class="spacer"></div>             <span id="shash-100307"><div class="post" id="post-100307">                    <h1><a href="http://trilema.com/2021/working-perfect-tower-ii-mining-ai-script/" rel="bookmark" title="Permanent Link to Working Perfect Tower II Mining AI Script">Working Perfect Tower II Mining AI Script</a></h1>                        <div class="date">                                     Friday, 02 April, Year 13 d.Tr.&nbsp;|&nbsp;Author: <a href="http://trilema.com/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+<div id="content">        <div class="spacer"></div>             <span id="shash-100307"><div class="post" id="post-100307">                    <h1><a href="/2021/working-perfect-tower-ii-mining-ai-script/" rel="bookmark" title="Permanent Link to Working Perfect Tower II Mining AI Script">Working Perfect Tower II Mining AI Script</a></h1>                        <div class="date">                                     Friday, 02 April, Year 13 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
 
                         <div class="entry">
 <p>Not being one to waste too much time, here it directly is<sup><a href="#footnote_0_100307" id="identifier_0_100307" class="footnote-link footnote-identifier-link" title="If you're curious, that base64 encoding decodes to the lulziest of mixed-binary-xmlish nonsense...
@@ -77,19 +77,19 @@
 000001d0: 6e2e 696e 740d 6c6f 6361 6c2e 696e 742e  n.int.local.int.
 000001e0: 6765 7408 636f 6e73 7461 6e74 0406 4d49  get.constant..MI
 000001f0: 4e45 5859 0863 6f6e 7374 616e 7404 013c  NEXY.constant..">i</a></sup> : </p>
-<blockquote class="breakup"><p><a href="http://trilema.com/wp-content/uploads/2021/04/perfect-tower-ii-scripting-interface.png"><img src="http://trilema.com/wp-content/uploads/2021/04/perfect-tower-ii-scripting-interface-100x100.png" alt="perfect-tower-ii-scripting-interface" title="perfect-tower-ii-scripting-interface" width="100" height="100" class="alignright size-thumbnail wp-image-100323" /></a>BU1pbmVyAQAAAAlvcGVuLm1pbmUAAAAADAAAAA1sb2NhbC5pbnQuc2V0CGNvbnN0YW50BAdNSU5FVEFCCGNvbnN0YW50AgIAAAANbG9jYWwuaW50LnNldAhjb25zdGFudAQJTUlORUxheWVyCGNvbnN0YW50AgAAAAANbG9jYWwuaW50LnNldAhjb25zdGFudAQGTUlORVhZCGNvbnN0YW50AgAAAAAIbWluZS5kaWcOYXJpdGhtZXRpYy5pbnQNbG9jYWwuaW50LmdldAhjb25zdGFudAQGTUlORVhZCGNvbnN0YW50BANNT0QIY29uc3RhbnQCBAAAAA5hcml0aG1ldGljLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAZNSU5FWFkIY29uc3RhbnQEAS8IY29uc3RhbnQCBAAAAA1sb2NhbC5pbnQuc2V0CGNvbnN0YW50BAZNSU5FWFkOYXJpdGhtZXRpYy5pbnQNbG9jYWwuaW50LmdldAhjb25zdGFudAQGTUlORVhZCGNvbnN0YW50BAErCGNvbnN0YW50AgEAAAAOZ2VuZXJpYy5nb3RvaWYIY29uc3RhbnQCBAAAAA5jb21wYXJpc29uLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAZNSU5FWFkIY29uc3RhbnQEATwIY29uc3RhbnQCEQAAAA1taW5lLm5ld2xheWVyDWxvY2FsLmludC5zZXQIY29uc3RhbnQECU1JTkVMQVlFUg5hcml0aG1ldGljLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAlNSU5FTGF5ZXIIY29uc3RhbnQEASsIY29uc3RhbnQCAQAAAA5nZW5lcmljLmdvdG9pZghjb25zdGFudAIDAAAADmNvbXBhcmlzb24uaW50DWxvY2FsLmludC5nZXQIY29uc3RhbnQECU1JTkVMQVlFUghjb25zdGFudAQBPAhjb25zdGFudAILAAAACG1pbmUudGFiDWxvY2FsLmludC5nZXQIY29uc3RhbnQEB01JTkV0QUINbG9jYWwuaW50LnNldAhjb25zdGFudAQHTUlORVRBQg5hcml0aG1ldGljLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAdNSU5FVEFCCGNvbnN0YW50BAErCGNvbnN0YW50AgEAAAAOZ2VuZXJpYy5nb3RvaWYIY29uc3RhbnQCAgAAAA5jb21wYXJpc29uLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAdNSU5FVEFCCGNvbnN0YW50BAE8CGNvbnN0YW50Ag4AAAA=</p></blockquote>
+<blockquote class="breakup"><p><a href="/wp-content/uploads/2021/04/perfect-tower-ii-scripting-interface.png"><img src="/wp-content/uploads/2021/04/perfect-tower-ii-scripting-interface-100x100.png" alt="perfect-tower-ii-scripting-interface" title="perfect-tower-ii-scripting-interface" width="100" height="100" class="alignright size-thumbnail wp-image-100323" /></a>BU1pbmVyAQAAAAlvcGVuLm1pbmUAAAAADAAAAA1sb2NhbC5pbnQuc2V0CGNvbnN0YW50BAdNSU5FVEFCCGNvbnN0YW50AgIAAAANbG9jYWwuaW50LnNldAhjb25zdGFudAQJTUlORUxheWVyCGNvbnN0YW50AgAAAAANbG9jYWwuaW50LnNldAhjb25zdGFudAQGTUlORVhZCGNvbnN0YW50AgAAAAAIbWluZS5kaWcOYXJpdGhtZXRpYy5pbnQNbG9jYWwuaW50LmdldAhjb25zdGFudAQGTUlORVhZCGNvbnN0YW50BANNT0QIY29uc3RhbnQCBAAAAA5hcml0aG1ldGljLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAZNSU5FWFkIY29uc3RhbnQEAS8IY29uc3RhbnQCBAAAAA1sb2NhbC5pbnQuc2V0CGNvbnN0YW50BAZNSU5FWFkOYXJpdGhtZXRpYy5pbnQNbG9jYWwuaW50LmdldAhjb25zdGFudAQGTUlORVhZCGNvbnN0YW50BAErCGNvbnN0YW50AgEAAAAOZ2VuZXJpYy5nb3RvaWYIY29uc3RhbnQCBAAAAA5jb21wYXJpc29uLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAZNSU5FWFkIY29uc3RhbnQEATwIY29uc3RhbnQCEQAAAA1taW5lLm5ld2xheWVyDWxvY2FsLmludC5zZXQIY29uc3RhbnQECU1JTkVMQVlFUg5hcml0aG1ldGljLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAlNSU5FTGF5ZXIIY29uc3RhbnQEASsIY29uc3RhbnQCAQAAAA5nZW5lcmljLmdvdG9pZghjb25zdGFudAIDAAAADmNvbXBhcmlzb24uaW50DWxvY2FsLmludC5nZXQIY29uc3RhbnQECU1JTkVMQVlFUghjb25zdGFudAQBPAhjb25zdGFudAILAAAACG1pbmUudGFiDWxvY2FsLmludC5nZXQIY29uc3RhbnQEB01JTkV0QUINbG9jYWwuaW50LnNldAhjb25zdGFudAQHTUlORVRBQg5hcml0aG1ldGljLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAdNSU5FVEFCCGNvbnN0YW50BAErCGNvbnN0YW50AgEAAAAOZ2VuZXJpYy5nb3RvaWYIY29uc3RhbnQCAgAAAA5jb21wYXJpc29uLmludA1sb2NhbC5pbnQuZ2V0CGNvbnN0YW50BAdNSU5FVEFCCGNvbnN0YW50BAE8CGNvbnN0YW50Ag4AAAA=</p></blockquote>
 <p>And here's how it looks while it's working :</p>
-<p><div id="attachment_100324" class="wp-caption aligncenter" style="width: 570px"><a href="http://trilema.com/wp-content/uploads/2021/04/perfect-tower-ii-mining-ai-script.png"><img src="http://trilema.com/wp-content/uploads/2021/04/perfect-tower-ii-mining-ai-script-560x315.png" alt="Perfect Tower II Mining Script at work -- don&#039;t mind the primitive drill, it&#039;s unupgraded yet." title="perfect-tower-ii-mining-ai-script" width="560" height="315" class="size-large wp-image-100324" /></a><p class="wp-caption-text">Perfect Tower II Mining Script at work -- don't mind the primitive drill, it's unupgraded yet.</p></div></p>
+<p><div id="attachment_100324" class="wp-caption aligncenter" style="width: 570px"><a href="/wp-content/uploads/2021/04/perfect-tower-ii-mining-ai-script.png"><img src="/wp-content/uploads/2021/04/perfect-tower-ii-mining-ai-script-560x315.png" alt="Perfect Tower II Mining Script at work -- don&#039;t mind the primitive drill, it&#039;s unupgraded yet." title="perfect-tower-ii-mining-ai-script" width="560" height="315" class="size-large wp-image-100324" /></a><p class="wp-caption-text">Perfect Tower II Mining Script at work -- don't mind the primitive drill, it's unupgraded yet.</p></div></p>
 <p><center><br />
 <hr />~ * ~<br />
 <hr /></center></p>
-<p><a href="http://trilema.com/wp-content/uploads/2021/04/perfect-tower-ii-battle-screen.png"><img src="http://trilema.com/wp-content/uploads/2021/04/perfect-tower-ii-battle-screen-100x100.png" alt="perfect-tower-ii-battle-screen" title="perfect-tower-ii-battle-screen" width="100" height="100" class="alignright size-thumbnail wp-image-100325" /></a>For everyone else, <a href="">Perfect Tower II</a> (illustrated to the right) is an... unfinished, how shall we say this, <em>alpha</em><sup><a href="#footnote_1_100307" id="identifier_1_100307" class="footnote-link footnote-identifier-link" title="You know how `beta` means `a rough prototype that doesn't work but might illustrate the contemplated concepts for deeply specialized minds that are generously inclined` everywhere, yet in software `engineering` it somehow means `eh, ship it to production, whatever` ?">ii</a></sup> tower defense game.<sup><a href="#footnote_2_100307" id="identifier_2_100307" class="footnote-link footnote-identifier-link" title="Pro tip : don't use a skill point to get the Detector Mine skill. Just not worth anything (even if by level 30 or so you'll have spare points not worth using anyways).">iii</a></sup></p>
-<p>It's been in development for a year or two (it just hit the <a href="http://trilema.com/2019/the-state-of-the-vidya-address/">Steam</a><font color="white">ing Pile Of Shit</font> as an early release maybe last month) ; but it's interesting to me because it makes a very peculiar set of choices in terms of what to develop. </p>
-<p><a href="http://trilema.com/wp-content/uploads/2021/04/perfect-tower-ii-workshop.png"><img src="http://trilema.com/wp-content/uploads/2021/04/perfect-tower-ii-workshop-100x100.png" alt="perfect-tower-ii-workshop" title="perfect-tower-ii-workshop" width="100" height="100" class="alignright size-thumbnail wp-image-100326" /></a>The graphics, for instance, are very much neglected (as you can see) ; whereas the interface <em>level of access</em> is extremely refined (as you can also see). I mean, there's an actual <del>Basic</del> Ada strap-on for crying out loud<sup><a href="#footnote_3_100307" id="identifier_3_100307" class="footnote-link footnote-identifier-link" title="And no, THERE IS NOTHING WRONG WITH GOTO PROGRAMMING. 
+<p><a href="/wp-content/uploads/2021/04/perfect-tower-ii-battle-screen.png"><img src="/wp-content/uploads/2021/04/perfect-tower-ii-battle-screen-100x100.png" alt="perfect-tower-ii-battle-screen" title="perfect-tower-ii-battle-screen" width="100" height="100" class="alignright size-thumbnail wp-image-100325" /></a>For everyone else, <a href="">Perfect Tower II</a> (illustrated to the right) is an... unfinished, how shall we say this, <em>alpha</em><sup><a href="#footnote_1_100307" id="identifier_1_100307" class="footnote-link footnote-identifier-link" title="You know how `beta` means `a rough prototype that doesn't work but might illustrate the contemplated concepts for deeply specialized minds that are generously inclined` everywhere, yet in software `engineering` it somehow means `eh, ship it to production, whatever` ?">ii</a></sup> tower defense game.<sup><a href="#footnote_2_100307" id="identifier_2_100307" class="footnote-link footnote-identifier-link" title="Pro tip : don't use a skill point to get the Detector Mine skill. Just not worth anything (even if by level 30 or so you'll have spare points not worth using anyways).">iii</a></sup></p>
+<p>It's been in development for a year or two (it just hit the <a href="/2019/the-state-of-the-vidya-address/">Steam</a><font color="white">ing Pile Of Shit</font> as an early release maybe last month) ; but it's interesting to me because it makes a very peculiar set of choices in terms of what to develop. </p>
+<p><a href="/wp-content/uploads/2021/04/perfect-tower-ii-workshop.png"><img src="/wp-content/uploads/2021/04/perfect-tower-ii-workshop-100x100.png" alt="perfect-tower-ii-workshop" title="perfect-tower-ii-workshop" width="100" height="100" class="alignright size-thumbnail wp-image-100326" /></a>The graphics, for instance, are very much neglected (as you can see) ; whereas the interface <em>level of access</em> is extremely refined (as you can also see). I mean, there's an actual <del>Basic</del> Ada strap-on for crying out loud<sup><a href="#footnote_3_100307" id="identifier_3_100307" class="footnote-link footnote-identifier-link" title="And no, THERE IS NOTHING WRONG WITH GOTO PROGRAMMING. 
 Yes, I know they insistently told you there is, and you ended up believing (just like you ended up believing there's something wrong with html's table element, or inline styling, or whatever the fuck else). Because back in the 80s it was the early age of human thinking, apparently, and you buncha simpletons simply believed what everyone insisted upon. Because `that's how it worked back in school`, right, and  d'oh, why's the world not simply school-continued, and thank you very much for ruining EVERYTHING because look now, 30 years later every last halfwit in existence is trying to nigger out of insisting in that manner (meanwhile called `consensus`). You had to ruin it, you buncha sheepcows. Didn't you!
 Yet there's nothing wrong with goto programming (nor is `recursion` gonna earn you brownie `intelligent kid` points ; nor is it the right solution in every fucking context) ; and you really did ruin the world.">iv</a></sup>! I can script game activity to the level of peeling off layers and moving through tabs, <em>and it's all natively supported</em>. </p>
-<p>Needless to say this is <em>exactly</em> the sort of balancing choice I tend to favour (and have been favouring systematically throughout Minigame's tenure, especially as seen in Eulora development). I happen to believe it's the right choice, because you can always paint <em>later</em> upon the many edges and panes of a well made game (<em>even if that "later" never in practice comes</em>) ; but you can never "make" a game out of a set of very expensive, elaborately hand-painted... paintings. And, most importantly at all, everyone must wait while the smartest are satisfied <em>first</em> -- always and everywhere <a href="http://trilema.com/2014/namecheap-goes-off-the-deep-end-anyone-know-a-decent-domain-registrar/?b=I%20warn%20you&#038;e=gone#select">FIRST</a>, and always and thoroughly <b>SATISFIED</b>. If this should mean there'll be no resources left for "everyone else" left waiting in line, <a href="http://trilema.com/2018/the-republic-without-mp/?b=I%20understand&#038;e=whatsoever#select">all the better</a>. Nobody cares. Let all-but-the-smartest <a href="http://trilema.com/2016/an-immodest-proposal/">whither</a> and <a href="http://trilema.com/2013/the-dead-jew-and-the-raped-girl/">die</a> for <a href="http://trilema.com/2017/when-did-america-end/#identifier_0_76183">lack of basics</a>, <a href="http://trilema.com/2017/in-scams-today-disk-less-terminal-sa-dba-laesquinadelamazmorra/#footnote_3_72501">I don't give a shit</a>. Nor should you! Actually, strike that : <b>nor may you</b>.</p>
-<p>Because the alternative, where "everyone gets the basics", results in atrocities like the present situation. Do you know there doesn't exist <em>anywhere</em>, <a href="http://trilema.com/2017/lets-revisit-the-google-is-irrelevant-discussion/#footnote_7_76296">google be damned</a>, a working<sup><a href="#footnote_4_100307" id="identifier_4_100307" class="footnote-link footnote-identifier-link" title="Check out this nutfarm offering :
+<p>Needless to say this is <em>exactly</em> the sort of balancing choice I tend to favour (and have been favouring systematically throughout Minigame's tenure, especially as seen in Eulora development). I happen to believe it's the right choice, because you can always paint <em>later</em> upon the many edges and panes of a well made game (<em>even if that "later" never in practice comes</em>) ; but you can never "make" a game out of a set of very expensive, elaborately hand-painted... paintings. And, most importantly at all, everyone must wait while the smartest are satisfied <em>first</em> -- always and everywhere <a href="/2014/namecheap-goes-off-the-deep-end-anyone-know-a-decent-domain-registrar/?b=I%20warn%20you&#038;e=gone#select">FIRST</a>, and always and thoroughly <b>SATISFIED</b>. If this should mean there'll be no resources left for "everyone else" left waiting in line, <a href="/2018/the-republic-without-mp/?b=I%20understand&#038;e=whatsoever#select">all the better</a>. Nobody cares. Let all-but-the-smartest <a href="/2016/an-immodest-proposal/">whither</a> and <a href="/2013/the-dead-jew-and-the-raped-girl/">die</a> for <a href="/2017/when-did-america-end/#identifier_0_76183">lack of basics</a>, <a href="/2017/in-scams-today-disk-less-terminal-sa-dba-laesquinadelamazmorra/#footnote_3_72501">I don't give a shit</a>. Nor should you! Actually, strike that : <b>nor may you</b>.</p>
+<p>Because the alternative, where "everyone gets the basics", results in atrocities like the present situation. Do you know there doesn't exist <em>anywhere</em>, <a href="/2017/lets-revisit-the-google-is-irrelevant-discussion/#footnote_7_76296">google be damned</a>, a working<sup><a href="#footnote_4_100307" id="identifier_4_100307" class="footnote-link footnote-identifier-link" title="Check out this nutfarm offering :
 :global int atr_layer
 :global int atr_index
 :local int index
@@ -106,7 +106,7 @@ Yet there's nothing wrong with goto programming (nor is `recursion` gonna earn y
   goto(7)
 It's on the game site's own wiki, perfecttower2.com/wiki/AI_Script_Repository. It recurses (!), yet nevertheless can't peel layers or move tabs (!!!) and what the fuck holy shit. There's more cowpigfoot offerings on rettardit (apparently the gamedevs are byproducts of that cowpie fermenter) and they're no better! I spent five minutes searching and ten minutes writing, and this is the state of the world you've wrought.
 Nothing for `everyone`. Not even the basics.">v</a></sup> mining script<sup><a href="#footnote_5_100307" id="identifier_5_100307" class="footnote-link footnote-identifier-link" title="Speaking of `working` : mine has this interesting property that it doesn't start mining on tab 1, it starts mining on the current tab, whatever that is, and continues from there to the 2nd and so on in order. This is important because right after a tier-up, all the resources being depleted, the mine white box finds are the best means to kickstart the tower modules into higher gear so you can start making some serious resources TD-ing. This means you'll be depleting the first few 5-6 tabs (the one for which the dig cost was reduced all the way to 1) way before you can afford to dig the further ones out (and in particular the 1st tab you deplete to even get enough orange resources to get going in the first place). Notwithstanding the tenuous circumstances, nothing is lost with my script because it will happily dig your current tab whichever it is, and then you have plenty of time to stop it while it drones impuissantly on tab 2.
-There's something to be said for `coding sloppiness`, especially when that `sloppiness` matches underlying characteristics of the world.">vi</a></sup> for this <em>year old</em> game ? I had to make my own ; always and perpetually whenever I want something I gotta make my own, because nobody does anything useful, because everyone's way too busy <a href="http://trilema.com/2017/the-world-has-changed/">jacking off</a> and "<a href="http://trilema.com/2014/agency-and-other-notes/">helping everyone get the basics</a>". Fuck that dumb shit.</p>
+There's something to be said for `coding sloppiness`, especially when that `sloppiness` matches underlying characteristics of the world.">vi</a></sup> for this <em>year old</em> game ? I had to make my own ; always and perpetually whenever I want something I gotta make my own, because nobody does anything useful, because everyone's way too busy <a href="/2017/the-world-has-changed/">jacking off</a> and "<a href="/2014/agency-and-other-notes/">helping everyone get the basics</a>". Fuck that dumb shit.</p>
 <p>Fuck that dumb shit with a red hot poker, the only interesting problem in the world is the complete satisfaction of the very best and nothing else matters.</p>
 &mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_100307" class="footnote">If you're curious, that base64 encoding decodes to the lulziest of mixed-binary-<a href="http://ossasepia.com/2021/03/20/the-space-it-takes-xml-binary-and-raw-mesh-formats/">xml</a>ish nonsense...</p>
 <blockquote><p>00000000: 054d 696e 6572 0100 0000 096f 7065 6e2e  .Miner.....open.<br />
@@ -176,8 +176,8 @@ There's something to be said for `coding sloppiness`, especially when that `slop
 <p>Da fuck is that "arithmetic.int.local.int.set.constant" / "local.int.get.constant" spelled out shit ? What is this, the spurious machine spelling bee competition ?! (Check it out btw, Layer / LAYER.) But do you have any idea what wonders zip/deflate would do to it !??! AND WHY DO I KNOW THIS, GOD DAMN IT!eleventy</p>
 <p>Anyway, if you wish to reproduce such wonders at home, it's not hard to do with all-standard tools : </p>
 <blockquote><p>echo "VGhpcyBpcyBzb21lIHRleHQu" | base64 -d | xxd</p></blockquote>
-<p>  [<a href="#identifier_0_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_100307" class="footnote">You know how "beta" means "a rough prototype that doesn't work but might illustrate the contemplated concepts for <a href="http://trilema.com/2010/hai-sa-studiem-gramatica-impreuna/?b=Insist%20si%20subliniez&#038;e=Pentru%20ca%20meriti#select">deeply specialized minds</a> that are generously inclined" everywhere, yet in software "<a href="http://trilema.com/2019/the-alleged-crisis-of-the-supposed-engineering-or-mistaken-identities-pantomiming-a-comedy-of-manners/">engineering</a>" it somehow means "eh, ship it to production, whatever" ? [<a href="#identifier_1_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_100307" class="footnote">Pro tip : don't use a skill point to get the Detector Mine skill. Just not worth anything (even if by level 30 or so you'll have spare points not worth using anyways). [<a href="#identifier_2_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_100307" class="footnote">And no, <b><font color="red">THERE IS NOTHING WRONG WITH GOTO PROGRAMMING</font></b>. </p>
-<p>Yes, I know <a href="http://trilema.com/2020/desperation-in-desolation-or-the-woes-of-the-contemporary-entrepreneur-or-what-came-of-my-first-attempt-at-running-the-second-generation-eulora-client-ornery-in-any-case/?b=poisonous&#038;e=shitheads#select">they</a> insistently told you there is, and you ended up believing (just like you ended up believing there's something wrong with html's table element, or inline styling, or whatever the fuck else). Because <a href="http://trilema.com/2013/dazed-and-confused/">back in the 80s</a> it was the early age of human thinking, apparently, and you buncha simpletons simply believed what everyone insisted upon. Because "that's how it worked back in school", right, and  d'oh, why's the world not simply school-continued, and thank you very much for ruining <b>EVERYTHING</b> because look now, 30 years later <a href="http://trilema.com/2014/the-nigger-a-practical-exercise/#identifier_1_52821">every last halfwit in existence</a> is <a href="http://trilema.com/2013/fried-chicken/">trying to nigger</a> out of insisting in that manner (meanwhile called "<a href="http://trilema.com/2013/soft-consensus-aka-fecal-matter/">consensus</a>"). You had to ruin it, you buncha sheepcows. Didn't you!</p>
+<p>  [<a href="#identifier_0_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_100307" class="footnote">You know how "beta" means "a rough prototype that doesn't work but might illustrate the contemplated concepts for <a href="/2010/hai-sa-studiem-gramatica-impreuna/?b=Insist%20si%20subliniez&#038;e=Pentru%20ca%20meriti#select">deeply specialized minds</a> that are generously inclined" everywhere, yet in software "<a href="/2019/the-alleged-crisis-of-the-supposed-engineering-or-mistaken-identities-pantomiming-a-comedy-of-manners/">engineering</a>" it somehow means "eh, ship it to production, whatever" ? [<a href="#identifier_1_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_100307" class="footnote">Pro tip : don't use a skill point to get the Detector Mine skill. Just not worth anything (even if by level 30 or so you'll have spare points not worth using anyways). [<a href="#identifier_2_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_100307" class="footnote">And no, <b><font color="red">THERE IS NOTHING WRONG WITH GOTO PROGRAMMING</font></b>. </p>
+<p>Yes, I know <a href="/2020/desperation-in-desolation-or-the-woes-of-the-contemporary-entrepreneur-or-what-came-of-my-first-attempt-at-running-the-second-generation-eulora-client-ornery-in-any-case/?b=poisonous&#038;e=shitheads#select">they</a> insistently told you there is, and you ended up believing (just like you ended up believing there's something wrong with html's table element, or inline styling, or whatever the fuck else). Because <a href="/2013/dazed-and-confused/">back in the 80s</a> it was the early age of human thinking, apparently, and you buncha simpletons simply believed what everyone insisted upon. Because "that's how it worked back in school", right, and  d'oh, why's the world not simply school-continued, and thank you very much for ruining <b>EVERYTHING</b> because look now, 30 years later <a href="/2014/the-nigger-a-practical-exercise/#identifier_1_52821">every last halfwit in existence</a> is <a href="/2013/fried-chicken/">trying to nigger</a> out of insisting in that manner (meanwhile called "<a href="/2013/soft-consensus-aka-fecal-matter/">consensus</a>"). You had to ruin it, you buncha sheepcows. Didn't you!</p>
 <p>Yet there's nothing wrong with goto programming (nor is "recursion" gonna earn you brownie "intelligent kid" points ; nor is it the right solution in every fucking context) ; and you really <em>did</em> ruin the world. [<a href="#identifier_3_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_100307" class="footnote">Check out this nutfarm offering :</p>
 <blockquote><p>:global int atr_layer<br />
 :global int atr_index<br />
@@ -195,10 +195,10 @@ There's something to be said for `coding sloppiness`, especially when that `slop
   goto(7)</p></blockquote>
 <p>It's on the game site's own wiki, perfecttower2.com/wiki/AI_Script_Repository. It <em>recurses</em> (!), yet nevertheless can't peel layers or move tabs (!!!) and what the fuck holy shit. There's more cowpigfoot offerings on rettardit (apparently the gamedevs are byproducts of that cowpie fermenter) and they're no better! I spent five minutes searching and ten minutes writing, and this is the state of the world you've wrought.</p>
 <p>Nothing for "everyone". <em>Not even the basics.</em> [<a href="#identifier_4_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_100307" class="footnote">Speaking of "working" : mine has this interesting property that it doesn't start mining on tab 1, it starts mining on the <em>current</em> tab, whatever that is, and continues from there to the 2nd and so on in order. This is important because right after a tier-up, all the resources being depleted, the mine white box finds are the best means to kickstart the tower modules into higher gear so you can start making some serious resources TD-ing. This means you'll be depleting the first few 5-6 tabs (the one for which the dig cost was reduced all the way to 1) way before you can afford to dig the further ones out (and in particular the 1st tab you deplete to even get enough orange resources to get going in the first place). Notwithstanding the tenuous circumstances, nothing is lost with my script because it will happily dig your current tab whichever it is, and then you have plenty of time to stop it while it drones impuissantly on tab 2.</p>
-<p>There's something to be said for "coding sloppiness", especially when that "sloppiness" matches <a href="http://trilema.com/2015/the-downtrodden-are-downtrodden-for-a-reason-step-on-their-faces/">underlying characteristics of the world</a>. [<a href="#identifier_5_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+<p>There's something to be said for "coding sloppiness", especially when that "sloppiness" matches <a href="/2015/the-downtrodden-are-downtrodden-for-a-reason-step-on-their-faces/">underlying characteristics of the world</a>. [<a href="#identifier_5_100307" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
               <div>
-                <div class="alignleft">&laquo; <a href="http://trilema.com/2021/george-whites-scandals/">George White's Scandals</a></div>
-                <div class="alignright"><a href="http://trilema.com/2021/the-skin/">The Skin</a> &raquo;</div>
+                <div class="alignleft">&laquo; <a href="/2021/george-whites-scandals/">George White's Scandals</a></div>
+                <div class="alignright"><a href="/2021/the-skin/">The Skin</a> &raquo;</div>
               </div>
 
 <div class="clear"></div>
@@ -209,7 +209,7 @@ There's something to be said for `coding sloppiness`, especially when that `slop
                    <div class="info_bot"></div>
             </div>
           <div id="postmetadata">
-                        Comments feed : <a href='http://trilema.com/2021/working-perfect-tower-ii-mining-ai-script/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="http://trilema.com/2021/working-perfect-tower-ii-mining-ai-script/trackback/" rel="trackback">trackback</a>.                                   </div>
+                        Comments feed : <a href='/2021/working-perfect-tower-ii-mining-ai-script/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2021/working-perfect-tower-ii-mining-ai-script/trackback/" rel="trackback">trackback</a>.                                   </div>
   
 <!-- You can start editing here. -->
 
@@ -218,7 +218,7 @@ There's something to be said for `coding sloppiness`, especially when that `slop
 
 		<strong id="respond">Add your cents!</strong>
  <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
-			<form action="http://trilema.com/wp-comments-post.php" method="post" id="commentform">
+			<form action="/wp-comments-post.php" method="post" id="commentform">
 	
 
 <!--- This is just a decoy ;)
@@ -270,31 +270,31 @@ There's something to be said for `coding sloppiness`, especially when that `slop
 <ul>
                         <h5>Recent Comments</h5>
       <ul>
-      	<li><a href=http://trilema.com/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
-	<li><a href=http://trilema.com/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
-	<li><a href=http://trilema.com/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
-	<li><a href=http://trilema.com/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
-	<li><a href=http://trilema.com/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
-	<li><a href=http://trilema.com/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
-	<li><a href=http://trilema.com/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
-	<li><a href=http://trilema.com/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
-	<li><a href=http://trilema.com/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
-	<li><a href=http://trilema.com/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
-	<li><a href=http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
-	<li><a href=http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
-	<li><a href=http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
       </ul>
    
 
@@ -304,39 +304,39 @@ There's something to be said for `coding sloppiness`, especially when that `slop
                 <div id="sidebar2">
                 <ul>
                         <li><h5>Recent Articles</h5><ul>
-                	<li><a href='http://trilema.com/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
-	<li><a href='http://trilema.com/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
-	<li><a href='http://trilema.com/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
-	<li><a href='http://trilema.com/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
-	<li><a href='http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
-	<li><a href='http://trilema.com/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
-	<li><a href='http://trilema.com/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
-	<li><a href='http://trilema.com/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
-	<li><a href='http://trilema.com/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
-	<li><a href='http://trilema.com/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
-	<li><a href='http://trilema.com/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
-	<li><a href='http://trilema.com/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
-	<li><a href='http://trilema.com/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
-	<li><a href='http://trilema.com/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
-	<li><a href='http://trilema.com/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
-	<li><a href='http://trilema.com/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
-	<li><a href='http://trilema.com/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
-	<li><a href='http://trilema.com/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
-	<li><a href='http://trilema.com/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
-	<li><a href='http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
 </ul></li>
                 
 
         
-<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="http://trilema.com/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
-<li class="page_item page-item-34333"><a href="http://trilema.com/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
-<li class="page_item page-item-181"><a href="http://trilema.com/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
-<li class="page_item page-item-62578"><a href="http://trilema.com/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
-<li class="page_item page-item-94098"><a href="http://trilema.com/in-the-press/" title="In the press">In the press</a></li>
-<li class="page_item page-item-39332"><a href="http://trilema.com/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
 </ul></li>
 <h5>Say NO! to platforms</h5>      
-<center><a href=http://trilema.com/2019/no-platforms/><img src=http://trilema.com/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
 
                                                         </ul>
         </div>
@@ -350,7 +350,7 @@ There's something to be said for `coding sloppiness`, especially when that `slop
 </div>
 		</div>		
 <div id="footer">			
-<a href="http://trilema.com/feed/" title="RSS Feed"><img src="http://trilema.com/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
 </a>		
 Copyright &copy; 2008 - 
 2021 for all text and images.			

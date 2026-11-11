@@ -6,15 +6,15 @@
 	<meta http-equiv="Cache-control" content="private,max-age:9800">
 	<meta name="description" content="Planet Earth's most widely read blog." /> 
 	<meta name="robots" content="index,follow,noarchive" />
-<link rel="icon" href="http://trilema.com/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-	<link rel="stylesheet" href="http://trilema.com/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
 
-<style type="text/css">  body {      	background: #fff url('http://trilema.com/wp-content/themes/trilema/images/bg_oct2009.jpg') no-repeat center top; }  </style>
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_oct2009.jpg') no-repeat center top; }  </style>
 
-	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://trilema.com/feed/atom/" />
-	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="http://trilema.com/feed/" />
-	<link rel="pingback" href="http://trilema.com/xmlrpc.php" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
 		<title>There's a one Bitcoin reward for the death of Pieter Wuille. Details below. on Trilema - A blog by Mircea Popescu.</title>
 	<style type="text/css">
 						ol.footnotes li {list-style-type:lower-roman;}
@@ -30,7 +30,7 @@
 	<div id="mask_head_ie"></div>
 	<div id="base2">
 		<div id="header">
-			<div id="blogtitle"><a href="http://trilema.com">Trilema</a></div>
+			<div id="blogtitle"><a href="/">Trilema</a></div>
 			<div id="subtitle">If "waifu" is "wife"<br />should "kung-fu" be "knife" ?
 </div>
 
@@ -41,7 +41,7 @@
 		</div>
 		<div id="mask_foot"></div>
 		<div id="container">
-<div id="content">        <div class="spacer"></div>             <span id="shash-64242"><div class="post" id="post-64242">                    <h1><a href="http://trilema.com/2015/theres-a-one-bitcoin-reward-for-the-death-of-pieter-wuille-details-below/" rel="bookmark" title="Permanent Link to There&#039;s a one Bitcoin reward for the death of Pieter Wuille. Details below.">There's a one Bitcoin reward for the death of Pieter Wuille. Details below.</a></h1>                        <div class="date">                                     Thursday, 10 December, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="http://trilema.com/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+<div id="content">        <div class="spacer"></div>             <span id="shash-64242"><div class="post" id="post-64242">                    <h1><a href="/2015/theres-a-one-bitcoin-reward-for-the-death-of-pieter-wuille-details-below/" rel="bookmark" title="Permanent Link to There&#039;s a one Bitcoin reward for the death of Pieter Wuille. Details below.">There's a one Bitcoin reward for the death of Pieter Wuille. Details below.</a></h1>                        <div class="date">                                     Thursday, 10 December, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
 
                         <div class="entry">
 <p><code>-----BEGIN PGP SIGNED MESSAGE-----<br />
@@ -71,8 +71,8 @@ M85j/tKGmtrckZVRndMJ<br />
 <blockquote><p>Okay. So I am Pieter Wuille. I'll be talking about segregated witness for Bitcoin. Before I can explain this, I want to give some context. We all know how bitcoin transactions work. Every bitcoin transaction gets inputs, which refer to previous outputs being spent. Every input has the txid and the signature to prove that it is allowed, plus an amount and script in every output. What this presentation will mostly be about is<strong> the question of whether all of this data is equally important</strong>.</p>
 <p>In particular, we are going to be talking about signatures. It's important to realize here that signatures are really only needed for fully-validating nodes. As a light-weight client, you are not validating signatures, even though they are part of the transactions you still have to download them. If you are using a full-node that is syncing historical data, you don't actually validate all of the signatures in there. Currently there is a mechanism in there using checkpoints, which we want to deprecate soon, but the result will still be that we're not validating all signatures from years ago in deep history.</p>
 </blockquote>
-<p>The point here is that non-validating nodes <em>are not nodes</em>. If you decide to buy some Trilema credits<sup><a href="#footnote_1_64242" id="identifier_1_64242" class="footnote-link footnote-identifier-link" title="Still to this day the principal, real-world use-case for Bitcoin as Bitcoin, rather than as a proxy for some fiat or another. Though in fairness S.MG's products are catching up.">ii</a></sup>, the relevant, Bitcoin-related interaction happens at two points : when whatever validating node that holds your Bitcoin<sup><a href="#footnote_2_64242" id="identifier_2_64242" class="footnote-link footnote-identifier-link" title="No, `you` don't hold any Bitcoin until and unless you control a full node that has a wallet. If for instance you're `using blockchain.info` then USG has your Bitcoin, and you use them, maybe, sometimes, at their pleasure. Or not.">iii</a></sup> signs and announces the transaction, and when whatever full node I use sees the announcement and verifies the signature. At no other point and in no other manner is Bitcoin to any degree involved. Not when you use the "SPV Bitcoin Node" that is "your" online wallet ; not when you use the "SPV Bitcoin Node" that is the browser which displays Trilema to you, Mozilla, Chrome, whatever it may be. Not when the "SPV Bitcoin Node" that is your NAT Router or Comcast-owned modem passes the bits back and forth. Bitcoin is something that happens, on the social level, between <a href="http://trilema.com/2014/a-compendium-of-basic-points-about-bitcoin-for-the-benefit-of-various-confused-noobs/#selection-131.0-131.77">holders</a> ; and on the technical level between nodes.<sup><a href="#footnote_3_64242" id="identifier_3_64242" class="footnote-link footnote-identifier-link" title="Nodes means `fully validating` nodes. The other version, the faux-nodes, the `not really nodes`, the `I can't believe it's not a node` SPV nonsense are the ones that require the specification just like when an honest man meets a thief the honest man is Jim and the thief is Jeff the Thief - not the other fucking way around.">iv</a></sup></p>
-<p>The other important point is that the signatures <em>are the only important parts of the transaction</em>. The reference Bitcoin implementation, as released by the <a href="http://thebitcoin.foundation/">Bitcoin Foundation</a> (the real one, not the n-th reboot of Vessennes' original MtGox-promoting, BFL-promoting fraudster den) already ignores most of that crud, and will be removing more of it in the future. This can not be emphasized enough : you can not be building any type of business on <a href="http://trilema.com/2015/if-you-go-on-a-bitcoin-fork-irrespective-which-scammer-proposes-it-you-will-lose-your-bitcoins/">any sort of Gavinism</a>, because they will not survive on the middle term. It's not just the Bitcoins, that you would have lost had I not murdered "XT". Everything - every hour you spend "developing" atop the crud USG agents try to stick in Bitcoin is a wasted hour, because the stuff you build upon has the consistency of smoke and the life expectancy of... well, I was going to say ephemerides, but I guess we could just as well say Pieter Wuille.</p>
+<p>The point here is that non-validating nodes <em>are not nodes</em>. If you decide to buy some Trilema credits<sup><a href="#footnote_1_64242" id="identifier_1_64242" class="footnote-link footnote-identifier-link" title="Still to this day the principal, real-world use-case for Bitcoin as Bitcoin, rather than as a proxy for some fiat or another. Though in fairness S.MG's products are catching up.">ii</a></sup>, the relevant, Bitcoin-related interaction happens at two points : when whatever validating node that holds your Bitcoin<sup><a href="#footnote_2_64242" id="identifier_2_64242" class="footnote-link footnote-identifier-link" title="No, `you` don't hold any Bitcoin until and unless you control a full node that has a wallet. If for instance you're `using blockchain.info` then USG has your Bitcoin, and you use them, maybe, sometimes, at their pleasure. Or not.">iii</a></sup> signs and announces the transaction, and when whatever full node I use sees the announcement and verifies the signature. At no other point and in no other manner is Bitcoin to any degree involved. Not when you use the "SPV Bitcoin Node" that is "your" online wallet ; not when you use the "SPV Bitcoin Node" that is the browser which displays Trilema to you, Mozilla, Chrome, whatever it may be. Not when the "SPV Bitcoin Node" that is your NAT Router or Comcast-owned modem passes the bits back and forth. Bitcoin is something that happens, on the social level, between <a href="/2014/a-compendium-of-basic-points-about-bitcoin-for-the-benefit-of-various-confused-noobs/#selection-131.0-131.77">holders</a> ; and on the technical level between nodes.<sup><a href="#footnote_3_64242" id="identifier_3_64242" class="footnote-link footnote-identifier-link" title="Nodes means `fully validating` nodes. The other version, the faux-nodes, the `not really nodes`, the `I can't believe it's not a node` SPV nonsense are the ones that require the specification just like when an honest man meets a thief the honest man is Jim and the thief is Jeff the Thief - not the other fucking way around.">iv</a></sup></p>
+<p>The other important point is that the signatures <em>are the only important parts of the transaction</em>. The reference Bitcoin implementation, as released by the <a href="http://thebitcoin.foundation/">Bitcoin Foundation</a> (the real one, not the n-th reboot of Vessennes' original MtGox-promoting, BFL-promoting fraudster den) already ignores most of that crud, and will be removing more of it in the future. This can not be emphasized enough : you can not be building any type of business on <a href="/2015/if-you-go-on-a-bitcoin-fork-irrespective-which-scammer-proposes-it-you-will-lose-your-bitcoins/">any sort of Gavinism</a>, because they will not survive on the middle term. It's not just the Bitcoins, that you would have lost had I not murdered "XT". Everything - every hour you spend "developing" atop the crud USG agents try to stick in Bitcoin is a wasted hour, because the stuff you build upon has the consistency of smoke and the life expectancy of... well, I was going to say ephemerides, but I guess we could just as well say Pieter Wuille.</p>
 <p>All the captatio in the world, all the carefully-engineered, plainly USG-Democrat style narrative, all the attentive positioning<sup><a href="#footnote_4_64242" id="identifier_4_64242" class="footnote-link footnote-identifier-link" title="Oh, of course you're the ones running non-nodes, who want to pretend otherwise, right ?">v</a></sup> is not going to change the simple fact : Bitcoin wants Wuille's head. Follow down the path that got him killed at your own peril.</p>
 <blockquote><p>These signatures are only needed at time of validation. They don't go into the UTXO set, the database of all unspent coins.</p>
 </blockquote>
@@ -102,10 +102,10 @@ M85j/tKGmtrckZVRndMJ<br />
 </blockquote>
 <p>No.</p>
 <p>That's it, and that's all. Please take my money.</p>
-&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_64242" class="footnote">You are now confronted with the unhappy choice between making this "go viral" or whatever you call blathering endlessly about <a href="http://trilema.com/2015/on-how-i-ended-up-suing-phoenix-nap-llc-on-how-ira-r-cadwells-mom-stephanies-going-to-lose-her-chula-vista-home-on-how-marcus-bohn-is-going-to-catch-a-lot-of-shit-for-that-on-assorted-othe/#selection-203.0-209.602">shit you can't affect</a> on "social media" ; or else tacitly admitting that I have the right to issue death warrants, something you don't otherwise admit for anyone else. What's all that precious "<a href="http://trilema.com/forum-logs-for-22-aug-2015#1848242">public choice</a>" theory have to say on the topic ? [<a href="#identifier_0_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_64242" class="footnote">Still to this day the principal, real-world use-case for Bitcoin <em>as Bitcoin</em>, rather than as a proxy for some fiat or another. Though in fairness <a href="http://trilema.com/2015/minigame-smg-november-2015-statement/">S.MG's products</a> are catching up. [<a href="#identifier_1_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_64242" class="footnote">No, "you" don't hold any Bitcoin until and unless you control a full node that has a wallet. If for instance you're "using blockchain.info" then USG has your Bitcoin, and you use them, maybe, sometimes, at their pleasure. Or <a href="http://trilema.com/2015/gerald-davis-is-wrong-heres-why/#footnote_0_59780">not</a>. [<a href="#identifier_2_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_64242" class="footnote">Nodes means "fully validating" nodes. The other version, the faux-nodes, the "not really nodes", the "I can't believe it's not a node" SPV nonsense are the ones that require the specification just like when an honest man meets a thief the honest man is Jim and the thief is Jeff the Thief - not the other fucking way around. [<a href="#identifier_3_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_64242" class="footnote">Oh, of course you're the ones running non-nodes, who want to pretend otherwise, right ? [<a href="#identifier_4_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_64242" class="footnote">What Makes America Great. [<a href="#identifier_5_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_64242" class="footnote">You are now confronted with the unhappy choice between making this "go viral" or whatever you call blathering endlessly about <a href="/2015/on-how-i-ended-up-suing-phoenix-nap-llc-on-how-ira-r-cadwells-mom-stephanies-going-to-lose-her-chula-vista-home-on-how-marcus-bohn-is-going-to-catch-a-lot-of-shit-for-that-on-assorted-othe/#selection-203.0-209.602">shit you can't affect</a> on "social media" ; or else tacitly admitting that I have the right to issue death warrants, something you don't otherwise admit for anyone else. What's all that precious "<a href="/forum-logs-for-22-aug-2015#1848242">public choice</a>" theory have to say on the topic ? [<a href="#identifier_0_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_64242" class="footnote">Still to this day the principal, real-world use-case for Bitcoin <em>as Bitcoin</em>, rather than as a proxy for some fiat or another. Though in fairness <a href="/2015/minigame-smg-november-2015-statement/">S.MG's products</a> are catching up. [<a href="#identifier_1_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_64242" class="footnote">No, "you" don't hold any Bitcoin until and unless you control a full node that has a wallet. If for instance you're "using blockchain.info" then USG has your Bitcoin, and you use them, maybe, sometimes, at their pleasure. Or <a href="/2015/gerald-davis-is-wrong-heres-why/#footnote_0_59780">not</a>. [<a href="#identifier_2_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_64242" class="footnote">Nodes means "fully validating" nodes. The other version, the faux-nodes, the "not really nodes", the "I can't believe it's not a node" SPV nonsense are the ones that require the specification just like when an honest man meets a thief the honest man is Jim and the thief is Jeff the Thief - not the other fucking way around. [<a href="#identifier_3_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_64242" class="footnote">Oh, of course you're the ones running non-nodes, who want to pretend otherwise, right ? [<a href="#identifier_4_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_64242" class="footnote">What Makes America Great. [<a href="#identifier_5_64242" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
               <div>
-                <div class="alignleft">&laquo; <a href="http://trilema.com/2015/eulora-as-seen-by-mircescu/">Eulora as seen by Mircescu</a></div>
-                <div class="alignright"><a href="http://trilema.com/2015/heres-who-doesnt-belong-in-bitcoin-you/">Here's who doesn't belong in Bitcoin : you.</a> &raquo;</div>
+                <div class="alignleft">&laquo; <a href="/2015/eulora-as-seen-by-mircescu/">Eulora as seen by Mircescu</a></div>
+                <div class="alignright"><a href="/2015/heres-who-doesnt-belong-in-bitcoin-you/">Here's who doesn't belong in Bitcoin : you.</a> &raquo;</div>
               </div>
 
 <div class="clear"></div>
@@ -116,7 +116,7 @@ M85j/tKGmtrckZVRndMJ<br />
                    <div class="info_bot"></div>
             </div>
           <div id="postmetadata">
-                        Comments feed : <a href='http://trilema.com/2015/theres-a-one-bitcoin-reward-for-the-death-of-pieter-wuille-details-below/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="http://trilema.com/2015/theres-a-one-bitcoin-reward-for-the-death-of-pieter-wuille-details-below/trackback/" rel="trackback">trackback</a>.                                   </div>
+                        Comments feed : <a href='/2015/theres-a-one-bitcoin-reward-for-the-death-of-pieter-wuille-details-below/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2015/theres-a-one-bitcoin-reward-for-the-death-of-pieter-wuille-details-below/trackback/" rel="trackback">trackback</a>.                                   </div>
   
 <!-- You can start editing here. -->
 		<p class="commenttitle"><a name="comments"></a>18 Responses</p>
@@ -131,7 +131,7 @@ M85j/tKGmtrckZVRndMJ<br />
 <p>Hah! Literally last night a friend of mine asked me for 0.01 bitcoin so that he could buy Trilema credits, and that he would pay me back in cash next time we meet. I thought about it for a moment and decided I'd much rather he pay me back in Eulora coppers, and told him that as a noob it should be very easy for him to earn the 1 million needed to settle the proposed debt.</p>
 						</li>
 
-										<li id="comment-116013" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='http://trilema.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+										<li id="comment-116013" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
 								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-116013" title="">Thursday, 10 December 2015</a>
@@ -139,15 +139,15 @@ M85j/tKGmtrckZVRndMJ<br />
 						<p>Heh not bad.</p>
 						</li>
 
-										<li id="comment-116015" class="commentbody"><div class="commenthead"><img alt='anon`s avatar' src='http://trilema.com/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
-								<span class="authorlink">anon<img src="http://trilema.com/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="http://trilema.com/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+										<li id="comment-116015" class="commentbody"><div class="commenthead"><img alt='anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">anon<img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-116015" title="">Thursday, 10 December 2015</a>
 							</div>
 						<p>Seeing how this is a 10x bigger story, I'm curious if the US media is going to continue beating the craig-satoshi angle in preference of it. Footnote 1 ftw.</p>
 						</li>
 
-										<li id="comment-116016" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='http://trilema.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+										<li id="comment-116016" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
 								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-116016" title="">Friday, 11 December 2015</a>
@@ -157,7 +157,7 @@ M85j/tKGmtrckZVRndMJ<br />
 <p>No shortage of forgeries for the media to entertain, I'm sure they'll find something "more important".</p>
 						</li>
 
-										<li id="comment-116018" class="commentbody"><div class="commenthead"><img alt='Anonymous`s avatar' src='http://trilema.com/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+										<li id="comment-116018" class="commentbody"><div class="commenthead"><img alt='Anonymous`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
 								<span class="authorlink">Anonymous</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-116018" title="">Friday, 11 December 2015</a>
@@ -165,15 +165,15 @@ M85j/tKGmtrckZVRndMJ<br />
 						<p>Incidentally it was Luke Jr. that wrote the code that implemented this.</p>
 						</li>
 
-										<li id="comment-116020" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='http://trilema.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+										<li id="comment-116020" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
 								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-116020" title="">Friday, 11 December 2015</a>
 							</div>
-						<p>Luke's been known <a href=http://www.btcalpha.com/wot/user/luke-jr/ >for a while</a> as a liar/scammer/general scumbag. His career highlights include taking a bribe from BFL to lie about having received delivery of "his order" (he hadn't ordered anything) coupla days before the closing of a major BitBet on the topic (the second one, there was a <a href=http://trilema.com/2013/the-positive-market-effects-of-the-delivery-bet/ >different one</a> that sunk Inaba), helping the USG in their fortunately defeated push for the "XT" attempt at breaking Bitcoin and so on and so forth.</p>
+						<p>Luke's been known <a href=http://www.btcalpha.com/wot/user/luke-jr/ >for a while</a> as a liar/scammer/general scumbag. His career highlights include taking a bribe from BFL to lie about having received delivery of "his order" (he hadn't ordered anything) coupla days before the closing of a major BitBet on the topic (the second one, there was a <a href=/2013/the-positive-market-effects-of-the-delivery-bet/ >different one</a> that sunk Inaba), helping the USG in their fortunately defeated push for the "XT" attempt at breaking Bitcoin and so on and so forth.</p>
 						</li>
 
-										<li id="comment-116024" class="commentbody"><div class="commenthead"><img alt='polyclef`s avatar' src='http://trilema.com/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+										<li id="comment-116024" class="commentbody"><div class="commenthead"><img alt='polyclef`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
 								<span class="authorlink">polyclef</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-116024" title="">Saturday, 12 December 2015</a>
@@ -186,7 +186,7 @@ XT is obviously an attempt to damage bitcoin - also agree.</p>
 <p>SW doesn't eliminate transaction history. Full nodes will still get all the data they need to have the same level of validation you have now.  It is just not part of the signature and thereby eliminates most (all?) of the malleability issues. Once those are fixed, there are a ton of new features that become possible. Stuff that will have the USG shitting bricks.</p>
 						</li>
 
-										<li id="comment-116029" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='http://trilema.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+										<li id="comment-116029" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
 								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-116029" title="">Saturday, 12 December 2015</a>
@@ -204,7 +204,7 @@ XT is obviously an attempt to damage bitcoin - also agree.</p>
 <p>It took me nearly a year to verify deeds all by my lonesome self, so I'm gonna need a little help on this one.</p>
 						</li>
 
-										<li id="comment-116090" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='http://trilema.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+										<li id="comment-116090" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
 								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-116090" title="">Monday, 28 December 2015</a>
@@ -221,7 +221,7 @@ XT is obviously an attempt to damage bitcoin - also agree.</p>
 <p>In this moment, I am euphoric.</p>
 						</li>
 
-										<li id="comment-149599" class="commentbody"><div class="commenthead"><img alt='Ella Galloway`s avatar' src='http://trilema.com/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+										<li id="comment-149599" class="commentbody"><div class="commenthead"><img alt='Ella Galloway`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
 								<span class="authorlink">Ella Galloway</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-149599" title="">Sunday, 26 April 2020</a>
@@ -229,7 +229,7 @@ XT is obviously an attempt to damage bitcoin - also agree.</p>
 						<p>I like your writing style truly enjoying</p>
 						</li>
 
-										<li id="comment-149605" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='http://trilema.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+										<li id="comment-149605" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
 								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-149605" title="">Sunday, 26 April 2020</a>
@@ -237,7 +237,7 @@ XT is obviously an attempt to damage bitcoin - also agree.</p>
 						<p>Cheers.</p>
 						</li>
 
-										<li id="comment-151050" class="commentbody"><div class="commenthead"><img alt='Eve Jenkins Wrinkle Freezing Moisturizer`s avatar' src='http://trilema.com/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+										<li id="comment-151050" class="commentbody"><div class="commenthead"><img alt='Eve Jenkins Wrinkle Freezing Moisturizer`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
 								<span class="authorlink">Eve Jenkins Wrinkle Freezing Moisturizer</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-151050" title="">Friday, 22 May 2020</a>
@@ -248,7 +248,7 @@ I will forward this page to him. Pretty sure he will have a good read.<br />
 Many thanks for sharing!</p>
 						</li>
 
-										<li id="comment-151052" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='http://trilema.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+										<li id="comment-151052" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
 								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
 													<br />
 								<a class="commentlink" href="#comment-151052" title="">Friday, 22 May 2020</a>
@@ -265,17 +265,17 @@ Many thanks for sharing!</p>
 				<li class="trackbody" id="comment-141804">
 					<div class='trackhead'>
 						<div class="commentcount">16</div>
-						<span class="authorlink"><a href='http://trilema.com/2016/is-internetbs-getting-sued-is-anon-chickenshit-getting-doxxed-a-drama-of-our-times?b=well%20as%20bein&amp;e=T.bs#select' class='url'>Is internet.bs getting sued ? Is anon chickenshit getting doxxed ? A drama of our times! on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<span class="authorlink"><a href='/2016/is-internetbs-getting-sued-is-anon-chickenshit-getting-doxxed-a-drama-of-our-times?b=well%20as%20bein&amp;e=T.bs#select' class='url'>Is internet.bs getting sued ? Is anon chickenshit getting doxxed ? A drama of our times! on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
 						<br />
 						<a class="commentlink" href="#comment-141804" title="">Wednesday, 8 January 2020</a>
 					</div>
-					<p>[...] well as being a is a breach of .com registrar rules. Â &gt; Please take action, the content is &gt; [3]http://trilema.com/2015/theres-a-one-bitcoin-reward-for-the-death-of-pi &gt; eter-wuille-details-below/ &gt; &gt; ---- End forwarded message --- &gt; &gt; &gt; &gt; [1] <a href="http://www.INTERNET.bs">http://www.INTERNET.bs</a> [...]</p>
+					<p>[...] well as being a is a breach of .com registrar rules. Â &gt; Please take action, the content is &gt; [3]/2015/theres-a-one-bitcoin-reward-for-the-death-of-pi &gt; eter-wuille-details-below/ &gt; &gt; ---- End forwarded message --- &gt; &gt; &gt; &gt; [1] <a href="http://www.INTERNET.bs">http://www.INTERNET.bs</a> [...]</p>
 				</li>
 
 				<li class="trackbody" id="comment-141833">
 					<div class='trackhead'>
 						<div class="commentcount">17</div>
-						<span class="authorlink"><a href='http://trilema.com/2016/thats-right-time-to-move-on-please-do-bitcoin-is-really-not-for-you?b=can%20kill%20all&amp;e=rink#select' class='url'>That's right, time to move on. Please do. Bitcoin is really not for you. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<span class="authorlink"><a href='/2016/thats-right-time-to-move-on-please-do-bitcoin-is-really-not-for-you?b=can%20kill%20all&amp;e=rink#select' class='url'>That's right, time to move on. Please do. Bitcoin is really not for you. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
 						<br />
 						<a class="commentlink" href="#comment-141833" title="">Wednesday, 8 January 2020</a>
 					</div>
@@ -285,7 +285,7 @@ Many thanks for sharing!</p>
 				<li class="trackbody" id="comment-142474">
 					<div class='trackhead'>
 						<div class="commentcount">18</div>
-						<span class="authorlink"><a href='http://trilema.com/2016/the-story-of-elliot-rodger-by-elliot-rodger-adnotated-part-one?b=for%20beheadin&amp;e=%2C%20is#select' class='url'>The Story of Elliot Rodger. By Elliot Rodger. Adnotated. Part One. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<span class="authorlink"><a href='/2016/the-story-of-elliot-rodger-by-elliot-rodger-adnotated-part-one?b=for%20beheadin&amp;e=%2C%20is#select' class='url'>The Story of Elliot Rodger. By Elliot Rodger. Adnotated. Part One. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
 						<br />
 						<a class="commentlink" href="#comment-142474" title="">Wednesday, 8 January 2020</a>
 					</div>
@@ -297,7 +297,7 @@ Many thanks for sharing!</p>
 
 		<strong id="respond">Add your cents!</strong>
  <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
-			<form action="http://trilema.com/wp-comments-post.php" method="post" id="commentform">
+			<form action="/wp-comments-post.php" method="post" id="commentform">
 	
 
 <!--- This is just a decoy ;)
@@ -349,31 +349,31 @@ Many thanks for sharing!</p>
 <ul>
                         <h5>Recent Comments</h5>
       <ul>
-      	<li><a href=http://trilema.com/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
-	<li><a href=http://trilema.com/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
-	<li><a href=http://trilema.com/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
-	<li><a href=http://trilema.com/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
-	<li><a href=http://trilema.com/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
-	<li><a href=http://trilema.com/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
-	<li><a href=http://trilema.com/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
-	<li><a href=http://trilema.com/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
-	<li><a href=http://trilema.com/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
-	<li><a href=http://trilema.com/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
-	<li><a href=http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
-	<li><a href=http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
-	<li><a href=http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
       </ul>
    
 
@@ -383,39 +383,39 @@ Many thanks for sharing!</p>
                 <div id="sidebar2">
                 <ul>
                         <li><h5>Recent Articles</h5><ul>
-                	<li><a href='http://trilema.com/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
-	<li><a href='http://trilema.com/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
-	<li><a href='http://trilema.com/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
-	<li><a href='http://trilema.com/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
-	<li><a href='http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
-	<li><a href='http://trilema.com/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
-	<li><a href='http://trilema.com/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
-	<li><a href='http://trilema.com/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
-	<li><a href='http://trilema.com/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
-	<li><a href='http://trilema.com/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
-	<li><a href='http://trilema.com/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
-	<li><a href='http://trilema.com/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
-	<li><a href='http://trilema.com/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
-	<li><a href='http://trilema.com/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
-	<li><a href='http://trilema.com/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
-	<li><a href='http://trilema.com/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
-	<li><a href='http://trilema.com/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
-	<li><a href='http://trilema.com/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
-	<li><a href='http://trilema.com/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
-	<li><a href='http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
 </ul></li>
                 
 
         
-<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="http://trilema.com/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
-<li class="page_item page-item-34333"><a href="http://trilema.com/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
-<li class="page_item page-item-181"><a href="http://trilema.com/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
-<li class="page_item page-item-62578"><a href="http://trilema.com/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
-<li class="page_item page-item-94098"><a href="http://trilema.com/in-the-press/" title="In the press">In the press</a></li>
-<li class="page_item page-item-39332"><a href="http://trilema.com/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
 </ul></li>
 <h5>Say NO! to platforms</h5>      
-<center><a href=http://trilema.com/2019/no-platforms/><img src=http://trilema.com/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
 
                                                         </ul>
         </div>
@@ -429,7 +429,7 @@ Many thanks for sharing!</p>
 </div>
 		</div>		
 <div id="footer">			
-<a href="http://trilema.com/feed/" title="RSS Feed"><img src="http://trilema.com/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
 </a>		
 Copyright &copy; 2008 - 
 2021 for all text and images.			

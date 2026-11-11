@@ -6,15 +6,15 @@
 	<meta http-equiv="Cache-control" content="private,max-age:9800">
 	<meta name="description" content="Planet Earth's most widely read blog." /> 
 	<meta name="robots" content="index,follow,noarchive" />
-<link rel="icon" href="http://trilema.com/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-	<link rel="stylesheet" href="http://trilema.com/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
 
-<style type="text/css">  body {      	background: #fff url('http://trilema.com/wp-content/themes/trilema/images/bg_oct2009.jpg') no-repeat center top; }  </style>
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_oct2009.jpg') no-repeat center top; }  </style>
 
-	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://trilema.com/feed/atom/" />
-	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="http://trilema.com/feed/" />
-	<link rel="pingback" href="http://trilema.com/xmlrpc.php" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
 		<title>The problem of distributed counting, and how we avoided it (at significant mental cost to you) on Trilema - A blog by Mircea Popescu.</title>
 	<style type="text/css">
 						ol.footnotes li {list-style-type:lower-roman;}
@@ -30,7 +30,7 @@
 	<div id="mask_head_ie"></div>
 	<div id="base2">
 		<div id="header">
-			<div id="blogtitle"><a href="http://trilema.com">Trilema</a></div>
+			<div id="blogtitle"><a href="/">Trilema</a></div>
 			<div id="subtitle">Mediocrity is not a lack of intelligence.<br />Mediocrity is intelligence entirely dedicated to self-preservation.
 </div>
 
@@ -41,15 +41,15 @@
 		</div>
 		<div id="mask_foot"></div>
 		<div id="container">
-<div id="content">        <div class="spacer"></div>             <span id="shash-98674"><div class="post" id="post-98674">                    <h1><a href="http://trilema.com/2021/the-problem-of-distributed-counting-and-how-we-avoided-it-at-significant-mental-cost-to-you/" rel="bookmark" title="Permanent Link to The problem of distributed counting, and how we avoided it (at significant mental cost to you)">The problem of distributed counting, and how we avoided it (at significant mental cost to you)</a></h1>                        <div class="date">                                     Saturday, 09 January, Year 13 d.Tr.&nbsp;|&nbsp;Author: <a href="http://trilema.com/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+<div id="content">        <div class="spacer"></div>             <span id="shash-98674"><div class="post" id="post-98674">                    <h1><a href="/2021/the-problem-of-distributed-counting-and-how-we-avoided-it-at-significant-mental-cost-to-you/" rel="bookmark" title="Permanent Link to The problem of distributed counting, and how we avoided it (at significant mental cost to you)">The problem of distributed counting, and how we avoided it (at significant mental cost to you)</a></h1>                        <div class="date">                                     Saturday, 09 January, Year 13 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
 
                         <div class="entry">
-<p>In lingering continuation of an <a href="http://trilema.com/2020/forum-logs-for-30-oct-2019/#2567938">ancient discussion</a>, we will be making some changes to the Eulora communication protocol (still specced <a href="http://trilema.com/2018/euloras-communication-protocol-restated/">here</a>).</p>
-<p>To summarize, Eulora communications rest on a layered encrypted protocol. The first layer's RSA, which is known to be secure, but it is also very intensive, both in time (exponentiation's not free) and in space (OAEP ensures sub-50% packet utilization, for instance). The second layer's [an in-house elaboration of<sup><a href="#footnote_0_98674" id="identifier_0_98674" class="footnote-link footnote-identifier-link" title="This because everyone out there sucks pustulent whore ass and call it macaronifoss. There existed no such thing as a Serpent implementation before I had my own engineer make it exist, fancy that wonder.">i</a></sup>] Serpent, which is much more comfortable but also ambiguous<sup><a href="#footnote_1_98674" id="identifier_1_98674" class="footnote-link footnote-identifier-link" title="Any buffer can be used as `key` to `decrypt` via this algorithm any buffer used as `encrypted message`, resulting in a `decrypted message` of the correct length obtained through the correct number of steps. If this makes you salivate while you've your crypto hat on, because `man, sounds just like OTP`, it'll also make you weep because there's no good ways to reject messages intrinsically. You always gotta know the item's actually a message, and actually intended for so-and-so key, you can't really do the (very useful!) old RSA trick, for instance.">ii</a></sup>. The RSA key is fixed and intrinsically melded into the notion of identity (as <a href="http://trilema.com/2014/what-the-wot-is-for-how-it-works-and-how-to-use-it/">it should be</a>!) whereas serpent keys are just kept in a round buffer by the hundreds, intended for and destined to ephemereality.</p>
+<p>In lingering continuation of an <a href="/2020/forum-logs-for-30-oct-2019/#2567938">ancient discussion</a>, we will be making some changes to the Eulora communication protocol (still specced <a href="/2018/euloras-communication-protocol-restated/">here</a>).</p>
+<p>To summarize, Eulora communications rest on a layered encrypted protocol. The first layer's RSA, which is known to be secure, but it is also very intensive, both in time (exponentiation's not free) and in space (OAEP ensures sub-50% packet utilization, for instance). The second layer's [an in-house elaboration of<sup><a href="#footnote_0_98674" id="identifier_0_98674" class="footnote-link footnote-identifier-link" title="This because everyone out there sucks pustulent whore ass and call it macaronifoss. There existed no such thing as a Serpent implementation before I had my own engineer make it exist, fancy that wonder.">i</a></sup>] Serpent, which is much more comfortable but also ambiguous<sup><a href="#footnote_1_98674" id="identifier_1_98674" class="footnote-link footnote-identifier-link" title="Any buffer can be used as `key` to `decrypt` via this algorithm any buffer used as `encrypted message`, resulting in a `decrypted message` of the correct length obtained through the correct number of steps. If this makes you salivate while you've your crypto hat on, because `man, sounds just like OTP`, it'll also make you weep because there's no good ways to reject messages intrinsically. You always gotta know the item's actually a message, and actually intended for so-and-so key, you can't really do the (very useful!) old RSA trick, for instance.">ii</a></sup>. The RSA key is fixed and intrinsically melded into the notion of identity (as <a href="/2014/what-the-wot-is-for-how-it-works-and-how-to-use-it/">it should be</a>!) whereas serpent keys are just kept in a round buffer by the hundreds, intended for and destined to ephemereality.</p>
 <p>The protocol as summarily described (and naively represented in the reader's mind on a first pass read) works well enough in most practical situations : the RSA secure layer handles identity and Serpent key seeding, the Serpent workhorse layer takes over from there. Problems arise at the interface with a somewhat marginal case which is practically a ftp implementation : large quantities of data are sent over this protocol, being the game's own resources (models, animations, etcetera). UDP packets are relatively small (thousand bytes sorta thing) ; such assets are relatively large (million byte sorta thing), but an elaborate (yet remarkably flexible and functional, I must say!) algorithm cuts the files into more manageable-sized chunks, produces manifests for the lists, ships the manifests over first... it's basically torrenting but fast, cheap and altogether lite <em>not to mention <b>actually</b> encrypted</em>, because that "https" bullshit you folk do... But let's not get distracted with discussions of the pustulence and all-around misery of barbarian lands. Instead, let's say our thing works splendidly well, except...</p>
-<p>There's this naive concept of automatically burning serpent keys, see ? It seemed, at some point <em>illo tempore</em>, in continuation of and comunion with <a href="http://trilema.com/2019/being-an-engineer-the-mental-disorder/">specified idiocies</a>, that it'd be a good idea to have an implicit rule for burning Serpent keys every nth use (potentially, n=1<sup><a href="#footnote_2_98674" id="identifier_2_98674" class="footnote-link footnote-identifier-link" title="An important point to underscore here is that even n=1 (meaning, burn the key used after every packet) does not in fact equate single-usage of Serpent keys. 
+<p>There's this naive concept of automatically burning serpent keys, see ? It seemed, at some point <em>illo tempore</em>, in continuation of and comunion with <a href="/2019/being-an-engineer-the-mental-disorder/">specified idiocies</a>, that it'd be a good idea to have an implicit rule for burning Serpent keys every nth use (potentially, n=1<sup><a href="#footnote_2_98674" id="identifier_2_98674" class="footnote-link footnote-identifier-link" title="An important point to underscore here is that even n=1 (meaning, burn the key used after every packet) does not in fact equate single-usage of Serpent keys. 
 The 1472-byte Serpent packet is really a concatenation of 92 16-byte chunks, all of which were obtained by encrypting respective 16-byte payload chunks to the same Serpent key, so even the (extremely expensive!) n=1 case still means 92 reuses per Serpent key. Such is the nature of the beast : there's no self-obvious way to stretch Serpent to larger sizes ; there's not much utility to smaller UDP packets ; a procedure whereby 92 different keys are used for composing each packet could theoretically be implemented on the current protocol, however it'd increase costs substantially.">iii</a></sup>, why not, if the user's willing to pay for the mounting costs involved the server will work for pay, that's what a server is). This leads to an insolvable problem : decentralized counting. We have some mechanisms to deal with it in some favourable cases (which involve <em>private algebras</em> and other things I absolutely won't... "bother" you with, for you're unworthy), but in this particular case, where the count can increase by arbitrarily large chunks suddenly... well, nothing's doing, what can I say.</p>
-<p>We've seen all sorts of lulz as part of ongoing, for the past five or six weeks, experimental constructions to better understand the problem <em>in our own terms</em> (which is what <a href="http://trilema.com/2018/experimental-results/">the lab</a> ever was for). Such as for instance a client telling the server "hey, use THIS key from now on!" upwards of sixty times (in response to a large burst of data) only to exhaust the key's lifetime thusly and so cap the hot mess with a message to... use a different key. (Which of course doesn't even have to arrive in order, yes, it could come in next-to-last or something, why not, it's UDP after all.) Such as for instance all sorts and manner, the fact of the matter's that decentralized counting is dubious at best...</p>
+<p>We've seen all sorts of lulz as part of ongoing, for the past five or six weeks, experimental constructions to better understand the problem <em>in our own terms</em> (which is what <a href="/2018/experimental-results/">the lab</a> ever was for). Such as for instance a client telling the server "hey, use THIS key from now on!" upwards of sixty times (in response to a large burst of data) only to exhaust the key's lifetime thusly and so cap the hot mess with a message to... use a different key. (Which of course doesn't even have to arrive in order, yes, it could come in next-to-last or something, why not, it's UDP after all.) Such as for instance all sorts and manner, the fact of the matter's that decentralized counting is dubious at best...</p>
 <p><center>~ <b>Part Two</b> ~</center> </p>
 <p>Hellow, an' welcome to Part Two!!! of our article. When we parted company in part one (which at the time was merely The Article) barely twenty minutes ago, I hadn't yet had breakfast, and we were discussing things and matters phylosophycal and of great depth, such as distributed counting -- this enhancedly insane situation where two people count the things they say to each other over a lossy channel and baș-never manage to arrive at any sort of reconciled count ; nor is there any hope to resolve the situation through authority, because whoever is promoted to head librarian is stuck issuing a concrete number, and the recipient can always find itself looking at a five written down next to a collection of six items all present.</p>
 <p>In other words, before this Part Two!!! came along, we were fucked. But then it occured to me<sup><a href="#footnote_3_98674" id="identifier_3_98674" class="footnote-link footnote-identifier-link" title="Here, if you wish to see raw the workings of true life I'm not one to deny : 
@@ -146,11 +146,11 @@ mircea_popescu nu-ti zic ce fericit is lol
 diana_coman da' sa stii ca si eu, mai ales ca imi rezolva asa frumos si partea aia cu `cum dracu' sa decida cand ori daca e cazul de reset`
 mircea_popescu e un salt calitativ
 diana_coman este.
-And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>distributed</em> counting exercise, if (and <b>only if</b>) one lets go of the <a href="http://trilema.com/2015/the-squares-and-the-holes/">"modern democracy" poison</a> and reverts to more <a href="http://trilema.com/2016/modernism-and-traditionalism/?b=What%20do%20you%20mean&#038;e=Natasha#select">traditional values</a>. Removing spurious "communication" and assorted "<a href="http://trilema.com/2017/the-practical-costs-of-hallucinated-freedom/">anyone</a>-can-do-<a href="http://trilema.com/2016/the-darkening/">anything</a>-isms" from the pie results in... less complexity, or more properly put : <a href="http://trilema.com/2020/eulora-changes-or-hey-diana_coman/?b=aware&#038;e=Nevertheless#select">manageable</a> complexity.</p>
-<p>And so... work continues, on better footing. Always remember : #BelieveWomen <a href="http://trilema.com/2018/the-common-psychosis/">kills</a> IRL. </p>
-<p>And don't forget to love Rochester like <a href="http://trilema.com/2014/i-love-rochester-so-will-you/?b=This%20busy&#038;e=em%20out#select">I do</a>!</p>
-&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_98674" class="footnote">This because everyone out there sucks pustulent whore ass and call it <del>macaroni</del>foss. There existed no such thing as a Serpent implementation before I had my own engineer make it exist, fancy <a href="http://trilema.com/2017/fake-news-are-just-one-tail-of-the-failed-female-state/">that wonder</a>. [<a href="#identifier_0_98674" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_98674" class="footnote">Any buffer can be used as "key" to "decrypt" via this algorithm any buffer used as "encrypted message", resulting in a "decrypted message" of the correct length obtained through the correct number of steps. If this makes you salivate while you've your crypto hat on, because "man, sounds just like OTP", it'll also make you weep because there's no good ways to reject messages intrinsically. You always gotta know the item's actually a message, and actually intended for so-and-so key, you can't really do the (very useful!) <a href="http://trilema.com/2012/cum-sa-pastram-secrete-digitale/?b=Chestia%20asta%20are&#038;e=procedeaza#select">old RSA trick</a>, for instance. [<a href="#identifier_1_98674" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_98674" class="footnote">An important point to underscore here is that even n=1 (meaning, burn the key used after every packet) does not in fact equate single-usage of Serpent keys. </p>
-<p>The 1472-byte Serpent packet is really a concatenation of 92 16-byte chunks, all of which were obtained by encrypting respective 16-byte payload chunks to <em>the same</em> Serpent key, so even the (extremely expensive!) n=1 case still means 92 reuses per Serpent key. Such is the nature of the beast : there's <a href="http://trilema.com/2020/forum-logs-for-22-nov-2017/#2367491">no self-obvious way</a> to stretch Serpent to larger sizes ; there's not much utility to smaller UDP packets ; a procedure whereby 92 different keys are used for composing each packet could theoretically be implemented on the current protocol, however it'd increase costs substantially. [<a href="#identifier_2_98674" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_98674" class="footnote">Here, if you wish to see raw the workings of true life I'm not one to deny : </p>
+And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>distributed</em> counting exercise, if (and <b>only if</b>) one lets go of the <a href="/2015/the-squares-and-the-holes/">"modern democracy" poison</a> and reverts to more <a href="/2016/modernism-and-traditionalism/?b=What%20do%20you%20mean&#038;e=Natasha#select">traditional values</a>. Removing spurious "communication" and assorted "<a href="/2017/the-practical-costs-of-hallucinated-freedom/">anyone</a>-can-do-<a href="/2016/the-darkening/">anything</a>-isms" from the pie results in... less complexity, or more properly put : <a href="/2020/eulora-changes-or-hey-diana_coman/?b=aware&#038;e=Nevertheless#select">manageable</a> complexity.</p>
+<p>And so... work continues, on better footing. Always remember : #BelieveWomen <a href="/2018/the-common-psychosis/">kills</a> IRL. </p>
+<p>And don't forget to love Rochester like <a href="/2014/i-love-rochester-so-will-you/?b=This%20busy&#038;e=em%20out#select">I do</a>!</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_98674" class="footnote">This because everyone out there sucks pustulent whore ass and call it <del>macaroni</del>foss. There existed no such thing as a Serpent implementation before I had my own engineer make it exist, fancy <a href="/2017/fake-news-are-just-one-tail-of-the-failed-female-state/">that wonder</a>. [<a href="#identifier_0_98674" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_98674" class="footnote">Any buffer can be used as "key" to "decrypt" via this algorithm any buffer used as "encrypted message", resulting in a "decrypted message" of the correct length obtained through the correct number of steps. If this makes you salivate while you've your crypto hat on, because "man, sounds just like OTP", it'll also make you weep because there's no good ways to reject messages intrinsically. You always gotta know the item's actually a message, and actually intended for so-and-so key, you can't really do the (very useful!) <a href="/2012/cum-sa-pastram-secrete-digitale/?b=Chestia%20asta%20are&#038;e=procedeaza#select">old RSA trick</a>, for instance. [<a href="#identifier_1_98674" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_98674" class="footnote">An important point to underscore here is that even n=1 (meaning, burn the key used after every packet) does not in fact equate single-usage of Serpent keys. </p>
+<p>The 1472-byte Serpent packet is really a concatenation of 92 16-byte chunks, all of which were obtained by encrypting respective 16-byte payload chunks to <em>the same</em> Serpent key, so even the (extremely expensive!) n=1 case still means 92 reuses per Serpent key. Such is the nature of the beast : there's <a href="/2020/forum-logs-for-22-nov-2017/#2367491">no self-obvious way</a> to stretch Serpent to larger sizes ; there's not much utility to smaller UDP packets ; a procedure whereby 92 different keys are used for composing each packet could theoretically be implemented on the current protocol, however it'd increase costs substantially. [<a href="#identifier_2_98674" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_98674" class="footnote">Here, if you wish to see raw the workings of true life I'm not one to deny : </p>
 <blockquote><p><b>mircea_popescu</b> diana_coman, tuuuu!<br />
 <b>mircea_popescu</b> pula mea noi suntem idioti complet.<br />
 <b>mircea_popescu</b> de ce isi face fiecare management la ~cheile lui~ ?!<br />
@@ -246,8 +246,8 @@ And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>dis
 <b>diana_coman</b> este.</p></blockquote>
 <p>And so it goes! [<a href="#identifier_3_98674" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
               <div>
-                <div class="alignleft">&laquo; <a href="http://trilema.com/2021/ken-russells-70s-the-boy-friend-tommy-and-altered-states/">Ken Russell's 70s : The Boy Friend, Tommy and Altered States</a></div>
-                <div class="alignright"><a href="http://trilema.com/2021/253-269-863-261-471-958-220-370-4-21-19-24/">253 - 269 - 863 - 261 - 471 - 958 - 220 - 370 - 4 - 21 - 19 - 24</a> &raquo;</div>
+                <div class="alignleft">&laquo; <a href="/2021/ken-russells-70s-the-boy-friend-tommy-and-altered-states/">Ken Russell's 70s : The Boy Friend, Tommy and Altered States</a></div>
+                <div class="alignright"><a href="/2021/253-269-863-261-471-958-220-370-4-21-19-24/">253 - 269 - 863 - 261 - 471 - 958 - 220 - 370 - 4 - 21 - 19 - 24</a> &raquo;</div>
               </div>
 
 <div class="clear"></div>
@@ -258,7 +258,7 @@ And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>dis
                    <div class="info_bot"></div>
             </div>
           <div id="postmetadata">
-                        Comments feed : <a href='http://trilema.com/2021/the-problem-of-distributed-counting-and-how-we-avoided-it-at-significant-mental-cost-to-you/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="http://trilema.com/2021/the-problem-of-distributed-counting-and-how-we-avoided-it-at-significant-mental-cost-to-you/trackback/" rel="trackback">trackback</a>.                                   </div>
+                        Comments feed : <a href='/2021/the-problem-of-distributed-counting-and-how-we-avoided-it-at-significant-mental-cost-to-you/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2021/the-problem-of-distributed-counting-and-how-we-avoided-it-at-significant-mental-cost-to-you/trackback/" rel="trackback">trackback</a>.                                   </div>
   
 <!-- You can start editing here. -->
 		<p class="commenttitle"><a name="comments"></a>4 Responses</p>
@@ -282,7 +282,7 @@ And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>dis
 				<li class="trackbody" id="comment-158899">
 					<div class='trackhead'>
 						<div class="commentcount">2</div>
-						<span class="authorlink"><a href='http://trilema.com/2021/minigame-smg-statement-on-q4-2020/?b=is%20concerned&amp;e=f%20it#select' class='url'>MiniGame (S.MG) Statement on Q4 2020 on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<span class="authorlink"><a href='/2021/minigame-smg-statement-on-q4-2020/?b=is%20concerned&amp;e=f%20it#select' class='url'>MiniGame (S.MG) Statement on Q4 2020 on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
 						<br />
 						<a class="commentlink" href="#comment-158899" title="">Sunday, 17 January 2021</a>
 					</div>
@@ -292,7 +292,7 @@ And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>dis
 				<li class="trackbody" id="comment-159354">
 					<div class='trackhead'>
 						<div class="commentcount">3</div>
-						<span class="authorlink"><a href='http://trilema.com/2021/i-cant-remember-the-last-time-i-talked-to-a-dude/?b=wrinkles%2C%20so&amp;e=a%20in#select' class='url'>I can't remember the last time I talked to a dude... on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<span class="authorlink"><a href='/2021/i-cant-remember-the-last-time-i-talked-to-a-dude/?b=wrinkles%2C%20so&amp;e=a%20in#select' class='url'>I can't remember the last time I talked to a dude... on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
 						<br />
 						<a class="commentlink" href="#comment-159354" title="">Saturday, 30 January 2021</a>
 					</div>
@@ -314,7 +314,7 @@ And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>dis
 
 		<strong id="respond">Add your cents!</strong>
  <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
-			<form action="http://trilema.com/wp-comments-post.php" method="post" id="commentform">
+			<form action="/wp-comments-post.php" method="post" id="commentform">
 	
 
 <!--- This is just a decoy ;)
@@ -366,31 +366,31 @@ And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>dis
 <ul>
                         <h5>Recent Comments</h5>
       <ul>
-      	<li><a href=http://trilema.com/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
-	<li><a href=http://trilema.com/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
-	<li><a href=http://trilema.com/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
-	<li><a href=http://trilema.com/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
-	<li><a href=http://trilema.com/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
-	<li><a href=http://trilema.com/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
-	<li><a href=http://trilema.com/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
-	<li><a href=http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
-	<li><a href=http://trilema.com/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
-	<li><a href=http://trilema.com/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
-	<li><a href=http://trilema.com/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
-	<li><a href=http://trilema.com/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
-	<li><a href=http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
-	<li><a href=http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
-	<li><a href=http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
       </ul>
    
 
@@ -400,39 +400,39 @@ And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>dis
                 <div id="sidebar2">
                 <ul>
                         <li><h5>Recent Articles</h5><ul>
-                	<li><a href='http://trilema.com/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
-	<li><a href='http://trilema.com/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
-	<li><a href='http://trilema.com/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
-	<li><a href='http://trilema.com/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
-	<li><a href='http://trilema.com/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
-	<li><a href='http://trilema.com/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
-	<li><a href='http://trilema.com/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
-	<li><a href='http://trilema.com/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
-	<li><a href='http://trilema.com/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
-	<li><a href='http://trilema.com/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
-	<li><a href='http://trilema.com/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
-	<li><a href='http://trilema.com/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
-	<li><a href='http://trilema.com/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
-	<li><a href='http://trilema.com/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
-	<li><a href='http://trilema.com/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
-	<li><a href='http://trilema.com/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
-	<li><a href='http://trilema.com/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
-	<li><a href='http://trilema.com/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
-	<li><a href='http://trilema.com/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
-	<li><a href='http://trilema.com/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
 </ul></li>
                 
 
         
-<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="http://trilema.com/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
-<li class="page_item page-item-34333"><a href="http://trilema.com/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
-<li class="page_item page-item-181"><a href="http://trilema.com/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
-<li class="page_item page-item-62578"><a href="http://trilema.com/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
-<li class="page_item page-item-94098"><a href="http://trilema.com/in-the-press/" title="In the press">In the press</a></li>
-<li class="page_item page-item-39332"><a href="http://trilema.com/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
 </ul></li>
 <h5>Say NO! to platforms</h5>      
-<center><a href=http://trilema.com/2019/no-platforms/><img src=http://trilema.com/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
 
                                                         </ul>
         </div>
@@ -446,7 +446,7 @@ And so it goes!">iv</a></sup> there's no absolute need to manage it as a <em>dis
 </div>
 		</div>		
 <div id="footer">			
-<a href="http://trilema.com/feed/" title="RSS Feed"><img src="http://trilema.com/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
 </a>		
 Copyright &copy; 2008 - 
 2021 for all text and images.			
