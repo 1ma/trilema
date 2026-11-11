@@ -1,0 +1,19 @@
+:80 {
+	root * /srv/trilema
+
+	# Don't serve project files
+	@project path /Caddyfile /compose.yml /README.md
+	respond @project 404
+
+	# serve extensionless files as HTML
+	@extensionless {
+		not path /favicon.ico
+		not path *.*
+		file {path}
+	}
+
+	header @extensionless Content-Type "text/html; charset=utf-8"
+
+	try_files {path} {path}/ {path}/index.html
+	file_server
+}
