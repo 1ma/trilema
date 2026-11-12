@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_may2019b.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>MPEx - Status Report on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">It mildly annoys me, as a capable sheep,<br />that people like you exist.<br />~ <a href=/2016/the-story-of-elliot-rodger-by-elliot-rodger-adnotated-part-one/#comment-118639>nicknaem</a>
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-49593"><div class="post" id="post-49593">                    <h1><a href="/2013/mpex-status-report/" rel="bookmark" title="Permanent Link to MPEx - Status Report">MPEx - Status Report</a></h1>                        <div class="date">                                     Friday, 27 September, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p><strong>I. The news</strong>. <a href=/forum-logs-for-27-sep-2013#916012>Last night</a> when I announced this article on irc this particular chapter didn't yet exist, so I had to re-do the numbering of all the others. I guess that's the definition of news.</p>
+<p>Anyway, the final segment of optic fiber connecting my private NOC<sup><a href="#footnote_0_49593" id="identifier_0_49593" class="footnote-link footnote-identifier-link" title="No, it's not in a sauna tyvm.">i</a></sup> to the world at large was cut, physically, sometime around noon today. This has caused no end of hassle because guess what ? GPG doesn't work so well through phones, at least not yet. It especially works poorly the day after the culmination of a two day aggravation programme about security and social engineering everyone I know went through. Basically every remote operator arrayed into one of two camps : the "you're kidding me right ? what is this, a bit ?" camp or the "oh he's pretending to be attacked to test me har har" camp. I have been methodically<sup><a href="#footnote_1_49593" id="identifier_1_49593" class="footnote-link footnote-identifier-link" title="Which is to mean : slowly. Ironically, I actually prophesied this ;/">ii</a></sup> rebuilding access which is why you even get to read this in the first place. It may not look like much, but it is a worked-for victory. </p>
+<p>Tempting as it may be to suspect reptilian conspiracy and the gubbinment, the much more likely explanation is the guys with the excavators and assorted heavy equipment at the corner of the street acting of their own free will such as it is, and being hard working, productive members of society after a fashion. They're building a gas station, which likely won't make in its entire short, unhappy existence enough profit to justify my cursing. The local Internet people are giving themselves one pm tomorrow as the deadline for fixing the thing, which is probably remarkable given that it's Friday night and Romania. </p>
+<p>Notwithstanding the annoying inconvenience, this is not particularly serious or threatening an event. I will in due time get my connectivity and credentials all sorted out, meanwhile MPEx servers are still being tested independently, backups of everything still got, Bitcoin still got, you no come to disturb!</p>
+<p><strong>II. The new MPEx key</strong> is 4096RSA/4096RSA, fingerprint 3FF3 65E9 0FF6 B246 5841 E819 2EE9 3869 A57D 509A keyid A57D509A. You can copy/paste it from here : </p>
+<p><code>-----BEGIN PGP PUBLIC KEY BLOCK-----<br />
+Version: SKS 1.1.0</p>
+<p>mQINBFJE9SgBEADmoQkiACzQojTnY6+87SMvIAupdtmPdrcTBcWOnck5RwwbipQDumi52QP9<br />
+r4ChSFYO1g6UE40FwtBQuDHbGmQtNvZZnBncPmUuvCCYyAab55FK0vP3mA2I65YLpRdTsB9F<br />
+D+ZxDrgFjXpF/vELVgvIibAsIS92jHkMuzN2slXq8r8WP/Q+/ds+BoFsgb39eOKAy+FHeALO<br />
+NqU0h9s0RwJVfqNpP/NRtFXsoPstkWFrXA2zgbS5mroQadxcGqNaiyZl8AqphfP6uUUzUSTG<br />
+mdW21LDFao7JISz3uhM4hcge36hWD18H8fcc+NHQvtyOBbwOPC8dAt8R0s+kz6jGDVUmNyr2<br />
+ppoWRy88VZ/nOrBmdNm2jWNAcS79mW51tRkFIt60fGSvs8hrHlnupGUJjJYzeNRlJ+0mwRmc<br />
+4rMYUg1ogQFprdBeLzQYg+4SX7BA4/l+qI9xrkmeLfNy96ctv1pV5K40+d4FANpLVtqn5dZX<br />
+6Jn537L5RE7UKof5NwbItaEEzemByiSr2CUwyHn+PZTZ1HqgDAOUw9TT44DQ9wiIxXXtIjy5<br />
+FrrsxKSpY0VIKihS5RbS254qun/YKoAgvLzT+AsQ7Iz+arQ4Bcx05oDdBi7Cv1IK1Wop8mKs<br />
+jbrVwZFr8hHak2/81tVie3hNmaBtIbNTL3v7j3hXwWXSVCVv+wARAQABtDxNUEV4LCB0aGUg<br />
+Qml0Y29pbiBTZWN1cml0aWVzIEV4Y2hhbmdlICh2aXNpdCBodHRwOi8vbXBleC5jbymJAjgE<br />
+EwECACIFAlJE9SgCGwMGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAAAoJEC7pOGmlfVCasukP<br />
+/0/5KFLWj7Ol5GE1WaVx+RNhnD9pfQUM3xbqFHj7nPglpBwJaVE0PEFymcIV4ambotWah1ry<br />
+476ZG1mU0IIhDWVgmMbr62617x25x9EjQsvmeIUsPxhd1VZQAA6TmlM79Y0Dol/RUfWCHQ9Z<br />
+j+Jh7+6L+D2rLiX98y/D9Tuu7HbWV98fhp6qzO7hlMwM02I2gIyFv6w2hEiEnTYqgjgwEIm6<br />
+1077TYJbPj3RXh3IDaJu2O1DONRyl3rc/p+Xof0hkGa74H4HTUuG3NGps46LB0evPYxML942<br />
+bPdX+1uhF0ZHlN1lKE2EEUA4LBREDhLljsUp1A17pe4+GJPvBjDgc9h9InOxAnVCIlNbp56x<br />
+lxQGTwxmPXHl+rrki0S/m4lmDbFYa6iZArUq238RTElydvWZrNahIJa6gbYmp1BZx2ThgA7Y<br />
+bZsp1v+MSqnkB5kbTV9W9qz0+ldEgF95wmu7EdTWkFtHypjYlEcKkdknV96aDb6FRabFYBv5<br />
+EACgxJWX9IEe1B50eonqiS8xmOQ1TlSBlEQgM+V8fpMMVD/U+rEAvt68haWGwUdkcRFHq/no<br />
+PvlNt9feBTgxWrS9dAX4YIa3u+BHYK1tvRMTPyTGkHQSq3h6Xrgs2eCCom8pXreGh6noj655<br />
+wTvob0LPTvjWYtXNKkBURsqCMeLxPlXDqWquiQIcBBABAgAGBQJSRQLZAAoJEIpzbw4vt7RS<br />
+TDUQAINq0Fug4rzca92NwqQkEaXqTZ2aoMcnfE9joFbJSyWl/H3UvtOKOH2gXA71tLi2unVi<br />
+sO/qJgOkv8H+ZOA1C5/EyDYRR4F4NKffb50LU3m0z0aTsn2Gd4CJT9/1raJv4zBgwlsJxajB<br />
+f31IPJgCqfTzNIN1LXMZp90olbcfsSsNCqg3hfywSV2SuX1WpUs8cbM1gmiNTq8uXOq20vUg<br />
+Tk/MOYHwA7a69b2eqJGwf33Xf1xwwFMMLToV9kr3/FMysnUmHg+qk5SRIrCZVuMPNW8dLoQ/<br />
+xw+/WeijltRKxCR6tDTGOKbUfprLuo5p7uLaxT68/rSRY0pBYt5f4K6akSneV9OCuqjSJoKn<br />
++WzQM9+zaQFWuGc8O3b1un60NxHB4XYc78whzV72luRnx5vBfr1A5EUNpu2vASrI7LgZ7Ask<br />
+0+tmCFvvebkgPK9384rQB1ma3tZgXTe+6YWA8WWfwCz1o5hyWwXqWaOZ4I2vu+WTDKvSuxqE<br />
+LyB8bnFfikxIiQPSjMGPVuh1r9NVRCz38t3GhC5Z5b9Tl5aW6y2nkF0k6a4Q2dbGeA47fgCG<br />
+Q0EiU/JZCjmcWMAuPzutC52odUua/xFzR+Fkq2HcCsScbq93D21abd6WNCDmROUQZEcJONqn<br />
+AS6YaHMGqyV3BOetoKfRiRzeQ08RY+DeIkUJlI03uQINBFJE9SgBEADEC3jiJAoF90czf08Z<br />
+OodaFedkHvifwhlp+jEtc+CgmvNIUBU2ZbfImjsZa0qaK00kB1aeMdSHLsl9BlGycNGolZqr<br />
+lZd/M6esnIY0oI1HDzzRWfVYD4aF3PBZK8P6DlqKrPyDnY1ooQvq5jiAf6Iz5tUJpP718IGg<br />
+cRtOvxdOuz1bm5DL+aLb0zAUML6W91zTdB2wmE1EnsMGyVoqnFSgZC5a0dDDo/TMAe6r5sJN<br />
+vWMNMHem0+zeS5eZWKJD0BmuRFZ3ylakjAYltzbPrtRMT4VdIap6zfxRqTifgCDw4n/UqKqB<br />
+Q9bKY+IRvDXQXZRsp0QVemN2zlf7PkqOgU2+cKNt1PzjiSnYcDXcEUEN1mpPzfJJGZagY3wz<br />
+wltZO2YzYMGiRiEwx9OALGAgL+0cmzOPlYBPUXhmzq4N0cvjtQ2XwxzoO4sAHk8OTwcwcAXj<br />
+ObOaEY798EUX0A1LOGjc3tKko1hM1EURAaxZ/UkMdthtYXolb7OvuoFA18MWFvjJfZMmkTt3<br />
+/nJdBvYo0cA+kbOwphdVbUJLFGA+kHxNYlpdTaOr+PDpM43imAst6rAmGaGo9pH+M9CYiiO9<br />
+WCQHFajLxRW/Whlwsem60fPye42EBDltFzcoGzTsjKV8c+IzwltRMO+Ud0Z4g8jM5kdCLfL9<br />
+S3u1DIioERtSF0WjawARAQABiQIeBBgBAgAJBQJSRPUoAhsMAAoJEC7pOGmlfVCaO1EP93Le<br />
+PkR/IDuAAhMq9QT20Hg5xIqUpYJrEbdx6vmMltspa3J1x2gxBllDCcxATQ3sFb4UXXUkl9Mk<br />
+34SpOE5sHNg3tErluztP1GxJ5lurP+m99vjzl4XA0KVRPDo2DL/v6qbgJV6Bv+Ebmw9xmCJl<br />
+ZirRjBKS5VqWEUFZre894zWqhdXxXsG1AxspGpv56XopCY7nnX1yo7pRffdkhr06tZkgQ/dv<br />
+4m7FkkseibQygJd6OHH9sZgO4AfD0qrTeC298bBQ0YovuHOQeW3EKwSnTYcGn2CGqOAIKlVh<br />
+4Uv30FYQY/PPY6ZbjoVtGsr4LYQCuV57ZteOjTHctQhoMZY0yyKKE6Me6jIQwIoo0cARqfrw<br />
+KYbHWoYPUWrCv3RAFJsOlU+F51OWSUVjrzGlprAyGo5GRdUMh7rvaoxa6LVDiX19I3G2oLmB<br />
+J4ZDTRnkvmMmUNbu6eNNi5om747O49iuGa8kKQnWaEK1AbzgKpOKifcGQjIAGVcsNIYRZ+E6<br />
+0uGuv5pDBGVqTgDPZypF8ih1Dm9Ik9ndWbQVpHMAgMyicdy0JxyNwahZ3NFmErdT2ICDPp89<br />
+rj8bUOQjtS+aCCz1+b4yypsaBN7XoCVwEJTfMCBiAgVgwqm/pYFcncrepe9Ql4YBZ3UfCrKS<br />
+WLM7hsJ7Cx76sQ6OFviaYvZgc9MJtfc=<br />
+=TeDs<br />
+-----END PGP PUBLIC KEY BLOCK-----</code></p>
+<p>or else you can pick it up off the Internet. You know it's right because as you can see <a href=http://pgp.mit.edu:11371/pks/lookup?op=vindex&#038;search=0x2EE93869A57D509A>it's signed by me</a>.</p>
+<p>The larger signature will mean an estimated 35 to 45% increase in bandwidth consumption by MPEx for the same traffic volume<sup><a href="#footnote_2_49593" id="identifier_2_49593" class="footnote-link footnote-identifier-link" title="Short one liner orders are impacted significantly but long STAT responses and DB dumps not nearly as much.">iii</a></sup>. This is not the end of the world. I briefly considered making a custom 8k bit key, but in the end discarded the idea as overkill. Nevertheless, it remains an open possibility : in spite of all MPEx keys to date being marked as "never expires", none of them function like that or indeed are intended to be used like that. They remain revokable as circumstances demand and at my discretion. While I generally try to avoid multiple revocations in the same year, you never know what the next Snowden is going to be telling us.</p>
+<p>If you are using MPEx independently, please update its key. You won't be able to use it otherwise. If you are using MPEx through a script such as pyMPEx, make sure you either edit it accordingly or download an updated copy from the script's maintainer. If you are using MPEx through a broker you should be fine. </p>
+<p><strong>III. Public keys.</strong> This is perhaps the strangest part of the entire affair. We have detected differences in a few user public keys as cached on the disk of the attacked server when compared to what should be more authoritative copies of same on different servers. This circumstance is yet unexplained. It may be some sort of data corruption, either intended by the hacker for some yet obscure purpose or accidental. Either explanation seems improbable. </p>
+<p>The variant keys do not work, ie, neither the affected machine nor clean machines can encrypt to them.<sup><a href="#footnote_3_49593" id="identifier_3_49593" class="footnote-link footnote-identifier-link" title="Although I confess mentally preparing for the surprise of my life as we were testing this the first time.">iv</a></sup> Nevertheless, in the interest of paranoia MPEx will require resubmitting your public key. This procedure is trivial for the user, as described in the FAQ. You will have to submit the exact key we have on record for your account, substitutes will not be accepted. Should we receive multiple variants for the same fingerprint you will be asked to satisfy a signature test. There is no deadline for this process, but you won't be allowed access to your account until you have satisfied it.</p>
+<p><strong>IV. Back online.</strong> Internet access to MPEx is to be restored Sunday, Sept 29th, at noon GMT. This is mostly intended to give most people a chance to import MPEx' new key and send over their public key. Trade will continue under supervision for the rest of the day. </p>
+<p>In general I don't expect trouble - it is and remains the case that to date MPEx has been harassed through social rather than technical means. Be it DDoS or password begging, neither really have all that much to do with computers. </p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_49593" class="footnote">No, it's not in a sauna tyvm. [<a href="#identifier_0_49593" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_49593" class="footnote">Which is to mean : slowly. Ironically, I actually <A href=/2013/mpex-security-breach/>prophesied</a> this ;/ [<a href="#identifier_1_49593" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_49593" class="footnote">Short one liner orders are impacted significantly but long STAT responses and DB dumps not nearly as much. [<a href="#identifier_2_49593" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_49593" class="footnote">Although I confess mentally preparing for the surprise of my life as we were testing this the first time. [<a href="#identifier_3_49593" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/jesus-you-guys-are-like-snark-bullion-already/">"Jesus you guys are like snark bullion already"</a></div>
+                <div class="alignright"><a href="/2013/mpoe-september-2013-statement/">MPOE, September 2013 Statement</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/mpex/" title="View all posts in MPEx" rel="category tag">MPEx</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/mpex-status-report/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/mpex-status-report/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>6 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-95278" class="commentbody"><div class="commenthead"><img alt='FabianB`s avatar' src='http://rubygems.org/gems/mpex/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='https://rubygems.org/gems/mpex' class='url'>FabianB</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95278" title="">Saturday, 28 September 2013</a>
+							</div>
+						<p>MPEx.rb 0.6.1 released with updated new MPEx key (https://rubygems.org/gems/mpex and <a href="https://github.com/fawuxi/mpex">https://github.com/fawuxi/mpex</a>). No need to upgrade if you're user of 0.6.0 already, just edit the mpexkeyid in ~/.mpex/config.yaml</p>
+						</li>
+
+										<li id="comment-95279" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95279" title="">Saturday, 28 September 2013</a>
+							</div>
+						<p>Nice going there F!</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-139385">
+					<div class='trackhead'>
+						<div class="commentcount">3</div>
+						<span class="authorlink"><a href='/2013/real-men-cabling?b=you%20recall%2C%20&amp;e=ople#select' class='url'>Real men cabling on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139385" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] you recall, I had my optics cut yesterday. The original resolution estimate was 13:00 on a Saturday. Nevertheless, the connectivity people [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139400">
+					<div class='trackhead'>
+						<div class="commentcount">4</div>
+						<span class="authorlink"><a href='/2013/mpex-breach-post-mortem?b=been%20a%20week%20&amp;e=as%20a#select' class='url'>MPEx breach - post mortem on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139400" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] been a week since coming back online. All is calm and so I suspect we may regard the incident as over, and look back towards it as a [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139489">
+					<div class='trackhead'>
+						<div class="commentcount">5</div>
+						<span class="authorlink"><a href='/2013/the-horror-of-horrors?b=9%20hours%20from&amp;e=%20own#select' class='url'>The horror of horrors on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139489" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] 9 hours from now. [&#8617;]Users who still haven't resubmitted their public key as per MPEx - Status Report are still required to do so. [&#8617;]   Category: MPEx     Comments feed : RSS 2.0. Leave your own [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-142057">
+					<div class='trackhead'>
+						<div class="commentcount">6</div>
+						<span class="authorlink"><a href='/2016/912001273-an-ode-to-a-tireless-bot?b=once%20more%2C%20a&amp;e=56%22%2C#select' class='url'>91.200.12.73 - An ode to a tireless bot. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142057" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] once more, and at 15:33:49, 17:17:47, and 19:03:54 checks this attempt. By 22:19:14 it moves on to MPEx - Status Report, where it tries to send a comment at 22:19:15 and then checks twice (at 22:19:16 as "PHP/5.3.56", [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author192c63a" id="author192c63a" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email192c63a" id="email192c63a" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url192c63a" id="url192c63a" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="49593" /></p>
+				<input type="hidden" name="comment_post_time" value="1781264237-18.97.14.80" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-49593")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-49593");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-49593");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

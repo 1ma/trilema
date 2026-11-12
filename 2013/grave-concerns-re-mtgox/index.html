@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_apr2009.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Grave concerns re MtGox on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">The scandalous blog of a sexual predator.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-47191"><div class="post" id="post-47191">                    <h1><a href="/2013/grave-concerns-re-mtgox/" rel="bookmark" title="Permanent Link to Grave concerns re MtGox">Grave concerns re MtGox</a></h1>                        <div class="date">                                     Monday, 08 April, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>There are two major points to consider before proceeding to the actual discussion.</p>
+<p><strong>I. The suspicion of self trading.</strong> You probably vaguely know about the one time two years ago when Bitcoin nearly died. What happened there was that MtGox ignored reports about accounts being broken into for about two weeks (customer's fault! weak passwords!) only to have it forced upon them that in fact they had a security hole (which was never in fact discussed, documented or explained - MtGox does deceit, not post-mortems).</p>
+<p>Through that security hole being exploited somebody gained control of an account which had a balance over 400`000 BTC. The hacker soon discovered that it is not possible to withdraw the entire amount, because of limits in place based on the dollar equivalent value. Consequently he sold BTC all the way down to 0.01, and so withdrew a good chunk of "worthless" coins.</p>
+<p>The question here is whether somebody was indeed holding 400`000 BTC (close to 10% of all BTC then in existence) on the exchange, in spite of there being no real need and no actual advantage to doing so. Alternatively it would be perfectly possible for MtGox to simply maintain an account loaded with virtual BTC (ie, an infinity thereof) for the purpose of trading on the market. The temptation to do so would be significant, or to quote some <a href="/2012/and-another-one-bites-the-dust-bitmarketeu/">other random geek</a> : </p>
+<blockquote><p>Earlier this year, I had this “genius” idea which led me to making a fatal mistake. I thought I could provide a hedge fund service for Bitmarket users. There were other sites providing this service so I guesses that it could be successful.</p></blockquote>
+<p>There is currently no way to know whether in fact it was a customer account that was compromised, or if the hacker simply tore into MtGox's own fractional reserve vault. </p>
+<p><strong>II. The long history of deceitful communication.</strong> I will simply refer the curious reader to a recent case study titled "<a href="/2013/its-been-an-epic-few-days-what-happened/">It’s been an epic few days: What happened?</a>". That aside, on the balance of evidence MtGox is by a significant margin the most deceitful Bitcoin business out there, if we exclude the actual scams. Personal study of the matter is by all means encouraged, you might start by searching "MtGox" on the btctalk forum. </p>
+<p>And now that we're on the same page, here's what made it into today's summaries and popped right off the screen : </p>
+<p><a href="/wp-content/uploads/2013/04/mt-gox-scam-generation.png"><img src="/wp-content/uploads/2013/04/mt-gox-scam-generation.png" alt="mt-gox-scam-generation" title="mt-gox-scam-generation" width="560" height="155" class="aligncenter size-full wp-image-47193" /></a></p>
+<p>To go with that, allow me to quote from a discussion of Stock Generation : </p>
+<blockquote><p>On March 20, 2000, SG unilaterally suspended all pending requests to withdraw funds and sharply reduced participants' account balances in all companies except the privileged company. (Applying "Rule 13" to all participants' accounts.) </p>
+<p>Two weeks later, SG peremptorily announced a reverse stock split for its highest-yield company, applying "Rule 18", which caused the share prices to plummet to less than 1/100,000 of their previous values, while other shares (including those that were "guaranteed" not to decrease in value) were devalued by 50% to 95%. </p>
+<p>At about the same time, SG stopped responding to participant requests for the return of funds, yet continued to solicit new participants through its website.</p></blockquote>
+<p>The situation at MtGox is about as follows : </p>
+<ul>
+<li><strong>Huge trade engine lag</strong> (click on chart for source and more spans). <a href="http://jezus.si/graf/dashboards/bitcoin/details/lag/"><img src="/wp-content/uploads/2013/04/mt-gox-1-day.png" alt="mt-gox-1-day" title="mt-gox-1-day" width="500" height="250" class="aligncenter size-full wp-image-47194" /></a>
+<p>In principle in a situation where the minimum unit equals <em>two minutes</em> "anything can happen". This situation may, of course, be explained by incompetence. It may just as well be explained by strict need : if you are running a fractional reserve system that's blowing out you simply can't afford any manner of precision. Time precision least of all.</li>
+<p></p>
+<li><strong>Arbitrary "waiting queue".</strong> The company declares a queue which can in no way be verified by anyone. Accounts are randomly "flagged", go to bottom of queue. Withdrawals are frozen in the interval. Even if the locking of existing accounts may not, a queue may, of course, be explained by an influx of new users trying to buy bitcoin. It may just as well be explained by strict need : if you are running a fractional reserve system that's blowing out you simply can't afford any certain liabilities. Thus randomly suspending accounts to be reinstated at unspecified times in the future (just as soon as more dollars are sent in) makes perfect sense.<sup><a href="#footnote_0_47191" id="identifier_0_47191" class="footnote-link footnote-identifier-link" title="This is by no means a singular case. Consider this recent example.">i</a></sup></li>
+<p>
+</ul>
+<p>I would say that on the balance of evidence available, MtGox is more likely to be a scam than a legitimate operation at this point. The trifecta of <strong>tight lipped yet deceitful reps</strong> ; <strong>soft as opposed to hard liabilities coupled with a tendency towards further softening</strong> and <strong>arbitrary, case-by-case handling of accounts showing extreme sensitivity to public exposure</strong> is present and that's enough for my needs.</p>
+<p>At this point I would advise anyone against keeping any sums on MtGox overnight, fiat or BTC. Their reaction will probably be to make transfers even slower, in an attempt to discourage capital flight. Take a moment and think things through : if your reason for keeping capital on MtGox is that you don't want to wait for their excessive transfer delays, isn't this in and of itself proof that you really shouldn't be there at all ?</p>
+<p>I may, of course, be wrong. This is not a determination of fact. This is a determination of risk. Simply put, if you're not making 50% round trip you're taking more of a chance dealing with MtGox than you're being paid for.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_47191" class="footnote">This is by no means a singular case. Consider <a href="https://bitcointalk.org/index.php?topic=162481.msg1715705#msg1715705">this recent example</a>. [<a href="#identifier_0_47191" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/the-bitcoiners-press-manual/">The Bitcoiner's Press Manual</a></div>
+                <div class="alignright"><a href="/2013/let-me-show-you-how-right-i-am/">Let me show you how right I am</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/bitcoin/" title="View all posts in Bitcoin" rel="category tag">Bitcoin</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/grave-concerns-re-mtgox/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/grave-concerns-re-mtgox/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>19 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-92669" class="commentbody"><div class="commenthead"><img alt='Jeff`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">Jeff</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92669" title="">Monday, 8 April 2013</a>
+							</div>
+						<p>I think you're just wrong.  Don't attribute to malice what can be explained by ignorance.  Do you really think the owners of MtGox, whose identities are well known, would get away with this kind of fraud?  It's not like they are some anonymous internet guy.  The police would know where to find them, and this isn't some lawless country, it's Japan.</p>
+<p>Also, the transfer delays are not MtGox's fault, they make funds available as soon as they receive them.  The delay is caused by banks.</p>
+						</li>
+
+										<li id="comment-92670" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92670" title="">Tuesday, 9 April 2013</a>
+							</div>
+						<p>Experience shows that having your identity well known is not necessarily an effectual deterrant to this type of fraud. People end up doing all the time, they get sucked in for whatever reasons their arrogance forces upon them, after which it grows on itself and it becomes unstoppable. Madoff is the controlling example.</p>
+<p>In principle anything can be argued to have been ultimately caused by banks. This argument would obviously be more or less convincing depending.</p>
+						</li>
+
+										<li id="comment-92671" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">BingoBoingo</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92671" title="">Tuesday, 9 April 2013</a>
+							</div>
+						<p>A healthy number of people know Trendon Shavers identity...</p>
+<p>If Gox continues bleeding market share enough to reach the point any fractional reserve system could be exposed. The bigger any fractional reserve the less market share they'd have to lose to break a scheme.</p>
+						</li>
+
+										<li id="comment-92675" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92675" title="">Tuesday, 9 April 2013</a>
+							</div>
+						<p>That is true. In a sense decentralisation is the safest weapon Bitcoin has to protect itself from <a href=/2012/the-politics-of-bitcoin/ >fiat exchange corruption</a>.</p>
+						</li>
+
+										<li id="comment-92685" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92685" title="">Wednesday, 10 April 2013</a>
+							</div>
+						<blockquote><p>There is currently no way to know whether in fact it was a customer account that was compromised, or if the hacker simply tore into MtGox’s own fractional reserve vault.</p></blockquote>
+<p>They've couldn't simply steal from their clients, ignoring hacking reports because they were 'hacking' accounts themselves?</p>
+						</li>
+
+										<li id="comment-92687" class="commentbody"><div class="commenthead"><img alt='subSTRATA`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">subSTRATA</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92687" title="">Wednesday, 10 April 2013</a>
+							</div>
+						<p>The fact most people still use Gox is disturbing. One major issue with Gox would ruin Bitcoin big time, so where is decentralization? But it is pointless to speak of it, Bitcoin is at the stage when real life herd types became majority of BTC users, which means that we others are sort of fucked. I totally don't like the current situation, I'd prefer Bitcoin to go back underground.</p>
+						</li>
+
+										<li id="comment-92694" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92694" title="">Wednesday, 10 April 2013</a>
+							</div>
+						<p>You mean like now ?</p>
+<p>noiframe=http://polimedia.us/dtng/c/src/136562118454.png width=500 height=250></p>
+						</li>
+
+										<li id="comment-92710" class="commentbody"><div class="commenthead"><img alt='Kim Jong Un`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Kim Jong Un</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92710" title="">Thursday, 11 April 2013</a>
+							</div>
+						<p>Mircea you are one -huge- faggot<br />
+you just want to devaluate btc so you can finally buy half a bitcoin yourself with your allowance money.</p>
+<p>Stop this faggotry right now or I will nuke your ass to Timbuktu.</p>
+<p>I mean it.</p>
+<p>Sincerely,</p>
+<p>Kim Jong</p>
+						</li>
+
+										<li id="comment-92711" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92711" title="">Thursday, 11 April 2013</a>
+							</div>
+						<p>He would rather enjoy world slave center.</p>
+						</li>
+
+										<li id="comment-94453" class="commentbody"><div class="commenthead"><img alt='oyvinds`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">oyvinds</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-94453" title="">Sunday, 11 August 2013</a>
+							</div>
+						<p>Some months later and this is the situation:</p>
+<p>- MtGox declared a "withdraw freeze" and nobody could make withdraw requests for two weeks.<br />
+- A lot of people report big withdraws made before this freeze still have not come through.<br />
+- People have now been waiting 2 months for USD withdraws and 1-3 months for EUR withdraws.</p>
+<p><a href="https://bitcointalk.org/index.php?topic=179586.540">https://bitcointalk.org/index.php?topic=179586.540</a></p>
+<p>You were spot on ahead of your time.</p>
+						</li>
+
+										<li id="comment-94463" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-94463" title="">Sunday, 11 August 2013</a>
+							</div>
+						<p>It happens.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-95243">
+					<div class='trackhead'>
+						<div class="commentcount">12</div>
+						<span class="authorlink"><a href='http://www.thedrinkingrecord.com/2013/09/26/anti-bitcoin-bitcoin-apps-part-3-gliph-in-particular/' class='url'>Anti-Bitcoin &#8220;Bitcoin Apps&#8221; Part 3: Gliph in particular | Bingo Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-95243" title="">Thursday, 26 September 2013</a>
+					</div>
+					<p>[...] be valued equally and the current spread of Bitcoin prices between MtGox and other exchanges. Specific concerns about MtGox were laid out in April by Mircea Popescu though he had criticized then before and after then. Since April MtGox has been [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-98928">
+					<div class='trackhead'>
+						<div class="commentcount">13</div>
+						<span class="authorlink"><a href='http://www.thedrinkingrecord.com/2014/04/08/the-big-rock-candy-foundation/' class='url'>The Big Rock Candy Foundation | Bingo Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-98928" title="">Tuesday, 8 April 2014</a>
+					</div>
+					<p>[...] names that promise good things have a precedent set for not always themselves being good. From Mt Gox to Inputs.io to Coinlab the Bitcoin Foundation Stands as an organization where many of the worst [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-130414">
+					<div class='trackhead'>
+						<div class="commentcount">14</div>
+						<span class="authorlink"><a href='http://bingology.net/2014/02/25/a-reminder-the-most-important-word-in-bitcoin-again-because-gox/?b=stopp&amp;e=#select' class='url'>A Reminder - The Most Important Word in Bitcoin, Again because Gox &laquo; Bingology - BingoBoingo's Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-130414" title="">Thursday, 1 August 2019</a>
+					</div>
+					<p>[...] stopping frying bacon naked. People were warned in large ways for nearly a year, and in smaller ways much earlier than that. Everyone who might actually have claim to the title of [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-130425">
+					<div class='trackhead'>
+						<div class="commentcount">15</div>
+						<span class="authorlink"><a href='http://bingology.net/2013/09/26/anti-bitcoin-bitcoin-apps-part-3-gliph-in-particular/?b=andt&amp;e=#select' class='url'>Anti-Bitcoin &quot;Bitcoin Apps&quot; Part 3: Gliph in particular (Updated) &laquo; Bingology - BingoBoingo's Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-130425" title="">Thursday, 1 August 2019</a>
+					</div>
+					<p>[...] and the current spread of Bitcoin prices between MtGox and other exchanges illustrates this. Specific concerns about MtGox were laid out in April by Mircea Popescu though he had criticized MtGox before and after then. Since April MtGox has been [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139797">
+					<div class='trackhead'>
+						<div class="commentcount">16</div>
+						<span class="authorlink"><a href='/2014/mtgox-and-ancient-bitcoin-history-the-straight-dope?b=The%20demise%20o&amp;e=dn%27t#select' class='url'>MtGox and ancient Bitcoin history - the straight dope. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139797" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] The demise of MtGox was privately announced at my secret conference early April 2013, and then publicly a week or so later. The only novel thing in this world is the history you didn't [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139828">
+					<div class='trackhead'>
+						<div class="commentcount">17</div>
+						<span class="authorlink"><a href='/2014/mpoe-february-2014-statement?b=node%20in%20this&amp;e=t%20to#select' class='url'>MPOE, February 2014 Statement on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139828" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] node in this space. Anyway : the panic seems to have inadvertently been the last straw for dead man walking exchange MtGox, which apparently was exposed the wrong way or who the hell even knows what happened there. But to [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-140931">
+					<div class='trackhead'>
+						<div class="commentcount">18</div>
+						<span class="authorlink"><a href='/2015/lets-address-even-more-of-the-more-common-pseudo-arguments-raised-by-the-very-stupid-people-that-like-the-gavin-scamcoin-proposal?b=foundation%20h&amp;e=%20has#select' class='url'>Let's address even more of the more common pseudo-arguments raised by the very stupid people that like the Gavin scamcoin proposal on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-140931" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] foundation has been propping up scams, and the rate at which they blow up. Where is BFL ? Where is MtGox ? Where's all them fearless captn's of industry of yore ?ii Perhaps much more importantly : who has [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-148115">
+					<div class='trackhead'>
+						<div class="commentcount">19</div>
+						<span class="authorlink"><a href='http://ossasepia.com/2020/03/27/a-review-of-the-bitcoin-category-on-trilemacom/?b=concerns%20re%20&amp;e=ting#select' class='url'>A Review of the Bitcoin Category on trilema.com &laquo; Ossa Sepia</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-148115" title="">Friday, 27 March 2020</a>
+					</div>
+					<p>[...] concerns re MtGox's operations including self-trading, deceitful communications, huge trade engine lag and arbitrary "waiting [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authorc2a7cbb" id="authorc2a7cbb" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emailc2a7cbb" id="emailc2a7cbb" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urlc2a7cbb" id="urlc2a7cbb" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="47191" /></p>
+				<input type="hidden" name="comment_post_time" value="1768343108-18.97.9.174" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-47191")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-47191");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-47191");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

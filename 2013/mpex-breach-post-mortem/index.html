@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_oct2019.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>MPEx breach - post mortem on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Din bube, mucegaiuri si noroi<br />Mi-am facut bici, si m-am cicat pe voi.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-49787"><div class="post" id="post-49787">                    <h1><a href="/2013/mpex-breach-post-mortem/" rel="bookmark" title="Permanent Link to MPEx breach - post mortem">MPEx breach - post mortem</a></h1>                        <div class="date">                                     Monday, 07 October, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>It's been a week since <a href="/2013/mpex-status-report/">coming back online</a>. All is calm and so I suspect we may regard the incident as over, and look back towards it as a thing of the past and part of history, with a view to draw morals and conclusions. You may draw your own, but if interested in mine they are below.</p>
+<p><strong>I. Social engineering is the #1 threat you face.</strong> Appallingly coded pieces of crap made by mentally feeble dorks (such as <a href="/2013/dear-guardian-stop-being-retarded/">Tor</a> or <a href="http://www.reddit.com/r/Bitcoin/comments/ybaut/do_not_invest_in_bitdaytrade_this_website_is/">Bitdaytrade</a>) are defeated through technical means all the time, sure. Nevertheless, if you're not mentally feeble and you're not coding a piece of crap the possibility of technical breach shall be and should be the least of your concerns. Mind that <a href="/2013/the-events-of-failday/">BitInstant</a> lost a few hundred BTC in a social engineering attack last year, mind that Lavabit ended up closed through a social engineering attack last month<sup><a href="#footnote_0_49787" id="identifier_0_49787" class="footnote-link footnote-identifier-link" title="Yes, the fiat courts and their orders are no different from the famished Ghanaian and his friends in this context : thieves, the lot of them.">i</a></sup>, mind that even the NSA, for all its lavish expenditure out of ill gotten proceeds and all its advertised (if false) abundance of young bright minds and qualified engineer hands has pretty much abandoned technical attacks and is concentrating primarily on social engineering tactics. </p>
+<p>They can't break RSA so they plant moles on implementation standards committees to make sure it never gets implemented, and they try to get the consumer to use Tor for the exact reason they were trying to suppress PGP and push DES back in the day. For that matter, gleefully ignorant people like J P Koning gleefully failing to realise that gleefully discussing a well known, well documented <a href="/2013/the-anatomy-of-a-scam/">collection of scams</a> and scammers <a href="http://jpkoning.blogspot.ro/2013/10/what-happens-when-stock-markets-die.html">as if it were a Bitcoin stock exchange</a> does a lot of damage to the future of the poor saps reading him as if he were an expert that thinks before opening his mouth. It's not MPEx that suffers from this sort of stupidity any more than PGP suffered from all the effort to push DES, any more than secure online communication suffered from all the pushing of Tor. It's the saps that believe the pusher - whether he's honestly clueless or earnestly doing his job - that get the shaft.</p>
+<p>Social engineering is your enemy, social engineering will stay your enemy. Permanently, your biggest enemy. If you don't have plans to fight this beast in all its multifacetious forms you don't have plans to survive, and that's how it is. </p>
+<p><strong>II. A breach is massive psychological trauma.</strong> I've had people throw up over it. The last time I had seen grown humans throw up like stressed out cats we were in a ditch and being fired upon. There is no real difference at work, trauma exists in the brain as a function of the mind not in the body as a function of sensata, and as such a breach is going to hurt your best and most dedicated people the most. You'd better be prepared. </p>
+<p>You'd better be prepared, because the momentary impression of everyone doing the everyday job of making the thing you've made breathe and digest and slowly grow and move around its environment in response to stimuli will be that it's the end of the world. It's the CEOs job to keep calm and provide anchors for everyone else to work from, and if you're not capable of doing this, and doing it well, you're no CEO and you should never have been called that in the first place. This is what the job is.</p>
+<p><strong>III. Keep the channels clear.</strong> The people doing the thankless, unknown and unrecognised job of handling the communications of your project, preparing drafts you throw across the room eighteen times in a row because you've never read something this stupid this year, trying to make some sort of sense of what may be said and what may not be said and how to say it in such a way that it's even worth saying in the first place will do what they do : lock up. They'll want to make a statement "once all is finished". They'll want to deny everything. They'll want to do all the wrong things to do at such a time, as everyone else does them, all the time. Look around and see which corporations handle crisis well on a communications perspective and you'll see why humanities departments are in such poor shape everywhere. </p>
+<p>So you're going to have to provide an anchor for them too. You're going to clear for publishing a lot of material that will have comms experts protest with big wide eyes that "with all due respect they don't think" etc. You're going to do all that and do it all the time without exception not just when you remember about having read this on Trilema sometime, and the result will be that it gets very easy to do for one and that attacks actually strengthen you, whether successful or not. Because guess what, when I say "well they got lucky on the 6th try" <a href="/2013/in-the-interest-of-full-disclosure-failed-social-engineering-attempt-and-0day-vulnerability-in-betadesk/">I have the goods to back it up with</a>. Because I disclosed at the time, although "we don't really need to". Sure we don't, and for that matter we don't really need to do our homework or even show up for work. Rent's not even due yet, right ? </p>
+<p>That's about it. Sure, you'll take measures so this particular thing doesn't happen again. Maybe it won't. Maybe it will. You don't know the future, and you can't get emotionally invested in knowing the future. That's not your job, a CEO is not a sort of digital age shaman, we're not a primitive horde living in a scavenger world atop artifacts we don't understand but can sort-of use, reconstructing our ancestral, tribal habits out of bits of silicon and cable optics. And for that matter, something else will happen. Definitely. </p>
+<p>A breach is a test, but not of the everyday processes of your project, not of its normal respiration, common digestion, usual metabolism. A breach in an exceptional event, and as such it is a test of your project's exceptional qualities, wide reaching plans, deep and flawless understanding and self representation of the world it lives in. It's a test of you.</p>
+<p>May you pass it rather than merely pretend like you had.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_49787" class="footnote">Yes, the fiat courts and their orders are no different from the famished Ghanaian and his friends in this context : thieves, the lot of them. [<a href="#identifier_0_49787" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/so-this-urbit-thing/">So this Urbit thing...</a></div>
+                <div class="alignright"><a href="/2013/what-the-drug-trade-is-how-the-drug-trade-works-and-why-silk-road-didnt-work-and-didnt-matter/">What the drug trade is, how the drug trade works and why Silk Road didn't work and didn't matter</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/3-ani-experienta/" title="View all posts in 3 ani experienta" rel="category tag">3 ani experienta</a>,  <a href="/category/mpex/" title="View all posts in MPEx" rel="category tag">MPEx</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/mpex-breach-post-mortem/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/mpex-breach-post-mortem/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>11 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-95994" class="commentbody"><div class="commenthead"><img alt='pankkake`s avatar' src='http://headfucking.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://headfucking.net/' class='url'>pankkake</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95994" title="">Saturday, 9 November 2013</a>
+							</div>
+						<p>"Social engineering is the #1 threat you face" even if you're the NSA: <a href="http://yro.slashdot.org/story/13/11/08/163245/snowden-used-social-engineering-to-get-classified-documents">http://yro.slashdot.org/story/13/11/08/163245/snowden-used-social-engineering-to-get-classified-documents</a></p>
+						</li>
+
+										<li id="comment-95995" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95995" title="">Saturday, 9 November 2013</a>
+							</div>
+						<p>Definitely.</p>
+						</li>
+
+										<li id="comment-95999" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='http://www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95999" title="">Saturday, 9 November 2013</a>
+							</div>
+						<p>What aout for the TSA that just hurts people while it makes them werk?</p>
+						</li>
+
+										<li id="comment-96000" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96000" title="">Saturday, 9 November 2013</a>
+							</div>
+						<p>I'm kinda surprised there's not a lot more TSA pranking going on tbh.</p>
+						</li>
+
+										<li id="comment-96001" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='http://www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96001" title="">Saturday, 9 November 2013</a>
+							</div>
+						<p>I know you want to be NSA which has no teeth. Still lawful New Mexico style pranks...</p>
+						</li>
+
+										<li id="comment-96002" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96002" title="">Saturday, 9 November 2013</a>
+							</div>
+						<p>Wait, what ?!</p>
+						</li>
+
+										<li id="comment-96006" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='http://www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96006" title="">Sunday, 10 November 2013</a>
+							</div>
+						<p>NSA just watches. TSA injures, unlike the T&amp;A.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-139418">
+					<div class='trackhead'>
+						<div class="commentcount">8</div>
+						<span class="authorlink"><a href='/2013/why-i-suspect-schneier-is-an-us-agent?b=and%20independ&amp;e=in%27.#select' class='url'>Why I suspect Schneier is an US agent. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139418" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] and independent ideas, quite unlike everyone else." [&#8617;]And by the way, allow me to remind : Social engineering is the #1 threat you face. Which social engineering includes COMSEC disinformation planted by enemy agents. Jus' sayin'. [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139488">
+					<div class='trackhead'>
+						<div class="commentcount">9</div>
+						<span class="authorlink"><a href='/2013/the-horror-of-horrors?b=the%20hell%20hap&amp;e=ruct#select' class='url'>The horror of horrors on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139488" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] the hell happened here. Sorry for the downtime! &mdash;&mdash;&mdash;MPEx security breach ; MPEx breach - post mortem [&#8617;]If we're not cheapskates content to just format the failed drive and reconstruct [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139801">
+					<div class='trackhead'>
+						<div class="commentcount">10</div>
+						<span class="authorlink"><a href='/2014/o-hai-let-me-verify-your-identity?b=me%20just%20reit&amp;e=e%20by#select' class='url'>O hai let me verify your identity! on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139801" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] me just reiterate and thickly underscore an older observation :  I. Social engineering is the #1 threat you face. Appallingly coded pieces of crap made by [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139952">
+					<div class='trackhead'>
+						<div class="commentcount">11</div>
+						<span class="authorlink"><a href='/2014/gotta-love-that-negro-speak?b=for%20you%2C%20it%27&amp;e=ause#select' class='url'>Gotta love that negro speak on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139952" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] for you, it's not like the NSA works more because stupid people than because [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authorf0265ca" id="authorf0265ca" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emailf0265ca" id="emailf0265ca" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urlf0265ca" id="urlf0265ca" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="49787" /></p>
+				<input type="hidden" name="comment_post_time" value="1772976001-18.97.14.85" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-49787")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-49787");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-49787");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

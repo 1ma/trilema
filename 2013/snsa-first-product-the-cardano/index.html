@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_may2014.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>S.NSA first product - The Cardano on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Evil broadly consists of people who<br />aren't very good and don't want to get any better.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-49839"><div class="post" id="post-49839">                    <h1><a href="/2013/snsa-first-product-the-cardano/" rel="bookmark" title="Permanent Link to S.NSA first product - The Cardano">S.NSA first product - The Cardano</a></h1>                        <div class="date">                                     Wednesday, 09 October, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p style="padding-left: 230px;"><em><strong>Note:</strong> This article reflects a draft spec. The final product may be slightly different from what is herein described.</em></p>
+<p><strong>What's the idea here ?</strong> </p>
+<ul>
+The idea is that the 'computer insecurity industry' walks one path, while we walk another. It is plainly impossible to either securely operate computers or operate secure computers - or for that matter even live - unless absolute guarantees can be presented. While teeming with all sorts of reptilian and insect pullulation, the swamp of relativism is not hospitable to human life. </p>
+<p>It is sad reality that such guarantees are all but absent in today's computing world. We make it our business and purpose in life to create products that may be used to enact absolute guarantees, to verify them and to enforce them - and in the process we both create the measures by which you can evaluate the freedom available in the world in which you live as well as provide the bricks upon which a free world may be built, one bit at a time. </p>
+<p>Today's installment of these lofty ideas is a simple USB stick to make your private keys absolutely secure.</ul>
+<p><strong>What is this Cardano thing then ?</strong> </p>
+<ul>
+The Cardano<sup><a href="#footnote_0_49839" id="identifier_0_49839" class="footnote-link footnote-identifier-link" title="So named in honor of Girolamo Cardano (1501-1576), Italian Renaissance polymath, as well as one of the girl's cats, which hereby promises to not chew electronic parts ever again.">i</a></sup> is a custom made solid-state USB mass-storage device, similar in size and shape to a standard external hard drive. The unit comes equipped with a USB connector, a red toggle switch (enclosed under a safety flip-cover) and a bicolor indicator light.</ul>
+<p><strong>What does it do ?</strong> </p>
+<ul>
+The Cardano allows you to sign and decrypt gpg messages while ensuring that your private key remains inaccessible to an attacker, even should that attacker have control<sup><a href="#footnote_1_49839" id="identifier_1_49839" class="footnote-link footnote-identifier-link" title="Including physical.">ii</a></sup> of the machine Cardano is attached to. </p>
+<p>Consider the case of visiting a random net cafe or public library. Without Cardano you are in a relatively tough spot : even should you carry your gpg keyring and gpg software on a USB stick, and even should you be able to install gpg software on the respective computer, typing in the keyring passphrase would in all likelihood compromise that key. For instance if there's a keylogger present on the computer, the keylogger's owner now possessed of your gpg keyring and your gpg passphrase is just as much in control of your private key as you are.   </p>
+<p>With Cardano you simply pop the unit in, install no further software and proceed on your merry way, as if you had an airgapped<sup><a href="#footnote_2_49839" id="identifier_2_49839" class="footnote-link footnote-identifier-link" title="This is not a misrepresentation of fact, as you will see in the technical description.">iii</a></sup>, linux based system available right there. One example use case would be identifying with gribble : you receive the challenge encrypted message from gribble, you put it through Cardano and you have the decrypted line necessary to indentify - all while your private key remains 100% safe. </p>
+<p>Another use case would be the implementation of a better 2FA system. Yet another use case would be secure backups of a remote system : simply encrypt your backup to the correct key on the remote machine, download the encrypted file (even over a cleartext connection). Whenever the backups are needed you can retrieve the plaintext content by copying your encrypted back-up to a local Cardano unit.</ul>
+<p><strong>How does it work ?</strong></p>
+<ul>
+A) Key generation.</p>
+<ul>
+This step is mandatory upon first use. It is not necessary to supply power via the USB connector for this process - the internal battery will power Cardano during key generation.</p>
+<ul>
+1) Flip open the safety cover and throw the red toggle switch into the position marked 'ZAP.' The indicator light will flash red.</ul>
+<p><Br /></p>
+<ul>
+2) Return the toggle to the 'ARMED' position. The indicator light will flash green, and after approximately thirty seconds key generation will have completed.<sup><a href="#footnote_3_49839" id="identifier_3_49839" class="footnote-link footnote-identifier-link" title="For increasing the safety of your key it is advisable to place the unit into a Faraday cage - such as for instance a correctly installed, not powered on microwave oven - during key generation.">iv</a></sup></ul>
+<p>The indicator will then turn a solid green. The device can now be plugged into a PC, which will recognize it as a thumb drive containing a 'FAT16' partition. Look for the file named 'PUB'. This is a gpg-compatible 'ASCII armored' public key. The key's identifier string is fixed, and contains the serial number printed on the bottom of the chassis.
+</ul>
+<ul></ul>
+<p>B) GPG signature.</p>
+<ul>Attach your Cardano to a PC and copy over the payload to be signed in the appropriate directory. </p>
+<p>On a sane operating system your device will at this point signal that it has been ejected (without any need for you to physically touch it), process the file, write the intended result to the FAT partition and signal that it has been re-inserted, at which point you will find the signed file on the USB drive, which you may copy normally. At no point does Cardano store what you send to it, but simply processes the incoming data stream and stores it as the intended result. The filename will be changed to append the operation count after the filename, before the extension.</p>
+<p>If running MS Windows or Mac OS you will need to software-'eject' the device yourself to ensure that the OS actually flushes your copied file to the stick.<sup><a href="#footnote_4_49839" id="identifier_4_49839" class="footnote-link footnote-identifier-link" title="You still won't need to actually unplug the stick. In many cases it may also be possible to issue an equivalent command to linux' mount -o sync /dev/sdb1 /mnt/usb or otherwise disable the overbearing OS cache for USB drives - please refer to your OS documentation for further instructions.">v</a></sup></ul>
+</ul>
+<ul>
+C) Decryption</p>
+<ul>
+Attach your Cardano to a PC and place the payload to be decrypted in the appropriate directory. The drive will go through the same process as explained in B above.</ul>
+</ul>
+<ul>
+D) Self-destruct</p>
+<ul>
+This is in fact the first half of the Key Generation operation. (Section A.) Your Cardano is not actually destroyed or otherwise rendered inoperable by this action, but the current contents of your private key storage will be irretrievably lost.</p>
+<ul>
+1) Flip open the safety cover and throw the red toggle switch into the position marked 'ZAP.' The indicator light will flash red. While the toggle remains in this position, the key storage EEPROM will be filled in its entirety with zeroes, then with ones, and then once again with a sequence of random bits distilled from the built-in analog entropy source. This process will repeat until the toggle is returned to the 'ARMED' position or until the internal battery is exhausted.<sup><a href="#footnote_5_49839" id="identifier_5_49839" class="footnote-link footnote-identifier-link" title="On a fresh Cardano the battery lifetime will far exceed any reasonable application of this procedure. If your battery is getting iffy you are well advised to either replace it or get in touch with us to have your unit serviced.">vi</a></sup></ul>
+<p>If you are faced with the imminent loss of your Cardano to a malefactor, leave the red toggle in this position. There is absolutely no way known or conceivable through which a private key could be retrieved after this process. Do not casually throw the zap switch without having fully considered the implications for your security arrangements. Once zapped that key is gone. Gone. </ul>
+<ul>
+<ul>
+2) Return the toggle to the 'ARMED' position. The indicator light will flash green, and after approximately half a minute key generation is complete. The old key has vanished, and a new one will have taken its place.</ul>
+<p>At the end of this procedure, the working slate will have been re-formatted, and will appear empty - as Cardano no longer possesses the old block-cipher key.<sup><a href="#footnote_6_49839" id="identifier_6_49839" class="footnote-link footnote-identifier-link" title="Yes, the working slate is encrypted ">vii</a></sup></p>
+</ul>
+</ul>
+</ul>
+<p><strong>How is it made ?</strong></p>
+<ul>Other than the metal USB connector and the chassis with its lights and lever which are visible to visual inspection, the Cardano contains : </p>
+<ul>
+A) The key storage EEPROM. This is socketed for ease of removal and destruction should your application demand this.<sup><a href="#footnote_7_49839" id="identifier_7_49839" class="footnote-link footnote-identifier-link" title="The indicated manner of destroying EEPROMS is through oxidation, for instance through the use of a high temperature controlled flame such as from a magnesium strip. Alternative chemical destruction such as for instance through Brønsted acids may also be effectual. Do not rely on electric or electromagnetic means for this application. ">viii</a></sup> It can be replaced with any industry-standard SPI EEPROM of 8KB capacity or greater. Do not expect to be able to retrieve keys by removing this EEPROM : all keys are enciphered with a random block-cipher<sup><a href="#footnote_8_49839" id="identifier_8_49839" class="footnote-link footnote-identifier-link" title="Practically speaking an OTP in this application.">ix</a></sup> key which is unique to your particular unit's firmware.</p>
+<p>B) Cardano's firmware. This is a socketed antifuse (OTP) ROM which is unique to your unit and is engraved with the latter's serial number. If desired, it can be read on a common instrument sold for this purpose and its contents checksummed or otherwise perused. The checksum of your firmware ROM is printed on the bottom of the chassis, under the unit's serial number. For your safety, this ROM is non-reprogrammable. Please contact us for upgrades.</p>
+<p>C) Working slate ROM. This Flash ROM is removable, and may be inspected or replaced<sup><a href="#footnote_9_49839" id="identifier_9_49839" class="footnote-link footnote-identifier-link" title="Should you not wish to obtain a new unit it can be replaced when it has exhausted its maximum write-cycle count. Stressing your Cardano unit in this manner is perhaps unadvisable, but you are entitled to your own decisions.">x</a></sup> by customers either before deploying the unit or at any point during. </p>
+<p>D) Internal battery. This is a disposable lithium cell. Please contact us or your favourite local electronics vendor for replacements. A working battery is required for the Key Generation / Self-Destruct operation, and in the interest of your own safety you are advised to not let it get to its absolute last legs.</p>
+<p>E) Entropy generator. This is an avalanche noise array, with some sanity checking in place.<sup><a href="#footnote_10_49839" id="identifier_10_49839" class="footnote-link footnote-identifier-link" title="Note that if you are a security researcher or cryptography specialist and would like to verify the quality of our on-board entropy generation we will be happy to send you our entropy generator at no cost to you, in consideration of a promise to publish your review within some reasonable time frame. Please contact us with an url to your blog for this purpose.">xi</a></sup></ul>
+<p>These components are assembled together in such a way that only the firmware has access to the private key storage, which it uses in specified, non-reprogrammable ways which do not include any way to dump the key. </p>
+</ul>
+<p><strong>What if the thing breaks ?</strong> </p>
+<ul>
+If the file 'SAD' appears on your working slate, please consult its contents for maintenance instructions. Something has gone seriously wrong, included but not limited to: failure of the key-storage EEPROM; the working slate; the entropy generator; or the internal battery.</ul>
+<p><strong>What if someone steals my Cardano ?</strong> </p>
+<ul>
+You should probably let any third parties you are in communication with know that you will be using a new public key. Ideally you accomplish this by signing a declaration / the new public key with your known master, such as for instance by use of your secret, buried-in-the-garden master Cardano. Because yes, you can have more than one of these things. </ul>
+<p><strong>I forgot my Cardano at the library, and now I don't know if someone used it while I was away.</strong> </p>
+<ul>
+Yes, you do know. The Cardano counts each operation. If the current count is above what it was when you left the unit behind, it has been used that many times. There is no easy way for an attacker to modify that value, and any casual attempt would likely leave the unit in quite a sad state.</p>
+<p>That aside, note that this is not the intended mode of operation for the unit, and if at all possible you would be well advised to rescind as a matter of policy any public keys for any units which you did not maintain under your uninterrupted physical control. </ul>
+<p><strong>Why is Cardano better than just buying an old laptop off eBay  ?</strong> </p>
+<ul>
+For one, a Cardano is smaller and lighter. For another, a Cardano is probably cheaper.<sup><a href="#footnote_11_49839" id="identifier_11_49839" class="footnote-link footnote-identifier-link" title="On a cash basis. It would take you at the minimum a few hours of expert time to set-up your second hand laptop in such a way as to offer the same guarantees Cardano offers out of the box, putting the full cost of the laptop alternative squarely in the four figures range.">xii</a></sup> More importantly, the Cardano has much better entropy generation than is available on any consumer x86 machine made before 2005 or so<sup><a href="#footnote_12_49839" id="identifier_12_49839" class="footnote-link footnote-identifier-link" title="After that date the odds that the CPU has been diddled to provide crackable `entropy` are significant.">xiii</a></sup>. </ul>
+<p><strong>I am a developer, can I help ?</strong> </p>
+<ul>
+Yes. The most useful thing you can do is change any system that you control which relies on "2FA" to be able to use Cardano based 2FA. This will require you to obtain and store a user's public key, and then issue challenges encrypted to that public key as part of the verification process. This is very much in your best interest, as  the Cardano provides much better security than what can be obtained from generic 2FA usb sticks or smart phones.</ul>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_49839" class="footnote">So named in honor of Girolamo Cardano (1501-1576), Italian Renaissance polymath, as well as one of the girl's cats, which hereby promises to not chew electronic parts ever again. [<a href="#identifier_0_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_49839" class="footnote">Including physical. [<a href="#identifier_1_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_49839" class="footnote">This is not a misrepresentation of fact, as you will see in the technical description. [<a href="#identifier_2_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_49839" class="footnote">For increasing the safety of your key it is advisable to place the unit into a Faraday cage - such as for instance a correctly installed, not powered on microwave oven - during key generation. [<a href="#identifier_3_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_49839" class="footnote">You still won't need to actually unplug the stick. In many cases it may also be possible to issue an equivalent command to linux' mount -o sync /dev/sdb1 /mnt/usb or otherwise disable the overbearing OS cache for USB drives - please refer to your OS documentation for further instructions. [<a href="#identifier_4_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_49839" class="footnote">On a fresh Cardano the battery lifetime will far exceed any reasonable application of this procedure. If your battery is getting iffy you are well advised to either replace it or get in touch with us to have your unit serviced. [<a href="#identifier_5_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_49839" class="footnote">Yes, the working slate is encrypted  [<a href="#identifier_6_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_49839" class="footnote">The indicated manner of destroying EEPROMS is through oxidation, for instance through the use of a high temperature controlled flame such as from a magnesium strip. Alternative chemical destruction such as for instance through Brønsted acids may also be effectual. Do not rely on electric or electromagnetic means for this application.  [<a href="#identifier_7_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_49839" class="footnote">Practically speaking an OTP in this application. [<a href="#identifier_8_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_9_49839" class="footnote">Should you not wish to obtain a new unit it can be replaced when it has exhausted its maximum write-cycle count. Stressing your Cardano unit in this manner is perhaps unadvisable, but you are entitled to your own decisions. [<a href="#identifier_9_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_10_49839" class="footnote">Note that if you are a security researcher or cryptography specialist and would like to verify the quality of our on-board entropy generation we will be happy to send you our entropy generator at no cost to you, in consideration of a promise to publish your review within some reasonable time frame. Please contact us with an url to your blog for this purpose. [<a href="#identifier_10_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_11_49839" class="footnote">On a cash basis. It would take you at the minimum a few hours of expert time to set-up your second hand laptop in such a way as to offer the same guarantees Cardano offers out of the box, putting the full cost of the laptop alternative squarely in the four figures range. [<a href="#identifier_11_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_12_49839" class="footnote">After that date the odds that the CPU has been diddled to provide crackable "entropy" are significant. [<a href="#identifier_12_49839" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/romania-deep-down-at-the-core/">Romania, deep down at the core</a></div>
+                <div class="alignright"><a href="/2013/and-now-i-shall-be-off-scarfing-smoked-salmon-and-fresh-apple-pie-seasoned-with-free-market-tears-or-why-a-collection-of-confused-retards-does-not-amount-to-a-free-market/">And now I shall be off scarfing smoked salmon and fresh apple pie seasoned with free market tears, or <br />Why a collection of confused retards does not amount to a free market.</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/snsa/" title="View all posts in S.NSA" rel="category tag">S.NSA</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/snsa-first-product-the-cardano/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/snsa-first-product-the-cardano/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>42 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-95491" class="commentbody"><div class="commenthead"><img alt='jurov`s avatar' src='http://coinbr.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='https://coinbr.com' class='url'>jurov</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95491" title="">Thursday, 10 October 2013</a>
+							</div>
+						<p>Would be interesting to compare this with Trezor, not sure if all above scenarios were considered in Trezor design. On the other side, Trezor has a display where you can verify it's really desired transaction before confirming it.</p>
+						</li>
+
+										<li id="comment-95492" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95492" title="">Thursday, 10 October 2013</a>
+							</div>
+						<p>I looked, but there's not much tech meat to be had there. </p>
+<blockquote><p>Cutting-edge cryptography<br />
+TREZOR uses state of the art cryptographic algorithms and practices.</p></blockquote>
+<p>The best I can say is that I have no idea.</p>
+						</li>
+
+										<li id="comment-95493" class="commentbody"><div class="commenthead"><img alt='David FRANCOIS`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">David FRANCOIS</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95493" title="">Thursday, 10 October 2013</a>
+							</div>
+						<p>I'll just leave this here :<br />
+ - Generation of a revocation certificate,<br />
+ - Ability to read the private key for 30 minutes after generation for backup purposes if desirable<br />
+ - Ability to protect the key with a passphrase set with a text file that's wiped each time it's read and requires re-inputting each time the device is re-connected (the key generation would encrypt the key with the passphrase  if such a file is found at key-generation time)<br />
+ - Ability to generate ECC keys instead of RSA keys</p>
+						</li>
+
+										<li id="comment-95494" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95494" title="">Thursday, 10 October 2013</a>
+							</div>
+						<p>I'll trade ya : </p>
+<blockquote><p>- Generation of a revocation certificate,</p></blockquote>
+<p>Your device doesn't update keys. As a result, you may publish your revocation certificate to no effect whatsoever : items signed with your key will still be produced whether you signed the cert or not. The timing implicit in gpg signatures is documentedly unreliable - to the degree the mainainer insists it shouldn't be used. As a result your classic revocation cert does exactly 0. The correct way to do this is as indicated above, via a master key that both enacts and revokes the Cardano.</p>
+<blockquote><p>- Ability to read the private key for 30 minutes after generation for backup purposes if desirable</p></blockquote>
+<blockquote><p>Oct 10 01:47:32 {<a href=http://btcbase.org/log/?date=09-10-2013#346197 >asciilifeform</a>}	Vexual: if you were to introduce key importation, the zapper would have to come with cyanide.<br />
+Oct 10 01:47:51 {asciilifeform}	whereas the answer to the inquisitor's 'where are the other copies' is correctly 'nowhere.'</p></blockquote>
+<blockquote><p>- Ability to protect the key with a passphrase set with a text file that’s wiped each time it’s read and requires re-inputting each time the device is re-connected (the key generation would encrypt the key with the passphrase if such a file is found at key-generation time)</p></blockquote>
+<p>No. Absolute means absolute. This device guarantees electronic security if you guarantee physical security. If you do not guarantee physical security you need a different device, more expensive and otherwise designed. We will release it if there's a market for it, however we won't dork about with laughable, ill baked, pseudo "solutions" of the sort suggested. This is srs bzns.</p>
+<blockquote><p>- Ability to generate ECC keys instead of RSA keys</p></blockquote>
+<p>The only alternative worth the mention is the Cramer-Shoup, as per</p>
+<blockquote><p>Sep 28 12:10:42 {<a href=http://btcbase.org/log/?date=28-09-2013#333701 >mircea_popescu</a>}	my current curiosity in the field is why isn't cramer–shoup more widely usedf.<br />
+Sep 28 12:11:16 {mircea_popescu}	at any rate it should have been implemented in preference of elgamal </p></blockquote>
+<p>There may be a later version with C-S, but there won't likely be a version using multiple schemes and there probably won't be an ECC version. I don't trust ECC.</p>
+						</li>
+
+										<li id="comment-95495" class="commentbody"><div class="commenthead"><img alt='Anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Anon<img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95495" title="">Thursday, 10 October 2013</a>
+							</div>
+						<p>"I don’t trust ECC." <a href="http://blog.cryptographyengineering.com/2013/09/the-many-flaws-of-dualecdrbg.html" >Werd.</a></p>
+						</li>
+
+										<li id="comment-95512" class="commentbody"><div class="commenthead"><img alt='bgupta`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">bgupta</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95512" title="">Saturday, 12 October 2013</a>
+							</div>
+						<p>Why not just install suitable GPG subkeys on one of these? <a href="http://www.g10code.de/docs/openpgp-card-2.0.pdf">http://www.g10code.de/docs/openpgp-card-2.0.pdf</a> (And keep your master key airgapped in a safe place.)</p>
+						</li>
+
+										<li id="comment-95513" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95513" title="">Saturday, 12 October 2013</a>
+							</div>
+						<p><a href="http://btcbase.org/log/?date=12-10-2013#349117">http://btcbase.org/log/?date=12-10-2013#349117</a><br />
+( and <a href="http://btcbase.org/log/?date=09-10-2013#346180">http://btcbase.org/log/?date=09-10-2013#346180</a> )</p>
+						</li>
+
+										<li id="comment-95517" class="commentbody"><div class="commenthead"><img alt='spyked`s avatar' src='http://lucian.mogosanu.ro/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink"><a href='http://lucian.mogosanu.ro' class='url'>spyked</a><img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-educat.png" class="insigna" alt="insigna de cetatean educat" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95517" title="">Saturday, 12 October 2013</a>
+							</div>
+						<blockquote><p>There may be a later version with C-S, but there won’t likely be a version using multiple schemes and there probably won’t be an ECC version. I don’t trust ECC.</p></blockquote>
+<p>From what I gather, it's not ECC itself which is faulty, but some implementations, especially some of the NIST-approved ones (and I believe this is mainly what Schneier was concerned about). Like RSA parameters, some elliptic curves are vulnerable, and it's a matter of choosing the right ones, and (unfortunately) not what some arbitrary institute or agency is promoting as "standard".</p>
+<p>Again, from what I gather, the main advantage of ECC is not ECC itself, but the fact that it can be used in conjunction with existing crypto schemes (e.g. DSA -&gt; ECDSA). I'm guessing that it has the potential to become of practical use in some years from now, after sufficient research and peer review on the matter.</p>
+<p>Anyways, Cramer-Shoup looks quite interesting. Its only problem might be related to encryption of large amounts of data, as I understand the generated ciphertext is twice as large as in Elgamal.</p>
+						</li>
+
+										<li id="comment-95521" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95521" title="">Saturday, 12 October 2013</a>
+							</div>
+						<p>While what you say re ECC is in principle true, sometimes people make heuristic calls. I have. The good news is that my calls are only mandatory for people working for me. The bad news is that my calls are historically quite on point.</p>
+<p>I don't think data storage is quite SUCH a problem these days. As I say in the linked chatlog, I can see why they wouldn't have done it in the 90s, but it's 2013.</p>
+						</li>
+
+										<li id="comment-95563" class="commentbody"><div class="commenthead"><img alt='Eq`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">Eq</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95563" title="">Tuesday, 15 October 2013</a>
+							</div>
+						<p>GPG is the name of a product. Stick to standards, not to products. Idea's not new, but the solution may win lots of clients because it's independent. Keep it that way.</p>
+						</li>
+
+										<li id="comment-95564" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95564" title="">Tuesday, 15 October 2013</a>
+							</div>
+						<p>I'm famously horrible about using pgp and gpg interchangeably. First symptom of dyslexic brain rot I guess. The scary part is it tends to infect people in proximity, too.</p>
+						</li>
+
+										<li id="comment-95566" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='http://www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95566" title="">Tuesday, 15 October 2013</a>
+							</div>
+						<p>Any more GPG is probably the right thing to be saying anyway. Kind of the reverse of the photoshop situation.</p>
+						</li>
+
+										<li id="comment-95576" class="commentbody"><div class="commenthead"><img alt='jjoensuu`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">jjoensuu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95576" title="">Tuesday, 15 October 2013</a>
+							</div>
+						<p>Where can this S.NSA product be purchased from? Or is it not available yet?</p>
+						</li>
+
+										<li id="comment-95583" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95583" title="">Wednesday, 16 October 2013</a>
+							</div>
+						<p>Not available yet, ideally should be here before Xmas.</p>
+						</li>
+
+										<li id="comment-95590" class="commentbody"><div class="commenthead"><img alt='killerstorm`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">killerstorm</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95590" title="">Wednesday, 16 October 2013</a>
+							</div>
+						<p>1. Attach your Cardano to a compromised PC.<br />
+2. Attacker can now sign whatever he wants.<br />
+3. Profit (for attacker; e.g. he might have signed MPEx command).</p>
+<p>What a worthless piece of trash...</p>
+<p>Thing like this DO NOT WORK if they don't have a separate display which allows one to check what will be signed.</p>
+<p>Fucking amateurs...</p>
+<p>Also, how do we know that RNG isn't compromised?</p>
+						</li>
+
+										<li id="comment-95591" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95591" title="">Wednesday, 16 October 2013</a>
+							</div>
+						<p>killerstorm,</p>
+<p>The spec published here is a little out of date. The current plan is to trigger every sign or decrypt operation via a physical act (removal and reinsertion of the cable), or, alternatively, a button.</p>
+<p>As for how a skeptic is to know that the RNG isn't compromised, this, inevitably, requires studying the device yourself. Ask MP about the details of how this shall be arranged.</p>
+						</li>
+
+										<li id="comment-95592" class="commentbody"><div class="commenthead"><img alt='killerstorm`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">killerstorm</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95592" title="">Thursday, 17 October 2013</a>
+							</div>
+						<p>&gt; The current plan is to trigger every sign or decrypt operation via a physical act (removal and reinsertion of the cable), or, alternatively, a button.</p>
+<p>This doesn't help:</p>
+<p>1. You want to sign something and thus connect the device to PC.<br />
+2. Attacker replaces the document to be signed with his own. (This is analogous to MitM attack.)<br />
+3. You press the button, or do whatever is necessary.<br />
+4. Attacker now has document he wants to be signed signed. Say, he might redirect money to his account.</p>
+<p>There is a reason why Bitcoin hardware wallets, such as Trezor, have a little screens on them:<br />
+<a href="http://thegenesisblock.com/trezor-bitcoin-hardware-wallet-on-pace-for-october-deliveries/">http://thegenesisblock.com/trezor-bitcoin-hardware-wallet-on-pace-for-october-deliveries/</a></p>
+						</li>
+
+										<li id="comment-95594" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95594" title="">Thursday, 17 October 2013</a>
+							</div>
+						<p>@<b>killerstorm</b> Basically your position here is, you still haven't digested your intellectual inferiority, not to mention the social inferiority to which that condemns you, as discussed for instance <a href=/2013/why-i-nixed-p2p-colored-coins-and-all-that-jazz/ >here</a>, or on the retardforum. Consequently you imagine calling a cherry "trash" because it's not "big enough" (like for instance an apple is big enough) is somehow going stick, and make it all better. This doesn't work in practice, principally because nobody cares what you think, or what you call things. Cherries still sell for about two to three times per pound what apples sell for, in spite of them being "really shitty apples". It also doesn't work in practice because even should you be able to somehow prove everyone else is just as fucking stupid as you are, that <em>still</em> wouldn't make you any smarter.</p>
+<p>Please don't go reading past this point, as the rest of this comment consists of factual discussion, which is perfectly useless to you as it doesn't and couldn't meaningfully fit into the preconceived schematics you're emotionally invested into. Instead re-direct your effort to re-reading the previous paragraph, ideally over one hundred times, and perhaps even copy it down, by hand. Who knows, maybe through rote it makes it past the very tough carpace which allegedly contains your brain.</p>
+<p>I. There's no means for the host machine to distinguish the Cardano from any other stick. If one suspects the machine he's connecting to might be attempting to hijack writes, that one can trivially insert a normal stick and see what happens.</p>
+<p>II. What the Cardano does is that it guarantees the keys will not be compromised no matter what happens. This is it, nothing else, just like cups excel at holding liquids even if they make poor hammers, just like hangers excel at holding up clothes even if they make poor curettage equipment. </p>
+<p>It is an unfortunate habit of the clueless youth to try and solve "all the problems" simultaneously, often in the same item. This "super-power" inspired approach to life leads to stuff like <a href=/2013/the-bitchslapping-of-2013/ >power-rangering</a>, and it is always and everywhere a definitive sign of gross incompetence, the sort that requires revoking all priviledges for the afflicted and packing them back to school, preferably freshman highschool level.</p>
+						</li>
+
+										<li id="comment-95595" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95595" title="">Thursday, 17 October 2013</a>
+							</div>
+						<p>killerstorm,</p>
+<p>If you are worried about an attack like this one, what you need is a full-scale secure terminal. Preferably with both keyboard and screen. This might be a future product - a somewhat more expensive one.</p>
+<p>Our current objective, on the other hand, is merely to secure private keys.</p>
+						</li>
+
+										<li id="comment-97688" class="commentbody"><div class="commenthead"><img alt='A Varner`s avatar' src='http://avarner.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink"><a href='http://avarner.org' class='url'>A Varner</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97688" title="">Tuesday, 21 January 2014</a>
+							</div>
+						<p>"Ability to read the private key for 30 minutes after generation for backup purposes if desirable"</p>
+<p>Personally, I agree, and I'd like to be able to make a paper backup copy of the key, to store somewhere safe.</p>
+<p>But, I also understand the motive of being able to fully demonstrate that there are no other copies of the private key.</p>
+<p>Couldn't the device just put a file next to the "PUB" file, called "EXPORT", whose contents will be an integer, which is the number of times the private key has been read out? If it's 0, then that proves that the key only exists on the Cardano. If the Cardano is zapped, the key is gone forever. If it's 1 or greater, then the key has been copied, and it's only as secure as your safe-deposit box.</p>
+						</li>
+
+										<li id="comment-97690" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97690" title="">Tuesday, 21 January 2014</a>
+							</div>
+						<p>A Varner,</p>
+<p>To 'Backup' is a solution to a certain anticipated problem: 'key was destroyed or lost.' In the case of Cardano, you are being offered a different - more correct solution: revoke misplaced key by signing a message to this effect with your 'master' - or simply the next higher level of importance - key, and generate a new one.</p>
+<p>Cardano will not tell you how many times a key has been read back because this is physically impossible. (Not reading back a key, that is; this is eminently possible, with inexpensive tools, if you insist! rather, determining how many heads have absorbed a piece of information, by whatever means, is an impossibility. Even if you can wire all the heads in the world to the mains socket in an attempt to get at the truth.)</p>
+<p>All a machine could hope to tell you is: the number of times the key has been read out using the provided mechanism. Note that the Cardano - as currently specified -already does this! Simply scratch a 'zero' onto the cover. That'd be your readout.</p>
+<p>My objective was not to be insulting, but to emphasize a useful fact: some of the ways in which cryptography is presently used are: simply dumb. Especially in the sense of systems which utter false promises to the user ('number of times key has been read.') Any system which is secure 'by protocol' (example: Bitcoin multi-signature payments) is also an example of this kind of false promise.</p>
+<p>We are in the business not only of producing useful gadgets, but in that of making strictly those promises which can be kept, under the laws of arithmetic and physics as we presently know them.</p>
+						</li>
+
+										<li id="comment-97692" class="commentbody"><div class="commenthead"><img alt='A Varner`s avatar' src='http://avarner.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink"><a href='http://avarner.org/' class='url'>A Varner</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97692" title="">Tuesday, 21 January 2014</a>
+							</div>
+						<p>It's not impossible, nor a false promise. It requires one extra byte of EEPROM. If the user makes no use of the 30 minute backup period, then the byte is zero. If the user does plug in the device in the first 30 minutes, then it will be non-zero. What is physically impossible about that?</p>
+						</li>
+
+										<li id="comment-97693" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97693" title="">Tuesday, 21 January 2014</a>
+							</div>
+						<p>A Varner,</p>
+<p>The enemy, to whom you have helpfully lent your Cardano, removes the ROM and reads out the key with a logic analyzer. Value of the 'times read' cell remains zero.</p>
+<p>The devil borrows your unit and reads the ROM 666 times, using the hypothetical mechanism. Which the one byte provided did not suffice to count, resulting in an angry overflow.</p>
+						</li>
+
+										<li id="comment-97694" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97694" title="">Tuesday, 21 January 2014</a>
+							</div>
+						<p>And perhaps it is worth pointing out that Cardano contains no 'real time clock.' When it's off, it's /off./ So no '30 minutes' of anything.</p>
+						</li>
+
+										<li id="comment-97696" class="commentbody"><div class="commenthead"><img alt='A Varner`s avatar' src='http://avarner.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">25</div>
+								<span class="authorlink"><a href='http://avarner.org' class='url'>A Varner</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97696" title="">Wednesday, 22 January 2014</a>
+							</div>
+						<p>In saturation arithmetic (assuming you haven't seen it before), when the one byte reaches 255, if you continue to increment it, it stays at 255. A counter limited to 255 is sufficient for this.</p>
+<p>Without an RTC, you can just use a regular 30 minute countdown timer. If power is lost, the countdown terminates early, and the private key can no longer be read.</p>
+<p>If you lend the Cardano to an enemy, or to the devil, the security is completely compromised anyway.</p>
+<p>The user obviously can always get the key by reading the firmware out, extracting the decryption key from the firmware, and then decrypting the EEPROM. The counter would not count this. (If the Cardano as originally specified is meant to be able to defend against this, then please specify. If not, then it doesn't need to be counted as a read of the private key, because this attack is out of scope.) The counter only counts the number of reads during the initial 30 minute backup period.</p>
+						</li>
+
+										<li id="comment-97697" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">26</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97697" title="">Wednesday, 22 January 2014</a>
+							</div>
+						<p>So saturation arithmetic and all the rest of the technical solutions basically serve to discern between the following two situations : A. user makes a copy of the key which he then copies in three places vs B. user makes four copies of the keys. </p>
+<p>Perhaps this may be useful in some circumstance. Or perhaps we should also add some DRM preventing copies made from being copied in turn, so the counter may be accurate.</p>
+<p>The problem with design is that there are fundamentally two broad groups of designers : one that designs, the other that used to play with lego blocks and other similar toys in their childhood and never quite outgrew the habit, or indeed understood the difference between toys and tools, playing and working and so on.</p>
+						</li>
+
+										<li id="comment-97698" class="commentbody"><div class="commenthead"><img alt='A Varner`s avatar' src='http://avarner.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">27</div>
+								<span class="authorlink"><a href='http://avarner.org' class='url'>A Varner</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97698" title="">Wednesday, 22 January 2014</a>
+							</div>
+						<p>No, the purpose of the counter is to distinguish between:<br />
+*The user has made zero copies of the key.<br />
+*The user has made at least one copy of the key.</p>
+<p>In the former case, the device operates as originally specified, and provides all the guarantees originally specified. In the latter case, it allows key backup. Therefore, since it can operate in either mode, it is strictly adding a feature, and does not harm any existing functionality or guarantees.</p>
+<p>If you want to criticize my credentials and use lightly veiled ad hominem attacks, I will inform you that I have written production cryptographic code, full disk encryption software, and verifications for existing encryption programs to confirm correctness of protocol. My day job is writing software for safety critical systems.</p>
+						</li>
+
+										<li id="comment-97699" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">28</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97699" title="">Wednesday, 22 January 2014</a>
+							</div>
+						<p>I wasn't discussing your credentials, I was discussing the process you found yourself involved in. The later is not reducible to the former.</p>
+<p>An ad hominem atack works like this : someone makes a statement, and the proposition is made that on the grounds of who the someone is, the statement should be regarded a certain way (usually, false). </p>
+<p>This is not what happened here. Instead, the statement was shown to be a certain number of different ways (all of which unflattering). This had then tacked on some observations intended to inform and instruct the author (ie, you) so that they may a) realise their intellectual inferiority, as displayed by their own actions and b) take steps to remedy said inferiority, to the degree such may be possible. </p>
+<p>That the observations were general rather than particular in nature is mostly a function of the fact that the problems you struggle with are fundamental, and will require fundamental effort. A good example of this fundamental nature is the couple of confusions your most recent contribution includes, which had to be rectified in the foregoing paragraphs of this comment.</p>
+<p>Now, I get it that you'd like to be friends and all, and I get that you'd like to help. The problem is that you predicate all this on it being accepted that your understanding of the topic at hand such as it stands is nevertheless equally valid and equally respectable to anyone else's. This is a bridge too far, unfortunately, and it poisons the entire exercise.</p>
+						</li>
+
+										<li id="comment-97700" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">29</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97700" title="">Wednesday, 22 January 2014</a>
+							</div>
+						<p>A Varner,</p>
+<p>I will try to answer the original question - 'why no easy private key export.' Certain usage scenarios, while perfectly possible, are foolish. And there is no reason to encourage them. Tradition, luser habit, and the idiocy of other vendors are not worthy reasons.</p>
+<p>If you were to make a copy of your private key, the 'zap' switch is now an empty threat. And your torturer has every incentive to house you in an oubliette until you reveal the location of the backup.</p>
+<p>A user of a proper Cardano, housed in the same oubliette, could only be made to reveal the location of his master key (assuming one existed.) The use of which, to declare a key swap, is inevitably a /detectable/ event from the standpoint of confederates not yet in the oubliette. On top of this, coughing up a master key will not compromise the secrecy of past correspondence, the way revealing a backed-up Cardano key would.</p>
+<p>Yes, you can extract your private key, if you insist - with a few dollars' worth of commonly-available instruments. You could also sharpen your Cardano and remove your appendix with it! We will make no attempt to stop you. But nothing written here should be seen as encouragement of these or similar follies.</p>
+						</li>
+
+										<li id="comment-97719" class="commentbody"><div class="commenthead"><img alt='A Varner`s avatar' src='http://avarner.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">30</div>
+								<span class="authorlink"><a href='http://avarner.org' class='url'>A Varner</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97719" title="">Wednesday, 22 January 2014</a>
+							</div>
+						<p>Good, I'm glad we can focus on technical issues again.</p>
+<p>So, the scenario is that the user has been captured by an enemy with no moral limits. His Cardano is in the ZAP position. The enemy wants to be able to digitally sign and decrypt the user's data, and will torture the user to do this.</p>
+<p>If the user has a master key, he could give it up, allowing the enemy to sign a new key and make new digital signatures. This would look suspicious, and it would not allow decryption of old data.</p>
+<p>If the user does not have a master key, and clearly does not have the Cardano private key, then there is nothing he can give up, and the enemy would not torture him for information. But, how does the enemy know that the Cardano private key he seeks was really permanently deleted by zapping? To avoid torture, the prisoner needs a way to prove these things:</p>
+<p>1. The key was originally created by the Cardano, not a PC, and not a different Cardano. Therefore, it was only stored on that Cardano, and was destroyed in the ZAP process.<br />
+2. The key was never extracted by reading the firmware and EEPROM to decrypt it, and then saved somewhere<br />
+3. If this model of Cardano had the initial 30 minute key export, it was not used.</p>
+<p>To solve number 3, the feature can just be removed, as you said. Any ideas for 1 or 2?</p>
+						</li>
+
+										<li id="comment-97720" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">31</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97720" title="">Wednesday, 22 January 2014</a>
+							</div>
+						<p>A Varner,</p>
+<p>(1) is addressed, however imperfectly, by the deliberate lack of an easy key import/export mechanism. The enemy can usually presume that a Cardano private key was generated therein, and exists nowhere else. Exactly how much this increases one's chances of surviving the torture chamber is debatable, but it stands to reason that it should increase them.</p>
+<p>A user concerned about (2) can pot his unit in epoxy (or the like) and then exhibit it (performing key generation) publicly, to provide credible denial.</p>
+<p>(3) simply isn't happening, and therefore not a concern in the current design. when Cardano is off, it is galvanically off: unpowered. That means no clocks.</p>
+						</li>
+
+										<li id="comment-114010" class="commentbody"><div class="commenthead"><img alt='hsujak`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">32</div>
+								<span class="authorlink">hsujak</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114010" title="">Friday, 1 May 2015</a>
+							</div>
+						<p>Thank you for sharing such a good post, hope to see more.</p>
+						</li>
+
+										<li id="comment-114096" class="commentbody"><div class="commenthead"><img alt='battery`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">33</div>
+								<span class="authorlink">battery</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114096" title="">Sunday, 10 May 2015</a>
+							</div>
+						<p>Thank you for sharing such a good post, hope to see more</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-95791">
+					<div class='trackhead'>
+						<div class="commentcount">34</div>
+						<span class="authorlink"><a href='http://www.thedrinkingrecord.com/2013/10/29/private-pains-explaining-a-gpg-homework-assignment/' class='url'>Private Pains: Explaining a GPG Homework Assignment | Bingo Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-95791" title="">Tuesday, 29 October 2013</a>
+					</div>
+					<p>[...] them is much more desirable than letting an adversary read them , then a tool like the upcoming Cardano may be more desirable for its ability to destroy the private key. As you are hopefully starting to [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-95833">
+					<div class='trackhead'>
+						<div class="commentcount">35</div>
+						<span class="authorlink"><a href='http://www.thedrinkingrecord.com/2013/10/30/this-secure-email-problem/' class='url'>This Secure Email Problem | Bingo Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-95833" title="">Thursday, 31 October 2013</a>
+					</div>
+					<p>[...] The approach of No Such lAbs, the people behind the Phuctor, proceeds from the assumption of a generally more hostile computing environment, per their initial announcement of the Cardano:  It is sad reality that such guarantees are all but absent in today’s computing world. We make it... [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-98450">
+					<div class='trackhead'>
+						<div class="commentcount">36</div>
+						<span class="authorlink"><a href='http://bitcoinpete.com/2014/on-matters-of-digital-security/' class='url'>On Matters Of Digital Security | When Bitcoin Met Pete</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-98450" title="">Wednesday, 12 March 2014</a>
+					</div>
+					<p>[...] this is established through PGP, the Web of Trust, and one day, a little device called a Cardano. [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-121092">
+					<div class='trackhead'>
+						<div class="commentcount">37</div>
+						<span class="authorlink"><a href='http://cascadianhacker.com/02_log-in-with-crypto-only-moderately-bad-ideas-edition' class='url'>Log in with Crypto: Only Moderately Bad Ideas Edition &laquo; CH</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-121092" title="">Sunday, 15 January 2017</a>
+					</div>
+					<p>[...] answer would be The Cardano3 - a hardware encryption, decryption and signing device designed for use in hostile computation [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-125810">
+					<div class='trackhead'>
+						<div class="commentcount">38</div>
+						<span class="authorlink"><a href='http://danielpbarron.com/2017/how-are-people-using-bitcoin/' class='url'>How are people using Bitcoin &laquo; Daniel P. Barron</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-125810" title="">Monday, 28 May 2018</a>
+					</div>
+					<p>[...] any more. TMSR or GTFO. &#8617;Some barfalicious usb card that’s described to sound like it’s a Cardano with the technical specifications displaced by buzzwords. &#8617;Really. There has not been nor [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139490">
+					<div class='trackhead'>
+						<div class="commentcount">39</div>
+						<span class="authorlink"><a href='/2013/snsa-cardano-pricing-other-statements?b=have%20been%20of&amp;e=%20the#select' class='url'>S.NSA - Cardano pricing, other statements on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139490" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] have been of course asking since the day the Cardano was announced, almost three weeks ago. We, by which I mean mostly Mr. Datskovskiy, have been hard at work in the [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139651">
+					<div class='trackhead'>
+						<div class="commentcount">40</div>
+						<span class="authorlink"><a href='/2013/cardano-xmas-blown-other-statements?b=now%20that%20tha&amp;e=dget#select' class='url'>Cardano : Xmas blown, other statements on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139651" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] now that that's settled, let's go into a little context. Two months ago, when this product was announced, having a company started from scratch design, manufacture and deliver to customers a USB widget [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139654">
+					<div class='trackhead'>
+						<div class="commentcount">41</div>
+						<span class="authorlink"><a href='/2013/cardano-xmas-blown-other-statements?b=the%20relative&amp;e=tion#select' class='url'>Cardano : Xmas blown, other statements on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139654" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] the relative importance for them, personally, of all the people that are. Thank you. [&#8617;]Take this confused fellow as a fine example. No, he doesn't know he's confused, which is exactly what makes the substitution [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-147012">
+					<div class='trackhead'>
+						<div class="commentcount">42</div>
+						<span class="authorlink"><a href='/2019/closing-statement-for-no-such-labs-snsa?b=we%20are%20%3A%20one&amp;e=s%20to#select' class='url'>Closing statement for No Such lAbs (S.NSA) on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-147012" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] we are : one of Bitcoin's longest living corporations is today closing shop. 7th of October 2013 through 28th of October 2019 makes for just about exactly six years. The postwar tradition is to [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authord4a1448" id="authord4a1448" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emaild4a1448" id="emaild4a1448" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urld4a1448" id="urld4a1448" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="49839" /></p>
+				<input type="hidden" name="comment_post_time" value="1780841854-18.97.9.174" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-49839")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-49839");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-49839");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

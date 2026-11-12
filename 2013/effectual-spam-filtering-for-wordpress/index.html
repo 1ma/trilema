@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_jul2015.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Effectual spam filtering for WordPress on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">The world’s greatest erotica writer.<br /><a href=/2019/i-own-erotica-like-zeus-owns-olympus/>By far</a>.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-51298"><div class="post" id="post-51298">                    <h1><a href="/2013/effectual-spam-filtering-for-wordpress/" rel="bookmark" title="Permanent Link to Effectual spam filtering for WordPress">Effectual spam filtering for WordPress</a></h1>                        <div class="date">                                     Saturday, 30 November, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>Trilema runs an (ancient) version of Wordpress which has meanwhile been modified into oblivion. I've already explained in detail <a href="/2013/how-to-process-bitcoin-payments-cheaply-and-easily/">how to process Bitcoin payments cheaply and easily</a>, let's see if we can do something to alleviate the problem of spam comments.</p>
+<p>Trilema does not use Akismet or any other third-party antispam plugin. Nevertheless, to date it has received 18`219 spam comments<sup><a href="#footnote_0_51298" id="identifier_0_51298" class="footnote-link footnote-identifier-link" title="Comes to a little under ten a day, but the best part is that they mostly go straight into the spam folder anyway, so it's not like I have to click on anything.">i</a></sup> out of a 96`421 total over five years. That's a 81% ham rate, which I'd say is not too shabby. How is this miracle accomplished ? </p>
+<p><strong>I. Change the comment form</strong>. Let's examine Trilema's comment form together.<sup><a href="#footnote_1_51298" id="identifier_1_51298" class="footnote-link footnote-identifier-link" title="This can be obtained by loading any page where one can put in comments, clicking `show source` or whatever your browser uses to show the html source of a page and searching for `form`.">ii</a></sup></p>
+<ul><code>
+<pre>&lt;form action="/wp-comments-post.php" method="post"
+ id="commentform">
+
+<font color=gray>&lt;!--- This is just a decoy ;)
+&lt;p>&lt;input type="text" name="author" id="author" value="" size="22"
+tabindex="1" />
+&lt;label for="author">&lt;small>Name&nbsp;(required)&lt;/small>&lt;/label>&lt;/p>
+&lt;p>&lt;input type="text" name="email" id="email" value="" size="22"
+tabindex="2" />
+
+&lt;label for="email">&lt;small>E-Mail (will not be published , required)
+&lt;/small>&lt;/label>&lt;/p>
+&lt;p>&lt;input type="text" name="url" id="url" value="http://pest"
+size="22" tabindex="3" />
+--></font>
+
+&lt;p>&lt;input type="text" name="author<font color=red>e46998f</font>" id="author<font color=red>e46998f</font>"
+value="" size="22" tabindex="1" />
+&lt;label for="author">&lt;small>Name&nbsp;(required)&lt;/small>&lt;/label>&lt;/p>
+&lt;p>&lt;input type="text" name="email<font color=red>e46998f</font>" id="email<font color=red>e46998f</font>"
+value="" size="22" tabindex="2" />
+&lt;label for="email">&lt;small>E-Mail
+&lt;/small>&lt;/label>&lt;/p>
+&lt;p>&lt;input type="text" name="url<font color=red>e46998f</font>" id="url<font color=red>e46998f</font>" value=""
+size="22" tabindex="3" />
+
+&lt;label for="url">&lt;small>Website (optional)&lt;/small>&lt;/label>&lt;/p>
+
+<font color=gray>&lt;!--- This is just a decoy ;)
+&lt;p>&lt;input type="text" name="author" id="author" value="" size="22"
+tabindex="1" />
+&lt;label for="author">&lt;small>Name&nbsp;(required)&lt;/small>&lt;/label>&lt;/p>
+&lt;p>&lt;input type="text" name="email" id="email" value="" size="22"
+tabindex="2" />
+
+&lt;label for="email">&lt;small>E-Mail (will not be published , required)
+&lt;/small>&lt;/label>&lt;/p>
+&lt;p>&lt;input type="text" name="url" id="url" value="http://pest"
+size="22" tabindex="3" /></font>
+--></pre>
+<p></code></ul>
+<p>The grey part is a html comment. It is ignored by the browser, but it is nevertheless a userful countermeasure against the grep based page scrapper.<sup><a href="#footnote_2_51298" id="identifier_2_51298" class="footnote-link footnote-identifier-link" title="A page scrapper is an automated utility that downloads webpages looking for particular strings. For instance if someone was aiming to spam Wordpress blogs, perhaps one way they'd proceed would be to look all over for pages that contain the string 
+&lt;input type=`text` name=`author` id=`author` value=`
+If the scrapper itself was complex enough to parse html and eliminate comments our decoy would do nothing, but because of the humongous volume of data these scripts have to sift through and the memory and CPU constraints of the real world economics of spamming it's more likely the would-be spammer will never know it choked on a html comment.">iii</a></sup> The red part is however the meat and potatoes of this entire thing. Specifically, I bet you that the page you're looking at has a different string there.</p>
+<p>This magic is achieved by altering your wordpress in the following manner : In wp-comments-post.php you add</p>
+<blockquote><p>$suffix = substr(md5(date(’Y-m-d’).”salt”<sup><a href="#footnote_3_51298" id="identifier_3_51298" class="footnote-link footnote-identifier-link" title="Replace this string with a well chosen secret string of your own.">iv</a></sup>. $_SERVER['REMOTE_ADDR']),0,6);</p>
+<p>$comment_author = ( isset( $_POST[ 'author'.$suffix ]) ) ? trim( strip_tags( $_POST [ 'author'.$suffix ] ) ) : null;</p></blockquote>
+<p>and in comments.php<sup><a href="#footnote_4_51298" id="identifier_4_51298" class="footnote-link footnote-identifier-link" title="Found under whatever directory your theme lives, such as /wp-content/themes/mytheme/. ">v</a></sup> you add </p>
+<blockquote><p>&lt;p>&lt;input type=”text” name=”author&lt;?$suffix = substr( md5( date(’Y-m-d’). ”salt” . $_SERVER['REMOTE_ADDR'] ),0,6); echo $suffix;?>” id=”author” value=”&lt;?php echo $comment_author; ?>” size=”22″ tabindex=”1″ /></p></blockquote>
+<p>The effect of all this is that the forms allowing commenting on any one Trilema page are only usable on the day the page was loaded, by the same machine that loaded the page. </p>
+<p>This matches pretty well the experience of most legitimate users - when was the last time you switched computers mid-way commenting on a blog by means of saving the page on one machine, then burning it on a CD, copying it on another computer, opening it in a browser there and finally submitting the comment ? or when was the last time you took over a day writing down your comment ? - but it throws a royal monkey wrench into the workings of spam scripts, because on one hand most spam is sent by amateur "SEO experts" running pretty stupid software that doesn't even bother visiting your page, but instead <em>simply assumes</em> your html form parameters will be in the default state and connects directly to wp-comments-post.php with a forged POST request, and on the other hand because the entreprise level spammer that does occasionally actually scrape pages before spamming them tends to use separate machines for the two tasks, which won't work with our set-up. In either case this simple two line change of two files is going to cut the spam you receive by orders of magnitude, and the best part is that nobody will likely even notice.</p>
+<p><strong>II. Change the link counting rules</strong>. Hey, it's your blog, you can change anything you want!</p>
+<p>Modify wp-includes/comment.php so that function check_comment includes the following : </p>
+<ul><code>
+<pre>$textchk = apply_filters('comment_text', $comment);
+$linkcount = preg_match_all(
+"|(href\t*?=\t*?['\"]?)?(https?:)?//|i", $textchk, $out);
+$plinkcount = preg_match_all(
+"|(href\t*?=\t*?['\"]?)?(https?:)?//trilema\.com/|i",$textchk,
+$out);
+$linkcount_result = $linkcount - $plinkcount;</pre>
+<p></code></ul>
+<p>And then further down the road in the comment whitelisting section modify the if as follows : </p>
+<ul><code>
+<pre>if ( ( 1 == $ok_to_comment ) &#038;& (empty($mod_keys) || false ===
+strpos( $email, $mod_keys)))
+if ($linkcount_result == 0) return 1; else return 0;
+else if ($linkcount_result > 1) return "spam"; else return 0;</pre>
+<p></code></ul>
+<p>What this does is as follows : the first part counts the number of times the string "http://" appears in a comment, and then counts how many times that actually is a reference to your own blog (so change trilema\.com to your own domain - don't forget the dot needs to be escaped in regex). If there's more http references than links to your own site, this logically means your commenter is linking outside, and so the second part moves any comments from unwhitelisted<sup><a href="#footnote_5_51298" id="identifier_5_51298" class="footnote-link footnote-identifier-link" title="In this context whitelisted means `user who already has had one comment approved`.">vi</a></sup> commenters straight into spam if they do contain outside links, whereas it puts comments from whitelisted people into your moderation queue so you can review them. Unwhitelisted users go to your moderation queue by default. </p>
+<p>So there you have it, with this arrangement you'll never see all the nonsense spam posted by first time commenters - fictitious personas like <a href="http://www.economic-undertow.com/2013/10/31/new-anti-spam-measures/">Steve from Virginia</a> battles in his recent article, but you'll still see all the comments made by <em>legitimate</em> first time users<sup><a href="#footnote_6_51298" id="identifier_6_51298" class="footnote-link footnote-identifier-link" title="For any definition of legitimate that reduces to `doesn't spam links as their first comment`.">vii</a></sup>, as well as all the links made by your whitelisted tribe.<sup><a href="#footnote_7_51298" id="identifier_7_51298" class="footnote-link footnote-identifier-link" title="And if moderating all links whitelisted users post seems undesirable to you, all it takes is changing the first branch of the if to always return 1. Trilema has this system in place because I don't use the rel=`nofollow` convention and I like to keep some control of what I end up linking to.">viii</a></sup> Together with the previous measure, I will be very much surprised if spam comments still give you trouble, even should you live to average fifty comments a day for a five year stretch.</p>
+<p>Enjoy blogging!</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_51298" class="footnote">Comes to a little under ten a day, but the best part is that they mostly go straight into the spam folder anyway, so it's not like I have to click on anything. [<a href="#identifier_0_51298" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_51298" class="footnote">This can be obtained by loading any page where one can put in comments, clicking "show source" or whatever your browser uses to show the html source of a page and searching for "form". [<a href="#identifier_1_51298" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_51298" class="footnote">A page scrapper is an automated utility that downloads webpages looking for particular strings. For instance if someone was aiming to spam Wordpress blogs, perhaps one way they'd proceed would be to look all over for pages that contain the string </p>
+<blockquote><p>&lt;input type="text" name="author" id="author" value="</p></blockquote>
+<p>If the scrapper itself was complex enough to parse html and eliminate comments our decoy would do nothing, but because of the humongous volume of data these scripts have to sift through and the memory and CPU constraints of the real world economics of spamming it's more likely the would-be spammer will never know it choked on a html comment. [<a href="#identifier_2_51298" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_51298" class="footnote">Replace this string with a well chosen secret string of your own. [<a href="#identifier_3_51298" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_51298" class="footnote">Found under whatever directory your theme lives, such as /wp-content/themes/mytheme/.  [<a href="#identifier_4_51298" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_51298" class="footnote">In this context whitelisted means "user who already has had one comment approved". [<a href="#identifier_5_51298" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_51298" class="footnote">For any definition of legitimate that reduces to "doesn't spam links as their first comment". [<a href="#identifier_6_51298" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_51298" class="footnote">And if moderating all links whitelisted users post seems undesirable to you, all it takes is changing the first branch of the if to always return 1. Trilema has this system in place because I don't use the rel="nofollow" convention and I like to keep some control of what I end up linking to. [<a href="#identifier_7_51298" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/mpoe-november-2013-statement/">MPOE, November 2013 Statement</a></div>
+                <div class="alignright"><a href="/2013/you-probably-have-no-idea-how-funny-the-law-is/">You probably have no idea how funny "the law" is</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/meta-psihoza/" title="View all posts in Meta psihoza" rel="category tag">Meta psihoza</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/effectual-spam-filtering-for-wordpress/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/effectual-spam-filtering-for-wordpress/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>3 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-96578" class="commentbody"><div class="commenthead"><img alt='Peter Lambert`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">Peter Lambert</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96578" title="">Friday, 6 December 2013</a>
+							</div>
+						<p>This is a pretty ingenious approach.</p>
+<p>Is this patent pending yet?</p>
+						</li>
+
+										<li id="comment-96583" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96583" title="">Saturday, 7 December 2013</a>
+							</div>
+						<p>Nah. Have at.</p>
+						</li>
+
+										<li id="comment-98846" class="commentbody"><div class="commenthead"><img alt='Peter Lambert`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Peter Lambert</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-98846" title="">Thursday, 3 April 2014</a>
+							</div>
+						<p>testing comment feature ... I swear I am an actual human being ...</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author09eae30" id="author09eae30" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email09eae30" id="email09eae30" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url09eae30" id="url09eae30" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="51298" /></p>
+				<input type="hidden" name="comment_post_time" value="1773329428-204.62.249.2" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-51298")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-51298");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-51298");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

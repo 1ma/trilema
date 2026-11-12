@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_may2019b.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Some basic discussion of Bitcoin macroeconomy on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Mentula cum doleat imperio, tibi, lector, culus.<br />Non sum diuinus, sed scio quid facias.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-47630"><div class="post" id="post-47630">                    <h1><a href="/2013/some-basic-discussion-of-bitcoin-macroeconomy/" rel="bookmark" title="Permanent Link to Some basic discussion of Bitcoin macroeconomy">Some basic discussion of Bitcoin macroeconomy</a></h1>                        <div class="date">                                     Saturday, 04 May, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>As the <a href="/2013/in-which-noobs-learn-lessons-and-pay-for-the-privilege/">trend followers</a><sup><a href="#footnote_0_47630" id="identifier_0_47630" class="footnote-link footnote-identifier-link" title="Euphemistically speaking.">i</a></sup> are waning away from Bitcoin the remaining new people are starting to ask and to consider meaningful, worthwhile questions. The situation is not much unlike that of a tide beach : periodically the high water comes in. Then it retreats. Stuff is left behind on the sand.</p>
+<p>In this particular case it is the first time in the history of Bitcoin that people with other skillsets than simple computer dickery have been carried in by the tide. This is a fundamental and essential development, because on the strength of code monkeys alone Bitcoin never will and never could become anything other than Paypal's Ubuntu Hal.</p>
+<p>So : welcome new people! Have fun. <a href="/2013/mind-your-step/">Mind your step</a>.</p>
+<p>And now this introduction aside, let's move to the meat and potatoes.</p>
+<p><strong>I. Bitcoin inflation.</strong> Bitcoin is regularly described as "deflationary", "designed to deflate", "non inflationary" etc. This is not at all true in the present tense and dubious in the future tense. Specifically, here's the evolution of Bitcoin MB<sup><a href="#footnote_1_47630" id="identifier_1_47630" class="footnote-link footnote-identifier-link" title="Notes and coins in circulation + Notes and coins in vaults.">ii</a></sup> :</p>
+<p><a href="http://blockchain.info/charts/total-bitcoins"><img src="/wp-content/uploads/2013/05/bitcoin-inflation.png" alt="bitcoin-inflation" title="bitcoin-inflation" width="560" height="318" class="aligncenter size-full wp-image-47635" /></a></p>
+<p>So now, what deflation are we talking about ? With the MB going from just under 9mn to just over 11mn over the course of <strong>one year</strong> it'd stand to reason that Bitcoin inflation is a very healthy 25% a year. Of course it speaks volumes to the desperate situation of fiat currencies that the Bitcoin exchange rate has appreciated from two to three digits over the same interval its inflation was "only" 25%, but nevertheless : you can't talk of deflation in an environment which inflates from under 9 to over 11 in a year. It just makes no sense.</p>
+<p>As for the future, Bitcoin is designed to <strong>never</strong> deflate on a MB basis. The design specifically calls for new Bitcoins being added in at the steady rate of 25 each new block for a while, then 12.5 each new block for another while then 6.25 each block for yet another while and so on indefinitely. Those whiles are about <strong>four years</strong> each, give or take. By the time the new block reward actually drops to zero<sup><a href="#footnote_2_47630" id="identifier_2_47630" class="footnote-link footnote-identifier-link" title="And provided the code isn't buggy and ends up keeping the reward forever at 1, which on the balance of evidence so far would not be in the least bit surprising.">iii</a></sup> centuries will have elapsed<sup><a href="#footnote_3_47630" id="identifier_3_47630" class="footnote-link footnote-identifier-link" title="50 Bitcoins are just a shorthand representation, the truth of the matter is that we are talking of 5000000000 satoshi. There's eight zeroes, or one hundred million satoshi in a Bitcoin and contrary to common representation Bitcoin is actually integer based. The satoshi are the integer, and with respect to them the exact value of a Bitcoin is purely an arbitrary convention. The satoshi are actually the unit of this game.
+For 5000000000 to become 0 it'll have to be divided in half no less than
+34 times, which if the 4 year per division rule holds would mean ~136 years.">iv</a></sup>.</p>
+<p>This would, I hope, set to rest any discussion of "deflation" on an MB basis : it's inflation all the way, and currently at rates which the IMF, WB et al consider "unhealthy" for an economy (or at least considered, back when the Argentines were doing it and the US was not<sup><a href="#footnote_4_47630" id="identifier_4_47630" class="footnote-link footnote-identifier-link" title="Isn't this amusing, dear reader ? Twenty years ago when Argentinian economists were practicing exactly, but exactly what the US sponsored clowns a la Krugman et al are practicing today the `entire world` derided them for being incompetent, the `entire world` knew better and so on. Today somehow magically that `entire world` changed its tune, and somehow the `scientific` consensus has taken a 180 degree turn. 
+How did this miracle happen, ye `scientists` and `experts` and what-are-you ? How can `everything we know` and `historically established facts through centuries of accumulated economic experience and study` and all that change into its exact opposite within a decade or two ? What if astronomy (which, unlike `social sciences`, is an actual science) operated on these lines, and every twenty or so years the Moon would take the place of the Sun as the center of the Solar System ? (Depending on, of course, whether a woman or a man was Tyrant Universal &#038; Grand Emperor of the World).
+Shameless creatures. Eagerly awaiting the `reverse golf cross pattern` and all that jazz.">v</a></sup>). </p>
+<p>That aside, consider the problem of the M3<sup><a href="#footnote_5_47630" id="identifier_5_47630" class="footnote-link footnote-identifier-link" title="Which includes, on top of the MB, demand deposits, savings deposits, time deposits, large time deposits, institutional money market funds, short-term repurchase and other larger liquid assets and a slew of other items.">vi</a></sup> : If you credit the <a href="/2012/is-smpoe-really-worth-that-much/">monetization of S.MPOE theory</a>, for instance, that's a solid 0.7mn that has been added to the M3 on top of the ~2.3 mn added through sheer Bitcoin printing. We are talking over 30% M3 inflation for the 2012 Bitcoin fiscal year, folks. This trend will only continue, and as the pressure for the M3 meeting actual economic activity increases the compensatory mechanism of financial instrument monetization will go into full bore, easily deleting by orders of magnitude any and all deflationary effects (such as the small and rapidly diminishing loss of coins through actual physical destruction of wallets / passwords / etc). </p>
+<p>In short : Bitcoin is not deflationary. It inflates, and can inflate abundantly, but only through market-directed processes. The fiat process of inflation is unavailable. That is all. To say Bitcoin is deflationary is akin to saying a married woman is sterile. No, she's not, the balance of new life is created by married women. They just don't happen to be available to the general public through its "elected" representatives, that is all.</p>
+<p><strong>II. Bitcoin economic activity.</strong> I've recently had the pleasure to publish a report detailing the 2012 fiscal year<sup><a href="#footnote_6_47630" id="identifier_6_47630" class="footnote-link footnote-identifier-link" title="I'm afraid the happenstance that MPEx open beta closed in in late March and the first corporate results were published for April will make forevermore Bitcoin's fiscal year to run 1st of May to 1st of May. C'est la vie.">vii</a></sup> in Bitcoin : <a href="/2013/mpex-one-year-of-dividends/">MPEx - one year of dividends</a>. The part of interest to us here is : Total MPEx dividends to date - 89`171 BTC ; All time average MPEx market cap - 896`121.18 BTC.</p>
+<p>This means that the... wait for it... that the return through dividends rate for pretty much the entirety of Bitcoin economy was 10%<sup><a href="#footnote_7_47630" id="identifier_7_47630" class="footnote-link footnote-identifier-link" title="10.049468773% if you're the precise sort">viii</a></sup>. What can we say of an economy with ~30% inflation rate, ~10% dividend rate and a healthy 80% to 200%<sup><a href="#footnote_8_47630" id="identifier_8_47630" class="footnote-link footnote-identifier-link" title="The MPBOR, Bitcoin's equivalent of the fiat world LIBOR minus, of course, all the corruption and lies, consistently averages between 5% and 10% a month.">ix</a></sup> risk-adjusted deposit rate ?</p>
+<p>That of course is the question you all have to answer. Note that answers in fact are in general better and in most cases more productive than answers in word. </p>
+<p>Have fun now.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_47630" class="footnote">Euphemistically speaking. [<a href="#identifier_0_47630" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_47630" class="footnote">Notes and coins in circulation + Notes and coins in vaults. [<a href="#identifier_1_47630" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_47630" class="footnote">And provided the code isn't buggy and ends up keeping the reward forever at 1, which on the balance of evidence so far would not be in the least bit surprising. [<a href="#identifier_2_47630" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_47630" class="footnote">50 Bitcoins are just a shorthand representation, the truth of the matter is that we are talking of 5000000000 satoshi. There's eight zeroes, or one hundred million satoshi in a Bitcoin and contrary to common representation Bitcoin is actually integer based. The satoshi are the integer, and with respect to them the exact value of a Bitcoin is purely an arbitrary convention. The satoshi are actually the unit of this game.</p>
+<p>For 5000000000 to become 0 it'll have to be divided in half no less than<br />
+34 times, which if the 4 year per division rule holds would mean ~136 years. [<a href="#identifier_3_47630" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_47630" class="footnote">Isn't this amusing, dear reader ? Twenty years ago when Argentinian economists were practicing exactly, but <em>exactly</em> what the US sponsored clowns a la Krugman et al are practicing today the "entire world" derided them for being incompetent, the "entire world" knew better and so on. Today somehow magically that "entire world" changed its tune, and somehow the "scientific" consensus has taken a 180 degree turn. </p>
+<p>How did this miracle happen, ye "scientists" and "experts" and what-are-you ? How can "everything we know" and "historically established facts through centuries of accumulated economic experience and study" and all that change into its exact opposite within a decade or two ? What if astronomy (which, unlike "social sciences", is an actual science) operated on these lines, and every twenty or so years the Moon would take the place of the Sun as the center of the Solar System ? (Depending on, of course, whether a woman or a man was Tyrant Universal &#038; Grand Emperor of the World).</p>
+<p>Shameless creatures. Eagerly awaiting the "reverse golf cross pattern" and all that jazz. [<a href="#identifier_4_47630" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_47630" class="footnote">Which includes, on top of the MB, demand deposits, savings deposits, time deposits, large time deposits, institutional money market funds, short-term repurchase and other larger liquid assets and a slew of other items. [<a href="#identifier_5_47630" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_47630" class="footnote">I'm afraid the happenstance that MPEx open beta closed in in late March and the first corporate results were published for April will make forevermore Bitcoin's fiscal year to run 1st of May to 1st of May. C'est la vie. [<a href="#identifier_6_47630" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_47630" class="footnote">10.049468773% if you're the precise sort [<a href="#identifier_7_47630" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_47630" class="footnote">The <a href="/2012/mpoe-bonds-historical-data/">MPBOR</a>, Bitcoin's equivalent of the fiat world LIBOR minus, of course, all the corruption and lies, consistently averages between 5% and 10% a month. [<a href="#identifier_8_47630" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/the-best-investments-in-the-history-of-bitcoin/">The best investments in the history of Bitcoin</a></div>
+                <div class="alignright"><a href="/2013/another-internet-story/">Another Internet story</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/bitcoin/" title="View all posts in Bitcoin" rel="category tag">Bitcoin</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/some-basic-discussion-of-bitcoin-macroeconomy/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/some-basic-discussion-of-bitcoin-macroeconomy/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>30 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-93037" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93037" title="">Sunday, 5 May 2013</a>
+							</div>
+						<p>While the "code monkey" remains a pathetic and even tragic character, the "code chimpanzee" is still king:</p>
+<p>The mining method with the highest ROI remains the botnet. The most effective means of obtaining other people's Bitcoins remains the wallet&amp;passphrase-lifting trojan. And the most effective trading strategies still involve HFT wankery targeting MtGox. And, to top it all, the most profitable means of converting BTC into physical wealth is still the old "pump and dump."</p>
+<p>One might argue that natural attrition of idiots will change all of this in due time, but this shows no sign of having happened yet.</p>
+						</li>
+
+										<li id="comment-93038" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93038" title="">Sunday, 5 May 2013</a>
+							</div>
+						<p>Listen, the writing with the greatest ROI remains the ransom letter and the economic activity with the greatest ROI remains playing the lottery. This doesn't make either particularly noteworthy.</p>
+<p>This is an apt analogy : a certain obscure Romanian character created something to the tune of 700k BTC worth of value during about a year and a half. This is roughly double a generous credible estimate of all the heists (which includes, of course, the hard work of dozens of talented if misguided <a href=/2012/the-bitcoin-drama-timeline/ >people</a>). </p>
+<p>Mining presents itself quite similarly : a certain obscure Chinese character created something to the tune of 500k BTC of present value during about a year and a half. They're meeting the market demand nowadays by selling 300 Gh/s usb chips at 2 BTC each. (Which chips are not worth that in any practical sense except people want to be part of something they perceive important the way they know how rather than the way that something would need them - same thing with women really, men prefer to impose on women through familiar avenues rather than meet them halfway in those spaces where they'd actually be interested).</p>
+<p>It is convenient to represent the "pump and dump" as something that controlledly opposes the "smart" to the "stupid", conveniently forgetting this ex-post facto allocates the labels, as people who fancied themselves smart <a href=/Mircea_Popescu/status/330836539754029056 >smartingly found out</a>. There's always going to be someone who knows they're smarter than you and can surprisingly prove it should the need arise.</p>
+<p>I guess the expression would go something like "you've got yourself drunk on tap water". The real Bitcoin economy is actually a lot closer to what you'd think the ideal of such than any fiat. At least these days.</p>
+						</li>
+
+										<li id="comment-93039" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93039" title="">Sunday, 5 May 2013</a>
+							</div>
+						<p>MP, both lotteries and kidnapping for ransom have negative ROI, as you surely know.  The latter is at least true in the civilized world. My point here was that in the world of Bitcoin, crime pays. And the more idiot plebes take to using the currency, the more it will pay.</p>
+<p>One could even argue that BTC mining is also a form of theft (albeit one that is permitted under the rules of the game, whatever difference this makes.) When you mine a Bitcoin, the BTC held by everyone else is slightly debased.</p>
+<p>The Chinese ASIC builder no more creates value than the fellow who produces engraving plates for the U.S. mint.  If you hold BTC (especially BTC which you paid for in fiat) he and his customers are in fact fishing value out of your pocket, rather than creating any. This will be doubly true once the mining difficulty rises to the point where an ASIC is required for the same level of yield you can get today with a consumer GPU setup.</p>
+<p>The more "the race is to the swift", the more the situation in Bitcoin will begin to resemble that of fiat, where a handful of well-connected people can mint money (with asymptotically-diminishing returns, but that will be the only difference.)  ASICs aren't even the last round in the arms race. At some point, some wealthy joker will build a miner out of optical logic on superconducting gallium arsenide, cooled with liquid helium.  This will cost eight figures (U.S. dollars) and there ever will be something like three of them on the planet.  And now we're back to mints again.  Slow, hardly-inflationary mints with diminishing returns, but mints nonetheless.</p>
+<p>Personally, I have no problem with the existence of BTC miners - or of botnet operators. Or with the fact of some people having bought BTC for pennies. What I argue is that all of these people have something in common: they create little-to-no real-world economic value, and still remain the true winners in the Bitcoin world in terms of pure ROI. And when these winners win, everyone else (the people trying to conduct actual commerce in BTC) loses.</p>
+						</li>
+
+										<li id="comment-93041" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93041" title="">Sunday, 5 May 2013</a>
+							</div>
+						<blockquote><p>My point here was that in the world of Bitcoin, crime pays. And the more idiot plebes take to using the currency, the more it will pay.</p></blockquote>
+<p>Are you talking of a fiat definition of crime or a Bitcoin definition of crime here ? </p>
+<p>You sort of teeter on the edge of realising this in the next paragraph, but the point is simply that when I say </p>
+<blockquote><p>4.2. This contract is the sole and complete agreement between the parties and to the subject matter. This contract supersedes and replaces any other agreements, communicated in any other way at any point in time. This contract stands as it is, and may not be modified by third parties, irrespective if said parties should style themselves "court of law", "judge" or otherwise.</p></blockquote>
+<p>I actually mean it. It's not a fling of my overactive imagination, but the modest realisation that Bitcoin is among other things a mathematical transformation upon our space that does weird things to many familiar tropes. I've discussed how the state is likely to be affected here and there, I frankly have no idea how exactly crime and justice will look through the Bitcoin lens (or in any case the one field I've practically failed so far is trying to flesh out that).</p>
+<p>Finally, your definition of "real world" economic value is likely flawed and in any case unexamined. This is superficially shown by the need for that qualifier, and more in depth at even cursory analysis. What "real world value" does Blizzard create, pray tell ?</p>
+						</li>
+
+										<li id="comment-93043" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93043" title="">Sunday, 5 May 2013</a>
+							</div>
+						<p>The definition of "crime" which I'm partial to is: the ancient one. As in, you had five sacks of grain in your larder one day, and the next morning there are none - because some clever fellow pried the door open and merrily galloped off with them.</p>
+<p>In the era of the State you could go crying to your liege-lord, and he might reward you for your long years of sucking lordly cock by tracking down the clever fellow and impaling him.  Or, historically, the lord would not object too strongly if you were to do so yourself. (One of my favorite episodes from historical readings is a case of a Russian peasant catching a horse thief and winding a rope around his head, twisting until the skull cracked. "Now he shall steal no more horses," the peasant said.  This was presented as typical practice by a 19th century scholar.)</p>
+<p>In the case of Bitcoin, we are back to a kind of historical reality where anything which "isn't bolted down" isn't really yours. With the added twist that neither "Infangthief" nor "Outfangthief" (English feudal terms for the two cases described above) are applicable, because the thief speeds off on a rocket into deep space the instant he makes off with the goods.</p>
+<p>Bitcoin users like to imagine that they could live on the Libertarian planet of "And Then There Were None" (by Eric Frank Russell). Where thieves are punished by starvation, as no one will choose to conduct commerce with them. This might work in a village, where everyone knows your face, or even on the Net with cryptographic reputation tracking.  However, witness the total lack of interest in the latter.  The Bitcoin WOT is great for "movers and shakers" like you, but does not scale to "cup of coffee" transactions. And does nothing to address the problem of stolen coins, whether via trojan or Pirate-like scam. My "Shitcoin" proposal would go a long way to introducing a small hint of "crime does not pay" into the Bitcoin world, but, just as I expected, no one is interested.  My hypothesis is that far too many users like to imagine themselves as potentially-successful thieves and scammers, and *like* the fact that crime pays.  Well, I hope they enjoy playing in an ecosystem where no one sows and no one reaps, and everyone tries to cleverly make off with sacks of grain produced from thin air.</p>
+<p>Real world economic value is not a hard concept. Produce cocaine, sell on the Silk Road.  Set up servers and rent out CPU cycles, whatever. Even Blizzard sets up pleasurable masturbatoriae for the masses and sells tickets. That's value, even if you and I don't care for the taste. But moving coin from one pocket to another is something else entirely.</p>
+						</li>
+
+										<li id="comment-93046" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93046" title="">Sunday, 5 May 2013</a>
+							</div>
+						<p>Wait just one darn moment here. Everything that is yours and in your property is bolted down and can never be taken away. Period. Never. Under any circumstances and for whatever reasons or justifications, not even if the Sun itself were to conspire and the Good Lord came riding an Holy Ass. If the sky were to fall not as much as a spec of dust of yours could be moved as much as an inch in any direction.</p>
+<p>This absolute and perfect solution to the problem of safeguarding property does not and could not give you license to extend your representation of property outside of what you actually own, and then pretend wholly imaginary property rights you've created by yourself for yourself should be upheld or matter in any way.</p>
+<p>When you give your five sacks AWAY from your larder into the hands of another, who promises whatever or offers whatever or whatever the fuck else you rightfully own his promise and naught else. If the promise is no good for you then don't trade your sacks. If the promise is good for you then all's right and fine, you got exactly what you bargained for. Don't expect me, your lord, the holy ass, the Sun itself or any other entity to enforce your expectations of the future, we have better things to do with our time.</p>
+<p>That's the entire point of <a href=/2012/gpg-contracts/ >GPG contracts</a> : you think BEFORE rather than AFTER. If you refuse to think before... well. </p>
+<p>The fact that the WoT does not scale down means two things : one is that nobody steals cups of coffee. This is not necessarily for lack of trying, but for lack of caring. So you have a cup of coffee I end up paying for. Durrr. The other is that a large subsection of the population are retards. They belong in the ghetto, they are living in the ghetto, and all this through their own doing and by their own hand. I fail to see the problem.</p>
+<p>The problems with your shitcoin idea may be numerous. The reason I am not interested in it myself is that it is based on a mistaken assumption, specifically that guilt is fungible. Guilt is not however fungible, it is the most friable of all goods. Money is however fungible, and good implementations thereof are the most fungible of all goods. The idea that you can associate these two is not unlike the idea of making oilwater atomic mixtures. On the long term they're doomed.</p>
+<p>I think otherwise you are grossly mistaken on the "imagine themselves" theory. I have no proof of this, just my guess. </p>
+<p>There's plainly no difference between moving imaginary coins from pocket to pocket and moving imaginary scepters of definitive domination from hand to hand. None.</p>
+						</li>
+
+										<li id="comment-93047" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93047" title="">Sunday, 5 May 2013</a>
+							</div>
+						<p>I'm all for GPG contracts or something quite like it. The only shortcoming is that, at present, identity is cheap. So you end up having to laboriously build reputation - which can sometimes be lost without your having committed any particular sin, but through the sheer misfortune of having had perfectly honest dealings with the wrong people. (Hence your 30BTC fee, for example.)</p>
+<p>The other problem is that the perceived value of a newly-created identity isn't zero in most people's minds.  It cannot be zero, or no one would ever risk even the smallest transaction with a newcomer. And so, scamming remains easy and profitable.</p>
+<p>Shitcoin is imperfect, but the lack of it or something like it is an ongoing disaster.  It isn't that I particularly like the idea of non-fungible money, but the fact remains: Bitcoins themselves are the only thing in the system which isn't arbitrarily cheap. A reputation system where a newcomer could risk his BTC stash would allow one to establish reputation quickly.</p>
+<p>Let's see what you think of the "if it isn't bolted down and guarded with riflemen, it isn't yours" school of property thought when someone lifts your coldwallet with a hidden camera.  Or your passphrases and keys, by ensuring that every network card supplied to your operation (even via flea market) has trojaned firmware. "For the wiley arse, there is a threaded cock."</p>
+<p>Perhaps your riflemen are incorruptible and you audit the firmware of every computer component you buy, in person. But do your clients and associates? My argument wasn't that we ought to abandon Bitcoin and come crying back to the arms of the State, but that the present situation re: security is a volcano waiting to blow. Perhaps BTC is the stimulus that will finally lead to serious people taking computer security seriously. But chances are: no dice. Witness the number of people using Bitcoin and Microsoft products in the same household, for instance.</p>
+<p>The incentive for a mass-pwning of Bitcoin users is essentially infinite. It is only a matter of time.  A serious breakthrough in cryptoanalysis (esp. as it pertains to mining) would also count as a mass pwning. Consider a thought experiment: what if I found a way to mine *all* of the remaining BTC in one night? And slowly sold them off? Then I will have reached into the pocket of every person who "charged the battery" by putting fiat, cocaine, gold, whatever, into the BTC ecosystem. I doubt that I could pull out *all* of the goodies, but certainly one could vacuum up a healthy share of the total. And possibly destroy nearly everyone's faith in Bitcoin in the process.</p>
+<p>As for value, surely you understand the difference between selling someone an imaginary (but quite usable, in the game context) magic sword or whatnot, vs. lifting value straight out of their pocket via trojans or currency debasement (mining.) One transaction involves a kind of mutual agreement and pleasure, however perverse, for both parties, and one is a straightforward heist.</p>
+						</li>
+
+										<li id="comment-93049" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93049" title="">Sunday, 5 May 2013</a>
+							</div>
+						<blockquote><p>I’m all for GPG contracts or something quite like it. The only shortcoming is that, at present, identity is cheap. So you end up having to laboriously build reputation - which can sometimes be lost without your having committed any particular sin, but through the sheer misfortune of having had perfectly honest dealings with the wrong people. (Hence your 30BTC fee, for example.)</p></blockquote>
+<p>There is a lot more to this than simply a 30 BTC fee. Consider the unfortunate case of Coinabul's all but smashed business (<a href=https://bitcointalk.org/index.php?topic=149253.0 >1</a>,<a href=https://bitcointalk.org/index.php?topic=152382.0 >2</a>,<a href=https://bitcointalk.org/index.php?topic=152575.0 >3</a>), consider the failed case of <a href=https://bitcointalk.org/index.php?topic=186041.0 >trying to pull the racism card</a> against me. How often does something like that fail, and miserably, and sinks the would-be wielder of power instead ? </p>
+<p>People casually offer me advice about how to do PR, conveniently neglecting to notice the <a href=/2012/strategic-superiority-a-saga/ >actual strategic situation on the field</a>. As the old adage goes, what idiots don't know can't hurt them, right ?</p>
+<p>In short no, it's not something that "can". It's a new dimension of the game pretty much nobody even intuits, and it will be a field of professional expertise feeding more people than engineering ever did. </p>
+<blockquote><p>The other problem is that the perceived value of a newly-created identity isn’t zero in most people’s minds. It cannot be zero, or no one would ever risk even the smallest transaction with a newcomer. And so, scamming remains easy and profitable.</p></blockquote>
+<p>It is only currently reprezented as non-zero as a result of western fail-education induced brain damage. Within a negligible interval it will be recalibrated much closer to a proper value, which is, of course, NEGATIVE. Anyone who's bothered to study any bit of history knows as much, strangers aren't either positive or zero anywhere.</p>
+<blockquote><p>Shitcoin is imperfect, but the lack of it or something like it is an ongoing disaster.</p></blockquote>
+<p>It's not about it being imperfect, it's about it being fundamentally flawed. The perceived lack of something or perceived need for something are always poor criteria in making any choice, as the unfortunate recent history of the US clearly shows (for the 500th time).</p>
+<blockquote><p>Let’s see what you think of the...</p></blockquote>
+<p>The problem here would seem to be that you proceed on a scientific type of narrative, whereas this is a discussion of business. Business does not require or depend on any sort of certainty to thrive, which is the main aspect that paralyses the dorky mind cast in the murky waters of commerce.</p>
+<blockquote><p>The incentive for a mass-pwning of Bitcoin users is essentially infinite.</p></blockquote>
+<p>So ? I don't understand why you presume this future where everything that spwans from within a woman's legs has a prayer. This is not what life is about, not how reality works. Sure, for very short intervals in very small areas things could be made to look that way, perhaps enough so to convince recent borns that this is anything other than local aberration. No dice, it's exactly that.</p>
+<blockquote><p>As for value, surely you understand the difference</p></blockquote>
+<p>Frankly, I do not. What is it, the illusion of control ? Here's a fact : the WoW mace does not control anything, not even the reality of the game. The Bitcoin fake currency controls the actual world.</p>
+						</li>
+
+										<li id="comment-93051" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93051" title="">Sunday, 5 May 2013</a>
+							</div>
+						<p>My argument wasn't that every meatpuppet deserves a "fair chance" or some such poppycock. Rather, that the Bitcoin ecosystem as we know it lacks any mechanism for punishing theft or mitigating the consequences thereof. And that it isn't even theoretically possible to retrofit such a mechanism. So, a different attitude towards theft is required (more like that of a sovereign. If you can't defend something, it isn't yours.) Seems like you actually agree with this?</p>
+<p>As for scamming, the only reasonable defense mechanism I know of is the WoT, and it is a rather ad-hoc one - that fails to cover many situations which I consider commonplace (such as that of an honest outsider who wants to establish a good reputation overnight by staking his wealth through a cryptographic bond.)</p>
+<p>Yes, business does not require absolute certainty. No one can be certain that the planet will not be snapped in half by an asteroid tonight, etc. But given the state of the art in computer security, the BTC world looks (at least from the outside) like a playground for malware artists. Right now this is not an issue for you on your island fortress with hand-vetted network card firmware, but it should concern your hypothetical stable future, where BTC starts to derive its value from actual commerce done by a great many people, rather than from being a speculative vehicle for a few (with a million chumps in the mix to provide the "stupid money at the poker table.")</p>
+<p>Re: value: do you seriously propose that there is no difference between my persuading you to purchase a WoW sword and my lifting your BTC wallet through digital machinations without any intervention on your part? I admit that I'm rather puzzled here.</p>
+						</li>
+
+										<li id="comment-93052" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93052" title="">Sunday, 5 May 2013</a>
+							</div>
+						<p>Well... I've kinda said what I think about the entire punishment/contract enforcement/etc in that article. I don't feel able to reduce it to a more compact form.</p>
+<p>The situation of overnight reputation is well resolved. I don't have the logs myself, but if you ask either vragnaroda or one of the older folk about my first appearance in #bitcoin-otc they might treat you to the logs of me asking exactly this, "wtf, I run Romania's most read blog and you're telling me I can't buy a bitcoin ? This is ridiculous". It was sorted out presently and, in my view, correctly. The only edge case unresolved is that of people who falsely to delusionaly perceive they have reputation irl, but really do not. I am firmly persuaded such a "problem" absolutely needs no solution. Let the honest outsider learn a honest trade, practice it, then come talking of these things again. Or in other words : Bitcoin isn't here so that people do what they want to do. Bitcoin is here so that people want to do what they should be doing.</p>
+<p>I don't think the representation of the current situation is fair, and I don't think the solution is anything else than paying (handsomely) for (wot-backed) vetting. Of everything. Hence the <a href=/2012/probably-the-hottest-business-idea-of-the-moment-in-btc/ >hottest idea of the moment</a>. </p>
+<p>A good chunk of the MPEx business model is providing insulation for start-ups and entrepreneurs from the costs and risks of handling BTC, and this is working well and for very good reasons.</p>
+<p>I guess it'd all depend on what you mean by "no intervention on my part". You know the most common infection happens because the user clicks these days, do you ? <a href=/2012/the-storm-that-was-fel/#comment-90300 >Here</a>'s a nice look at it laid bare.</p>
+						</li>
+
+										<li id="comment-93053" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93053" title="">Monday, 6 May 2013</a>
+							</div>
+						<p>The interesting flaw in the code review idea is that code auditing simply doesn't work.  This of course in no way prevents eminent meatspace "experts" from offering the service to other wealthy chumps, sometimes for hundreds of millions of dollars.  There is a thriving snake oil industry in code auditing, "hardening," etc. - esp. re: U.S. "national security." It is a crock of shit, all of it.</p>
+<p>If you would like to know why, google the "Underhanded C Contest".  Likewise, examine the sea of idiot libraries, OS level and above, used by most commercial (and open source) projects. The entire stack is a Swiss cheese monstrosity, and the only way to get genuine computer security is to discard the whole shebang, and re-engineer the computer from the silicon up, all the way through the OS and application level.  Using a sane computer architecture (this includes, for instance, hardware type and bounds checking.  See "The Architecture of Symbolic Computers" by Peter M. Kogge. It is overwhelmingly likely that neither you nor anyone you know has ever touched or even seen a sanely-designed computer.)</p>
+<p>This is why there have been no takers for your auditing service / insurance startup idea.  Honest people know better than to bet their reputation on plugging the Swiss cheese holes, and the competent dishonest ones are already making a killing working U.S. DOD contracts.</p>
+						</li>
+
+										<li id="comment-93063" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93063" title="">Monday, 6 May 2013</a>
+							</div>
+						<blockquote><p>This is why there have been no takers </p></blockquote>
+<p>Perhaps.</p>
+						</li>
+
+										<li id="comment-93070" class="commentbody"><div class="commenthead"><img alt='Dr.A`s avatar' src='http://adrian.mihalcioiu.ro/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink"><a href='http://adrian.mihalcioiu.ro' class='url'>Dr.A</a><img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-educat.png" class="insigna" alt="insigna de cetatean educat" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-1k.png" class="insigna" alt="insigna pentru 1000 de comentarii" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-criptograf.png" class="insigna" alt="insigna de criptograf" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93070" title="">Monday, 6 May 2013</a>
+							</div>
+						<p>@Stanislav Datskovskiy<br />
+I guess printing the bitcoin wallet on paper and erasing the file would be a good thing to start with if you want to keep your bitcoins safe. </p>
+<p>You should remember that since bitcoin is not a "state currency" one can't benefit from property rights allocated according to Bentham's principle and therefore must remain within Locke's property limitations that is: all intellectual property rights (or rights on a digital currency) as we think of it today do not exist.<br />
+Hence my suggestion to print your wallet that makes you sole owner of the wallet (as long as you hold it for your eyes only).</p>
+						</li>
+
+										<li id="comment-93071" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93071" title="">Monday, 6 May 2013</a>
+							</div>
+						<p>Dr. A,</p>
+<p>Anyone who suggests coldwallets as some kind of security panacea is an idiot.  The BTC still has to pass through your potentially-trojaned machine to arrive in the printer's buffer, and will have to re-enter the machine in order to be spent.  The coldwallet is only helpful should an enemy take control of your disk in the meantime.  And even that is true only if you securely overwrote the hotwallet.</p>
+						</li>
+
+										<li id="comment-93077" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93077" title="">Tuesday, 7 May 2013</a>
+							</div>
+						<p>At the very least the attacker does not know through which machine will that wallet eventually resurface.</p>
+						</li>
+
+										<li id="comment-93082" class="commentbody"><div class="commenthead"><img alt='Dr.A`s avatar' src='http://adrian.mihalcioiu.ro/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink"><a href='http://adrian.mihalcioiu.ro' class='url'>Dr.A</a><img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-educat.png" class="insigna" alt="insigna de cetatean educat" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-1k.png" class="insigna" alt="insigna pentru 1000 de comentarii" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-criptograf.png" class="insigna" alt="insigna de criptograf" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93082" title="">Tuesday, 7 May 2013</a>
+							</div>
+						<p>@Stanislav Datskovskiy<br />
+Anyone expecting enforced property rights on virtual, non government backed currency suffers from cognitive dissonance. As does anyone pretending to provide them or looking for solutions to provide them.<br />
+I would not go as far as to claim it is an idiot as it is caused mostly by lack of proper education and not by a disability.    </p>
+<p>to be specific:<br />
+- connecting to the internet is a transaction you voluntarily enter with all users. As on all transactions, risk exists and mitigating risks is one of the main responsibility one has. Accurately pricing the risk the cost and the benefit is essential in deciding weather to engage or not in the transaction<br />
+- a trojaned machine connected to internet does not belong to you.<br />
+- putting your wallet in the "pocket" of someone else (as in a trojaned machine) is a voluntary transfer of your property rights on that wallet. (virtual of physical)</p>
+<p>PS. All this should be already obvious. As it appears it is not, try to grasp the concept of property first before engaging further discussions on the topic.</p>
+						</li>
+
+										<li id="comment-93085" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93085" title="">Tuesday, 7 May 2013</a>
+							</div>
+						<p>Idiocy connotes lack of (or even improper) education, not merely disability. This isn't the 1800s anymore.</p>
+						</li>
+
+										<li id="comment-93091" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93091" title="">Tuesday, 7 May 2013</a>
+							</div>
+						<p>Dr. A,</p>
+<p>What you said re: property is correct - and obvious, at least to you and I.  Anything you fail to properly bolt it down isn't yours, etc.</p>
+<p>What is less obvious is the implications re: personal computing as it pertains to Bitcoin.</p>
+<p>For the purpose of transactions ranging in the millions (or even thousands) of BTC, *all* available computer systems ought to be considered factory-trojaned. Have you personally reviewed the firmware in your network card? video card? hard disks? (There are 8 MB of firmware flashed in a late-model Seagate sitting on my desk; for a weird, undocumented Hitachi vaguely-MIPS-like CPU - doing hell knows what.) Have you any proprietary drivers running on your Linux box? (and I will charitably assume that a household where Bitcoin is used contains nothing Microsoft.)  The point remains, that very little is adequately "bolted down" at the present time.  Don't print your coldwallet with a networked printer.</p>
+						</li>
+
+										<li id="comment-93094" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93094" title="">Tuesday, 7 May 2013</a>
+							</div>
+						<p>This is true, thirty years of Microsoft-led "coding" have pretty much drowned us in shit. Bitcoin has little to do with this, other than for the first time in history making the shit stink.</p>
+						</li>
+
+										<li id="comment-93096" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93096" title="">Tuesday, 7 May 2013</a>
+							</div>
+						<p>You seem to hate trade secrets.</p>
+						</li>
+
+										<li id="comment-93117" class="commentbody"><div class="commenthead"><img alt='Dr.A`s avatar' src='http://adrian.mihalcioiu.ro/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink"><a href='http://adrian.mihalcioiu.ro' class='url'>Dr.A</a><img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-educat.png" class="insigna" alt="insigna de cetatean educat" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-1k.png" class="insigna" alt="insigna pentru 1000 de comentarii" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-criptograf.png" class="insigna" alt="insigna de criptograf" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-93117" title="">Wednesday, 8 May 2013</a>
+							</div>
+						<p>@Stanislav Datskovskiy<br />
+Ways to cost effectively mitigate risk are applied today there where transactions in the trillions of dollars range happens.<br />
+Expecting them to be freely available for you is just nonsense.</p>
+<p>If you ever plan to have a secure system: start from defining the necessary features and then keep it simple. There is a reason airplanes still have today 10 to 50 times less lines of codes than a BMW.</p>
+						</li>
+
+										<li id="comment-97974" class="commentbody"><div class="commenthead"><img alt='Sean William`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink">Sean William</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97974" title="">Friday, 7 February 2014</a>
+							</div>
+						<p>What surprised me the most about the bitcoin activity is its growing popularity in the gambling industry. It’s almost like every day, a new gambling site is being developed and accepting bitcoin.</p>
+						</li>
+
+										<li id="comment-99834" class="commentbody"><div class="commenthead"><img alt='K-Evans`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">K-Evans</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-99834" title="">Tuesday, 13 May 2014</a>
+							</div>
+						<p>The number of units is fixed, with a net % lost.</p>
+<p>you are talking angrily about economic velocity?</p>
+<p>the idea of a "dividend" is a proxy product of a debt monetary system, that's not to say its exclusive but its very much tied to it.</p>
+<p>did Silver holders that purchased physical Silver at 2 Dollars get a silver divined?</p>
+<p>I laughed at your Doge article.</p>
+						</li>
+
+										<li id="comment-99835" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-99835" title="">Tuesday, 13 May 2014</a>
+							</div>
+						<p>@<b>Sean Williams</b> Not every website is anything more or else than just that : a website. Some kid hacking together a "gambling website" isn't part of gambling now, he just made his homepage carry a different layout. Or, to paraphrase Johnson, a homepage that can pretend like it lets you gamble is a remarkable homepage, not a remarkable gambling site.</p>
+<p>@<b>K-Evans</b> That word salad thing could benefit from some structure.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-132269">
+					<div class='trackhead'>
+						<div class="commentcount">25</div>
+						<span class="authorlink"><a href='http://dorion-mode.com/2019/11/life-on-the-isthmus-83-months-in/?b=and%20emails&amp;e=and%20emails%20to%20leak%20from%20a%20derpy%20wordpress.%29%2C%20the%20stick%20up%20of%20Waked%20and%20the%20multi' class='url'>Life on the Isthmus, 83 months in. &laquo; Dorion Mode</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-132269" title="">Thursday, 14 November 2019</a>
+					</div>
+					<p>[...] and emails to leak from a derpy wordpress.), the stick up of Waked and the multi-decade attack on a fundamental characteristic -- fungibility -- of what competes to become the market's most marketable good were big raids in [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139770">
+					<div class='trackhead'>
+						<div class="commentcount">26</div>
+						<span class="authorlink"><a href='/2014/why-dogecoin-is-a-scam-why-the-people-pushing-it-are-assholes-why-business-insider-is-a-contemptible-piece-of-shit-why-anyone-who-ever-worked-for-it-will-be-dancing-in-the-stre' class='url'>Why Dogecoin is a scam, why the people pushing it are assholes, why Business Insider is a contemptible piece of shit, why anyone who ever worked for it will be dancing in the street for nickels and why Kevin Rose is a fuckwit. Plus other considerations. o</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139770" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] know, the imaginary problem of "deflation", as if Bicoin was in fact deflationary. Here's a hint : it isn't, and no amount of repeating a falsehood will make it count. As if the dollar can in fact survive [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-142460">
+					<div class='trackhead'>
+						<div class="commentcount">27</div>
+						<span class="authorlink"><a href='/2016/cia-factbook-the-most-serene-republic?b=such.%20%5B%26%23861&amp;e=nder#select' class='url'>CIA Factbook : The Most Serene Republic on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142460" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] such. [&#8617;]Baked into its currency, the inflation rate was ~15% throughout 2015 (down from ~25% in 2013). The inflation rate is expected to diminish constantly from this point forward for the remainder [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-143979">
+					<div class='trackhead'>
+						<div class="commentcount">28</div>
+						<span class="authorlink"><a href='/2017/the-ecu?b=unbacked%2C%20ab&amp;e=dred#select' class='url'>The ECu on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-143979" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] unbacked, absolutely worthless paper about the only transcendent. [&#8617;]Leaving aside the very inflationary underlying, consider that on September 2017 the ECu lost 90% of its value against Bitcoin -- from a hundred [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-145176">
+					<div class='trackhead'>
+						<div class="commentcount">29</div>
+						<span class="authorlink"><a href='/2018/the-stupidity-ratchet?b=as%20to%20not-th&amp;e=cher#select' class='url'>The stupidity ratchet on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-145176" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] as to not-the-bad ? Have you bought the hairspray they're selling ? Did you go to church ? Have you given at the office ? Has anything you've done today made you poorer and the stupidity ratcheteers richer [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-149179">
+					<div class='trackhead'>
+						<div class="commentcount">30</div>
+						<span class="authorlink"><a href='http://ossasepia.com/2020/03/27/a-review-of-the-bitcoin-category-on-trilemacom/?b=discussion%20o&amp;e=ers.#select' class='url'>A Review of the Bitcoin Category on trilema.com &laquo; Ossa Sepia</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-149179" title="">Sunday, 19 April 2020</a>
+					</div>
+					<p>[...] discussion of Bitcoin inflation as strictly linked to market processes and economic activity, aimed at the perceived influx of people other than programmers. [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author57e4a93" id="author57e4a93" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email57e4a93" id="email57e4a93" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url57e4a93" id="url57e4a93" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="47630" /></p>
+				<input type="hidden" name="comment_post_time" value="1781253821-18.97.14.91" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-47630")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-47630");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-47630");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

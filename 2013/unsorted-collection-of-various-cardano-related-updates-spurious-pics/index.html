@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_apr2017.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Unsorted collection of various Cardano related updates + spurious pics on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Moving targets for a fast crowd.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-51121"><div class="post" id="post-51121">                    <h1><a href="/2013/unsorted-collection-of-various-cardano-related-updates-spurious-pics/" rel="bookmark" title="Permanent Link to Unsorted collection of various Cardano related updates + spurious pics">Unsorted collection of various Cardano related updates + spurious pics</a></h1>                        <div class="date">                                     Sunday, 24 November, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p><strong>I. The question of entropy debit :</strong></p>
+<blockquote><p><div id="attachment_51122" class="wp-caption alignright" style="width: 160px"><a href="/wp-content/uploads/2013/11/cardano-shielded-rng.jpg"><img src="/wp-content/uploads/2013/11/cardano-shielded-rng-150x150.jpg" alt="The RNG in copper sheet shielding, being tested." title="cardano-shielded-rng" width="150" height="150" class="size-thumbnail wp-image-51122" /></a><p class="wp-caption-text">The RNG in copper sheet shielding, being tested.</p></div><strong>mircea_popescu</strong> So one measure quotes entropy at about 1k/sec. You said 100 baud above. Which is the better approximation ?<br />
+<strong>asciilifeform</strong> 2 different engines, 1st was straight von Neumann, 2nd also von Neumann but with multiple iterations xor-ing over a buffer.</p>
+<p><strong>mircea_popescu</strong> Yes yes, but generally per rng board, what'd you guess the entropy debit is ?<br />
+<strong>asciilifeform</strong> Why guess, let me measure.</p>
+<p><strong>mircea_popescu</strong> Aite.<br />
+<strong>asciilifeform</strong> 200 baud sharp.</p></blockquote>
+<p><strong>II. On the question of competition</strong>, market leadership, intellectual leadership and all the rest o that good stuff : </p>
+<blockquote><p><div id="attachment_51124" class="wp-caption alignright" style="width: 160px"><a href="/wp-content/uploads/2013/11/shield_test.jpg"><img src="/wp-content/uploads/2013/11/shield_test-150x150.jpg" alt="The RNG in copper sheet shielding, being otherwise tested." title="shield_test" width="150" height="150" class="size-thumbnail wp-image-51124" /></a><p class="wp-caption-text">The RNG in copper sheet shielding, being otherwise tested.</p></div><strong>asciilifeform</strong> Found out some quite surprising things about how RNG tests are (mis)-used in practice. Seems like many commercial (read: USG-approved) RNG widgets run in batches, and reject buffer if it doesn't pass 'FIPS'. Can you see the problem here, or do I need to draw a picture?<br />
+<strong>mircea_popescu</strong> Here's another half to this problem. Suppose all transformers ever sold in a geographical area for customer use have well known EM-soup form factors.</p>
+<p><strong>asciilifeform</strong> Beyond the usual 50/60hz?<br />
+<strong>mircea_popescu</strong> Could you, on the basis of 1. the rng widgets running the way you describe and 2. having a pretty good clue as to what EM is going about around the unshielded rngs obtain a narrower keyspace to explore than the math seems to imply ?</p>
+<p><strong>asciilifeform</strong> You'd need a very special kind of idiot to design an RNG that picks up line noise.<br />
+<strong>mircea_popescu</strong> Nono. It's not line noise. You run your computer next to the TV. The computer is making a GPG key. Meanwhile the TV is pumping out radiation. You know, just like your cellphone.</p>
+<p><strong>asciilifeform</strong> Well an ordinary Linux PC traditionally uses key/mouse intervals (low bits) for entropy generation.<br />
+<strong>mircea_popescu</strong> But an avalanche diode system (ie, 99% of the "professional" RNG solutions)...</p>
+<p><strong>asciilifeform</strong> An avalanche diode, if not shielded, will pick up all kinds of fun stuff.<br />
+<strong>mircea_popescu</strong> Right. Fun stuff which is predictable somewhat, as per 2, and then filtered as per 1, becoming a little more predictable. These together probably make RNG-based systems perversely less secure than good old linux on desktop.<sup><a href="#footnote_0_51121" id="identifier_0_51121" class="footnote-link footnote-identifier-link" title="This point couldn't be overstated enough : the way soft power works isn't that you try and control everything. The way soft power works is that you merely focus on doing a good job controlling that end of the stick which has already self-selected to indicate you should be controlling it. 
+In this sense, your going `upmarket` as far as privacy products are concerned hurts your privacy, in that it signals your enemy you have secrets to keep, which is in no way offset by the `advantage` than you now have a `better` (as classified by your very enemy) yet still enemy-approved item.
+The first step towards actual privacy is acquiring devices that weren't issued by the enemy.">i</a></sup></p>
+<p><strong>asciilifeform</strong> A, but, the buggers didn't bother with trying to diddle chinese TVs into compliance. They do it in software, the victim himself provides it, enthusiastically.<br />
+<strong>mircea_popescu</strong> Not diddle them, just measure them. All you need to know is "most" of the EM around.</p>
+<p><strong>asciilifeform</strong> The perverse beauty of what is actually being done is that you could use the Devil's own arse as an entropy source, but if you apply FIPS (or whatever) and reject batches of 20kb based on the result, you're adding pattern. Think about it.<br />
+<strong>mircea_popescu</strong> Yes you are.</p>
+<p><strong>asciilifeform</strong> Imagine you have all but the last bit. So you have to guess that last bit. You pick the one that... gives better FIPS! And so on, for n-1...n0.<br />
+<strong>mircea_popescu</strong> Exactly. I'm just saying, a little bit of here, a little bit of there, in the end maybe keyspace is like 2^24 or some shit.</p>
+<p><strong>asciilifeform</strong> Even smaller, if you (like virtually everyone) use straight whitening. E.g. AES or blumblumshub.<br />
+<strong>mircea_popescu</strong> Right. I think few people realise just how weak their crypto is actually.</p>
+<p><strong>asciilifeform</strong> If they did, they'd shit themselves.</p>
+<p>[a little later]</p>
+<p><div id="attachment_51126" class="wp-caption alignright" style="width: 160px"><a href="/wp-content/uploads/2013/11/popul_top.jpg"><img src="/wp-content/uploads/2013/11/popul_top-150x150.jpg" alt="Populated RNG board, top view" title="popul_top" width="150" height="150" class="size-thumbnail wp-image-51126" /></a><p class="wp-caption-text">Populated RNG board, top view</p></div><strong>asciilifeform</strong> People in Schneier's peanut gallery: 'somebody should make hardware to stand up to (classic)<sup><a href="#footnote_1_51121" id="identifier_1_51121" class="footnote-link footnote-identifier-link" title="He means fiat.">ii</a></sup> NSA!' Reply: 'but nobody knows how!'.<br />
+<strong>mircea_popescu</strong> Lol.</p>
+<p><strong>asciilifeform</strong> The comments are full of 'Ruiu' types (the bugs, they're everywhere! my oven's infected).<br />
+<strong>mircea_popescu</strong> I suspect that's the intended effect. Anyway, I wonder if the "powers that be" in their own imagination realise they're proper fucked yet.</p>
+<p><strong>asciilifeform</strong> Nah, they're wanking under their blanket, to 'full spectrum dominance!'<br />
+<strong>mircea_popescu</strong> Lulzy.</p></blockquote>
+<p><strong>III. The question of treating your customers right :</strong></p>
+<blockquote><p><strong>asciilifeform</strong> Btw, are we going with immersion gold plating on this one? (~$1/board)<br />
+<strong>mircea_popescu</strong> Remind me what this is about.</p>
+<p><strong>asciilifeform</strong> Ok look at 2 photos. 1) rng board 2) manufacturer's demo board for micro seen in last shot. Notice the colors of the contacts. Gold is an optional extra at most board houses.<br />
+<strong>mircea_popescu</strong> But what does it do ?</p>
+<p><strong>asciilifeform</strong> Sits there without oxidizing. Also shines and looks spiffy.<br />
+<strong>mircea_popescu</strong> Figure it's worth it ?</p>
+<p><strong>asciilifeform</strong> I'm asking you. You're the marketing sorcerer here.<br />
+<strong>mircea_popescu</strong> Myeah. 1 dollar is exactly rightly priced. I can see it either way.</p>
+<p><strong>asciilifeform</strong> I'll get an exact quote from golden turd, with and without.<br />
+<strong>mircea_popescu</strong> Eh what the hell, nobody ever went broke by throwing away gold at their customers. So let's.</p>
+<p><strong>asciilifeform</strong> Works.</p></blockquote>
+<p>As you can see, I love you all. Next product we add the diamond.</p>
+<p><strong>IV. The question of entropy quality :</strong> </p>
+<blockquote><p><strong>asciilifeform</strong> Entropy = 7.981308 bits per byte.<br />
+Optimum compression would reduce the size of this 5788119 byte file by 0 percent.<br />
+Chi square distribution for 5788119 samples is 137163.04, and randomly would exceed this value less than 0.01 percent of the times.<br />
+Arithmetic mean value of data bytes is 127.3688 (127.5 = random).<br />
+Monte Carlo value for Pi is 3.139591535 (error 0.06 percent).<br />
+Serial correlation coefficient is 0.017729 (totally uncorrelated = 0.0).</p>
+<p>For the sample I sent you earlier, output is from John Walker's 'ent' util.</p>
+<p>[later]</p>
+<p><strong>asciilifeform</strong> Don't publish the dump. Found an artifact in there. Accounts for the less-than-perfect test result.<br />
+<strong>mircea_popescu</strong> Ha! Wasn't going to, but what artefact was it ?</p>
+<p><strong>asciilifeform</strong> Comes from a null word that the serial tx engine shits out. Fixing now.<br />
+<strong>mircea_popescu</strong> Ha!</p>
+<p><strong>asciilifeform</strong> See, this is why /nothing/ can replace the Mark One Naked Eye. And a hexdumper.<br />
+<strong>mircea_popescu</strong> You know I'm publishing this.</p>
+<p><strong>asciilifeform</strong> Sure. If you like. People are gonna laugh, you know it. But if you think this helps the cause... sure. Go ahead. Damn I feel like a moron. 4 bytes of every 512 block were nils. See, this is why I compulsively massage the beast. Even when it 'seems to work'.<br />
+<strong>mircea_popescu</strong> Hahaha.</p>
+<p><strong>asciilifeform</strong> Classic.<br />
+<strong>mircea_popescu</strong> Totally.</p>
+<p><strong>mircea_popescu</strong> The difference between this and moronity is that 1. you caught it and 2. you admitted it. Shit's supposed to not work by itself, so merely discovering that it ain't working isn't in any way damning.</p>
+<p>[later]</p>
+<p><strong>asciilifeform</strong> Fixed. Incidentally, passes 'FIPS' now. We can sell to the Fuhrer!<br />
+<strong>mircea_popescu</strong> All of them ?</p>
+<p><strong>asciilifeform</strong> All of them. Not that the FIPS tests are worthless, but the practice of throwing buckets away is laughable.<br />
+<strong>mircea_popescu</strong> FIPS rejected nothing at all of how many MB ?</p>
+<p><strong>asciilifeform</strong> So far, 200kB. Remember, thing is slow. Ima leave it running.<br />
+<strong>mircea_popescu</strong> I would like you to do a 1gb sample.</p>
+<p><strong>asciilifeform</strong> It will piss as long as we like. I'm gonna see if I can shave a few of the xor iterations off and get similar metrics.<br />
+<strong>mircea_popescu</strong> Nah.</p>
+<p><strong>asciilifeform</strong> Ok.</p>
+<p>[later]</p>
+<p><strong>asciilifeform</strong> Entropy = 7.988682 bits per byte.<br />
+Optimum compression would reduce the size of this 64409600 byte file by 0 percent.</p>
+<p>Chi square distribution for 64409600 samples is 507404.32, and randomly would exceed this value less than 0.01 percent of the times.</p>
+<p>Arithmetic mean value of data bytes is 128.3681 (127.5 = random).<br />
+Monte Carlo value for Pi is 3.128231541 (error 0.43 percent).<br />
+Serial correlation coefficient is 0.000002 (totally uncorrelated = 0.0).</p>
+<p><strong>mircea_popescu</strong> Sweet.</p>
+<p>[later]</p>
+<p><strong>mircea_popescu</strong> Ok, we have some nice numbers here.<br />
+<strong>asciilifeform</strong> Maybe, maybe not; I've a sample purporting to be 10 megs of Geiger here. Gives Pi to 0.01%</p>
+<p><strong>mircea_popescu</strong> Matters not. The 0.000002 serial correlation coefficient is a thing of beauty. And looking at the crossings<sup><a href="#footnote_2_51121" id="identifier_2_51121" class="footnote-link footnote-identifier-link" title="We had the file ent'd every 100kB, precisely to see how the correlation moves. Here's the result, if you're curious. `The crossings` refers to where that indicator crosses 0.">iii</a></sup> I'd say it's just fine, with all my experience of following financial indicators and resisting the urge to imagine patterns where clearly no patterns exist.<sup><a href="#footnote_3_51121" id="identifier_3_51121" class="footnote-link footnote-identifier-link" title="Yes, I think TA is nonsense, generally speaking.">iv</a></sup><br />
+<strong>asciilifeform</strong> Have you ever wondered how paradoxical, from the engineering point of view, building an RNG is? Normally you want a machine to behave deterministically...</p>
+<p><strong>mircea_popescu</strong> Mhm.<br />
+<strong>asciilifeform</strong> ... and try to plaster over the noisiness of the physical world. Johnson noise, shot noise, etc. Engineers hate them. But RNG is a walking-on-your head sort of affair where you love and nurture noise and non-determinism. (Johnson noise is us. The fact that a resistor, any time above 0K, has a charge across it at all times. Just sitting on your desk.)</p>
+<p><strong>mircea_popescu</strong> Mno. Listen, you got a bias in here. For ones.<br />
+<strong>asciilifeform</strong> Yes. Trivial to fix, but i'd like to learn why it's there. It disappears after the von Neumann stage, but reappears upon the xor.</p>
+<p><strong>mircea_popescu</strong> About .8 which means about 1 in 160.<br />
+<strong>asciilifeform</strong> Interestingly, other RNG builders von Neumann before final output stage, but I never knew why.</p>
+<p><strong>mircea_popescu</strong> Explain the process to me like I was a 3 yo.<br />
+<strong>asciilifeform</strong> Ok, we have the board. It puts out a logic-level signal, 1 or 0, transitioning whenever it feels like it. No clocking. Micro samples the line. Every time it does so twice, the following is done: '00' or '11' -> nothing ; '01' -> we have a '1' ; '10' -> we have a '0'.</p>
+<p><strong>mircea_popescu</strong> Why is this ?<br />
+<strong>asciilifeform</strong> This is von Neumann's 'fair coin' algorithm. Given an arbitrarily weighted coin, you get a fair coin (50/50 odds). If we use the stream directly after this, we get fairly good entropy, but we're vulnerable to transients.</p>
+<p><strong>mircea_popescu</strong> You're implementing vN fair coin backwards. Or w/e, bigendian style.<br />
+<strong>asciilifeform</strong> Inverted fair coin is still fair.</p>
+<p><strong>mircea_popescu</strong> Yup. But do me the following favour : invert your fair coin algo. Let's see if we end up with 126.9. You know ?<br />
+<strong>asciilifeform</strong> Sure, why not.</p>
+<p>[later]</p>
+<p><strong>asciilifeform</strong> Interesting... about the same result.<br />
+<strong>mircea_popescu</strong> So it's not really to do with the chip. We're fucking it up afterwards.</p>
+<p><strong>asciilifeform</strong> Wondering if it's to do with rs232 again. (It's how we're hooked up to pc at the moment). There's no error correction...<br />
+<strong>mircea_popescu</strong> What'd it correct for ?</p>
+<p><a href="/wp-content/uploads/2013/11/how-rs232-works-tx-logic-rs232-diag.png"><img src="/wp-content/uploads/2013/11/how-rs232-works-tx-logic-rs232-diag-150x150.png" alt="how-rs232-works-tx-logic-rs232-diag" title="how-rs232-works-tx-logic-rs232-diag" width="150" height="150" class="alignright size-thumbnail wp-image-51148" /></a><strong>asciilifeform</strong> Notice the 'idle' state of the line is a 1. So a frame error would give '1'.<br />
+<strong>mircea_popescu</strong> Ha! Well then! That's it baby. You get 0.6% line errors.</p>
+<p><strong>asciilifeform</strong> Idea: I'll clock down the baud rate on the tx end, let's see what that does. Right now txmitter is putting out 115200. Easy to test hypothesis.<br />
+<strong>mircea_popescu</strong> Let's see.</p>
+<p><strong>asciilifeform</strong> 9600 baud; still there, but appears to be lessened. I'm convinced it's to do with the line. Switched off the xor part, to get something exactly like the setup i had with the (polled) FTDI chip. Bias still there.<br />
+<strong>mircea_popescu</strong> Listen. Implement the fair cointoss at this end rathert than at that end.</p>
+<p><strong>asciilifeform</strong> PC end?<br />
+<strong>mircea_popescu</strong> Yup.</p>
+<p><strong>asciilifeform</strong> Sure!<br />
+<strong>mircea_popescu</strong> You wanna hear something funny ?</p>
+<p><strong>asciilifeform</strong> Sure.<br />
+<strong>mircea_popescu</strong> The 4 nils in 512 blocks you fixed.... they would have just about balanced this out</p>
+<p><strong>asciilifeform</strong> Haha.<br />
+<strong>mircea_popescu</strong> PUT THEM BACK IN!</p>
+<p><strong>asciilifeform</strong> Ehehe<br />
+<strong>mircea_popescu</strong> :D</p>
+<p><strong>asciilifeform</strong> I bet some people do just that!<br />
+<strong>mircea_popescu</strong> You got any idea how often this is just how business works ? Yeah.</p>
+<p><strong>asciilifeform</strong> 'Fucker doesn't wurk, whack it with this here hammer'.<br />
+<strong>mircea_popescu</strong> "We don't have the time for this. Make it do it something."</p>
+<p><strong>asciilifeform</strong> Don't forget, I live in the place where they mine this kind of thinking and export to the rest of the planet. That's the main U.S. natural resource export, not helium...<br />
+<strong>mircea_popescu</strong> Nah, the Chinese are worse. Way way worse.
+</p></blockquote>
+<p>Long story short : we've been massaging this thing for weeks. We're looking everywhere we can think of, cutting no corners, discovering in the process a bunch of likely pitfalls you can feel more than free to ask any other vendor about, just for kicks, and reinforcing the whys and wherefores engineering is fun. Because it is fun. Done in the proper environment, for a proper business, with actual management, engineering is the most enjoyable passtime intelligent people with tinkering inclinations could possibly pursue. </p>
+<p>I can't guarantee that we've found all the holes, nor do I think anyone else could. We have however found a bunch of different holes, which we have fixed, which was the point of the entire exercise in the first place. And I can definitely guarantee that what we do when we find a hole is fix it, rather than anything else. </p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_51121" class="footnote">This point couldn't be overstated enough : the way soft power works isn't that you try and control everything. The way soft power works is that you merely focus on doing a good job controlling that end of the stick which has already self-selected to indicate you should be controlling it. </p>
+<p>In this sense, your going "upmarket" as far as privacy products are concerned hurts your privacy, in that it signals your enemy you have secrets to keep, which is in no way offset by the "advantage" than you now have a "better" (as classified by your very enemy) yet still enemy-approved item.</p>
+<p><strong>The first step towards actual privacy is acquiring devices that weren't issued by the enemy</strong>. [<a href="#identifier_0_51121" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_51121" class="footnote">He means fiat. [<a href="#identifier_1_51121" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_51121" class="footnote">We had the file ent'd every 100kB, precisely to see how the correlation moves. <a href=/wp-content/uploads/2013/11/rng_sample_measures.txt>Here</a>'s the result, if you're curious. "The crossings" refers to where that indicator crosses 0. [<a href="#identifier_2_51121" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_51121" class="footnote">Yes, I think TA is nonsense, generally speaking. [<a href="#identifier_3_51121" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/the-ocr-lol-of-today/">The OCR lol of today</a></div>
+                <div class="alignright"><a href="/2013/why-mpex-is-better-than-fiat-institutions-part-930458-we-don%e2%80%99t-use-lube/">Why MPEx is better than fiat institutions, part 930458 : we don’t use lube</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/snsa/" title="View all posts in S.NSA" rel="category tag">S.NSA</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/unsorted-collection-of-various-cardano-related-updates-spurious-pics/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/unsorted-collection-of-various-cardano-related-updates-spurious-pics/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>5 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-96241" class="commentbody"><div class="commenthead"><img alt='nubbins`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">nubbins</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96241" title="">Sunday, 24 November 2013</a>
+							</div>
+						<p>Great stuff!</p>
+						</li>
+
+										<li id="comment-96242" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96242" title="">Sunday, 24 November 2013</a>
+							</div>
+						<p>My pleasure!</p>
+						</li>
+
+										<li id="comment-96260" class="commentbody"><div class="commenthead"><img alt='pankkake`s avatar' src='http://headfucking.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink"><a href='http://headfucking.net/' class='url'>pankkake</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96260" title="">Monday, 25 November 2013</a>
+							</div>
+						<p>Pics but no pubii. I want my satoshi back.</p>
+<p>Nevermind, I read the chat log, which is porn to me. I'd rather buy that RNG, instead of the whole Cardano.</p>
+						</li>
+
+										<li id="comment-96268" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96268" title="">Tuesday, 26 November 2013</a>
+							</div>
+						<p>We plan to release it as a cartridge for our Super Fun CryptoCube.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-97390">
+					<div class='trackhead'>
+						<div class="commentcount">5</div>
+						<span class="authorlink"><a href='http://www.loper-os.org/?p=1427' class='url'>Loper OS &raquo; Cardano Prototype Tidbits: TRNG Boards.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-97390" title="">Tuesday, 7 January 2014</a>
+					</div>
+					<p>[...] (outputs subsequently XOR-ed) each, are connected. (First prototype of this type of TRNG is shown here. It contained one circuit of the kind used in the current version. Statistical analysis of the [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author6951375" id="author6951375" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email6951375" id="email6951375" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url6951375" id="url6951375" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="51121" /></p>
+				<input type="hidden" name="comment_post_time" value="1759773091-18.97.14.85" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2025 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-51121")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-51121");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-51121");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

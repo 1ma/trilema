@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_may2019b.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>How to airgap. A practical guide. on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Heretiquarium.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-49997"><div class="post" id="post-49997">                    <h1><a href="/2013/how-to-airgap-a-practical-guide/" rel="bookmark" title="Permanent Link to How to airgap. A practical guide.">How to airgap. A practical guide.</a></h1>                        <div class="date">                                     Sunday, 13 October, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>One of the more valuable tools in the arsenal of computer security is the Airgapped Machine.<sup><a href="#footnote_0_49997" id="identifier_0_49997" class="footnote-link footnote-identifier-link" title="If you wish to see my credentials by the way, here's an example of an airgapped box.">i</a></sup></p>
+<p>Thirty years ago everyone's machine was airgapped by default, there not being an Internet to speak of. Viruses for Ms-Dos still existed, spreading from one machine to the next through the services of rewritable media<sup><a href="#footnote_1_49997" id="identifier_1_49997" class="footnote-link footnote-identifier-link" title="Casettes, which mostly fed data into Z80s and their clones, required the user deliberately push a red REC button to allow the system to write out, and as such viruses simply didn't exist in that medium, as they couldn't replicate. Once rewritable media became common, the virus was born.
+To fight this exact problem, 5 ¼ diskettes, made out of flexible plastic as they were, included a cutout, which one could cover with purpose-made sticks. If the cutout was covered up the diskette became read-only. 3 ½ diskettes had a movable tab in their rigid body serving the same purpose. The tab was not removed, but instead refined and incorporated because at the time one could simply not have sold user-uncontrollable hardware, as a testament and indication of the much better quality available in the userpool at the time.
+And speaking of which, Schneier's `the first company to market a USB stick with a light that indicates a write operation — not read or write; I’ve got one of those — wins a prize` is pisswasser. What's needed is the original diskette tab, a switch you throw rendering the stick read-only in hardware.">ii</a></sup>, such as flexible diskettes. It is then incorrect to assume that an airgapped machine is immune to all threats by simple virtue of the gap. Airgapping a machine is just one step towards a solution for a particular problem, and by no means a complete cure.</p>
+<p>That problem is the machine reading and writing outside of the control of its operator<sup><a href="#footnote_2_49997" id="identifier_2_49997" class="footnote-link footnote-identifier-link" title="Law I - Obeys operator">iii</a></sup>. Removing the ability to Internet is an Alexandrine approach to the Gordian knot problem of how to properly secure Internet communication so that the machine actually obeys its owner - the simple fact of the matter is that there's absolutely no other solution, at least nothing available to the mass market<sup><a href="#footnote_3_49997" id="identifier_3_49997" class="footnote-link footnote-identifier-link" title="Microsoft is of course Microsoft and everyone involved should spend the rest of their life in jail, but even ubuntu, supposedly this heaven of niceness for the masses requires wget. Why would it require such a thing ? Ah, because connecting to the Internet may be useful, for the OS ? Ah, because hardcoding some quick behind the scenes phoning home is a `simpler` solution and `easier` to do ? Ah, because `users` want it anyway ? 
+Basically our modern security woes all boil down to a very definite issue with the current mentality of computer programmers - that the ulterior users are all whores, looking for nothing else but getting fucked, and certainly `asking for it`. 
+For this reason I am not particularly interested in all the `women in IT` jazz being pushed these days - you may rape Adria Richards to your heart's content for all I care. What actually matters is changing this mentality that regards computer users as a flock of subservient, objectified, mindless women, the stuff of bad 1970s pornofiction. 
+We can count on scarcely any progress if over the past century overt sexism in the workplace has been `erradicated`, only to be replaced with much worse, much more widespread, practically ubiquitous meta-sexism, embedded in the very design of the tools everyone uses all the time. I for one count myself wronged by all this `progress`, as I personally wasn't liable to suffer from any sort of gender discrimination in 1913, but I am certainly going to be treated as a sort of Princess Leila in Jabba's hut should I make the mistake of walking into Windowstown. Or Ubuntu bar.">iv</a></sup> - but even with the Interknot cut, the machine will still need some help to remain secure. Let's look into all the details of that.</p>
+<p><strong>I. Hardware.</strong>
+<ol>
+<li>You want all new hardware, don't reuse stuff that was already online.<sup><a href="#footnote_4_49997" id="identifier_4_49997" class="footnote-link footnote-identifier-link" title="One of the reasons is that many bits of hardware, such as hard drives or processors, come with identifiers embedded, such as serial numbers etc. There's no benefit for you from these being previously known to the world. Another reason is that inasmuch as you're trying to keep your daughter from getting knocked up, her never going for a nude swim with a bunch of classmates is a better bet than her going for a nude swim with a bunch of classmates. Irrespective of how `They never did anything. Honest!`.
+More generally, the sexual approach to the topic is quite likely to serve you well. There's this well documented inclination of the human brain to solve problems much better in familiar contexts, so that one is much more likely to spot an arithmetics error in his restaurant tab than he is to spot the same error in some general discussion of astronomy, with no direct impact to his pocket. Consequently, always think of your airgapped machine as this slutty teenager that's constantly trying to get pregnant so she can be a star on Jerry Springer. With the current state of computing this isn't even far off anyway.">v</a></sup></li>
+<li>You want old processors, and to a lesser but present degree old motherboards. Don't use stuff made after about 2006 or so.<sup><a href="#footnote_5_49997" id="identifier_5_49997" class="footnote-link footnote-identifier-link" title="The reason is that we're pretty certain many if not most of the processors made after that date were intentionally manipulated at the behest of the NSA in order to weaken their cryptographic abilities.">vi</a></sup></li>
+<li>You don't want SSD hard drives.<sup><a href="#footnote_6_49997" id="identifier_6_49997" class="footnote-link footnote-identifier-link" title="For many different reasons, such as for instance described in IV. Disposal. Also because the wear-levelling optimisation most SSDs natively employ makes it nigh-on impossible to actually delete anything you ever put on them.">vii</a></sup></li>
+<li>If you are able to brew your own set of hardware, such as for instance out of ARM processors, or FPGA boards which you program yourself, or soldered together Z80s or whatever else, it's a great idea to do so. Just as long as you actually know what you're doing, this sort of arrangement increases the costs of attacking your setup astronomically. It's not likely practical for most people, but if it's practical for you then by all means - and in any case the attempt will likely leave you a lot wiser.</li>
+<li>A laptop is better than a desktop, because battery operation increases your resilience to particular surveillance attacks.<sup><a href="#footnote_7_49997" id="identifier_7_49997" class="footnote-link footnote-identifier-link" title="In many cases the power cord acts as an antenna, which to some degree broadcasts descriptions of what's going on inside the machine it feeds.">viii</a></sup></li>
+<li>Ideally you want shielded displays. One way to go about this is <em>correctly</em> caging the monitor.<sup><a href="#footnote_8_49997" id="identifier_8_49997" class="footnote-link footnote-identifier-link" title="A Faraday cage is basically one huge ground. The cheapest way to implement this is making a sheet metal box and hooking it up to the ground (third pin) of a power strip. A more advanced solution uses dedicated, good quality grounding (such as a few square feet of corrosive resistant steel mesh which you burry in your garden) and a visor (that's to say, an extension of the monitor cage towards you so that you rest your face on it when looking at the monitor). Any way you turn this it's going to be clunky and incomfortable, but on the other hand both CRT and LCD displays can be trivially read with a spectrum analyzer, even through walls.">ix</a></sup> Another way to go about this is buzzing the monitor.<sup><a href="#footnote_9_49997" id="identifier_9_49997" class="footnote-link footnote-identifier-link" title="Have you ever noticed the effect of a cell phone call if the cell is right next to the monitor ? Basically to implement a good buzzer you'd have to study your equipment, see what frequencies it lets out, and place around it a few antennas making random noise in the same frequencies.">x</a></sup> The more common way is distance : if your battlestation is in the middle of an otherwise deserted acre of land it's somewhat unlikely that your waste em is being captured by an attacker.</li>
+<li>You don't want any extra hardware, such as for instance wireless adaptors or Bluetooth/infrared devices. Physically destroy them if present, preferably by dismounting their controller chip off the board.</li>
+<li>You must have good quality hardware entropy sources. Avalanche diodes marginally make that cut, but Geiger counters are the golden standard.</li>
+</ol>
+<p>As you can see, some of these are difficult and some even contradictory. Such is life. In practical terms, the serviceable, mass market device would be an old laptop bought off of some anonymous marketplace (Craigslist, whatever), with its various wired, wireless and infrared connectors permanently disabled ; whereas the upscale device would be some FPGA concotion with massive shielding and retina scanners because why not. </p>
+<p>It is unlikely that in any practical application the cost differential between the two is justified<sup><a href="#footnote_10_49997" id="identifier_10_49997" class="footnote-link footnote-identifier-link" title="It's important to remember that old lion joke : 
+Some guys are hanging out in the African savanna. Suddenly, there's a lion. Everyone starts running. One guy lagging behind asks the guy leading the pack `Hey, why are you running even ? A lion can run faster than any man.`.
+`I'm not trying to outrun the lion. I'm trying to outrun you.`
+Consider that both secret agents and terrorists are inexplicably fond of Excel. That's not much outrunning. ">xi</a></sup>, much like the cost differential between a Honda Civic and a Ferrari roadster is not justified in the common usecase - you're going to be waiting for the same lights and in the same traffic jams regardless. </p>
+<p><strong>II. Software.</strong></p>
+<ol>
+<li>You will use Linux, bitch.<sup><a href="#footnote_11_49997" id="identifier_11_49997" class="footnote-link footnote-identifier-link" title="This point is non-negotiable. Unless you're writing your own OS, you're using Linux for this task.">xii</a></sup></li>
+<li>You will download a standard, well known and amply maintained package,<sup><a href="#footnote_12_49997" id="identifier_12_49997" class="footnote-link footnote-identifier-link" title="Such as for instance Debian Sarge, or a stable RHEL or CentOs or w/e. Pick something you know well. If you must, one of the Ubuntu LTS versions prior to the insanity - that means 10.04 or so is the last allowable. ">xiii</a></sup> in that  form intended for non-Internet installation on a reasonably secure machine, and proceed to burn it on a CD / move it to a stick after you've verified its checksums. You add whatever packages you conceivably need and want.<sup><a href="#footnote_13_49997" id="identifier_13_49997" class="footnote-link footnote-identifier-link" title="This absolutely includes gpg. This absolutely excludes `office suites` and `pdf readers` - get a convertor if you must. ">xiv</a></sup></li>
+<li>You will install these packages on your airgapped machine, low level formatting all disks in the process. You will immediately proceed to permanently remove all those packages you don't want. Such as for instance avahi and other hipsterish pieces of shit.</li>
+<li>You're not advised to use or rely on "full disk encryption". It is immature technology that as of yet does not work.<sup><a href="#footnote_14_49997" id="identifier_14_49997" class="footnote-link footnote-identifier-link" title="How to Defeat Full-Disk Encryption in One Minute, to get a rough idea of the software approaches - this is not even going into freezing and reading RAM etc.">xv</a></sup> Instead, use gpg on a per-file basis.</li>
+</ol>
+<p>This is it. Really, it's very easy to do. Learn to awk and learn to vi already.</p>
+<p><strong>III. Communication.</strong></p>
+<p>The correct way to use your airgapped machine is without electronics. Take the time to type whatever you want into it - if it's not worth typing it's not worth considering, seriously now.</p>
+<p>Alternatively, you can use optical means. One way would be to attach a scanner to your airgapped machine, and read printed sheets of paper into it. Damned hard to hijack anything through a black-ink based buffer overflow, you know ? Another way would be to have a QR code reader attached to your airgapped machine, and to read whatever you need into it in the shape of QR codes. This works well if you mostly need small snippets moved back and forth, such as Bitcoin addresses. Damned hard to hijack anything through the crafty use of QR code dots.</p>
+<p>Significantly less secure would be the use of sticks and CDs to ferry information back and forth. This isn't really much better than simply having an Internet connection, but even so non-rewritable CDs are marginally better than sticks for the purpose, as they're (mostly) read-only media. </p>
+<p>Also bear in mind that the least secure of these (USB sticks) kept Osama off the radar for a decade, so consider <a href="/?p=49997&#038;preview=true#footnote_10_49997">footnote 11</a> again.</p>
+<p><strong>IV. Disposal.</strong></p>
+<p>Once you're done with your airgapped system, either because you're done or because you have a new one, </p>
+<ol>
+<li>You want the hard drive cooked. Solid state will require a serious incinerator<sup><a href="#footnote_15_49997" id="identifier_15_49997" class="footnote-link footnote-identifier-link" title="One hour spent at 1k Celsius or over should do it.">xvi</a></sup>, but a traditional platter system once removed from its protective casing can be safely disposed of by for instance boiling in tomato juice. I know that's how I used to dispose of diskettes twenty years ago, and basically that's what it is, a stack of diskettes.</li>
+<li>Replace the missing HDD with a new one, install some basic OS and leave the laptop behind in public, such as in a park. Mission complete &#038; the end.</li>
+</ol>
+<p>That'd be about it. Questions are welcome below.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_49997" class="footnote">If you wish to see my credentials by the way, here's an example of <a href="/2011/premiu-de-cultura-vizuala/">an airgapped box</a>. [<a href="#identifier_0_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_49997" class="footnote">Casettes, which mostly fed data into Z80s and their clones, required the user deliberately push a red REC button to allow the system to write out, and as such viruses simply didn't exist in that medium, as they couldn't replicate. Once rewritable media became common, the virus was born.</p>
+<p>To fight this exact problem, 5 ¼ diskettes, made out of flexible plastic as they were, included a cutout, which one could cover with purpose-made sticks. If the cutout was covered up the diskette became read-only. 3 ½ diskettes had a movable tab in their rigid body serving the same purpose. The tab was not removed, but instead refined and incorporated because at the time one could simply not have sold user-uncontrollable hardware, as a testament and indication of the much better quality available in the userpool at the time.</p>
+<p>And speaking of which, <a href="/2013/why-i-suspect-schneier-is-an-us-agent/">Schneier</a>'s "the first company to market a USB stick with a light that indicates a write operation — not read or write; I’ve got one of those — wins a prize" is pisswasser. What's needed is the original diskette tab, a switch you throw rendering the stick read-only <em>in hardware</em>. [<a href="#identifier_1_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_49997" class="footnote">Law I - <a href="http://www.loper-os.org/?p=284">Obeys operator</a> [<a href="#identifier_2_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_49997" class="footnote">Microsoft is of course <a href="http://www.loper-os.org/?p=288">Microsoft</a> and everyone involved should spend the rest of their life in jail, but even ubuntu, supposedly this heaven of niceness for the masses <em>requires</em> wget. Why would it require such a thing ? Ah, because connecting to the Internet may be useful, for the OS ? Ah, because hardcoding some quick behind the scenes phoning home is a "simpler" solution and "easier" to do ? Ah, because "users" want it anyway ? </p>
+<p>Basically our modern security woes all boil down to a very definite issue with the current mentality of computer programmers - that the ulterior users are all whores, looking for nothing else but getting fucked, and certainly "asking for it". </p>
+<p>For this reason I am not particularly interested in all the "women in IT" jazz being pushed these days - you may <a href="/2013/rape-is-fun-or-lets-fuck-up-adria-richards/">rape Adria Richards</a> to your heart's content for all I care. What actually matters is changing this mentality that regards computer users as a flock of subservient, objectified, mindless women, the stuff of bad 1970s pornofiction. </p>
+<p>We can count on scarcely any progress if over the past century overt sexism in the workplace has been "erradicated", only to be replaced with much worse, much more widespread, practically ubiquitous meta-sexism, embedded in the very design of the tools everyone uses all the time. I for one count myself wronged by all this "progress", as I personally wasn't liable to suffer from any sort of gender discrimination in 1913, but I am certainly going to be treated as a sort of Princess Leila in Jabba's hut should I make the mistake of walking into Windowstown. Or Ubuntu bar. [<a href="#identifier_3_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_49997" class="footnote">One of the reasons is that many bits of hardware, such as hard drives or processors, come with identifiers embedded, such as serial numbers etc. There's no benefit for you from these being previously known to the world. Another reason is that inasmuch as you're trying to keep your daughter from getting knocked up, her never going for a nude swim with a bunch of classmates is a better bet than her going for a nude swim with a bunch of classmates. Irrespective of how "They never did anything. Honest!".
+<p>More generally, the sexual approach to the topic is quite likely to serve you well. There's this well documented inclination of the human brain to solve problems much better in familiar contexts, so that one is much more likely to spot an arithmetics error in his restaurant tab than he is to spot the same error in some general discussion of astronomy, with no direct impact to his pocket. Consequently, always think of your airgapped machine as this slutty teenager that's constantly trying to get pregnant so she can be a star on Jerry Springer. With the current state of computing this isn't even far off anyway. [<a href="#identifier_4_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_49997" class="footnote">The reason is that we're pretty certain many if not most of the processors made after that date were intentionally manipulated at the behest of the NSA in order to weaken their cryptographic abilities. [<a href="#identifier_5_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_49997" class="footnote">For many different reasons, such as for instance described in IV. Disposal. Also because the wear-levelling optimisation most SSDs natively employ makes it nigh-on impossible to actually delete anything you ever put on them. [<a href="#identifier_6_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_49997" class="footnote">In many cases the power cord acts as an antenna, which to some degree broadcasts descriptions of what's going on inside the machine it feeds. [<a href="#identifier_7_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_49997" class="footnote">A Faraday cage is basically one huge ground. The cheapest way to implement this is making a sheet metal box and hooking it up to the ground (third pin) of a power strip. A more advanced solution uses dedicated, good quality grounding (such as a few square feet of corrosive resistant steel mesh which you burry in your garden) and a visor (that's to say, an extension of the monitor cage towards you so that you rest your face on it when looking at the monitor). Any way you turn this it's going to be clunky and incomfortable, but on the other hand both CRT and LCD displays can be trivially read with a spectrum analyzer, even through walls. [<a href="#identifier_8_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_9_49997" class="footnote">Have you ever noticed the effect of a cell phone call if the cell is right next to the monitor ? Basically to implement a good buzzer you'd have to study your equipment, see what frequencies it lets out, and place around it a few antennas making random noise in the same frequencies. [<a href="#identifier_9_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_10_49997" class="footnote">It's important to remember that old lion joke : </p>
+<blockquote><p>Some guys are hanging out in the African savanna. Suddenly, there's a lion. Everyone starts running. One guy lagging behind asks the guy leading the pack "Hey, why are you running even ? A lion can run faster than any man.".<br />
+"I'm not trying to outrun the lion. I'm trying to outrun you."</p></blockquote>
+<p>Consider that both <a href="/2012/law-enforcement-never-fails-to-unintentionally-entertain/">secret agents</a> and <a href="/2013/the-danger-of-homebrew-crypto/">terrorists</a> are inexplicably fond of Excel. That's not much outrunning.  [<a href="#identifier_10_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_11_49997" class="footnote">This point is non-negotiable. Unless you're writing your own OS, you're using Linux for this task. [<a href="#identifier_11_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_12_49997" class="footnote">Such as for instance Debian Sarge, or a stable RHEL or CentOs or w/e. Pick something you know well. If you must, one of the Ubuntu LTS versions prior to the insanity - that means 10.04 or so is the last allowable.  [<a href="#identifier_12_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_13_49997" class="footnote">This absolutely includes gpg. This absolutely excludes "office suites" and "pdf readers" - get a convertor if you must.  [<a href="#identifier_13_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_14_49997" class="footnote"><a href="http://threatpost.com/how-defeat-full-disk-encryption-one-minute-101909/72345">How to Defeat Full-Disk Encryption in One Minute</a>, to get a rough idea of the software approaches - this is not even going into freezing and reading RAM etc. [<a href="#identifier_14_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_15_49997" class="footnote">One hour spent at 1k Celsius or over should do it. [<a href="#identifier_15_49997" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/la-liceale-nella-classe-dei-ripetenti/">La liceale [nella classe dei ripetenti]</a></div>
+                <div class="alignright"><a href="/2013/let-me-tell-you-about-jean-moscopol/">Let me tell you about Jean Moscopol</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/3-ani-experienta/" title="View all posts in 3 ani experienta" rel="category tag">3 ani experienta</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/how-to-airgap-a-practical-guide/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/how-to-airgap-a-practical-guide/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>57 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-95539" class="commentbody"><div class="commenthead"><img alt='jurov`s avatar' src='http://coinbr.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='https://coinbr.com' class='url'>jurov</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95539" title="">Sunday, 13 October 2013</a>
+							</div>
+						<p>So apparently whole disk encryption is useless just because someone can plug in an USB stick and patch the bootloader? As in, you gonna stay using your carefully secured machine, regardless if with GPG or with truecrypt, after some chick plugged stuff in? </p>
+<p>In whole discussion there's certain key concept missing or just gets looked over - threat assessment. When it's not clear against what we want to protect, then logic lapses as above can take place.</p>
+<p>Oh, and where shall I find pre-2006 hardware that was reliably never exposed to internet nor to rewritable media?</p>
+						</li>
+
+										<li id="comment-95540" class="commentbody"><div class="commenthead"><img alt='анон`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">анон</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95540" title="">Sunday, 13 October 2013</a>
+							</div>
+						<p>better question: is the pre2006 assumption based on cpu microcode patches, patch = hax?</p>
+						</li>
+
+										<li id="comment-95542" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95542" title="">Sunday, 13 October 2013</a>
+							</div>
+						<p>@<b>Jurov</b> Well, there's a number of problems.</p>
+<p>I. Your notion of "threat assesment" is broken, with the result that it windows-ies the entire thing. It therefore is not missing, it's pointedly absent. Sometimes we prepare for specific threats, sometimes we construct absolute systems. This is the latter case. </p>
+<p>II. Full disk encryption does not work, for a whole array of very good reasons, all of them reducing to "full disk encryption as currently formulated is a self-contradictory proposition". Taking a particularly egregious example of the fail that self-contradiction leads to and pretending like it won't happen to you and so everything's fine isn't logically sound, but more of the same "oh, http is stateless, that's ok, we'll add passwords, which won't work so we create half an encrypted system which still doesn't work so we add 2fa which still doesn't work" crud. These are not solutions, these are antiviruses, which is to say ways to spend money so as to groom the problem into giving you further ways to spend more money on it down the road.</p>
+<p>III. I submit implementation would be your problem. This is a spec discussion. Go find it.</p>
+<p>@<b>анон</b> That's part of it, also particular sorts of CPU RNG "support" being added and so on.</p>
+						</li>
+
+										<li id="comment-95543" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='http://www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95543" title="">Sunday, 13 October 2013</a>
+							</div>
+						<p>For the problem of SSD destruction, incineration probably would be a reasonable choice. Most electronics recycling seems to inevitably involve burning the electronics in a barrel to separate things metal from things that are not metal. Generally though the proper destruction of a data-device, even something as naturally fragile as a hard drive isn't a trivial problem. Data manages to be recovered from all sorts of trauma inflicted on intact hard drives. Removing the platter to traumatize it seems like the right answer.</p>
+<p>I guess I'll probably have to suppose not everyone knows how to make a proper fire in a barrel though, I might have to write the guide. Should go better than that time I tried to write a guide on something for which too many implementations are broken. Fire is a technology that seems to have gone through adequate testing.</p>
+						</li>
+
+										<li id="comment-95544" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95544" title="">Sunday, 13 October 2013</a>
+							</div>
+						<p>Traditionally oxidation is the disposal method of choice, either through very high temperature (such as from a magnesium fire, oxyacetilene etc) or through a very strong BL-acid (for some applications even lower temperatures and weak acids together work wonderfully, hence the tomato sauce).</p>
+						</li>
+
+										<li id="comment-95545" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='http://www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95545" title="">Monday, 14 October 2013</a>
+							</div>
+						<p>The tomato sauce idea is a good one. Definitely more accessible than more extreme options like aqua regia. Chemical destruction via oxidation is good, physical destruction by melting is good. Throwing away the device and declaring it destroyed is not good.</p>
+<p>I imagine too many people by default are inclined to bad solutions, as people tend to be. Bad solutions include throwing the hard drive into the ocean or a river. Bad solutions also include burying the intact hard drive or encasing it in concrete. An intact hard drive is a durable thing. Saltwater immersion is a small portion of the data recovery business (head crashes are the meat of the business), but it is not exceedingly rare and generally recoverable. Anything that merely touches the PCB is generally recoverable.</p>
+<p>When disposing of a storage medium, the critical part is disposing of the place where things are stored. It's easy with a hard drive, more challenging with an SSD, and not verifiably possible with this "cloud" thing which apparently powers all of the VC geeks and NSA spies boners.</p>
+						</li>
+
+										<li id="comment-95546" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95546" title="">Monday, 14 October 2013</a>
+							</div>
+						<p>Yeah I suppose the sad story in here is that if you show supposedly literate teenagers the insides of a USB stick they may be seeing it for the first time, and if you demand they point out the actual memory cores to save their lives they may well not be able to. Such a world we live in, kids used to take cats apart to see what they're made out of.</p>
+						</li>
+
+										<li id="comment-95550" class="commentbody"><div class="commenthead"><img alt='pankkake`s avatar' src='http://headfucking.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink"><a href='http://headfucking.net/' class='url'>pankkake</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95550" title="">Monday, 14 October 2013</a>
+							</div>
+						<p>It's actually very easy to defeat any "evil maid" attack: don't have a bootloader on the computer. Simply have your /boot on a physically secure USB key (you could even use one that has hardware encryption, like the Corsair PadLock). It doesn't prevent the installation of an hardware keylogger, though... unless you use a key and not a password to unlock the drives.</p>
+<p>As for my home desktops, I have another trick: they have a webcam, and thus any attempt to alter them physically will get instantly uploaded.</p>
+						</li>
+
+										<li id="comment-95552" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95552" title="">Monday, 14 October 2013</a>
+							</div>
+						<p>So what do you do with the uploaded instagrams, you put them through your face recognition software to obtain the offender's ID and then send your police to knock on their door ?</p>
+						</li>
+
+										<li id="comment-95553" class="commentbody"><div class="commenthead"><img alt='анон`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">анон</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95553" title="">Monday, 14 October 2013</a>
+							</div>
+						<p>pre-boot authentication?</p>
+						</li>
+
+										<li id="comment-95554" class="commentbody"><div class="commenthead"><img alt='Anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Anon<img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95554" title="">Monday, 14 October 2013</a>
+							</div>
+						<p>And then when someone else comes along with a different /boot on a different physically secure USB you get to find out just exactly why citizen security is about on par with citizen finance.</p>
+						</li>
+
+										<li id="comment-95556" class="commentbody"><div class="commenthead"><img alt='pankkake`s avatar' src='http://headfucking.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink"><a href='http://headfucking.net/' class='url'>pankkake</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95556" title="">Monday, 14 October 2013</a>
+							</div>
+						<p>Mircea: Given that I'm mostly protecting myself from the police, no; the point is only to know if the system has been compromised. My cheap webcam doesn't give results good enough anyway, at least not with good lighting.</p>
+<p>Anon: I don't understand your point. Someone with another /boot won't be able to do anything, as the full disk is encrypted - the evil maid attack is on the unencrypted /boot, which isn't on the computer. You can't evil maid *my* USB stick.</p>
+						</li>
+
+										<li id="comment-95557" class="commentbody"><div class="commenthead"><img alt='Anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">Anon<img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95557" title="">Monday, 14 October 2013</a>
+							</div>
+						<p>If you say so.</p>
+						</li>
+
+										<li id="comment-95558" class="commentbody"><div class="commenthead"><img alt='анон`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">анон</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95558" title="">Monday, 14 October 2013</a>
+							</div>
+						<blockquote><p>My cheap webcam doesn’t give results good enough anyway, at least not with good lighting.</p></blockquote>
+<p>Which would render it pointless?</p>
+<p>If your camera could signal you that someone is at your desk, what you'll do? You'd either need the computer connected to the internet to send it some wipe/block command either some gprs phone bomb(implying you have so important data and you can dispose a body and stuff).</p>
+<p>I guess someone could still copy your data before you doing anything.</p>
+						</li>
+
+										<li id="comment-95559" class="commentbody"><div class="commenthead"><img alt='pankkake`s avatar' src='http://headfucking.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink"><a href='http://headfucking.net/' class='url'>pankkake</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95559" title="">Monday, 14 October 2013</a>
+							</div>
+						<p>If I'm saying it's a crappy webcam, it's because it is enough. I just need to be sure no one touched it.</p>
+<p>The data is encrypted, remember, it's about the evil maid attack. The only unencrypted part is the bootloader; if I see someone touched my computer, I'll just rewrite it. This leaves, however, the cold boot attack.</p>
+						</li>
+
+										<li id="comment-95634" class="commentbody"><div class="commenthead"><img alt='spyked`s avatar' src='http://lucian.mogosanu.ro/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink"><a href='http://lucian.mogosanu.ro' class='url'>spyked</a><img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-educat.png" class="insigna" alt="insigna de cetatean educat" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95634" title="">Saturday, 19 October 2013</a>
+							</div>
+						<blockquote><p>If you are able to brew your own set of hardware, such as for instance out of ARM processors, or FPGA boards which you program yourself, or soldered together Z80s or whatever else, it’s a great idea to do so. Just as long as you actually know what you’re doing, this sort of arrangement increases the costs of attacking your setup astronomically. It’s not likely practical for most people, but if it’s practical for you then by all means - and in any case the attempt will likely leave you a lot wiser.</p></blockquote>
+<p>A couple of years ago or so we were having a discussion in which I was denying the fact that every conceivable piece of software could be implemented in hardware (I'm really too lazy to look up the post containing the original discussion). Well, I still don't entirely believe in that, but I'll admit that I was (at least partially) wrong, designing applications directly in hardware is feasible, now more than ever. Anyway, this was offtopic.</p>
+<p>So, actually, building a FPGA-based design is ridiculously easy nowadays. One can simply get a cheap board (somewhere between $100 and $500, or around $1000 if they're willing to do a better investment) and write an <a href="http://opencores.org/or1k/Main_Page" >OpenRISC</a> CPU on it and then run Linux on top of the whole thing. It's probably as safe as you can get, short of attempting to build a hardwired CPU out of the design. I was amazed at the thing myself and am going to try it in the next few months for fun.</p>
+<p>By the way, I wouldn't trust ARM designs for the same reasons I don't trust Intel hardware. If the NSA tampered with post-2006 hardware, then they might as well have done it with ARM-based stuff built by Apple, Texas Instruments or whoever (maybe not Samsung, since they're Korean; maybe, but who knows).</p>
+						</li>
+
+										<li id="comment-95635" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95635" title="">Saturday, 19 October 2013</a>
+							</div>
+						<p>It was about putting mysql on a chip, and a later reference on a <a href=/2010/jotti/#comment-31478 >DRM discussion</a>. Note the tongue in cheek.</p>
+<p>Your pricepoints are ridiculous in that a raspberry pi retails for what 20 bux ?</p>
+						</li>
+
+										<li id="comment-95637" class="commentbody"><div class="commenthead"><img alt='spyked`s avatar' src='http://lucian.mogosanu.ro/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink"><a href='http://lucian.mogosanu.ro' class='url'>spyked</a><img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-educat.png" class="insigna" alt="insigna de cetatean educat" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95637" title="">Saturday, 19 October 2013</a>
+							</div>
+						<p>Yeah, but do you trust the Freescale SoC in a Raspberry Pi?</p>
+<p>But don't get me wrong, if said machine's safety values 20 bucks, then by all means, a Pi is the way to go.</p>
+						</li>
+
+										<li id="comment-95638" class="commentbody"><div class="commenthead"><img alt='spyked`s avatar' src='http://lucian.mogosanu.ro/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink"><a href='http://lucian.mogosanu.ro' class='url'>spyked</a><img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-educat.png" class="insigna" alt="insigna de cetatean educat" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95638" title="">Saturday, 19 October 2013</a>
+							</div>
+						<p>Also, Broadcom, not Freescale. Still an American company, unfortunately.</p>
+						</li>
+
+										<li id="comment-95639" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95639" title="">Saturday, 19 October 2013</a>
+							</div>
+						<p>Point remains, it can be done for significantly less than 1k.</p>
+						</li>
+
+										<li id="comment-95643" class="commentbody"><div class="commenthead"><img alt='анон`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink">анон</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95643" title="">Saturday, 19 October 2013</a>
+							</div>
+						<p>Budget chips don't come with "intel secure key" nor "aes-ni". Just buy a budget chip.</p>
+						</li>
+
+										<li id="comment-95670" class="commentbody"><div class="commenthead"><img alt='Anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink">Anon<img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95670" title="">Tuesday, 22 October 2013</a>
+							</div>
+						<p>“My medical practice has gone off line. Effective yesterday, the computers that contain patient’s account information including billing diagnosis, have been completely de-linked from the internet. Therefore, your health information is completely secure. Accounting will be done in house with Quickbooks on a PC that is not connected to the internet."<br />
+<a href="http://benswann.com/exclusive-dr-mike-vasovski-discusses-reasons-for-going-off-the-insurance-grid/">http://benswann.com/exclusive-dr-mike-vasovski-discusses-reasons-for-going-off-the-insurance-grid/</a></p>
+						</li>
+
+										<li id="comment-95689" class="commentbody"><div class="commenthead"><img alt='анон`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">анон</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95689" title="">Tuesday, 22 October 2013</a>
+							</div>
+						<p>Great. Now he just needs to stop issuing prescriptions stored with code bars/serial numbers in drug store computers, the drug stores need to stop labeling their products with a unique number and the buyer needs to stop using a credit credit and a DISCOUNT card for "members".</p>
+						</li>
+
+										<li id="comment-95759" class="commentbody"><div class="commenthead"><img alt='Mike the goat`s avatar' src='http://mikethegoat.wordpress.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink"><a href='http://mikethegoat.wordpress.com/' class='url'>Mike the goat</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95759" title="">Saturday, 26 October 2013</a>
+							</div>
+						<p>I think you could argue that you'd want an old computer rather than a new one for a variety of reasons. Even better would be an old computer that has never been internetworked. When dealing with an L3+ adversary (say the NSA) it is not unreasonable to expect that they have subverted hardware to their own ends before it has even left the OEM. Given the close ties between Intel and US intelligence agencies I think it is actually highly likely.</p>
+<p>As far as x86 hardware goes - the 80386 is the newest processor that can be implicitly trusted. Newer processors have fab processes that result in chips that can't be examined with optical techniques and have integrated cache and other features that mean that Joe engineer can't verify what is happening inside the "black box". For a variety of these reasons many safety critical systems still use 80386 or earlier hardware (and often have "original stock" from thirty years ago in storage and won't accept clones). </p>
+<p>It is interesting to note that some of the most "dangerous" and highly guarded systems on the planet still use 35+ year old hardware, e.g. soviet ICBM control systems using DEC VAX.</p>
+<p>Perhaps the most disgusting thing is that while the USG was whining about Chinese govt lined companies like Huawei spying they were doing it, and in wholesale.</p>
+<p>Of course - we can't do ALL our work on ancient hardware so there is always a security vs productivity tradeoff.</p>
+						</li>
+
+										<li id="comment-95760" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">25</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95760" title="">Saturday, 26 October 2013</a>
+							</div>
+						<p>That last part is a crucial aspect : a VAX only works because well... the task isn't really all that complicated. Not to say it's something to be done pen on paper, but it's not molecule folding either.</p>
+<p>I'm pretty sure current processors can't be trusted to RNG in the cryptographic sense. Occasionally there are aired fears about more mischievious things such as doctored Ethernet cards (which are dangerous as on many systems can read the entire RAM) and could easily start spilling secrets in response to a magic packet. Then again, such a thing'd be somewhat difficult to conceal, and yet it stays the stuff of legend.</p>
+						</li>
+
+										<li id="comment-95762" class="commentbody"><div class="commenthead"><img alt='Mike the goat`s avatar' src='http://mikethegoat.wordpress.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">26</div>
+								<span class="authorlink"><a href='http://mikethegoat.wordpress.com/' class='url'>Mike the goat</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95762" title="">Saturday, 26 October 2013</a>
+							</div>
+						<p>. . . kinda like the Ken Thompson compiler attack. We hear about it all the time yet nobody has (to my knowledge) has actually managed to usefully put it into practice to compromise real user's software.</p>
+<p>This is where subtle and clever attacks excel, ala the Debian OpenSSL screw up. If this happened in a closed source product and it was done maliciously nobody would be any the wiser.</p>
+<p>Management BMCs often have access to host resources (e.g. the ability to dump RAM) but at least are configured to bind to a secondary management LAN. The new Intel AMT is perhaps more of a worry as it is being cooked into personal (not server or business grade PCs) computers and often laptops and it is bound to the primaru NIC and is often enabled by default. I remember a few years back - okay a lot of years back - I got a lot of fun out of sending WoL packets on my college LAN and watched rooms full of PCs fire up without apparent reason. Why? it was enabled by default and required no authentication.</p>
+<p>The most subtle of attacks could be something as simple as not disclosing vulnerabilities. I guess Intel's microcode update system could be leveraged too. </p>
+<p>Hell, what about Windows Update? Force MS' cooperation through a NSL or secret court order and get their update servers to push a dirty update to their target. I guess software only hacks are off topic though. Hybrid hacks like using a patched BIOS to create resilient malware (in a similar method to how Computrace ensured its persistence even after reinstallation of the OS through an NTFS aware BIOS shim that patched a file that windows executed during boot)</p>
+						</li>
+
+										<li id="comment-95764" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">27</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95764" title="">Saturday, 26 October 2013</a>
+							</div>
+						<p>That was a thing of beauty, I remember reading his paper, feeling sick and not wanting - for the first and last time in my life - to have anything further to do with computers.</p>
+<p>I don't think Windows can be a topic of security discussion. All the pretense to the contrary of people paid to put forth pretense to the contrary, Windows isn't part of computer science, Windows is part of computer play. Systems security is counterproductive in computer play, inasmuch as it goes exactly against the very thing that playing is.</p>
+						</li>
+
+										<li id="comment-95771" class="commentbody"><div class="commenthead"><img alt='Mike the goat`s avatar' src='http://mikethegoat.wordpress.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">28</div>
+								<span class="authorlink"><a href='http://mikethegoat.wordpress.com/' class='url'>Mike the goat</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95771" title="">Sunday, 27 October 2013</a>
+							</div>
+						<p>Mircea: my sentiments exactly. I was shocked when I read that Schneier was a devout Windows user. I think that anyone with such experience would feel this way but I guess that he is a cryptographer and is likely trained and focus on the math and vulnerabilities of the cryptosystem and not necessarily the OS on which it runs. His reasoning was somewhat understandable, and can be paraphrased as "I use what I know and what I am comfortable using. If I used something I didn't know in and out then I may be even worse off" (paraphrased). This is like saying that because I only know how to drive a small car then I should continue making two trips to carry my big family because I am not confident enough to drive a larger vehicle  even though the larger vehicle is superior for this purpose. I respect Mr Schneier a lot and I don't mean any disrespect to him but you can't claim to be comfortable and know the inner workings of a closed source OS. Even if your crypto software is bullet proof you may be subverted from below. Of course you may run an arbitrary "better" OS - say Linux or *BSD and be subverted "from below" by evil hardware something which seems increasingly likely given the #badBIOS revelations of late (if they are true). I am trying to gather as much info on this matter on my blog but it is difficult when there is only a single source and he hasn't been very forthcoming offering physical samples of these evil USB sticks to the community for analysis (dragos is now speaking of "auctioning" them off!). If this is legit I can understand why he is being so guarded - discovering malware of this caliber could be your meal ticket for your entire career - fully paid appearances at sec conferences, doing the speaking circuit, etc. He may not want someone else to steal his thunder. We all need to make money, that's understandable but this shouldn't stifle collaborative research. If I could get a sample of an evil USB I would be more than happy to share attributions with the guy on any research produced, for example, and I think others would be of the same opinion. We don't like people who steal in this community - and taking someone's preliminary findings, elucidating further and releasing the results as original work without acknowledging the work of those before you is theft of intellectual property. </p>
+<p>Re Thompson - yes it raises fundamental questions that have been pushed under the rug for thirty odd years by the community. You could argue this is because it is impossible to solve, but I'd rather say that solutions are difficult and it is cheaper to ignore it. If we start seeing bad compilers or bad hardware in the wild (and it seemed what started with Russians reflashing thumb drives to spoof larger storage space to sell on eBay has now morphed into thumb drives with controllers reflashed to 'sploit the machine at the BIOS level) then this will change.</p>
+						</li>
+
+										<li id="comment-95772" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">29</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95772" title="">Sunday, 27 October 2013</a>
+							</div>
+						<p>Well yeah, it's confort by belief rather than confort by knowledge, which belies very dangerous mental processes. The man who is comfortable drinking out of lead cups on the grounds that "it's what he's been doing forever and what he's comfortable [ie, used to] whereas using proper earthenware or glassware or ANYTHING ELSE might perhaps give him nervous indigestion" is not by this comfort of his any healthier. For that matter, he may make a fine deacon, but he'll never make a half decent judge.</p>
+<p>I doubt the evil sticks thing. For one, making sticks isn't the hardest thing in IT, you'll notice NSA is starting with that as a first project. For the other, who is this guy and why would I trust him ?</p>
+<p>I think the reason Thompson's evil compiler is ignored is exactly the same psychological reaction I describe for myself. This is the equivalent of cp in IT, it's c[ompiler] porn. People just don't take well to it, can't think of it without an urge to throw up and so they just...can't. Any scientific approach requires some bedrock of absolute, what Kuhn calls a paradigm. The compiler has been part of the IT paradigm for half a century, and it can't be questioned (yet).</p>
+						</li>
+
+										<li id="comment-95779" class="commentbody"><div class="commenthead"><img alt='Mike the goat`s avatar' src='http://mikethegoat.wordpress.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">30</div>
+								<span class="authorlink"><a href='http://mikethegoat.wordpress.com/' class='url'>Mike the goat</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95779" title="">Sunday, 27 October 2013</a>
+							</div>
+						<p>I like your analogy. People don't discuss it because it is a social taboo, and because of that very reluctance to speak of it some very evil people get "cover" by that unwillingness to talk. Even worse the over sensitization that's caused by the taboo results in completely innocent people being labelled as deviates and potentially even imprisoned. I note that there is only one word for such an individual irrespective of whether the other party is a true child or for all intents and purposes an adult, nor is mental age or consent evaluated. One can obviously make the argument that someone who rapes a very young kid is a deviate of the highest order - but what about someone who had consensual sex with a girl who was just days away from being of legal age? The legal reality is both are treated the same, labelled as the same type of evil when the latter is an obvious danger to society and the other is guilty on "paper" but realistically hasn't hurt anyone. And what about the voyuers that download such material? They are routinely rounded up and imprisoned not for participating in any heinous act but for the mere act of possessing digital images. Such a thing is distasteful, perhaps just as or more distasteful than other "shock" images sites of mangled corpses and other misadventures which are popular with uh, certain individuals. Sure, all of these people obviously have a problem if they find any of the above ititilating, but what about the curious who look up, say pictures of a train wreck out of morbid curiosity? Are they just as deranged as someone who trolls the internet for such images 24/7 or is this morbid curiosity a part of the human condition? </p>
+<p>Perhaps the most concerning about having essentially "banned" digital data is that something which doesn't exist in a material sense can get your liberty taken away. A blackhat could use a RAT to run a bottorrrent server on your machine and serve up such materials knowing full well that eventually law enforcement will come to your door and drag you away. We heard about a few guys attempting to buy drugs on Silk Road to frame Krebs - but what about this idea? What of cache and proxy operators who may have no knowledge of what traverses their networks or is stored in their cache? </p>
+<p>I often consider that the damage done by making a subject "too controversial to discuss" is far greater than any embarrassment or social upheaval a frank discussion of the issues might bring.</p>
+<p>But I am way off topic. Regarding this guy and his claims of an evil USB thumb drive - I agree that such grandiose claims need proof otherwise he is just another crackpot. He does have some credibility having organized Pwn2own but that's not to say he is infallible and his analysis is correct. Given he appears unwilling to distribute said infected media to others for confirmation it does look very fishy. I guess we will just have to wait.</p>
+						</li>
+
+										<li id="comment-95780" class="commentbody"><div class="commenthead"><img alt='Mike the goat`s avatar' src='http://mikethegoat.wordpress.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">31</div>
+								<span class="authorlink"><a href='http://mikethegoat.wordpress.com/' class='url'>Mike the goat</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95780" title="">Sunday, 27 October 2013</a>
+							</div>
+						<p>I mean the former is an obvious danger to society, obviously.</p>
+<p>I do wonder why - just like the Thompson compiler attack - humans seem to love to just pretend that something difficult to talk about and hard to solve isn't an issue. It reminds me of how the banks tried to deny that CC card number generators weren't affecting their bottom line in the 80s, or ATM card skimmers in the 90s  .... non-bank lenders in the 2000s and now in this decade cryptocurrencies posing a threat to their very existence (and phishing scams and ID theft causing massive issues when they continue to send statements in cleartext emails)</p>
+						</li>
+
+										<li id="comment-111748" class="commentbody"><div class="commenthead"><img alt='jersgamneds`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">32</div>
+								<span class="authorlink">jersgamneds</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111748" title="">Monday, 26 January 2015</a>
+							</div>
+						<p>An amazing write-up. Thank you so much!</p>
+						</li>
+
+										<li id="comment-111751" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">33</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111751" title="">Monday, 26 January 2015</a>
+							</div>
+						<p>Good luck.</p>
+						</li>
+
+										<li id="comment-119618" class="commentbody"><div class="commenthead"><img alt='thestringpuller`s avatar' src='http://thestringpuller.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">34</div>
+								<span class="authorlink"><a href='http://thestringpuller.com' class='url'>thestringpuller</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119618" title="">Thursday, 3 November 2016</a>
+							</div>
+						<p>I'm still having trouble finding a new laptop system before 2006 (not ever connected to internet thing).</p>
+<p>Ugh at this point I might as well use my ghetto Equity II plugged up to reliable RNG to generate keys. I really don't want to go the route of (I. 4.)...</p>
+						</li>
+
+										<li id="comment-132388" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">35</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-132388" title="">Wednesday, 20 November 2019</a>
+							</div>
+						<p><lobbes> mircea_popescu: In trial-by-fire updates, it turns out that mp-wp appears to barf on unicode such as "</lobbes></p>
+						</li>
+
+										<li id="comment-148338" class="commentbody"><div class="commenthead"><img alt='RebeccaBlack83`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">36</div>
+								<span class="authorlink">RebeccaBlack83</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148338" title="">Tuesday, 7 April 2020</a>
+							</div>
+						<p>hi, i always check website posts here early in the dawn, because i love to gain knowledge of more and more...</p>
+						</li>
+
+										<li id="comment-148340" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">37</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148340" title="">Tuesday, 7 April 2020</a>
+							</div>
+						<p>So good for you.</p>
+						</li>
+
+										<li id="comment-148341" class="commentbody"><div class="commenthead"><img alt='Daniela Doyne`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">38</div>
+								<span class="authorlink">Daniela Doyne</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148341" title="">Tuesday, 7 April 2020</a>
+							</div>
+						<p>Oh my goodness! Awesome article dude! Thank you so much.</p>
+						</li>
+
+										<li id="comment-148372" class="commentbody"><div class="commenthead"><img alt='Rosaline`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">39</div>
+								<span class="authorlink">Rosaline</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148372" title="">Wednesday, 8 April 2020</a>
+							</div>
+						<p>Very informative. I'm wondering why the opposite specialists of this sector do not realize this.</p>
+<p>You must continue your writing. I'm sure you've a huge readers' base already!</p>
+						</li>
+
+										<li id="comment-148555" class="commentbody"><div class="commenthead"><img alt='Sanford Porter`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">40</div>
+								<span class="authorlink">Sanford Porter</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148555" title="">Friday, 10 April 2020</a>
+							</div>
+						<p>I've been browsing online since forever yet I never found any articles as interesting as yours. In my opinion if all bloggers made content as good as you the net would be a lot more useful.</p>
+						</li>
+
+										<li id="comment-148558" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">41</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148558" title="">Friday, 10 April 2020</a>
+							</div>
+						<p>Lol ok, and if all fishes were the size of whales the ocean'd be a lot meatier.</p>
+						</li>
+
+										<li id="comment-148658" class="commentbody"><div class="commenthead"><img alt='newman`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">42</div>
+								<span class="authorlink">newman</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148658" title="">Saturday, 11 April 2020</a>
+							</div>
+						<p>Wow that was odd. I just wrote an very long comment but after I clicked submit my comment didn't show up. Grrrr... well I'm not writing all that over again. Anyhow, just wanted to say excellent blog!</p>
+						</li>
+
+										<li id="comment-148664" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">43</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148664" title="">Saturday, 11 April 2020</a>
+							</div>
+						<p>Comment submit box ids expire once a day as an anti-spam protection measure. If they roll over while you're typing, you might have to reload the page and re-submit (the site says "looks like you've commented off a stale page, please reload" when you submit it the first time). In general you should be able to hit the back button and still have your comment there ; if your browser does not keep it though you should probably get a new browser.</p>
+						</li>
+
+										<li id="comment-148868" class="commentbody"><div class="commenthead"><img alt='Shanaatkins`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">44</div>
+								<span class="authorlink">Shanaatkins</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148868" title="">Tuesday, 14 April 2020</a>
+							</div>
+						<p>It's a pity you don't have a donate button! I'd definitely donate to this excellent blog! I guess for now i'll settle for sharing this site with my Facebook group.</p>
+						</li>
+
+										<li id="comment-148872" class="commentbody"><div class="commenthead"><img alt='wilda`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">45</div>
+								<span class="authorlink">wilda</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148872" title="">Tuesday, 14 April 2020</a>
+							</div>
+						<p>You actually make it seem so easy!</p>
+						</li>
+
+										<li id="comment-148886" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">46</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148886" title="">Tuesday, 14 April 2020</a>
+							</div>
+						<p>That's a nice sentiment, maybe I put something up.</p>
+						</li>
+
+										<li id="comment-148888" class="commentbody"><div class="commenthead"><img alt='big dick`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">47</div>
+								<span class="authorlink">big dick</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148888" title="">Tuesday, 14 April 2020</a>
+							</div>
+						<p>Howdy! I know this is kinda off topic however , I'd figured I'd ask. Would you be interested in trading links or maybe guest authoring a blog post or vice-versa? My site covers a lot of the same subjects as yours and I believe we could greatly benefit from each other. If you are interested feel free to send me an email.</p>
+<p>I look forward to hearing from you! Wonderful blog by the way!</p>
+						</li>
+
+										<li id="comment-148955" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">48</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148955" title="">Thursday, 16 April 2020</a>
+							</div>
+						<p>Maybe not.</p>
+						</li>
+
+										<li id="comment-149794" class="commentbody"><div class="commenthead"><img alt='richie`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">49</div>
+								<span class="authorlink">richie</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-149794" title="">Thursday, 30 April 2020</a>
+							</div>
+						<p>I don't even know how I ended up here, but I thought this post was great.</p>
+<p>I do not know who you are but definitely you're going to a famous blogger if you are not already ;) Cheers!</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-95562">
+					<div class='trackhead'>
+						<div class="commentcount">50</div>
+						<span class="authorlink"><a href='http://www.thedrinkingrecord.com/2013/10/14/a-proper-barrel-fire-a-secure-way-to-dispose-of-data-storage/' class='url'>A Proper Barrel Fire: A secure way to dispose of data storage | Bingo Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-95562" title="">Tuesday, 15 October 2013</a>
+					</div>
+					<p>[...] by post by Bruce Scheier and Mircea Popescu on things that are not air gapping and things that are air gapping. In Mircea&#8217;s article he mentions his method of oxidizing hard disk platters by boiling them [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-95792">
+					<div class='trackhead'>
+						<div class="commentcount">51</div>
+						<span class="authorlink"><a href='http://www.thedrinkingrecord.com/2013/10/24/getting-started-with-gpg/' class='url'>Getting Started with GPG | Bingo Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-95792" title="">Tuesday, 29 October 2013</a>
+					</div>
+					<p>[...] any keys generate a new one, but if it finds problems with a lot of your keys probably get a new3 machine and definitely set it up with some *nix or a different *nix system if you started this [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-97317">
+					<div class='trackhead'>
+						<div class="commentcount">52</div>
+						<span class="authorlink"><a href='http://www.thedrinkingrecord.com/2014/01/04/combining-tools-poorly/' class='url'>Combining Tools Poorly | Bingo Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-97317" title="">Saturday, 4 January 2014</a>
+					</div>
+					<p>[...] form of this separation involves composing and generating ciphertext on dedicated hardware like an airgapped machine or Cardano and then passing the ciphertext to an online machine for transmission. The popular [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-130422">
+					<div class='trackhead'>
+						<div class="commentcount">53</div>
+						<span class="authorlink"><a href='http://bingology.net/2013/10/24/getting-started-with-gpg/?b=anyk&amp;e=#select' class='url'>Getting Started with GPG &laquo; Bingology - BingoBoingo's Blog</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-130422" title="">Thursday, 1 August 2019</a>
+					</div>
+					<p>[...] any keys generate a new one, but if it finds problems with a lot of your keys probably get a new3 machine and definitely set it up with some *nix or a different *nix system if you started this [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-132381">
+					<div class='trackhead'>
+						<div class="commentcount">54</div>
+						<span class="authorlink"><a href='http://fixpoint.welshcomputing.com/2019/gales-bitcoin-wallet-status-preliminary-work-plan-and-code-dump/?b=possibility%&amp;e=possibility%20of%20remote%20compromise%20of%20keys%20%28so%20long%20as%20u' class='url'>Gales Bitcoin Wallet: status, preliminary work plan and code dump &laquo; Fixpoint</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-132381" title="">Tuesday, 19 November 2019</a>
+					</div>
+					<p>[...] possibility of remote compromise of keys (so long as underlying cryptographic assumptions hold). Proper airgapping is the foundation, but it's easier said than done when it comes to Bitcoin because of the [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-140132">
+					<div class='trackhead'>
+						<div class="commentcount">55</div>
+						<span class="authorlink"><a href='/2014/spy-stuff?b=harddrive%20pl&amp;e=ight#select' class='url'>Spy stuff on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-140132" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] harddrive platters are made out of a glassy ceramic composite, which shatters easily. But, as a throwback to older times, back when 1.44 MBytes was ample space, capable of carrying all the porn one might [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-149893">
+					<div class='trackhead'>
+						<div class="commentcount">56</div>
+						<span class="authorlink"><a href='http://dorion-mode.com/2020/05/protect-what-matters-with-jwrd/?b=Operating%20Pr&amp;e=iode#select' class='url'>Protect What Matters with JWRD &laquo; Dorion Mode</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-149893" title="">Saturday, 2 May 2020</a>
+					</div>
+					<p>[...] Operating Procedures for airgap operation via Optical Data Diode [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-152602">
+					<div class='trackhead'>
+						<div class="commentcount">57</div>
+						<span class="authorlink"><a href='http://dorion-mode.com/2020/07/gbw-node-gales-bitcoin-wallet-node-verified-acquisition-build-install-and-run-in-21ish-short-simple-steps/?b=Scheme%20imple&amp;e=ects#select' class='url'>GBW-NODE : Gales Bitcoin Wallet Node verified acquisition, build, install and run in 21ish short, simple steps. &laquo; Dorion Mode</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-152602" title="">Wednesday, 1 July 2020</a>
+					</div>
+					<p>[...] Scheme implementation, Gales Scheme. This design facilitates use over an airgapped system. Such a system would be composed of at least one online computer where gbw-node collects [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author192c63a" id="author192c63a" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email192c63a" id="email192c63a" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url192c63a" id="url192c63a" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="49997" /></p>
+				<input type="hidden" name="comment_post_time" value="1781266083-18.97.14.80" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-49997")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-49997");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-49997");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_may2019b.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Why I suspect Schneier is an US agent. on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Mentula cum doleat imperio, tibi, lector, culus.<br />Non sum diuinus, sed scio quid facias.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-49944"><div class="post" id="post-49944">                    <h1><a href="/2013/why-i-suspect-schneier-is-an-us-agent/" rel="bookmark" title="Permanent Link to Why I suspect Schneier is an US agent.">Why I suspect Schneier is an US agent.</a></h1>                        <div class="date">                                     Saturday, 12 October, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>This is not a novel suspicion nor an exotic point of view within the actual<sup><a href="#footnote_0_49944" id="identifier_0_49944" class="footnote-link footnote-identifier-link" title="As distinguished from people who read and perhaps write blogs on the topic of computer security.">i</a></sup> computer security community. Nevertheless I wouldn't have said anything, because honestly... who cares. Well meaning people keep recommending<sup><a href="#footnote_1_49944" id="identifier_1_49944" class="footnote-link footnote-identifier-link" title="Most recently half hour ago.">ii</a></sup> his stuff to me however, which is getting annoying. I would like a ready reference to be able to explain my position with a single link in the future, so here we go.</p>
+<p>Consider his most recent article, <a href="https://www.schneier.com/blog/archives/2013/10/air_gaps.html">Air Gaps</a>.</p>
+<blockquote><p>Since I started working with Snowden's documents, I have been using a number of tools to try to stay secure from the NSA. The advice I shared included using Tor, preferring certain cryptography over others, and using public-domain encryption wherever possible.</p></blockquote>
+<p>The recommendation to still use Tor<sup><a href="#footnote_2_49944" id="identifier_2_49944" class="footnote-link footnote-identifier-link" title="From Dear Guardian : stop being retarded :
+That contrary to planted disinformation of which the Guardian article is a fine example, the NSA has complete and unlimited, instantaneous access to any and all information passed through the TOR network in its entirety, as a matter of course and by design.
+That article even includes an oblique reference to Schneier in footnote 3.">iii</a></sup> is already a declaration of affiliation. Which, whatever... everyone's free to choose a camp in this world. </p>
+<p>In principle preferring certain types of cryptography over others is sound. The problem seems to be that Schneier prefers exactly the wrong types (ECC). I don't know that there's anything more suspicious in all crypto currently than ECC, and while suspicion and educated guesswork might not interest you, the fact still remains that ECC is, historically, the most frequently attacked by the NSA. Review the record.</p>
+<p>Public domain encryption is probably the correct choice, but it should not be in any case regarded as ironclad. The "million eyes" theory is mostly a myth<sup><a href="#footnote_3_49944" id="identifier_3_49944" class="footnote-link footnote-identifier-link" title="Roughly a restatement of the well known Parkinson law of triviality. While it's true that banal parts of the code garner a lot of posturing and discussion (chiefly from people desperate for a little bit of spotlight), it's equally true that the `obscure`, the unsexy parts of the code are passed on by everyone, in the hollow faith that `someone else`, `everyone else` will not be quite as `clever`. Seriously, that's the thought process, `I will pass over this function here because reading it is unlikely to make me famous and everyone else has read it anyway. Because everyone else is not at all likely to think the same way, because I am an unique snowflake of brilliance with my own, personal and independent ideas, quite unlike everyone else.`">iv</a></sup>, as well exemplified by the Bitcoin codebase. While perfectly open, and while offering clever folks a great financial incentive to find flaws, nevertheless it was two years before anyone read or comprehended the database code it was relying on to a degree sufficient to understand how it was being initialised. And it took <a href="/2013/the-bitchslapping-of-2013/">a massive fork</a> that nearly killed the project back in March to get people even looking at that part of the code. Thus your notion that public domain software has been already reviewed by countless experts at no cost or expense to you may well be misplaced. </p>
+<blockquote><p>I also recommended using an air gap, which physically isolates a computer or local network of computers from the Internet. (The name comes from the literal gap of air between the computer and the Internet; the word predates wireless networks.)</p></blockquote>
+<p>This is a great recommendation. Air gaps are an essential building block of COMSEC, or at least of COMSEC that works at any rate.</p>
+<blockquote><p>Air gaps might be conceptually simple, but they're hard to maintain in practice. The truth is that nobody wants a computer that never receives files from the Internet and never sends files out into the Internet. What they want is a computer that's not directly connected to the Internet, albeit with some secure way of moving files on and off.</p></blockquote>
+<p>This is also largely correct, minus the insistence on "files". You can have perfectly functional airgaps through the use of a QR reader gun on each end. I know at least some MPEx users employ this method to pass signed orders to their live connection and receipt responses back to their airgapped machine. It's a really neat solution that however involves no files - and in fact I would hold that filelessness as a strong point of the entire system - darned hard to hack a QR gun via a QR code.</p>
+<p>The intervening considerations are also correct, sure, <del datetime="2013-10-12T05:20:07+00:00">Obama</del> Osama used one, all that jazz. </p>
+<blockquote><p>And air gaps have been breached. Stuxnet was a US and Israeli military-grade piece of malware that attacked the Natanz nuclear plant in Iran. It successfully jumped the air gap and penetrated the Natanz network. Another piece of malware named agent.btz, probably Chinese in origin, successfully jumped the air gap protecting US military networks.</p></blockquote>
+<p>This, to the best of my knowledge, is factually incorrect. While it's possible Schneier knows something I don't, as far as I know Stuxnet did not cross any airgap. It was carelessly spread by poor security procedures. I suppose you can take the hardline that "if there's an airgap at any place in the design and stuff nevertheless gets across you may claim the airgap was breached, even if it was in fact the techs bypassing the airgap". This argument is perfectly solid in <em>some contexts</em>, such as in the post-mortem analysis of the defeated system. This argument is utterly facetious in a general discussion of airgaps, about akin to saying that "passwords offer no security because in at least one case an employee kept a post-it with his passwords on his monitor and so the workstation was trivially subverted". Obviously that subversion didn't involve password security, it was a social engineering attack through and through<sup><a href="#footnote_4_49944" id="identifier_4_49944" class="footnote-link footnote-identifier-link" title="And by the way, allow me to remind : Social engineering is the #1 threat you face. Which social engineering includes COMSEC disinformation planted by enemy agents. Jus' sayin'.">v</a></sup>. </p>
+<p>Agent.btz on the other hand definitely did not cross any airgaps, it simply benefited from the atrociously careless and irresponsible behaviours of contemporary US SIGINT people.<sup><a href="#footnote_5_49944" id="identifier_5_49944" class="footnote-link footnote-identifier-link" title="Since we're on the topic : the French were pretty much isolated in the NATO SIGINT community of the Cold War days, because everyone suspected that they'll leak whatever they're given. And so as long as there were French officers in the room, nobody discussed any serious intelligence. 
+Let it be clearly stated that while on occasion they did have trouble keeping a lid on things, it was rare that they actually lost anything. By contrast, the Americans at the time were regarded as grossly incompetent, and with few and far between exceptions basically worthless as field agents. Nevertheless, they did have deep pockets, a propensity for cool gadgets and a solid capacity of keeping data safe. Consequently, they were accepted as equals by their more able European counterparts, those people who made it their daily business to actually confront the devilishly competent Russians and the even worse Romanians on a daily basis.
+And yet here we are, the US is leaking reams of data on a yearly basis. Derpies, you're worse than the French ever were by degrees of magnitude! Wake up, do something, you're becoming a laughingstock. There are fucking African states with a much better grasp on things, what the hell are you doing!">vi</a></sup></p>
+<p>Back to reality : breaching an airgap is insanely difficult, and - much like RSA factorisation - an unsolved problem.</p>
+<blockquote><p>Since working with Snowden's NSA files, I have tried to maintain a single air-gapped computer. It turned out to be harder than I expected, and I have ten rules for anyone trying to do the same:</p>
+<p>1. When you set up your computer, connect it to the Internet as little as possible.</p></blockquote>
+<p>No. To <a href=/forum-logs-for-12-oct-2013#932828>quote myself</a>,<br />
+<blockquote>Any piece of hardware that was ever at any point in its life connected to the Internet can no longer be used as part of an airgapped system. Period.</p></blockquote>
+<p>And since we're on the topic, any girl that has been having as little sex as possible while taking great care for every round to last less than thirty seconds <em>still isn't a virgin</em>. Not no more. Funny how that works, and weird that I should have to point this out.</p>
+<blockquote><p>It's impossible to completely avoid connecting the computer to the Internet</p></blockquote>
+<p>This is, of course, false. Completely, patently, outrageously and mindnumbingly false.</p>
+<p>For one, there existed computers before there was an Internet. They worked just fine - heck, in many cases they worked a lot better than the current Windows / Cloud crapola.</p>
+<blockquote><p>I purchased my computer off-the-shelf in a big box store</p></blockquote>
+<p>This is a good idea.</p>
+<blockquote><p>then went to a friend's network and downloaded everything I needed in a single session</p></blockquote>
+<p>This is a horribly bad, retarded idea. For one, the "friend" belies gross unfamiliarity with the principled core of COMSEC. That is to say, if you use a third party, it's either an unrelated third party or else it's related for a very good reason that's part of the objectives. Thus, using your own computer, or using a random wireless connection are the available options. Using the customer's connection, if you're working for one and they want you to may also be fine. Using "a friend", ie a related entity that's related in a way that's not related to your project nor justified by it is exactly, but I say <em>exactly</em> the hole through which the night comes in. Just go wan raiding already.</p>
+<p>For the other, you really don't need to download anything on your airgapped computer. You can always download your favourite Linux CD distro, checksum it, burn it and live a happy life subsequently. And if even for a moment you believe yourself involved in COMSEC off Windows computers you really have to re-read <a href="/?p=49944&#038;preview=true#footnote_4_49944">footnote #5</a> above.</p>
+<blockquote><p>The ultra-paranoid way to do this is to buy two identical computers, configure one using the above method, upload the results to a cloud-based anti-virus checker, and transfer the results of that to the air gap machine using a one-way process.</p></blockquote>
+<p>This is so stupid a plan it beggars belief. For one, anything to do with "cloud-based" is about as antithetical to what we're doing here I'm beginning to suspect a certain three letter agency has a deal with the various cloud operators to somehow diddle everything on the go. There's just no way to explain why anyone would be proposing this cargo cult voodoo otherwise. Be that as it may, do not, under any circumstances and for any reason involve "the cloud" in your airgapping efforts. It does not belong there.</p>
+<p>And for that matter, antiviruses are a myth. They roughly work in the same manner US budget ceilings work, their only security implication being that if you're in a space that uses antiviruses you know you're in a space that's never going to be secure. </p>
+<blockquote><p>2. Install the minimum software set you need to do your job, and disable all operating system services that you won't need.  The less software you install, the less an attacker has available to exploit.</p></blockquote>
+<p>This is good advice.</p>
+<blockquote><p> I downloaded and installed OpenOffice, a PDF reader, a text editor, TrueCrypt, and BleachBit.</p></blockquote>
+<p>This is patent nonsense, antithetical to the aformentioned good advice. For one, OpenOffice is a dead project, and has been for a long long time. This means they're no longer keeping up with the world. For the other, a PDF reader is in no conceivable way needed on an airgapped machine, ever. Also, the PDF format is so fucking dangerous that it, together with Windows style WYSIWYG editors and their braindamaged attempts to become emacs through misimplementing macros etc create most of the ownage cases that don't involve a browser. Get rid of them, you don't need bulleted lists and power point presentations on your airgapped machine. Airgap it from stupid too, since you're going to all this trouble.</p>
+<blockquote><p>(No, I don't have any inside knowledge about TrueCrypt, and there's a lot about it that makes me suspicious. But for Windows full-disk encryption it's that, Microsoft's BitLocker, or Symantec's PGPDisk -- and I am more worried about large US corporations being pressured by the NSA than I am about TrueCrypt.)</p></blockquote>
+<p>Windows full disk encryption does not work. At all. It's pure snake oil.</p>
+<p>Linux full disk encryption does not really work, for that matter. If the sorts of problems that full disk encryption is intended to resolve actually are security considerations for you, the correct approach is something akin to keeping a half gallon bottle of oil of vitriol close by at all times and the hard drive exposed and within reach, because no "full disk encryption" will keep your data safe from an attacker with physical access to your full disk and enough time and gadgetry<sup><a href="#footnote_6_49944" id="identifier_6_49944" class="footnote-link footnote-identifier-link" title="Like, you know, a can of cold air. Herp.">vii</a></sup> on their hands.</p>
+<p>The correct solution for the vast majority of applications is, of course, to simply gpg whatever you want to keep secret and forget about it. A <a href="/2012/romanian-dicelist/">properly made passphrase</a> will keep your attacker sucking air out of a can indefinitely.</p>
+<blockquote><p>3. Once you have your computer configured, never directly connect it to the Internet again. Consider physically disabling the wireless capability, so it doesn't get turned on by accident.</p></blockquote>
+<p>For that matter, consider driving a nail through the wireless controller.</p>
+<blockquote><p>If you need to install new software</p></blockquote>
+<p>You don't. Ever. An airgapped system may never be upgraded no matter what happens, come hell or high water. It's salted and brined as is.</p>
+<p>If you absolutely must have some spanking new feature, you're making a new airgapped machine. If making a new airgapped machine isn't worth the hassle <em>you don't need whatever feature</em>.</p>
+<blockquote><p>Turn off all autorun features. This should be standard practice for all the computers you own, but it's especially important for an air-gapped computer. Agent.btz used autorun to infect US military computers.</p></blockquote>
+<p>Right. So much derp &#038; lol in here I don't even.</p>
+<blockquote><p>Minimize the amount of executable code you move onto the air-gapped computer. Text files are best. Microsoft Office files and PDFs are more dangerous, since they might have embedded macros. Turn off all macro capabilities you can on the air-gapped computer. Don't worry too much about patching your system; in general, the risk of the executable code is worse than the risk of not having your patches up to date. You're not on the Internet, after all.</p></blockquote>
+<p>Just get rid of the damned Microsoft stuff, and of the damned "office" crap. </p>
+<blockquote><p>Only use trusted media to move files on and off air-gapped computers. A USB stick you purchase from a store is safer than one given to you by someone you don't know -- or one you find in a parking lot.</p></blockquote>
+<p>This is true, if the file obsession a little out of place. Seriously, the world is not made out of files, the world is made out of data streams.</p>
+<blockquote><p>For file transfer, a writable optical disk (CD or DVD) is safer than a USB stick. Malware can silently write data to a USB stick, but it can't spin the CD-R up to 1000 rpm without your noticing. This means that the malware can only write to the disk when you write to the disk. You can also verify how much data has been written to the CD by physically checking the back of it. If you've only written one file, but it looks like three-quarters of the CD was burned, you have a problem. Note: the first company to market a USB stick with a light that indicates a write operation -- not read or write; I've got one of those -- wins a prize.</p></blockquote>
+<p>This is pure voodoo, seriously. So it can only write when you write, what sort of defense is that ? You <em>will</em> write, won't you ? You've written "one file" and 3/4 of the CD appears burned to visual inspection ? What's this, an application of the "64kb files should be enough for everyone" principle in tandem with the "Holy Mary Full of Grace" approach to security/birth control ? </p>
+<p>Visual inspection of a CD is about as likely to catch that three and a half kb piece of malware as TSA screening is to catch terrorists. Forget about nonsense ritual and do things that have an impact on actual security rather than your subjective impression of security. Stroking that later is how the former gets compromised. Fucking CD auguration, I can not believe this. </p>
+<p>What if the CD is sorta greenish ? Is that bad ? Cause you know, green is for poison, maybe we should only use blue tinted CDs. Those are cool, right ?</p>
+<blockquote><p>When moving files on and off your air-gapped computer, use the absolute smallest storage device you can. And fill up the entire device with random files. If an air-gapped computer is compromised, the malware is going to try to sneak data off it using that media. While malware can easily hide stolen files from you, it can't break the laws of physics. </p></blockquote>
+<p>Nor can it rewrite anything. It is a point of fact that no malware ever rewrites anything. Like, ever. At all. It just starts new processes and creates new "files" for everything. Always. It's in the rules, when Schneier's God created Schneier's Enchanted Universe of Strangely Insecure Computer Security, he made this a rule of Schphysics.</p>
+<blockquote><p>Consider encrypting everything you move on and off the air-gapped computer. Sometimes you'll be moving public files and it won't matter, but sometimes you won't be, and it will. And if you're using optical media, those disks will be impossible to erase. Strong encryption solves these problems. And don't forget to encrypt the computer as well; whole-disk encryption is the best.</p></blockquote>
+<p>Whole disk encryption is retarded in all those implementations which require the system to have the keys in order to use that disk. Strong encryption of individual files is always a good idea. That strong encryption means one thing and one thing only : <code>gpg --encrypt --armor -r yourkey</code></p>
+<blockquote><p>One thing I didn't do, although it's worth considering, is use a stateless operating system like Tails. You can configure Tails with a persistent volume to save your data, but no operating system changes are ever saved. Booting Tails from a read-only DVD -- you can keep your data on an encrypted USB stick -- is even more secure. Of course, this is not foolproof, but it greatly reduces the potential avenues for attack.</p></blockquote>
+<p>I have no idea about Tails. Maybe. It's in general a bad idea to make exotic systems your team doesn't understand well central to your security. Debian Sarge is, for this reason, a much better choice than whatever tails.</p>
+<blockquote><p>Yes, all this is advice for the paranoid</p></blockquote>
+<p>Sadly, a large chunk of it is advice for the delusional. They do go together, delusional and paranoid, but not to any sort of useful effect.</p>
+<blockquote><p>And it's probably impossible to enforce for any network more complicated than a single computer with a single user. But if you're thinking about setting up an air-gapped computer, you already believe that some very powerful attackers are after you personally. If you're going to use an air gap, use it properly.</p></blockquote>
+<p>Security is never "probably impossible". Anything you wish to do is quite possible, just as long as you don't expect Windows, whole disk encryption and the cloud to do it for you. That aside, yes, if you're going to the trouble of doing anything, anything whatsoever, do it properly. That includes not relying on Windows etc.</p>
+<blockquote><p>Of course you can take things further. I have met people who have physically removed the camera, microphone, and wireless capability altogether. But that's too much paranoia for me right now.</p></blockquote>
+<p>I've not met any people who haven't. If you use a laptop for the purpose of being your cold computer, you definitely want to rape the cam and the mic (some models come with a 2nd mic hidden in the chassis btw). And drive a nail through the fucking wireless controller. </p>
+<p>In closing, I would like to stress that none of this negates Schneier's past accomplishments or achievements. Applied Cryptography is still a great book. It's just that I don't trust him, not anymore.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_49944" class="footnote">As distinguished from people who read and perhaps write blogs on the topic of computer security. [<a href="#identifier_0_49944" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_49944" class="footnote">Most recently <a href="/forum-logs-for-12-oct-2013#932745">half hour ago</a>. [<a href="#identifier_1_49944" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_49944" class="footnote">From <a href="/2013/dear-guardian-stop-being-retarded/">Dear Guardian : stop being retarded</a> :</p>
+<blockquote><p>That contrary to planted disinformation of which the Guardian article is a fine example, the NSA has complete and unlimited, instantaneous access to any and all information passed through the TOR network in its entirety, as a matter of course and by design.</p></blockquote>
+<p>That article even includes an oblique reference to Schneier in <a href="/2013/dear-guardian-stop-being-retarded/#footnote_2_49762">footnote 3</a>. [<a href="#identifier_2_49944" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_49944" class="footnote">Roughly a restatement of the well known Parkinson law of triviality. While it's true that banal parts of the code garner a lot of posturing and discussion (chiefly from <a href="/2013/of-mice-and-men-revisited/">people desperate for a little bit of spotlight</a>), it's equally true that the "obscure", the unsexy parts of the code are passed on by everyone, in the hollow faith that "someone else", "everyone else" will not be quite as "clever". Seriously, that's the thought process, "I will pass over this function here because reading it is unlikely to make me famous and everyone else has read it anyway. Because everyone else is not at all likely to think the same way, because I am an unique snowflake of brilliance with my own, personal and independent ideas, quite unlike everyone else." [<a href="#identifier_3_49944" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_49944" class="footnote">And by the way, allow me to remind : <a href="/2013/mpex-breach-post-mortem/">Social engineering is the #1 threat you face</a>. Which social engineering includes COMSEC disinformation planted by enemy agents. Jus' sayin'. [<a href="#identifier_4_49944" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_49944" class="footnote">Since we're on the topic : the French were pretty much isolated in the NATO SIGINT community of the Cold War days, because everyone suspected that they'll leak whatever they're given. And so as long as there were French officers in the room, nobody discussed any serious intelligence. </p>
+<p>Let it be clearly stated that while on occasion they did have trouble keeping a lid on things, it was rare that they actually lost anything. By contrast, the Americans at the time were regarded as grossly incompetent, and with few and far between exceptions basically worthless as field agents. Nevertheless, they did have deep pockets, a propensity for cool gadgets and a solid capacity of keeping data safe. Consequently, they were accepted as equals by their more able European counterparts, those people who made it their daily business to actually confront the devilishly competent Russians and the even worse Romanians on a daily basis.</p>
+<p>And yet here we are, the US is leaking reams of data on a yearly basis. Derpies, you're worse than the French ever were by degrees of magnitude! Wake up, do something, you're becoming a laughingstock. There are fucking African states with a much better grasp on things, what the hell are you doing! [<a href="#identifier_5_49944" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_49944" class="footnote">Like, you know, a can of cold air. Herp. [<a href="#identifier_6_49944" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/cannibal-holocaust/">Cannibal Holocaust</a></div>
+                <div class="alignright"><a href="/2013/the-danger-of-homebrew-crypto/">The danger of homebrew crypto</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/meta-psihoza/" title="View all posts in Meta psihoza" rel="category tag">Meta psihoza</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/why-i-suspect-schneier-is-an-us-agent/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/why-i-suspect-schneier-is-an-us-agent/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>31 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-95519" class="commentbody"><div class="commenthead"><img alt='spyked`s avatar' src='http://lucian.mogosanu.ro/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://lucian.mogosanu.ro' class='url'>spyked</a><img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-educat.png" class="insigna" alt="insigna de cetatean educat" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95519" title="">Saturday, 12 October 2013</a>
+							</div>
+						<blockquote><p>In principle preferring certain types of cryptography over others is sound. The problem seems to be that Schneier prefers exactly the wrong types (ECC). I don’t know that there’s anything more suspicious in all crypto currently than ECC, and while suspicion and educated guesswork might not interest you, the fact still remains that ECC is, historically, the most frequently attacked by the NSA. Review the record.</p></blockquote>
+<p>That's pretty funny, cause he admitted ECC has problems <a href="https://www.schneier.com/blog/archives/2013/09/the_nsas_crypto_1.html" >in the near past</a>. To quote:</p>
+<blockquote><p>Breakthroughs in factoring have occurred regularly over the past several decades, allowing us to break ever-larger public keys. Much of the public-key cryptography we use today involves elliptic curves, something that is even more ripe for mathematical breakthroughs. It is not unreasonable to assume that the NSA has some techniques in this area that we in the academic world do not. Certainly the fact that the NSA is pushing elliptic-curve cryptography is some indication that it can break them more easily.</p></blockquote>
+<p>Although honestly, I still believe the math behind it is good and the issue is more related to actual implementations (even the open source ones, that is).</p>
+						</li>
+
+										<li id="comment-95523" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95523" title="">Saturday, 12 October 2013</a>
+							</div>
+						<p>Possibly. I think we'll be in a much better position to know after the patents expire.</p>
+						</li>
+
+										<li id="comment-95532" class="commentbody"><div class="commenthead"><img alt='Rob`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Rob</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95532" title="">Sunday, 13 October 2013</a>
+							</div>
+						<p>I have read both articles. I still don't know how I should set up my air gap machine. Will you consider writing a guide?</p>
+						</li>
+
+										<li id="comment-95533" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95533" title="">Sunday, 13 October 2013</a>
+							</div>
+						<p>I guess that can't hurt anything.</p>
+						</li>
+
+										<li id="comment-95686" class="commentbody"><div class="commenthead"><img alt='pankkake`s avatar' src='http://headfucking.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink"><a href='http://headfucking.net/' class='url'>pankkake</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95686" title="">Tuesday, 22 October 2013</a>
+							</div>
+						<p><a href="http://ask.slashdot.org/story/13/10/22/1416201/ask-slashdot-can-bruce-schneier-be-trusted">http://ask.slashdot.org/story/13/10/22/1416201/ask-slashdot-can-bruce-schneier-be-trusted</a></p>
+						</li>
+
+										<li id="comment-95687" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95687" title="">Tuesday, 22 October 2013</a>
+							</div>
+						<p>The Internet follows.</p>
+						</li>
+
+										<li id="comment-95697" class="commentbody"><div class="commenthead"><img alt='anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">anon<img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95697" title="">Wednesday, 23 October 2013</a>
+							</div>
+						<p>Lol @the fabulous day when the media darling S I Tiulpanov has to engage in <a href="https://www.schneier.com/blog/archives/2013/10/can_i_be_truste.html" >damage control</a> because of your articles. Such deliciously careful avoidance, such pain, such horror to be read between the lines. You've come a long way, influencere.</p>
+						</li>
+
+										<li id="comment-95698" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95698" title="">Wednesday, 23 October 2013</a>
+							</div>
+						<p>I live to please.</p>
+						</li>
+
+										<li id="comment-95699" class="commentbody"><div class="commenthead"><img alt='Dirk Praet`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Dirk Praet</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95699" title="">Wednesday, 23 October 2013</a>
+							</div>
+						<p>Did you actually bother to read the entire thread on that subject ? There were a score of subject matter experts pointing out the (many) flaws in Bruce's method and proposing alternative solutions that are much more secure. Bruce is a cryptographer, not a COMSEC specialist. He came up with something that with his understanding of the matter would already provide better protection than nothing, undoubtedly looking for comments and tips from those who are more knowledgeable in that particular field than he is. </p>
+<p>That's what we do on Bruce's blog: learning off each other.  If you find that approach wrong or a reason for suspecting him to be an NSA agent, feel free by all means but then in essence you haven't quite understood the culture of his blog.</p>
+						</li>
+
+										<li id="comment-95700" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95700" title="">Wednesday, 23 October 2013</a>
+							</div>
+						<p>And you have understood this "culture of his blog" ? How do I know this, how do you know this ?</p>
+<p>In the somewhat more widespread culture as a general concept, the principle is that you write guides on subjects you understand, and lists of questions on subjects you don't understand. </p>
+<p>But to get practical : suppose we somehow share a meal in a restaurant. Suppose I owe 125 and you owe 93. Suppose the waitress adds this up to 345. I am definitely going to tell her that stealing isn't a way to treat customers. Are you going to tell me that rather than reprimanding the clueless waitress I should try to understand some putative "culture of clueless waitresses" ? 'Cause if you do I'm just going to imagine that a white knight made out of pure sexual frustration is bubbling up inside.</p>
+						</li>
+
+										<li id="comment-95701" class="commentbody"><div class="commenthead"><img alt='Anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Anon<img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95701" title="">Wednesday, 23 October 2013</a>
+							</div>
+						<p>@Dirk: was that score of experts posting there after this article was published?</p>
+						</li>
+
+										<li id="comment-95723" class="commentbody"><div class="commenthead"><img alt='Vicky`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">Vicky</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95723" title="">Wednesday, 23 October 2013</a>
+							</div>
+						<p>I found this article interesting and useful as a counterpoint to Bruce's original article. Thank you for taking the time to go through it in such a detailed way. </p>
+<p>One thing though - was it really necessary to use the phrase "you definitely want to rape the cam and the mic"? I find the casual use of the word "rape" very jarring and it could easily be replaced with "physically damage" or "disable".</p>
+						</li>
+
+										<li id="comment-95724" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95724" title="">Wednesday, 23 October 2013</a>
+							</div>
+						<p>@<b>Vicky</b> You may find the "How to airgap. A practical guide." article linked below even more useful in that case.</p>
+<p>Trilema is traditionally very jarring. It could, for that matter, easily be replaced with other blogs, to varying effects.</p>
+						</li>
+
+										<li id="comment-95830" class="commentbody"><div class="commenthead"><img alt='Mike the goat`s avatar' src='http://mikethegoat.wordpress.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink"><a href='http://mikethegoat.wordpress.com/' class='url'>Mike the goat</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95830" title="">Thursday, 31 October 2013</a>
+							</div>
+						<p>Hi MP! I am not sure if Bruce is somehow collaborating with the US govt but I suspect that he is not - at least willingly - given his long held views. That said I often find issue with some of his advice.</p>
+<p>Re full disk encryption: FDE can be useful but you must know its limitations. It augments and not replaces tools like PGP. The biggest threat to FDE is cold boot attacks. That said if you wanted to avoid a thief from looking at the contents of your laptop's HDD if stolen while powered off it is a valid enough option. Another benefit of using FDE is that it makes quick pseudoerasure possible. Where you may need to nuke a disk but only have a few moments to do so using actual erasure tools like ATA_SECURE_ERASE or block level zeroing it could come in handy if FDE is used as instead of needing to erase the whole disk (hours) you can instead just target only the blocks which contain the key (most FDE tools don't directly encrypt your data with your passphrase but instead use the passphrase to encrypt a metadata block/s that contain the actual key. A stretching algo like PBKDF2 is used on the passphrase too in an attempt to slow down brute forcing. Anyway by erasing just the area where the on disk key is stored - and it is usually stored in two locations for redundancy - will leave the data unreadable) storage blocks.</p>
+<p>Why else is FDE advantageous? As a safety net in case you are leaking clear text on the disk somewhere. This happens more than most people believe especially on Windows (!) where the volume shadow copy may backup something you have later encrypted and believed to have scrubbed. Ideally you would use a ramdisk or tmpfs volume to put your files in "limbo" when you decrypt them. At least you can then power down the machine when done and be confident that there won't be any remanance after a temperature dependent period of time has elapsed. Of course this benefit is negated if you use say an office program that makes a temporary copy elsewhere on the HDD without your knowledge.</p>
+<p>Re Windows - I find it shocking that Bruce trusts Windows. I don't know how anyone "in the know" could have any confidence in Windows or any commercial closed source software for that matter.</p>
+						</li>
+
+										<li id="comment-95835" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95835" title="">Thursday, 31 October 2013</a>
+							</div>
+						<p>Mike the goat,</p>
+<p>The only correct way to carry out FDE is: in hardware. And not in a boot loader writable to by a potentially-diddled OS, and not in a disk manufacturer's "mystery meat" HDD controller. But rather in hardware which you personally install (and, ideally, understand the design of.) In hardware whose function cannot be altered via anything running on the machine, under any circumstances.</p>
+<p>Likewise, the keyboard is a piss-poor means of entering credentials for disk decryption, unless said keyboard is connected directly to the above.</p>
+						</li>
+
+										<li id="comment-95837" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95837" title="">Thursday, 31 October 2013</a>
+							</div>
+						<blockquote><p>most FDE tools don’t directly encrypt your data with your passphrase but instead use the passphrase to encrypt a metadata block/s that contain the actual key</p></blockquote>
+<p>This is actually true of gpg too, it doesn't RSA encrypt anything but a symetric cypher it then uses across the data.</p>
+<blockquote><p>Anyway by erasing just the area where the on disk key is stored - and it is usually stored in two locations for redundancy</p></blockquote>
+<p>Or, for all you know, three. Because that's the deal the producer reached with the NSA, have the data stored in a third, secret spot. Herp.</p>
+<p>The moral being, of course, that using tools in ways they were not specifically designed to be used may be productive, and all what IT is about, but is not particularly secure. In this case, the presumption that you may use disk encryption as proxy disk deletion relies on some assumptions about the software that may have or may have not been satisfied by the provider. The ease and comfort with which this sort of mistake is made is why security is and will remain a specialist field rather than a sort of popular mechanics.</p>
+<blockquote><p>Windows (!) where the volume shadow copy may</p></blockquote>
+<p>Footnote #5!</p>
+<blockquote><p>Likewise, the keyboard is a piss-poor means of entering credentials for disk decryption, unless said keyboard is connected directly to the above.</p></blockquote>
+<p>Directly and, of course, silently.</p>
+						</li>
+
+										<li id="comment-95848" class="commentbody"><div class="commenthead"><img alt='Mike the goat`s avatar' src='http://mikethegoat.wordpress.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink"><a href='http://mikethegoat.wordpress.com/' class='url'>Mike the goat</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95848" title="">Friday, 1 November 2013</a>
+							</div>
+						<p>Stanislav: even if the keyboard is directly connected you may still be vulnerable to uh, off channel attacks. Case in point a recent paper where they were able to determine 80% of entered keystrokes through the sound differences between key presses via a hidden mic. Another spoke of using compromising EM emanations from a pin pad to achieve a similar result. Re FDE - yes I agree with you but there are certain applications where it has some utility. Not a panacea, of course but another layer in the onion that is defense in depth.</p>
+<p>MP: re gpg - similar concept but gpg is a hybrid cryptosystem that uses asymmetric encryption to guard the symmetric cipher's key. Most FDE implementations (like, say android's modified dm-crypt) use an symmetric cipher to guard another symmetric key. The primary reason they do this is to allow quick "password" changes. Of course the actual on disk key never changes.</p>
+<p>I take your point though. Using many of these tools "as advertised" is a recipe for disaster.</p>
+						</li>
+
+										<li id="comment-95850" class="commentbody"><div class="commenthead"><img alt='Mike the goat`s avatar' src='http://mikethegoat.wordpress.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink"><a href='http://mikethegoat.wordpress.com/' class='url'>Mike the goat</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95850" title="">Friday, 1 November 2013</a>
+							</div>
+						<p>Hmm ... Seems my mobile browser is double posting. Sorry about that!</p>
+						</li>
+
+										<li id="comment-96365" class="commentbody"><div class="commenthead"><img alt='pankkake`s avatar' src='http://headfucking.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink"><a href='http://headfucking.net/' class='url'>pankkake</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96365" title="">Wednesday, 27 November 2013</a>
+							</div>
+						<p>He seems to like the buttplug <a href="https://www.schneier.com/blog/archives/2013/11/tor_appliance.html">https://www.schneier.com/blog/archives/2013/11/tor_appliance.html</a></p>
+						</li>
+
+										<li id="comment-96367" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-96367" title="">Wednesday, 27 November 2013</a>
+							</div>
+						<p>Silly me, I thought he didn't do product reviews.</p>
+						</li>
+
+										<li id="comment-105481" class="commentbody"><div class="commenthead"><img alt='Marilyn`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink">Marilyn</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-105481" title="">Sunday, 17 August 2014</a>
+							</div>
+						<p>Hey would you mind sharing which blog platform you're using? I'm going to start my own blog soon but I'm having a hard time making a decision between BlogEngine/Wordpress/B2evolution and Drupal. The reason I ask is because your design and style seems different then most blogs and I'm looking for something unique. P.S Sorry for being off-topic but I had to ask!</p>
+						</li>
+
+										<li id="comment-105534" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-105534" title="">Sunday, 17 August 2014</a>
+							</div>
+						<p>It's a very old heavily modified wordpress.</p>
+						</li>
+
+										<li id="comment-108063" class="commentbody"><div class="commenthead"><img alt='Hitler's Hairdresser`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">Hitler's Hairdresser</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-108063" title="">Wednesday, 24 September 2014</a>
+							</div>
+						<p>GPG to encrypt files is the only correct way. Any filesystem/files you want to encrypt use an AEAD (Authenticated Encryption with Associated Data) scheme, like GCM or  Salsa20+Poly1305. GPG is one of the easiest cryptographic tools to use that provides high-level functionality intended for doing authenticated encryption (AEAD). Lot's of people are backing up LUKS containers to the cloud without realizing how truly shitty it is for anything except FDE on physical drives.  </p>
+<p>Ferguson points out in his objection to NIST standardizing XTS how it lacks integrity checking, and how an attacker observing block offsets into a given sector can collect useful information as those blocks are changed to do code modification attacks. (Scenario: somebody backs up a truecrypt container to dropbox daily, or a system image like a VM snapshot encrypted with AES-256-XTS). The adversary can deduce where certain binaries to attack are in the container, then randomize a 16-byte chunk of it and brute force that little chunk instead of a full 128bit+ key. Now they can secretly alter the binary, creating a backdoor or anything they want and wait for you to download and run it again. Physical hardware prevents this attack, which is why XTS should only ever be used on a physical device. </p>
+<p>Schneier, who is not an agent, created a Tweakable block cipher to defeat this attack and submitted it to NIST SHA3 competition where it was a finalist candidate. Instead of being able to tamper with it undetected like in XTS, his cipher encrypts every block of every sector with its own key (Skein/Threefish). Ciphertext cannot be moved around or reveal itself to an attacker in repeated ciphertext blocks on different parts of the backup/drive. </p>
+<p>So if you want to backup an entire container or snapshot find a Skein implementation and use that instead. Use GPG for everything else, or LibreSSL AEAD stream ciphers like ChaCha20-poly1305 or AES-GCM.</p>
+<p>Also, not all ECC are created alike. DjBernstein's Curve25519 was specifically designed against timing attacks and the problems of the other curves which are mostly proprietary. His NaCl library is basically the most solid crypto blackbox that exists next to GPG. </p>
+<p>tl;dr use GPG and salt (NaCl)</p>
+						</li>
+
+										<li id="comment-108090" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-108090" title="">Wednesday, 24 September 2014</a>
+							</div>
+						<blockquote><p>XTS should only ever be used on a physical device.</p></blockquote>
+<p>Quite. The dangers stalking the amateur cryptographer are the same stalking any apprentice <del datetime="2014-09-24T15:22:58+00:00">wizard</del> professional : unwarranted assumptions.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-139420">
+					<div class='trackhead'>
+						<div class="commentcount">25</div>
+						<span class="authorlink"><a href='/2013/the-danger-of-homebrew-crypto?b=I%20was%20agreei&amp;e=tter#select' class='url'>The danger of homebrew crypto on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139420" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] I was agreeing with Schneier that "public domain encryption is probably the correct choice", with reservations. To better [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139424">
+					<div class='trackhead'>
+						<div class="commentcount">26</div>
+						<span class="authorlink"><a href='/2013/how-to-airgap-a-practical-guide?b=speaking%20of%20&amp;e=%20not#select' class='url'>How to airgap. A practical guide. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139424" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] speaking of which, Schneier's "the first company to market a USB stick with a light that indicates a write operation — not [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139455">
+					<div class='trackhead'>
+						<div class="commentcount">27</div>
+						<span class="authorlink"><a href='/2013/in-which-i-discuss-things-i-have-no-idea-about?b=the%20best%20way&amp;e=name#select' class='url'>In which I discuss things I have no idea about on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139455" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] the best way to evaluate the cultural impact of this blog is to consider that ten days after I express my suspicions, MSM darling and minor celebrity Schneier feels obligated to respond while taking care not to name [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139855">
+					<div class='trackhead'>
+						<div class="commentcount">28</div>
+						<span class="authorlink"><a href='/2014/fata-morgana-ii-or-dont-you-just-hate-it-when-you-come-up-with-an-idea-and-a-title-and-then-discover-you-need-an-introduction-which-keeps-swelling-so-eventually-youre-stuck-pub' class='url'>Fata morgana II, or don't you just hate it when you come up with an idea and a title and then discover you need an introduction which keeps swelling so eventually you're stuck publishing it as a stand-alone and now you're stuck because it used up your tit</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139855" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] dark). Schneier started by writing an excellent textbook on cryptography, and meanwhile managed to completely squander any semblance of credit. The related phenomena of great bands making great music early on, then "selling out" and coming up [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-140289">
+					<div class='trackhead'>
+						<div class="commentcount">29</div>
+						<span class="authorlink"><a href='/2014/that-aint-the-maslow-pyramid-yo?b=%2F2013%2Fwhy-i-&amp;e=ent%2F#select' class='url'>That ain't the Maslow pyramid, yo! on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-140289" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] /2013/why-i-suspect-schneier-is-an-us-agent/ [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-143262">
+					<div class='trackhead'>
+						<div class="commentcount">30</div>
+						<span class="authorlink"><a href='/2017/fuckgoats-unboxing-of?b=eager%20hands%20&amp;e=le%20a#select' class='url'>FUCKGOATS, unboxing of ~ on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-143262" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] eager hands you can not control. Every passing hour the return to the obsolete world of PRNGs and Schneier-powered NSA relevancy becomes that less feasible a [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-147256">
+					<div class='trackhead'>
+						<div class="commentcount">31</div>
+						<span class="authorlink"><a href='http://qntra.net/2020/01/usg-nsa-and-microsoft-push-emergency-windows-crypto-update-while-depreciating-windows-7/?b=X.509%20%26%23034%3B&amp;e=ical#select' class='url'>USG.NSA And Microsoft Push &quot;Emergency&quot; Windows Crypto Update While Depreciating Windows 7 | Qntra</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-147256" title="">Wednesday, 15 January 2020</a>
+					</div>
+					<p>[...] X.509 &#34;PKI&#34; certificate validation in Microsoft&#39;s crypt32.dll (archived). The usual suspects are loudly herding Windows users to update in a way that strongly suggests geopolitical [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author192c63a" id="author192c63a" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email192c63a" id="email192c63a" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url192c63a" id="url192c63a" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="49944" /></p>
+				<input type="hidden" name="comment_post_time" value="1781264683-18.97.14.80" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-49944")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-49944");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-49944");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>
