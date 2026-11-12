@@ -28,9 +28,9 @@ wbm_fetch() {
 extract_assets() {
     local file="$1"
     {
-        grep -oP '(?:src|href)="(/wp-content/uploads/[^"]+)"' "$file" 2>/dev/null | sed 's/.*="//;s/"$//' || true
-        grep -oP '(?:src|href)=(/wp-content/uploads/[^ >"'"'"']+)' "$file" 2>/dev/null | sed 's/.*=//' || true
-        grep -oP "url\(['\"]?(/wp-content/uploads/[^)\"']+)" "$file" 2>/dev/null | sed "s/.*url(//;s/['\"]//g" || true
+        grep -oP '(?:src|href)="(/wp-content/[^"]+)"' "$file" 2>/dev/null | sed 's/.*="//;s/"$//' || true
+        grep -oP '(?:src|href)=(/wp-content/[^ >"'"'"']+)' "$file" 2>/dev/null | sed 's/.*=//' || true
+        grep -oP "url\(['\"]?(/wp-content/[^)\"']+)" "$file" 2>/dev/null | sed "s/.*url(//;s/['\"]//g" || true
     } | sort -u
 }
 
