@@ -5,6 +5,8 @@
 	@project path /Caddyfile /compose.yml /README.md
 	respond @project 404
 
+	redir / /archives-categories/ temporary
+
 	try_files {path} {path}/ {path}/index.html
 	file_server
 }
