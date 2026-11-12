@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://trilema-mirror.pages.dev//</loc></url>
+  <url><loc>https://trilema-mirror.pages.dev/2008/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2008/12/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2008/andrei-plesu-sau-la-ce-servesc-ai-batrani/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2008/in-vizita/</loc></url>
+  <url><loc>https://trilema-mirror.pages.dev/2009/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2009/01/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2009/02/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2009/03/</loc></url>
@@ -75,6 +77,7 @@
   <url><loc>https://trilema-mirror.pages.dev/2009/trafic/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2009/v-as-spune-un-banc/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2009/vizitatori-unici-si-abonati-rss/</loc></url>
+  <url><loc>https://trilema-mirror.pages.dev/2010/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2010/01/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2010/02/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2010/03/</loc></url>
@@ -208,6 +211,7 @@
   <url><loc>https://trilema-mirror.pages.dev/2010/v-for-vendetta/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2010/vina-batranilor/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2010/ziua-mortilor-pe-stil-fain/</loc></url>
+  <url><loc>https://trilema-mirror.pages.dev/2011/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2011/01/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2011/02/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2011/03/</loc></url>
@@ -422,6 +426,7 @@
   <url><loc>https://trilema-mirror.pages.dev/2011/voi-cind-cereti-sa-vedeti-buletinul/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2011/voi-puneti-fetele-sa-zica-ceva/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2011/webfactor-procedurile-si-idiotenia/</loc></url>
+  <url><loc>https://trilema-mirror.pages.dev/2012/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2012/01/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2012/02/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2012/03/</loc></url>
@@ -728,6 +733,7 @@
   <url><loc>https://trilema-mirror.pages.dev/2012/yankee-doodle-dandy/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2012/you-and-me/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2012/ziua-internationala-a-bun-simtului-corectitudinii-politice-si-altor-balarii/</loc></url>
+  <url><loc>https://trilema-mirror.pages.dev/2013/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2013/01/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2013/02/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2013/03/</loc></url>
@@ -1232,6 +1238,7 @@
   <url><loc>https://trilema-mirror.pages.dev/2013/you-swedes-with-your-pickled-herring/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2013/you-want-to-see-reactionary-ill-show-you-reactionary/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2013/zonehedge-wow-such-durden-much-info-about-useless/</loc></url>
+  <url><loc>https://trilema-mirror.pages.dev/2014/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2014/01/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2014/02/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2014/03/</loc></url>
@@ -1436,6 +1443,7 @@
   <url><loc>https://trilema-mirror.pages.dev/2014/yes-we-can-ya-se-puede/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2014/yo-trilema-fratires/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2014/you-know-what-you-should-do/</loc></url>
+  <url><loc>https://trilema-mirror.pages.dev/2015/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2015/01/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2015/02/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2015/03/</loc></url>
@@ -2170,6 +2178,7 @@
   <url><loc>https://trilema-mirror.pages.dev/2018/ye-autre-damozel/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2018/yes-bitch-i-would-bring-it/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2018/you-know-who-the-best-us-president-was-how-about-andrew-johnson/</loc></url>
+  <url><loc>https://trilema-mirror.pages.dev/2019/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2019/01/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2019/02/</loc></url>
   <url><loc>https://trilema-mirror.pages.dev/2019/03/</loc></url>
