@@ -81,33 +81,15 @@ else:
         -e "s|https\?://trilema\.com|/|g" \
         "$tmpfile"
 
-    # Normalize splash background image
-    sed -i -E 's#bg_[a-z0-9_]*\.(jpg|jpeg|png|gif|webp)#bg_oct2009.jpg#g' "$tmpfile"
-
-    # Download missing wp-content assets
-    local assets_downloaded=0
-    while IFS= read -r asset_path; do
-        [[ -z "$asset_path" ]] && continue
-        local local_path="$REPO$asset_path"
-        if [[ ! -f "$local_path" ]]; then
-            info "downloading missing asset: $asset_path"
-            sleep "$SLEEP_BETWEEN"
-            mkdir -p "$(dirname "$local_path")"
-            local asset_url="https://web.archive.org/web/${timestamp}id_/$DOMAIN$asset_path"
-            if wbm_fetch "$asset_url" "$local_path"; then
-                (( assets_downloaded++ )) || true
-            else
-                info "warning: could not download $asset_path"
-                rm -f "$local_path"
-            fi
-        fi
-    done < <(grep -oP '(?:src|href)="(/wp-content/[^"]+)"' "$tmpfile" | sed 's/.*="//;s/"$//' | sort -u)
+    # Count asset references (not downloaded — use recover-month-assets.sh)
+    local asset_count
+    asset_count=$(grep -coP '(?:src|href)="(/wp-content/uploads/[^"]+)"' "$tmpfile" || true)
 
     # Save
     mkdir -p "$dest"
     mv "$tmpfile" "$dest/index.html"
 
-    echo "OK $path (assets: $assets_downloaded)"
+    echo "OK $path (assets: $asset_count)"
 }
 
 # Read URLs from stdin
