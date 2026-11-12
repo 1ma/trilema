@@ -79,12 +79,13 @@ for slug in $post_slugs; do
     echo "$slug: ${#missing[@]} missing assets"
     (( total_missing += ${#missing[@]} ))
 
+    i=0
     for asset_path in "${missing[@]}"; do
+        (( i++ )) || true
         local_path="$REPO$asset_path"
         mkdir -p "$(dirname "$local_path")"
 
-        # Try multiple WBM timestamps
-        info "downloading $asset_path"
+        info "[$i/${#missing[@]}] downloading $asset_path"
         sleep "$SLEEP_BETWEEN"
         asset_url="https://web.archive.org/web/2id_/$DOMAIN$asset_path"
         if wbm_fetch "$asset_url" "$local_path"; then
