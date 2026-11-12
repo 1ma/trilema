@@ -25,6 +25,19 @@ wbm_fetch() {
     return 1
 }
 
+cdx_timestamps() {
+    local asset_path="$1"
+    curl -s "https://web.archive.org/cdx/search/cdx?url=trilema.com${asset_path}&output=json&fl=timestamp,statuscode&filter=statuscode:200" \
+        | python3 -c "
+import sys, json
+try:
+    rows = json.load(sys.stdin)
+    for ts, _ in reversed(rows[1:]):
+        print(ts)
+except: pass
+" 2>/dev/null
+}
+
 extract_assets() {
     local file="$1"
     {
@@ -91,9 +104,27 @@ for slug in $post_slugs; do
         if wbm_fetch "$asset_url" "$local_path"; then
             (( total_downloaded++ )) || true
         else
-            info "MISS $asset_path"
-            rm -f "$local_path"
-            (( total_failed++ )) || true
+            # Fallback: query CDX for older snapshots
+            info "  latest failed, querying CDX..."
+            sleep "$SLEEP_BETWEEN"
+            got_it=false
+            while IFS= read -r ts; do
+                [[ -z "$ts" ]] && continue
+                info "  trying snapshot $ts"
+                sleep "$SLEEP_BETWEEN"
+                if wbm_fetch "https://web.archive.org/web/${ts}id_/$DOMAIN$asset_path" "$local_path"; then
+                    got_it=true
+                    break
+                fi
+            done < <(cdx_timestamps "$asset_path")
+
+            if $got_it; then
+                (( total_downloaded++ )) || true
+            else
+                info "MISS $asset_path"
+                rm -f "$local_path"
+                (( total_failed++ )) || true
+            fi
         fi
     done
 done
