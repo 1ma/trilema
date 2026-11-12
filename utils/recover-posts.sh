@@ -8,7 +8,7 @@ set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 DOMAIN="http://trilema.com"
 WBM_API="https://archive.org/wayback/available"
-SLEEP_BETWEEN=1
+SLEEP_BETWEEN=0.2
 
 die()  { echo "FAIL $1: $2" >&2; }
 info() { echo "  $*" >&2; }
