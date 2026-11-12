@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_mar2019b.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Why MPEx is better than fiat institutions, part 349085 : we don't use Excel. on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Aici este pragul cel de sus,<br />unde v-o zis tati ca'ti da cu capul.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-46252"><div class="post" id="post-46252">                    <h1><a href="/2013/why-mpex-is-better-than-fiat-institutions-part-349085-we-dont-use-excel/" rel="bookmark" title="Permanent Link to Why MPEx is better than fiat institutions, part 349085 : we don&#039;t use Excel.">Why MPEx is better than fiat institutions, part 349085 : we don't use Excel.</a></h1>                        <div class="date">                                     Tuesday, 12 February, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>Quoting from <a href="/wp-content/uploads/2013/02/excell-sucks-report.pdf">this report</a><sup><a href="#footnote_0_46252" id="identifier_0_46252" class="footnote-link footnote-identifier-link" title="Conducted in house, in large part because past attempts to conduct outside reviews resulted in expensive, flawed and ocasionally nonsensical reports. You know, just like ROTA worked out.">i</a></sup> explaining why the First Federal Bank of the US (formerly JP Morgan) lost about 6 billion worth of taxpayer's dollars in some spectacularly ill thought derivative trades :</p>
+<blockquote><p>VaR is a metric that attempts to estimate the risk of loss on a portfolio of assets. A portfolio’s VaR represents an estimate of the maximum expected mark-to-market loss over a specified time period, generally one day, at a stated confidence level, assuming historical market conditions. Through January 2012, the VaR for the Synthetic Credit Portfolio was calculated using a “linear sensitivity model,” also known within the Firm as the “Basel I model,” because it was used for purposes of Basel I capital calculations and for external reporting purposes.</p>
+<p>The Basel I model captured the major risk facing the Synthetic Credit Portfolio at the time, which was the potential for loss attributable to movements in credit spreads. However, the model was limited in the manner in which it estimated correlation risk: that is, the risk that defaults of the components within the index would correlate. As the tranche positions in the Synthetic Credit Portfolio increased, this limitation became more significant, as the value of the tranche positions was driven in large part by the extent to which the positions in the index were correlated to each other. The main risk with the tranche positions was that regardless of credit risk in general, defaults might be more or less correlated.</p>
+<p>This limitation meant that the Basel I model likely would not comply with the requirements of Basel II.5, which originally had been expected to be formally adopted in theUnited States at the end of 2011. One of the traders responsible for the Synthetic Credit Portfolio therefore instructed an expert in quantitative finance within the Quantitative Research team for CIO International to develop a new VaR model for the Synthetic Credit Portfolio that would comply with the requirements of Basel II.5. That individual (henceforth referred to in this Report as “the modeler”) began work on developing that model in or around August 2011. </p>
+<p>The trader who had instructed the modeler to develop the new VaR model (and to whom the modeler reported at the time), CIO Market Risk, and the modeler himself also believed that the Basel I model was too conservative – that is, that it was producing a higher VaR than was appropriate.<sup><a href="#footnote_1_46252" id="identifier_1_46252" class="footnote-link footnote-identifier-link" title="As noted above, VaR is a metric that attempts to estimate the risk of loss on a portfolio of assets. Both the modeler and a member of the CIO Market Risk team who was also involved in the new model’s development were of the view that the Basel I model might be overstating the VaR for the Synthetic Credit Portfolio, in part because the amount of losses had exceeded the stated VaR limit less frequently than would be expected based on the stated confidence level.">ii</a></sup> The modeler believed that an improved model should both (1) adequately capture correlation risk in the Synthetic Credit Portfolio, and (2) produce a lower and more accurate VaR.</p>
+<p><b>A. Development of the New VaR Model</b></p>
+<p>The modeler is a London-based quantitative expert, mathematician and model developer. In addition to the considerable responsibility of developing a new VaR model, he continued to perform his existing responsibilities in providing analytical support to the Synthetic Credit Portfolio traders. On a number of occasions, he asked the trader to whom he reported for additional resources to support his work on the VaR model, but he did not receive any.</p>
+<p>Early in the development process, CIO considered and rejected a proposal to adopt the VaR model used by the Investment Bank’s credit hybrids business for the Synthetic Credit Portfolio. Because the Investment Bank traded many bespoke (i.e., customized), illiquid CDS, its VaR model mapped individual instruments to a combination of indices and single name proxies, which CIO Market Risk viewed as less accurate for CIO’s purposes than mapping to the index as a whole. He believed that, because the Synthetic Credit Portfolio, unlike the Investment Bank, traded indices and index tranches, the Investment Bank’s approach was not appropriate for CIO. The Model Review Group agreed and, in an early draft of its approval of the model, described CIO’s model as “superior” to that used by the Investment Bank “in that it [was] a full revaluation approach.”</p>
+<p>From September to November 2011, the modeler corresponded regularly with the relevant individuals from the Model Review Group, and on November 25, 2011, he submitted his new methodology (known internally as the “full revaluation” or “Basel II.5 model”) for formal approval. The Model Review Group performed only limited back-testing of the model, comparing the VaR under the new model computed using historical data to the daily profit-and-loss over a subset of trading days during a two-month period. The modeler informed the Model Review Group that CIO lacked the data necessary for more extensive back-testing of the model (running the comparison required position data for the 264 previous trading days, meaning that a back-test for September 2011 would require position data from September 2010). Neither the Model Review Group nor CIO Market Risk expressed concerns about the lack of more extensive historical position data.</p>
+<p>During the review process, additional operational issues became apparent. <strong>For example, the model operated through a series of Excel spreadsheets, which had to be completed manually, by a process of copying and pasting data from one spreadsheet to another.</strong> In addition, many of the tranches were less liquid, and therefore, the same price was given for those tranches on multiple consecutive days, leading the model to convey a lack of volatility. While there was some effort to map less liquid instruments to more liquid ones (i.e., calculate price changes in the less liquid instruments derived from price changes in more liquid ones), this effort was not organized or consistent.</p>
+<p>By the end of 2011, some of the pressure to complete the review of the new model appears to have abated because it became clear that Basel II.5 would not be implemented on the previously anticipated timetable. However, as described in Section II.D.1, CIO exceeded its Global 10-Q VaR limit at several points between January 16 and January 26, 2012, which in turn caused a breach in the overall Firm 10-Q VaR limit. The Synthetic Credit Portfolio was the primary driver of each of those excessions. A temporary limit increase was requested<sup><a href="#footnote_2_46252" id="identifier_2_46252" class="footnote-link footnote-identifier-link" title="Firm-wide Market Risk raised the possibility of a temporary limit increase to Mr. Hogan on January 20, 2012. On January 21, 2012, the then-head of the Risk Reporting and Finance function – told Mr. Hogan “We are working towards a temporary one-off for CIO and the Firm proposed as follows: JPMC $140mm (vs. $125mm permanent limit) CIO $105mm (vs. $95mm permanent limit.” Mr. Weiland also e-mailed Mr. Hogan on January 22, 2012 regarding a proposed temporary VaR limit increase.">iii</a></sup> and required approval of senior Firm management. CIO recommended a temporary limit increase on the grounds that it was taking steps to reduce the VaR and that, in any event, the newly developed model was about to come online that would show a substantially reduced VaR.</p>
+<p>Mr. Weiland and another member of CIO Market Risk contacted the Model Review Group regularly in the last two weeks of January to inquire into the progress of the model approval and, in a January 23, 2012 e-mail to the modeler, the trader to whom the modeler reported wrote that he should “keep the pressure on our friends in Model Validation and [Quantitative Research].” There is some evidence the Model Review Group accelerated its review as a result of this pressure, and in so doing it may have been more willing to overlook the operational flaws apparent during the approval process.</p>
+<p>On January 26, the Model Review Group discovered that, for purposes of a pricing step used in the VaR calculation, CIO was using something called the “West End” analytic suite rather than Numerix, an approved vendor model that the Model Review Group had thought was being used. The Model Review Group had never reviewed or approved West End, which (like Numerix) had been developed by the modeler.<sup><a href="#footnote_3_46252" id="identifier_3_46252" class="footnote-link footnote-identifier-link" title="The modeler had previously worked at Numerix. While there, the Numerix repricing model was developed under his supervision.">iv</a></sup> CIO provided the Model Review Group with a reconciliation test, based on a limited number of days, showing that the valuations from West End and Numerix were in “good agreement,” and the Model Review Group committed to conduct a full review of West End separately, but not before approving the VaR model. The Model Review Group did not examine West End until early May 2012 (the results of which are discussed below).</p>
+<p>On January 30, the Model Review Group authorized CIO Market Risk to use the new model for purposes of calculating the VaR for the Synthetic Credit Portfolio beginning the previous trading day (January 27). Once the new model was implemented, the Firm-wide 10-Q VaR limit was no longer exceeded. Formal approval of the model followed on February 1. The formal approval states that the VaR calculation would utilize West End and that West End in turn would utilize the Gaussian Copula model<sup><a href="#footnote_4_46252" id="identifier_4_46252" class="footnote-link footnote-identifier-link" title="The Gaussian Copula is a commonly accepted model used to map the approximate correlation between
+two variables. (Accepted, yes, convenient very, sound not so much - n.Tr.) ">v</a></sup> to calculate hazard rates<sup><a href="#footnote_5_46252" id="identifier_5_46252" class="footnote-link footnote-identifier-link" title="A hazard rate is the probability of failure per unit of time of items in operation, sometimes estimated as a ratio of the number of failures to the accumulated operating time for the items. For purposes of the model, the hazard rate estimated the probability of default for a unit of time for each of the underlying names in the portfolio.">vi</a></sup> and correlations. It is unclear what, if anything, either the Model Review Group or CIO Market Risk did at the time to validate the assertion that West End would utilize the Gaussian Copula model as opposed to some other model, but that assertion later proved to be inaccurate.<sup><a href="#footnote_6_46252" id="identifier_6_46252" class="footnote-link footnote-identifier-link" title="A March 30, 2012 Internal Audit report on the Market Risk and Valuation Practices in CIO’s credit portfolios (including the Synthetic Credit Portfolio) assigned a rating of ‘Needs Improvement’ due in part to CIO’s use of “unapproved models in the calculation of risk (including VaR).” The reference to the use of “unapproved models” in the calculation of the VaR is to West End, which, as the Internal Audit report noted, had not been submitted to the Model Review Group for Review. The Internal Audit report included an action plan for CIO to document the West End analytics engine and submit to the Model Review Group with a target completion date of June 30, 2012. While the Internal Audit report also noted problems with the control processes surrounding the VaR calculation, Internal Audit found no specific examples of incomplete or inaccurate data.">vii</a></sup></p>
+<p>As part of its approval of the new model, the Model Review Group included an action plan with respect to two of the risk areas that were identified. First, it mandated automation of the VaR model by January 31, 2012 (i.e., contemporaneously with the model’s approval).</p>
+<p>Second, it required monitoring of illiquid tranches to assess whether mapping to more liquid tranches would be necessary, and ultimately development and submission to the Model Review Group of a risk mapping methodology. Neither of these action plans was completed. The Model Review Group and CIO Market Risk apparently believed that work was already underway to complete automation but took no steps to determine that automation had in fact been completed. The modeler likewise did not submit, nor was he ever required to submit, a complete risk mapping methodology.</p>
+<p><b>B. Operation of the VaR Model</b></p>
+<p>From February to April, the new VaR model was in operation. A CIO employee who reported to the modeler was responsible for daily data entry and operation of the new model. In April, an employee from the IT Department (who had previous experience as a senior quantitative developer) also began to provide assistance with these tasks. <strong>Notwithstanding this additional assistance, a spreadsheet error caused the VaR for April 10 to fail to reflect the day’s $400 million loss in the Synthetic Credit Portfolio.</strong> This error was noticed, first by personnel in the Investment Bank<sup><a href="#footnote_7_46252" id="identifier_7_46252" class="footnote-link footnote-identifier-link" title="On April 18, a member of the market risk team for the Investment Bank obtained information on the Firm-wide and CIO VaR calculations to determine the impact of the April 10 loss on the Firm-wide VaR. Upon discovering that the loss was not reflected in the CIO VaR, he reported his findings to Firm-wide Market Risk, who in turn reported to Mr. Hogan that CIO’s VaR appeared to have an error.">viii</a></sup>, and by the modeler and CIO Market Risk, and was corrected promptly. Because it was viewed as a one-off error, it did not trigger further inquiry.</p>
+<p><b>C. Discovery of Problems with the New VaR Model and Discontinuance</b></p>
+<p>In early May 2012, in response to the recent losses in the Synthetic Credit Portfolio, Mr. Venkatakrishnan asked an employee in the Model Review Group to perform a review of the West End analytic suite, which, as noted, the VaR model used for the initial steps of its calculations. The West End analytic had two options for calculating hazard rates and correlations: a traditional Gaussian Copula model and a so-called Uniform Rate model, an alternative created by the modeler. The spreadsheet that ran West End included a cell that allowed the user to switch between the Gaussian Copula and Uniform Rate models.</p>
+<p>The Model Review Group employee discovered that West End defaulted to running Uniform Rate rather than Gaussian Copula in this cell, including for purposes of calculating the VaR, contrary to the language in the Model Review Group approval. Although this error did not have a significant effect on the VaR, the incident focused the reviewer’s attention on the VaR model and ultimately led to the discovery of additional problems with it. </p>
+<p>After this re-review, a decision was made to stop using the Basel II.5 model and not to rely on it for purposes of reporting CIO VaR in the Firm’s first-quarter Form 10-Q. Following that decision, further errors were discovered in the Basel II.5 model, including, most significantly, an operational error in the calculation of the relative changes in hazard rates and correlation estimates. <strong>Specifically, after subtracting the old rate from the new rate, the spreadsheet divided by their sum instead of their average, as the modeler had intended. This error likely had the effect of muting volatility by a factor of two and of lowering the VaR, although it is unclear by exactly what amount, particularly given that it is unclear whether this error was present in the VaR calculation for every instrument, and that it would have been offset to some extent by correlation changes. It also remains unclear when this error was introduced in the calculation.</strong>
+</p></blockquote>
+<p>Aren't you impressed ? </p>
+<p>For anyone keeping score, the relevant commentary re Excel is found in the article "<a href="/2012/law-enforcement-never-fails-to-unintentionally-entertain/">Law enforcement never fails to unintentionally entertain</a>". In any case Excel is not "one of the greatest, most powerful, most important software applications of all time", as I've seen it described by some random clueless comentator.<sup><a href="#footnote_8_46252" id="identifier_8_46252" class="footnote-link footnote-identifier-link" title="James Kwak, associate professor at the University of Connecticut School of Law, if you must know who.">ix</a></sup> GCC is one of the greatest, most powerful, most important pieces of software of all time. Vi is one of the greatest, most powerful, most important pieces of software of all time.<sup><a href="#footnote_9_46252" id="identifier_9_46252" class="footnote-link footnote-identifier-link" title="I don't have any idea what `software application` is supposed to mean. Possibly the author is in dire need of some hardware application to the occiput, or else inherited his professorship somehow without needing to attend any school at all.">x</a></sup> GnuPG is one of the greatest, most powerful, most important pieces of software of all time. Yes, this list goes on for a while. No, nothing on it runs on Windows (or Mac, for that matter). The reason is that nothing on Windows is great, powerful or important. Not this time, not any time, certainly not all time. Maybe at some point in the (likely very distant) future the miracle happens and something powerful, or maybe important, or possibly even great is written for Windows (Mac is really unlikely). Until such a time however...</p>
+<p>And in closing, a quote from the discussion of <a href="/2013/mpex-tech-stuff/">MPEx innards</a> : </p>
+<blockquote><p>This is what we mean when we say things like “Bitcoin will revolutionize the banking industry”. It’s not something along the lines of Amir “Retard” Taaki going “rabble rabble maffs rabble rabble down with the banks”. It’s something along the lines of, “here’s this complete solution to the one problem you people don’t know how to solve”. From there on the future is pretty clear : either they move to the light side or fall by the wayside. Nobody can continue to offer flawed services once somebody opens up shop doing the Right Thing. That’s revolution for you, and it’s certainly enabled by Bitcoin : if it wasn’t for Bitcoin I wouldn’t have bothered to get involved, and if I wouldn’t have bothered to get involved practical deployment of PGP for financial services would have been still waiting for whatever it was awaiting up to this point. It’s 1990s technology after all.</p></blockquote>
+<p>Apparently not only we win because we do not have the problems of security that have rendered the entire credit card system useless<sup><a href="#footnote_10_46252" id="identifier_10_46252" class="footnote-link footnote-identifier-link" title="When something between one third and half of all credit cards ever issued are available for criminal use you can't claim the system is still working in any sense of the term.">xi</a></sup> but we also win because... we do not use Excel. </p>
+<p>Incredible how easy winning is when your competitor is the nationalised financial industry.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_46252" class="footnote">Conducted in house, in large part because past attempts to conduct outside reviews resulted in expensive, flawed and ocasionally nonsensical reports. You know,<a href="/2013/rota-post-mortem/"> just like ROTA worked out</a>. [<a href="#identifier_0_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_46252" class="footnote">As noted above, VaR is a metric that attempts to estimate the risk of loss on a portfolio of assets. Both the modeler and a member of the CIO Market Risk team who was also involved in the new model’s development were of the view that the Basel I model might be overstating the VaR for the Synthetic Credit Portfolio, in part because the amount of losses had exceeded the stated VaR limit less frequently than would be expected based on the stated confidence level. [<a href="#identifier_1_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_46252" class="footnote">Firm-wide Market Risk raised the possibility of a temporary limit increase to Mr. Hogan on January 20, 2012. On January 21, 2012, the then-head of the Risk Reporting and Finance function – told Mr. Hogan “We are working towards a temporary one-off for CIO and the Firm proposed as follows: JPMC $140mm (vs. $125mm permanent limit) CIO $105mm (vs. $95mm permanent limit.” Mr. Weiland also e-mailed Mr. Hogan on January 22, 2012 regarding a proposed temporary VaR limit increase. [<a href="#identifier_2_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_46252" class="footnote">The modeler had previously worked at Numerix. While there, the Numerix repricing model was developed under his supervision. [<a href="#identifier_3_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_46252" class="footnote">The Gaussian Copula is a commonly accepted model used to map the approximate correlation between<br />
+two variables. (Accepted, yes, convenient very, sound not so much - n.Tr.)  [<a href="#identifier_4_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_46252" class="footnote">A hazard rate is the probability of failure per unit of time of items in operation, sometimes estimated as a ratio of the number of failures to the accumulated operating time for the items. For purposes of the model, the hazard rate estimated the probability of default for a unit of time for each of the underlying names in the portfolio. [<a href="#identifier_5_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_46252" class="footnote">A March 30, 2012 Internal Audit report on the Market Risk and Valuation Practices in CIO’s credit portfolios (including the Synthetic Credit Portfolio) assigned a rating of ‘Needs Improvement’ due in part to CIO’s use of “unapproved models in the calculation of risk (including VaR).” The reference to the use of “unapproved models” in the calculation of the VaR is to West End, which, as the Internal Audit report noted, had not been submitted to the Model Review Group for Review. The Internal Audit report included an action plan for CIO to document the West End analytics engine and submit to the Model Review Group with a target completion date of June 30, 2012. While the Internal Audit report also noted problems with the control processes surrounding the VaR calculation, Internal Audit found no specific examples of incomplete or inaccurate data. [<a href="#identifier_6_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_46252" class="footnote">On April 18, a member of the market risk team for the Investment Bank obtained information on the Firm-wide and CIO VaR calculations to determine the impact of the April 10 loss on the Firm-wide VaR. Upon discovering that the loss was not reflected in the CIO VaR, he reported his findings to Firm-wide Market Risk, who in turn reported to Mr. Hogan that CIO’s VaR appeared to have an error. [<a href="#identifier_7_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_46252" class="footnote">James Kwak, associate professor at the University of Connecticut School of Law, if you must know who. [<a href="#identifier_8_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_9_46252" class="footnote">I don't have any idea what "software application" is supposed to mean. Possibly the author is in dire need of some hardware application to the occiput, or else inherited his professorship somehow without needing to attend any school at all. [<a href="#identifier_9_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_10_46252" class="footnote">When something between one third and half of all credit cards ever issued are available for criminal use you can't claim the system is still working in any sense of the term. [<a href="#identifier_10_46252" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/new-mpex-key/">New MPEx key</a></div>
+                <div class="alignright"><a href="/2013/bitcoin-prices-bitcoin-inflexibility/">Bitcoin prices, Bitcoin inflexibility</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/mpex/" title="View all posts in MPEx" rel="category tag">MPEx</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/why-mpex-is-better-than-fiat-institutions-part-349085-we-dont-use-excel/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/why-mpex-is-better-than-fiat-institutions-part-349085-we-dont-use-excel/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>21 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-91988" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-91988" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<blockquote><p>I don’t have any idea what “software application” is supposed to mean. Possibly the author is in dire need of some hardware application to the occiput, or else inherited his professorship somehow without needing to attend any school at all.</p></blockquote>
+<blockquote><p><b>James Kwak</b> is best known as co-founder, in September, 2008, with Simon Johnson of The Baseline Scenario a commentary on the global financial crisis, mostly focused on the situation in the USA. Kwak <b>received</b> his A.B. from Harvard University and <b>his Ph.D. in French intellectual history from the University of California</b>, Berkeley (1997).</p></blockquote>
+<p>Do you have his level in order to question his authority in any matter? Software needs to be app to da ppl moar.</p>
+<p>I'm sure Software is a group or entity, like the State or Society, and when you apply it properly and effectively several times, you obtain <i>applications</i> of software? :D</p>
+						</li>
+
+										<li id="comment-91993" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-91993" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<p>Meh. He can shove his "French intellectual history" phd from Berkley. There's nobody in the US qualified to discuss that topic, he might as well get an irrigations technology degree from the University of Sahara. What's next, BA in latin pronounciation from MIT ?</p>
+						</li>
+
+										<li id="comment-91996" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-91996" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<p><a href="http://www.toptenz.net/to-10-useless-college-classes-degrees.php" >Almost there</a>.</p>
+						</li>
+
+										<li id="comment-91997" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-91997" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<p>Pretty retarded list. Art history and philosophy are possibly the only two lines worth taking if you're going to be a leader of men. Obviously there's no good programmes in either anywhere in the English speaking world, but that's really a reflection on the stupidity of being American and little more.</p>
+						</li>
+
+										<li id="comment-91998" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-91998" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<p>How many people from your graduation with a philosophy degree got into leadership positions?</p>
+						</li>
+
+										<li id="comment-91999" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-91999" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<p>As far as I know, none.</p>
+<p>It's not the case that random whore taking philosophy becomes Cleopatra. It's the case that if you are Cleopatra, the best use of your time is taking philosophy.</p>
+						</li>
+
+										<li id="comment-92000" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92000" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<blockquote><p>Art history and philosophy are possibly the only two lines worth taking if you’re going to be a leader of men. </p></blockquote>
+<p>I assumed you meant studies before leading men, <a href="/2011/drepturile-celui-care-se-fofileaza/#comment-54120" >not your case in any condition</a>.</p>
+<blockquote><p>It’s the case that if you are Cleopatra, the best use of your time is taking philosophy.</p></blockquote>
+<p>This is after, that's why I've asked <a href="/2013/why-mpex-is-better-than-fiat-institutions-part-349085-we-dont-use-excel/#comment-91998" >that</a>. So <i>if you are a leader of men</i> moar correct?</p>
+<p>I'm supposing that if you have the capacity of leadership, you can take any career and if not, why so?</p>
+						</li>
+
+										<li id="comment-92001" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92001" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<blockquote><p>So if you are a leader of men moar correct?</p></blockquote>
+<p>If you are a leader of men to be. A chick is not a rooster, but those chicks that will be roosters are chicks going to be roosters.</p>
+<p>Philosophy is not a career, which is precisely why all the foregoing is the case.</p>
+						</li>
+
+										<li id="comment-92005" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92005" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<p>I guess this can't go further without debate regarding whether people are born with aptitudes or they are born and achive skill in time.</p>
+<p>Probably it is a career, it's just that socialism has not been properly implemented yet so that we can all be philosophers.</p>
+<p>For the lulz:</p>
+<blockquote><p>Employment &amp; Further Study of Kent Philosophy graduates</p>
+<p>There follows a summary of the employment and further study which Kent Philosophy students (including combined courses)</p>
+<p>Employed</p>
+<p>Courtline Landscapes - Gardener</p>
+<p>The Number UK-Call Handler</p>
+<p>Choo Choo-Nursery Assistant</p>
+<p>Michael Bispham Agriculture-Farmer</p>
+<p>Kent County Council-Social Worker</p></blockquote>
+						</li>
+
+										<li id="comment-92009" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92009" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<p>Being a leader is not a career. And for that matter, people are not born either equal or identical. Some are born inferior, some are born superior. The idea is to give them all equal chances, precisely because that's how you manage to select the superior and marginalise the inferior.</p>
+						</li>
+
+										<li id="comment-92011" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92011" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<p>If there is one Cleopatra and none more, how do you compensade expenses? So being, state-funded or church-funded education was and will be bound to fail?</p>
+<p>That could justify the expensive american model: they might not worth/succed the education they receive but hey, they pay for it; until they pay with virtual fiat issued by banks and it's no longer sustainable?!!? Circlejerk.</p>
+<p>Restriction of public access to education would be the solution?</p>
+						</li>
+
+										<li id="comment-92012" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-92012" title="">Tuesday, 12 February 2013</a>
+							</div>
+						<p>*I would like to include natural resources in expenses also, like wood for paper or fuel for lighting, which are not regenerable in short terms.<br />
+Money is exchanged between merchants, so expenses are covered, except nature can't buy coal for itself with human money.</p>
+						</li>
+
+										<li id="comment-95046" class="commentbody"><div class="commenthead"><img alt='Anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">Anon<img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95046" title="">Sunday, 15 September 2013</a>
+							</div>
+						<blockquote><p>…“‘[T]he gorilla in the room is that they sent me something that’s not even encrypted. It’s unsecured, on an Excel spreadsheet — which is using outdated technology to transfer that information in the first place.’</p></blockquote>
+<p><a href="http://www.weeklystandard.com/blogs/obamacare-employee-accidentally-sends-out-2400-social-security-numbers_753991.html">http://www.weeklystandard.com/blogs/obamacare-employee-accidentally-sends-out-2400-social-security-numbers_753991.html</a></p>
+						</li>
+
+										<li id="comment-95047" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95047" title="">Sunday, 15 September 2013</a>
+							</div>
+						<p>"Daddy, daddy, what's a bureaucrat ?"<br />
+"A dude still using Excel."</p>
+						</li>
+
+										<li id="comment-95048" class="commentbody"><div class="commenthead"><img alt='Vexare`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">Vexare</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-95048" title="">Sunday, 15 September 2013</a>
+							</div>
+						<p>Server database would be some saas on Internet Explorer.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-139111">
+					<div class='trackhead'>
+						<div class="commentcount">16</div>
+						<span class="authorlink"><a href='/2013/bitcoin-prices-bitcoin-inflexibility?b=unmanageable&amp;e=omic#select' class='url'>Bitcoin prices, Bitcoin inflexibility on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139111" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] unmanageable for the "ordinary person". Hedge funds and banks (the ones a little ahead of using Excel) that trade in this murky complexity make a killing and become the principal driver of economic [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-139598">
+					<div class='trackhead'>
+						<div class="commentcount">17</div>
+						<span class="authorlink"><a href='/2013/why-mpex-is-better-than-fiat-institutions-part-930458-we-don%e2%80%99t-use-lube?b=right%2C%20I%27m%20d&amp;e=ints#select' class='url'>Why MPEx is better than fiat institutions, part 930458 : we don’t use lube on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139598" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] right, I'm doing a series of these. So consider the following points [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-142925">
+					<div class='trackhead'>
+						<div class="commentcount">18</div>
+						<span class="authorlink"><a href='/2016/handled-badly?b=specifically&amp;e=aded#select' class='url'>Handled ; badly. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142925" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] specifically because the protective skins are in the way of actual realisation. [&#8617;]Call it Gaussian Copula, why not. [&#8617;]See the discussion of CDOs. [&#8617;]"Oh MP, but it didn't end, it was uploaded [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-145235">
+					<div class='trackhead'>
+						<div class="commentcount">19</div>
+						<span class="authorlink"><a href='/2019/i-dont-get-it?b=Which%20also%20s&amp;e=pen.#select' class='url'>I don't get it... on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-145235" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] Which also suggests the only possible explanation to this entire production : mayhap for some reason one of them "traffic generating" bots ended up thinking Trilema is a paying customer ? There's absolutely no reason on this side for such notions being entertained ; but then again who knows, some data entry monkey fucked up an excel spreadsheet somewhere. It's been known to happen. [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-146058">
+					<div class='trackhead'>
+						<div class="commentcount">20</div>
+						<span class="authorlink"><a href='/2019/bitcoin-recapitulation?b=pretty%20much%20&amp;e=s%20of#select' class='url'>Bitcoin Recapitulation on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-146058" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] pretty much all all banking currently happens through java-on-Windows unexamined (and unexaminable) towers of chairs, so no, I don't expect much efficiency will be seen deployed by the celebrated makers of [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-161860">
+					<div class='trackhead'>
+						<div class="commentcount">21</div>
+						<span class="authorlink"><a href='/2021/the-current-instagram-algorithm-or-monkeys-and-microscopes-again/?b=3%20cat-tagged&amp;e=e-n.#select' class='url'>The current Instagram algorithm, or monkeys and microscopes again on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-161860" title="">Sunday, 28 March 2021</a>
+					</div>
+					<p>[...] 3 cat-tagged pictures and commented on 2 fdhkjhdf-tagged picturesvi then one can "predict" (after a fashion) that the next cat-tagged picture is more likely to be liked than commented upon by profile-n. [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author48cc256" id="author48cc256" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email48cc256" id="email48cc256" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url48cc256" id="url48cc256" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="46252" /></p>
+				<input type="hidden" name="comment_post_time" value="1778666695-18.97.9.169" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-46252")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-46252");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-46252");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>
