@@ -1,0 +1,93 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Affidavit of Michael 'smickles' Carver
+
+
+
+12NOV12 20:21 Mircea and I began discussing the discrepancy between the future USD/BTC exchange rate implied by the icbit future contract BUZ2 and the future exchange rate implied by MPEx options and the current spot price.
+
+
+
+12NOV12 20:44 Mircea decided to send 200 BTC to my icbit account with the intention of capitalizing on the future/spot discrepancy. I placed the order and received the contracts.
+
+
+
+13NOV12 21:32 I reported to Mircea that the quoted price on BUZ2 was 10.1 at close (a significantly odd and large downward move considering the concurrent rise in the USD/BTC spot rate).
+
+	Mircea was then curious if icbit's operator could determine if my account was traceable to my known identity.
+
+	Due the username and email address associated with the account I speculated that it would not be a stretch to assume that they associated my account with me. Further, someone who did not care for strong evidence would assume his involvement too as most of the deposit of BTC into this account came from the public receiving address of MPEx.
+
+	I asserted that it was not likely they would try to figure out who I was.
+
+
+
+13NOV12 21:40 After determining that BUZ2 quoted price close was nearly 1 USD below spot with only about one month before settlement, Mircea decided to establish a bid-wall.
+
+
+
+13NOV12 25:51 After looking into the historical quote movement of BUZ2. I determined that, recently, selloffs had been occurring just before close. With the exception of this most recent one, they typically involved about 50 contracts. This most recent one involved a little fewer than 400, leading me to speculate that this larger amount was due to the triggering of forced liquidations, and another volley of 50 contracts could be expected at todays close.
+
+	Further, it became apparent that the order I placed for Mircea yesterday was one of the largest single points of volume (in terms of BTC) in the history of BUZ2 trading.
+
+	Mircea now asserted that it would be unlikely for the operator of a site not to look into who one of their largest customers is.
+
+
+
+14NOV12 00:11 I informed Mircea of confirmation of placement of his bid. At the same time, unknown to Mircea, I too placed a bid, yet slightly above his own.
+
+
+
+14NOV12 20:03 I informed Mircea of BUZ2's closing price of 10.01 and that I had been watching the live order book at close and saw the whole order book of less than 200 contracts sold except his order and then I informed him of my order and the fact that it was as well not sold into.
+
+	Mircea pointed out that this meant that everything was sold out except for [the few below our own and] our own orders.
+
+
+
+14NOV12 20:29 I reported a discrepancy between my observed volume at close and the official number of 471.
+
+
+
+15NOV12	18:12 Mircea informed me that he wanted to have a large buy order placed after todays expected pre-close sell order took place.
+
+	I noted that I had observed the previous sell orders occurring at 30 seconds before close and informed him that I could try.
+
+	I then placed a few orders to figure out the amount of time between when I placed an order and when the order showed in the book.
+
+	As the time it took an order to show in the book was less than a second, I reported my confidence in fulfilling Mircea's order to him.
+
+
+
+15NOV12 19:59 At 30 seconds until close, I saw the expected sell order. It was larger than I had expected, leaving about 450 contracts on the book at 10.025. Notwithstanding the fact that his order would not overcome this, I dutifully placed the order Mircea had asked me too.
+
+	I expected to see the results of Mircea's order within the next few seconds as server load could be expected to be higher than earlier in the day.
+
+	At 10 seconds until close I had not seen any evidence of the order taking effect.
+
+	Hurriedly, I began repeating the order as many times as I could before close, knowing that, should each of these orders go through, some of my own funds would be used and entered into a position which I did not really want to take. However, I felt it better to potentially sacrifice some of my own funds to fulfill my word. I was able to repeat the order at least three times before close.
+
+
+
+15NOV12 20:00 At 10 seconds after close, I saw the large sell order removed on the live order book, and, to my surprise, no evidence of any of my orders having occurred.
+
+
+
+I swear to the preceding statements.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iQIcBAEBCgAGBQJQpYY9AAoJEOpi186yRQw/2ZcQANcSTBJqIJyL/5ZSvL83+NtZ
+GISM5gGJHzTHRxDhfIqklaDKFZ1ubmNus665AfuO8pQ201OW5Jl8A9h88dlBq0vI
+AlFMMW1dYXffQVheCSJm8IOj79LmU7LduNyQn59DpAgGvgmPlAWr0SYAQr/o9w9q
+iiKfQbVQrxdtnoiFZjvo2DqmW+joDMB6zCxIvwCbda71RKTE/k6Rv35vHc4FVQQ1
+JR5yFzEaDFN9V+589oiY/YF6mxRWn0DvhHVKU517MRvH+Whe9kDpVXzGTjr223yn
+D5wXaDcl+vj1H0vVHIehODryOpCyac0LCmowq0m7HZ2v7nojZvIBPzDe3N6r8vs7
+pzhaviesOGInKKdSnu59hjmIFxCav0a21qVPjE+36qx8yNAW5a2FHmgkA4BVcJH3
+egb3nEAycmqzsNscSRhtjZSsnPb1i5En1rNL0s6mqJ7x6XZ8Cz2cpAfKpTZSSSCb
+OzIAs8kzdPAV33TaUEerHJ/ZXQYmp3zIfYsOl/m81Xmk818fkg3hP1ylIxeXUr+j
+MsFiPtGA8v5iojCmtD+DtSq+x7/ck+hnWmdOV9X5LmvyjCuE6jKa9gwRN4eJM52n
+46fSrxDhF+PJWWKP3mD0msDLBgpMF9w5NhpI2qBQwr1qf5z1+vXcv4NfiX2G7Zol
+uLh9uPOQELXkxYf+Q5Ew
+=S5XB
+-----END PGP SIGNATURE-----
