@@ -7,7 +7,7 @@
 
 ### Cloudflare Mirror
 
-Available at: [trilema-mirror.pages.dev](trilema-mirror.pages.dev)
+Available at: [trilema-mirror.pages.dev](https://trilema-mirror.pages.dev)
 
 > [!WARNING]
 > Use the Tor Browser or host your own private copy of the site for better privacy.
