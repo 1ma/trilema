@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_mar2019c.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>For the love of lolcows on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">The world’s greatest erotica writer.<br /><a href=/2019/i-own-erotica-like-zeus-owns-olympus/>By far</a>.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-45758"><div class="post" id="post-45758">                    <h1><a href="/2013/for-the-love-of-lolcows/" rel="bookmark" title="Permanent Link to For the love of lolcows">For the love of lolcows</a></h1>                        <div class="date">                                     Wednesday, 23 January, Year 5 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<blockquote><blockquote>I'm pessimistic about this change. </p>
+<p>What I really liked about CoinURL was giantdragon's commitment to improving it, especially when I gave him a feature request, which he had already implemented a few hours later. </p>
+<p>On the other hand, Operation Fabulous, which is currently owned mc_lovin has barely changed after it was sold; there are no way to arrange sites by view count or other statistics, changing the e-mail address is still "temporarely[sic] suspended" and while the site is functional, it doesn't seem to have the same level of support Anonymous Ads and CoinURL have, which have continued to improve in many ways since their inception.</p></blockquote>
+<p>I totally understand where you are coming from, Matoking, and I'm glad you brought that point up.</p>
+<p>Yeah, OpFab hasn't been visually updated since 2010.  It looks like it was made in 1990.  </p>
+<p>If you looked at the advertisers account page, you would have noticed that it was spelled correctly.  And on the publishers account page, it was spelled incorrectly.  The reason it was spelled properly on one page and not the other is because before I even bought OpFab (with Edd), I told BioMike that there was the typo, and he corrected one of them but he must not have realized there were two of them.  To show you that I'm serious about this stuff, I have corrected the spelling on both pages now, omg, first thing ever changed.  Why haven't I done any more?  Read on.</p>
+<p>I don't want to mess things up!</p>
+<p>Normally, when I get a site, or build a site, or anything, I like to have a full backup of everything, then if I make changes, I don't fear data loss.  Sure, we have backups, but OpFab is not as easy to work on as a normal LAMP site.  I prefer to work on a site in a development environment, offline system entirely, do the changes, and then push the changes live once I'm satisfied.  Luckily we moved the OpFab server to a familiar OS, but it does not use MySQL for a database.  So I can't just make a quick dump and load the dump up in the dev box.  It uses Firebird, and in my opinion Firebird is terrible.  I still have no idea how to do much of anything in Firebird, but I finally, FINALLY got a copy of OpFab in a dev environment about a week or so ago (January 4th to be exact) and I have already started to make visual changes to it.  I read somewhere that it is very easy to corrupt a Firebird database by making changes to the live site.  The original OpFab author, BioMike, is still around but he is a busy person as well and he lives in the Netherlands so the time zones are completely out of wack and he only has, when he's not on holidays, a few hours to work on something during the week, and I work F/T during the day so it is very hard for us to find a time to work together.  On the 4th I had to stay up until 7AM when working with him to learn how to operate it, and I have a log of our entire conversation, all of the sites' changes and exactly how to set up an OpFab server from scratch, to the point where I could literally make a bash script that creates an OpFab server with 1 command.  If I have any further questions, I can consult that conversation we had, as I have asked like everything already.  Firebird is very similar to MySQL but basically all the command names are different.  It was also very hard for me to have a server to experiment with a server either, but at Christmas I traded a nice C2D gaming rig to my sister for a dual-771 Xeon box she got for free from work and I ordered dual quads for it and set it up at home with VMWare, and I'm having a blast with it, the very first thing I did was get in touch with BioMike and we worked together to set up a dev box, which is running successfully.</p>
+<p>The interface of a site is the easiest thing to do.  Have you seen my site, Murder Capitals? (formerly Bitcoin Mafia due to this SSL company not giving me an SSL cert for BitcoinTrading because it sounded too 'commerical' and apparently it's a good idea for the site to be secure.)  The whole interface I did by hand.  And I mean, it was there before, I just changed every little image and all the colors, the styling, the whole theme, I changed pretty much every pixel of it, that should be testament to my CSS styling skills, as well I integrated some functionality in there that wasn't there previously.  It took me like hundreds of hours, and I think it's awesome.  It's like 95% complete.  It was this site I was working on immediately before I got a job, I was unemployed for a bit there thinking I could just live off Bitcoins, and then I got a wicked job in IT and it was 100% attributed to Bitcoin.  Bitcoin seriously got me a job, and in that job I work with Linux and websites and everything, so all day when I'm at work I'm expanding my knowledge-base even more, the learning process never stops, except I have to work on their projects instead of mine...  Since I work full-time now, it's very hard to find the time to work on things like this, but I still have a few hours in an evening and rest assured, my Bitcoin sites get all of it.  I don't "go out with friends" or ignore you guys, I seriously am just really busy!  My #1 problem is that I have too many things going on at once.  This is why I hire developers.  Y'know, if you get 2-3 replies out of me in a week, that's pretty good.  I hired the owner of Bitcoin Pyramid, Arsen, as well, to integrate Bitcoin into the Bitcoin Mafia game and a year after that went on, not a single line of code was changed, and we just sort of parted ways, no hard feelings, just nothing got done.  He was very busy, as I am now too.  I also have a signmaking company that I have customers hollering at me to cut their logos too and I have a nice bitcoin mining farm that spans 1 room in 2 houses and when the whole farm is down, I have to go drive down there and fix things...  Luckily I am the BAMT-master now, and I have uptimes of like 30 days before a rig even goes down, so it's not an issue anymore but it was at one time.  The good thing about not having time for my sites and a job instead, is that I have money to invest into my sites!  I can like, buy sites like CoinURL!</p>
+<p>I was so extremely pleased to see the code for CoinURL.  I understand every detail of it entirely, and I have built a few Twitter Bootstrap sites like this in the past but I always make static sites, having the code to review I am learning a lot already of how it is put together.  The code actually resembles many of the other sites I have built, it looks like I made this site except a year in the future.  You can rest assured I will be modifying and adding functionality to CoinURL far easier than with OpFab.  </p>
+<p>I hope this backstory helps you understand where I'm coming from.  I have been living in a computer world since 4 years old, I had to learn how to navigate MS-DOS before I could even write.  I spent my entire evening working with computers for over 20 years now.  Programming is just one thing I really wished I learned before, but every day I am just soaking it up.  </p>
+<blockquote><p>What happens with the balance I had on CoinURL?</p></blockquote>
+<p>That's a good question.  I'm still scratching my head on how this is going to go down.  I'll keep you posted but rest assured all the funds are stored offline and I have to build a fresh wallet for the new CoinURL, it's not like they are stored in some remote site.  I wish the coins came along with CoinURL, but if he did include the coins, a person could have just bought the site, stolen all the coins, and toss the site away.  Originally he was just selling the domain names and I made an offer to buy and revive the whole site.  The fact that there is even going to be a tomorrow for CoinURL is 100% my reviving it.  Re: balances, well, I had coins on there too, guys.  If the amount is very small or negligible, I will just pay you all out of pocket.  If there is a million dollars outstanding, well sorry folks but I haven't won the lottery yet.  I was talking to giantdragon though, and he says advertisers were originally not allowed to withdrawl at all.  Once you put your coins in, they HAD to be spent to a publisher.  I see some logic in this.  And he says the no-warranties ToS covered this.  Now me refunding advertisers which is against the sites' original ToS and site operation is just simply me, mc_lovin, being the nicest guy ever and I do stuff like that.  Pay by the bite.  Hug everyone.  No shoes, no shirt, but service.  Besides, the price I paid is far less than what it would take if I were to hire someone off the street to build the site entirely from scratch.  I basically bought the domains, codebase, databases, and some minor support to get things rolling.  It would have been worth it for me to purchase it simply to look over the beautiful code for the sake of learning.  If I was 100% owner of OpFab, I would probably just integrate the two sites into one, but I'm still on the fence about that idea.  I'd rather buy Edd's half and own them all but he won't sell .  But I'm mc_lovin and I am going to get the site back up and you guys won't even notice it down.  It's actually running as we speak, I have dedicated this entire day and tomorrow to setting it all up and configuring, I would share the link right now but there's no point since the actual DNS hasn't been pointed at the server, but the site is up and running on my server, we can point coinurl.com and cur.lv at the server and it will just start working instantly.  Folks, my server is going to friggin' EXPLODE when this goes live.  I really don't have the resources right now to get this running on there, but we're going to try it out, see what the bottlenecks are, and soup up the server to meet the demand.  I have already contacted BitVPS and asked them to double the memory in the server and they said yes, absolutely, I am just sitting here impatiently as they do that.  At that point, if it's still not enough, I am paying someone for resources on a really powerful dedicated server, I am trying to set it up so that if the BitcoinTrading or OpFab server does down, it automatically falls over to the superserver.  Or maybe vice-versa, it runs on the superserver and falls over to the VPS's.  Actually at work we have a full rack in a big datacenter, and I have asked a dozen times if I could put a physical box there, I would buy a SuperMicro server with redundant hard drives, redundant power supplies, hell I'll put a high-availability VMware cluster there if possible, I'd pay for electricity and per-MB bandwidth if necessary.  He's considering it, it's still on the table as an idea but he doesn't seem too enthusiastic about the idea.  I wish I could just go to the DC-owner and get a server put in an unrelated rack, even, but this stuff all takes time and I have enough on my plate to worry about keeping the BitVPS servers up and harassing them whenever things go down.  Hell, even if my boss gave me a VPS on their VMWare server that would be epic and I would upgrade the server so it would only be faster than before, but now that this CoinURL is going to be on there and if it's half as intense as giantdragon has implied it to be, good luck with that one.  But I'll keep trying.  </p>
+<p>So when the site is running, and everyone requests withdrawls at once...  Be realistic.  Site is starting up with no funds and we have to work together on this one.  If you have a balance, use it for advertising like you had originally intended.  Publishers, I think I can handle the amounts that you are likely to be receiving.  I know with CoinURL I had the banners up for the whole 6 months, I got like a half million pageviews and I only netted like 0.20 BTC.  So if everyone was as heavy as a publisher as I am and that is the kind of money you were getting, I can pay you that out of pocket.  But one day a time, one person a time, WHEN I have time.  In the meantime, I'll pay giantdragon for his time, and we'll take it from there.  </p>
+<p>Make sense?</p></blockquote>
+<p>This is a vastly abridged version of the statement made by the acquirer of one of the many pointless Bitcoin "services" that consist of an empty shell of a website (code, lamp, bullshit) and an empty shell of a developer (working full time at his real job, no qualification or experience with anything other than coding). </p>
+<p>That's it. That's all. No management (of any kind, process, financial, risk, strategic, you name it - it's missing), no sales, no market, no model really. No audit, security or otherwise. Just... the scripts that Joe wrote. </p>
+<p>Moving on to a little dialogue to liven up all this prose, </p>
+<ul>
+<strong>Me</strong> That last thread btw is hysterical.<br />
+<strong>Her</strong> Wait, there's a wall of text to describe the wall of text? Noty lmao.</p>
+<p><strong>Me</strong> :P<br />
+<strong>Her</strong> Sounds like that client I had that I had to drop cause he kept sending 10pg long emails of ramble and apology for a $50 project. And then when I told him I wouldn't do it if he kept at this he sent a 2x as long one promising he'd stop.</p>
+<p><strong>Me</strong> Haha<br />
+<strong>Her</strong> And isn't this the idiot lottery guy?!<sup><a href="#footnote_0_45758" id="identifier_0_45758" class="footnote-link footnote-identifier-link" title="Literally, person listed an asset on GLBSE which used equity to `invest` in PMBs and then used the dwindling `dividends` paid by those to buy Canadian lottery tickets. This, incidentally, got rave reviews on the forum from the contingent of idiots who are both represented by and representative for Bitcoin bilge. Luckily for everyone involved GLBSE promptly collapsed within the week and the lottery asset caused no further trouble.">i</a></sup> Lol!</p>
+<p><strong>Me</strong> Yup.<br />
+<strong>Her</strong> Ahaha. You're right, lolfactory. You gotta hand it to these ppl for actually getting out of bed and trying to write something even.</p>
+<p><strong>Me</strong> Srsly. And you know, during the <a href=//dtng/c/src/134654389322.png>GLBSE</a> era, this WAS bitcoin business.<br />
+<strong>Her</strong> Ze whoas.</p>
+<p><strong>Me</strong> You know, if you were friendlier, and nicer, I could benefit from the opportunity to have a chance at buying sites just like these from people just like him.<br />
+<strong>Her</strong> Aww, damn.</p>
+<p><strong>Me</strong> No shoes, no shirt, just service.<br />
+<strong>Her</strong> Lol. And a free puppy? And a cappucino?</p>
+<p><strong>Me</strong> Now why won't you be reasonable ?<br />
+<strong>Her</strong> Rawwrhh! SMASH growl epithet hurrr</p>
+<p><strong>Me</strong> Hurrr ahaha. I'm posting this.<br />
+<strong>Her</strong> Lol.</ul>
+<p>In conclusion : The <em>raison d'etre</em> of a good chunk of Internet dwellers is others' amusement. They're called lolcows.<sup><a href="#footnote_1_45758" id="identifier_1_45758" class="footnote-link footnote-identifier-link" title="The same is true offline, for that matter : most people don't have the sense to get out of the rain on their own, and couldn't as much as feed themselves. The difference is practical : offline people hide behind managers, officers, various and sundry bosses, rulers. Masters, ultimately. There's just no way the average corporate grunt finds himself on a stage, to speak before the whole market. Companies don't do open mic for the random schmoe in Accounting or HR. Masters protect the lolcows from, mostly, themselves. 
+Online however people aren't nearly as well protected. Most of them are directly accessible, which catastrophically exposes their incredibly numerous vulnerabilities to - potentially, at least - the entire world's best and brightest. I imagine some sort of submission and delegation mechanisms will have to eventually emerge even online, because as it is the system isn't workable for most anyone (and the `plz to be nice` veneer helps about as much as papering over a nuclear reactor core gone critical).">ii</a></sup></p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_45758" class="footnote">Literally, person listed an asset on GLBSE which used equity to "invest" in <a href=/2012/the-problem-with-pmbs-ie-perpetual-mining-bonds/>PMB</a>s and then used the dwindling "dividends" paid by those to buy Canadian lottery tickets. This, incidentally, got rave reviews on the forum from the contingent of idiots who are both represented by and representative for Bitcoin bilge. Luckily for everyone involved GLBSE promptly collapsed within the week and the lottery asset caused no further trouble. [<a href="#identifier_0_45758" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_45758" class="footnote">The same is true offline, for that matter : most people don't have the sense to get out of the rain on their own, and couldn't as much as feed themselves. The difference is practical : offline people hide behind managers, officers, various and sundry bosses, rulers. Masters, ultimately. There's just no way the average corporate grunt finds himself on a stage, to speak before the whole market. Companies don't do open mic for the random schmoe in Accounting or HR. Masters protect the lolcows from, mostly, themselves. </p>
+<p>Online however people aren't nearly as well protected. Most of them are directly accessible, which catastrophically exposes their incredibly numerous vulnerabilities to - potentially, at least - the entire world's best and brightest. I imagine some sort of submission and delegation mechanisms will have to eventually emerge even online, because as it is the system isn't workable for most anyone (and the "plz to be nice" veneer helps about as much as papering over a nuclear reactor core gone critical). [<a href="#identifier_1_45758" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2013/mpex-hiring-old-style-pr/">MPEx hiring : old style PR</a></div>
+                <div class="alignright"><a href="/2013/one-of-the-main-causes-of-collapse-of-white-society-in-the-us-may-well-be/">One of the main causes of collapse of white society in the US may well be...</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/rautati-si-mizerii/" title="View all posts in Rautati si Mizerii" rel="category tag">Rautati si Mizerii</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2013/for-the-love-of-lolcows/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2013/for-the-love-of-lolcows/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+
+
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authorcd2d460" id="authorcd2d460" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emailcd2d460" id="emailcd2d460" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urlcd2d460" id="urlcd2d460" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="45758" /></p>
+				<input type="hidden" name="comment_post_time" value="1764981628-18.97.9.172" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2025 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-45758")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-45758");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-45758");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>
