@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_nov2020c.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>No argument on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">The scandalous blog of a sexual predator.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-52541"><div class="post" id="post-52541">                    <h1><a href="/2014/no-argument/" rel="bookmark" title="Permanent Link to No argument">No argument</a></h1>                        <div class="date">                                     Friday, 31 January, Year 6 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p><strong>mircea_popescu</strong> There. Let's discuss it here, I'll publish it afterwards.<br />
+<strong>herbijudlestoids</strong> Kthx.</p>
+<p><strong>mircea_popescu</strong> Ok so here we go. Maddoff's balancesheet, before the collapse, showed some assets. Right ?<br />
+<strong>herbijudlestoids</strong> Nominally, yes, but it was easy for anyone who checked to see that the maths of the assets was completely bogus, and multiple fiduciaries did this and reported to the SEC (which dutifully ignored).</p>
+<p><strong>mircea_popescu</strong> But let me make the argument for what it is. Those assets that he had, they were in fact somehow valued. On one approach to valuation, they came out X. On another approach to valuation, they came out Y. There's little convergence between the series of Xs and Ys. These are all facts, these all happened. Now. What is the root cause ? How do we know they don't happen again ?<br />
+<strong>herbijudlestoids</strong> Well I have an answer, pretty straightforward and based in science.</p>
+<p><strong>mircea_popescu</strong> Aha ?<br />
+<strong>herbijudlestoids</strong> Let's say I take the universe of hedge funds and I also take the Fama/French asset factors (value, momentum, liquidity, smallcap, etc), and do a factor decomposition against them. I can see which factors explain the returns of which funds.</p>
+<p><strong>mircea_popescu</strong> No argument at all.<br />
+<strong>herbijudlestoids</strong> Even though I don't know exactly which assets they might be invested in.</p>
+<p><strong>mircea_popescu</strong> What if your unit of account is broken ? What if in fact, unbeknowst to you, all this is a pyramid scheme based on trading baseball cards ?<br />
+<strong>herbijudlestoids</strong> The factors are self funded, they do not use the unit of account such as USD. It's long one asset, short another. E.g. long the 10 cheapest and short the 10 most expensive stocks in an index.</p>
+<p><strong>mircea_popescu</strong> Right... So what if it's zeroes everywhere. Does your model remain coherent ? Ie, 10 cheapest are all really worth 0. 10 most expensive are all really worth... 0.<br />
+<strong>herbijudlestoids</strong> The actual value is not under consideration. What I am trying to do is determine where the returns posted by the fund come from. If I can determine, for example, they come 90% value and 10% liquidity factor, then I know probably what the fund is up to.</p>
+<p><strong>mircea_popescu</strong> Yes, but you base this on some presumptions. Which is what I'm trying to illustrate to you.<br />
+<strong>herbijudlestoids</strong> If the returns arent explained by any factor then I know the fund needs exploration. Since most funds returns are easily explained by common factors, I know that most funds are not Madoff funds.</p>
+<p><strong>mircea_popescu</strong> Only within the context in which your presumptions hold true. This is the problem here : it's not that you can't build models that measure things. It's that it's in principle impossible to know if you're measuring everything you need to.<br />
+<strong>herbijudlestoids</strong> The factors are proxies, right?</p>
+<p><strong>mircea_popescu</strong> I'm not sure what you're asking there ?<br />
+<strong>herbijudlestoids</strong> They're crude approximations of what one might do to capture a perceived given premium. You're saying I presume various things, but I really don't, except on the most relative basis. I'm not presuming that expensive stocks are worth $1 and cheap ones are worth $2, just that on a relative basis one is cheaper than the other.</p>
+<p><strong>mircea_popescu</strong> Ok, want to run me through a model and we can evaluate this claim ?<br />
+<strong>herbijudlestoids</strong> Sure, here is a simple one which has had good returns : take the universe of stocks, for example wilshire 5000.</p>
+<p><strong>mircea_popescu</strong> So taken.<br />
+<strong>herbijudlestoids</strong> Figure out the earnings of the avg stock and also the total dollar volume for the avg stock. Figure out the TDV/earnings ratio for the avg stock. Weight investments inversely to this proportion, so stocks that have a high TDV/earnings ratio receive low investment, low TDV/earnings ratio receive high investment. That is the "model". Alternatively to self fund I can short the high TDV/earnings and long the low TDV/earnings ratio.</p>
+<p><strong>mircea_popescu</strong> Ok. So what does this model presume ?<br />
+<strong>herbijudlestoids</strong> Basically it presumes only that low liquidity stocks as measured by the TDV/earnings ratio will outperform stocks with a high TDV/earnings ratio. So lets say I calculate the return path over the last 30 years for such a strategy, and compare it using linear regression to the return of all hedge funds, I can see which funds have used a strategy like this to earn their returns. I know emphatically they are not Madoff funds.</p>
+<p><strong>mircea_popescu</strong> But first and foremost you must be able to calculate a TDV. You must also be able to obtain earnings figures.<br />
+<strong>herbijudlestoids</strong> Yes, both your statements are correct. I need information about the assets im investing in to inform the decision.</p>
+<p><strong>mircea_popescu</strong> Well you see ? And now to your comparison : you know which funds have DECLARED to not be Maddoff funds. What if all the funds are in fact lieing on their return sheets ? You will get a selection of funds which randomly happen to meet a criteria you picked.<br />
+<strong>herbijudlestoids</strong> Then the information is bad and I've made an uninformed investment, failing my job for due diligence.</p>
+<p><strong>mircea_popescu</strong> Ok. Now we're on the same page here. The original argument, re the boat that has sailed, is fundamentally exactly this.<br />
+<strong>herbijudlestoids</strong> What, that all the hedge funds are lying on their SEC filings?</p>
+<p><strong>mircea_popescu</strong> Which is to say : that there is an economic reality, such as it is. That it is the job of everyone, from the lowliest accountant to the cleverest CEO, to try and follow this reality. And that people being faillible, they do in fact make mistakes. They have in the past made mistakes. We will in the future discover they have made mistakes today. Now let's leave this for a moment and consider the problem of the Atlantic Investor. Suppose you have a thousand kilograms of gold, in 1750.<br />
+<strong>herbijudlestoids</strong> So supposed ;)</p>
+<p><strong>mircea_popescu</strong> For these you expect returns, and you are immortal. If you invest it all in Europe, you shall have in 1850 a return, such as it is, whatever's left past Talleyrand<sup><a href="#footnote_0_52541" id="identifier_0_52541" class="footnote-link footnote-identifier-link" title="Charles Maurice de Talleyrand-Perigord. If you enjoy reading history, follow the life of this fellow, it's instructive.">i</a></sup>. If you invest it all in the US, you shall in 1850 have a different return. This fundamental difference the Atlantic made was NOT obvious at the time. People thought the Louisiana purchase was a fair deal, at the time it was made, and the Alaska similarly.<br />
+<strong>herbijudlestoids</strong> Sure, but if I waited until 1751 to invest in the US or even 1800, long run returns show that the boat definitely hasn't sailed.</p>
+<p><strong>mircea_popescu</strong> Definitely. However! All markets have maturities. 10k bitcoin cost a pizza in 2010, 10k pizzas will cost a bitcoin in 2020.<br />
+<strong>herbijudlestoids</strong> Do you mean maturities in the actual financial sense of the term? I tried to calculate the maturity of bitcoin and couldn't.</p>
+<p><strong>mircea_popescu</strong> This understates a major problem of people. Major actors in 2014 were sitting in 2012 around a table having a beer. You being the guy that buys them a drink in 2012 is one thing. You being the guy trying to hire them in 2015 is another thing. (No, im discussing HR now. The financial maturity issue is insanity on bread, god help us.)<br />
+<strong>herbijudlestoids</strong> What youre describing is a reference point. Bitcoin becoming a reference point</p>
+<p><strong>mircea_popescu</strong> I think that may work, yes.<br />
+<strong>herbijudlestoids</strong> The way it works today is the USD is a reference point, we don't know how much things worth but all people carry in their head an approximate conversion table of the various price of things and by which determine the value of the USD.</p>
+<p><strong>mircea_popescu</strong> A business will forever be a business. It will obey the context it's in. But a country is a country, and while in 1750 you can easily acquire its dogged loyalty by a grant of 10k pounds, in 1850 you can't buy it for all the gold in the world. It will buy you. Like it or not.<br />
+<strong>herbijudlestoids</strong> And bitcoin is a country?</p>
+<p><strong>mircea_popescu</strong> Bitcoin is more of a country than it is a currency. Which, yes, sounds absurd.<br />
+<strong>herbijudlestoids</strong> No. That makes more sense to me than "bitcoin just is".</p>
+<p><strong>mircea_popescu</strong> That's unrelated, incidentally. That statement holds bitcoin as pars-pro-toto "cryptocurrency", a transcendent, if you will. This discussion actually discusses Bitcoin as a thing of this world.<br />
+<strong>herbijudlestoids</strong> Ok on the country analogy, I can kind of understand where you are coming from for the idea the boat has sailed. At some point the entity becomes sovereign.</p>
+<p><strong>mircea_popescu</strong> Exactly. At some point you can go to the kids and say "here, do it this way because I am older and wiser and I say so". At some later point you can not, if you haven't done it earlier. Because...well... now THEY are old enough.<br />
+<strong>herbijudlestoids</strong> And you feel that the point of sovereignety has come and gone.</p>
+<p><strong>mircea_popescu</strong> What I said was the time's ticking out, and by now it's probably gone by. Not in the sense that a perfect agent, Baby Jesus On A Stick, couldn't still do it, but in the sense that by now the barriers are so high and the average agent so dumb, that it won't likely happen anymore.<br />
+<strong>herbijudlestoids</strong> Ok, I disagree with nothing you have said.</p>
+<p><strong>mircea_popescu</strong> Well so at least we understand each other.<br />
+<strong>herbijudlestoids</strong> I guess the question is whether Bitcoin country is the US in 1750, or another shitty country that becomes sovereign and goes nowhere.</p>
+<p><strong>mircea_popescu</strong> I disclaim any absolute word-of-god bs, I have no idea that things are exactly this way because I'm fucking Moses or something. But I do think it's quite persuasive. And yes, the question may well be that, but that question has pretty good answers from other sources.<br />
+* herbijudlestoids tries to think of failed nation states.</p>
+<p><strong>mircea_popescu</strong> See, this is where the state analogy breaks down. Bitcoin is 1) incredibly attractive, such as the US never was in its history ; 2) incredibly permeable, such as again (even if only on the grouns of fighting disease and w/e) and 3) incredibly selective. Such as yet again. These three make it the best calender in history.<br />
+<strong>herbijudlestoids</strong> But it depends wholly on the Internet.</p>
+<p><strong>mircea_popescu</strong> It does not.<br />
+<strong>herbijudlestoids</strong> And a free internet at that.</p>
+<p><strong>mircea_popescu</strong> I could have my slaves run Bitcoin on their own skins, with sharp objects.<br />
+<strong>herbijudlestoids</strong> It doesnt? </p>
+<p><strong>mircea_popescu</strong> It strictly depends on math. No more. The only way to meaningfully attack Bitcoin is to break math.<br />
+<strong>herbijudlestoids</strong> For any convenient use, it depends on computers and the Internet.</p>
+<p><strong>mircea_popescu</strong> "Convenient" presumes the conclusion. "For any use including the Internet it requires the Internet". Was nobody and nothing convenient in 1960 ?<br />
+<strong>herbijudlestoids</strong> I'm not proposing this as a real world example, but just hear me out.</p>
+<p><strong>mircea_popescu</strong> Sure.<br />
+<strong>herbijudlestoids</strong> Let's say some APT like China or the US decides they don't like Bitcoin, for whatever reason, and they decide to fragment the Bitcoin network.</p>
+<p><strong>mircea_popescu</strong> Okay.<br />
+<strong>herbijudlestoids</strong> New peers are redirected to malicious nodes, and existing peers have their connections constantly reset (or similar).</p>
+<p><strong>mircea_popescu</strong> Wait a second. How are peers "redirected" ?<br />
+<strong>herbijudlestoids</strong> Well right now my understanding is that peers seed themselves to the network through the use of a DNS seed. Like in all p2p systems you don't just go around scanning random IPs looking for a friend. You seed to the network.</p>
+<p><strong>mircea_popescu</strong> Your attack model doesn't work in practice. So do you mean an APT doesn't like bitcoin or god doesn't like bitcoin ?<br />
+<strong>herbijudlestoids</strong> You think it's hard for an apt to disrupt a small handful of DNS seeds? </p>
+<p><strong>mircea_popescu</strong> It is impossible to disrupt the node finding as implemented. This is a lengthy technical discussion for which I don't really feel inclined (and perhaps am not the best to carry it with anyway).<br />
+<strong>herbijudlestoids</strong> Well ok, you seem to think new nodes can find peers. So lets just assume the APT is resetting all connections for bitcoin traffic.</p>
+<p><strong>mircea_popescu</strong> How does it identify bitcoin traffic ? I can send it as vacation pictures. So can you. Perhaps you currently are and don't even know.<br />
+<strong>herbijudlestoids</strong> You can but you don't and the large pools certainly don't.</p>
+<p><strong>mircea_popescu</strong> Not at the moment. Cheaper to fix that than to get a global resetting infrastructure in place.<br />
+<strong>herbijudlestoids</strong> I think judging from the great firewall of China is pretty clear if an APT wants to defreedom the Internet they can. Not that hard.</p>
+<p><strong>mircea_popescu</strong> On the same basis I think the contrary.<br />
+<strong>herbijudlestoids</strong> So why does Tor bother to have a slowly updating obfsproxy list?</p>
+<p><strong>mircea_popescu</strong> Tor is a complex topic (not least because it is a honeypot, <a href=/2013/dear-guardian-stop-being-retarded/>not a legitimate service</a>). Perhaps best left aside<br />
+<strong>herbijudlestoids</strong> I guess it will be hard for me to convince you Bitcoin depends on the Internet if you don't believe its possible to disrupt Bitcoin communication at any meaningful level.</p>
+<p><strong>mircea_popescu</strong> I am not saying it is not possible to disrupt it. Disruptions happen all the time. I run a number of nodes, they lose peers and gain new peers all the time. The idea is that it's impossible to control that disruption for less cost than it'd be to evade it. It's an economic problem, in the end. But that said, surely the<br />
+US could keep the consumer off Bitcoin.<br />
+<strong>herbijudlestoids</strong> But if there was an active attempt to say, convince your nodes that they are operating on a global network when they aren't...</p>
+<p><strong>mircea_popescu</strong> But how do you know which are my nodes ? Maybe I start a new, secret one, just for the hell of it.<br />
+<strong>herbijudlestoids</strong> I don't and I don't really care, the goal is just to fragment the pools to disrupt the network. I don't care whos nodes are whos, I just find the big pools and disrupt them.</p>
+<p><strong>mircea_popescu</strong> Tsk. Hashing doesn't depend on pools. Actually, according to most people studying it, pools are moreover bad.<br />
+<strong>herbijudlestoids</strong> I agree the pools are bad.</p>
+<p><strong>mircea_popescu</strong> In this sense, disrupting pools would strengthen the chain.<br />
+<strong>herbijudlestoids</strong> But that is the Bitcoin catch 22 : people centralise their infrastructure in the end anyway. Mostly for convenience.</p>
+<p><strong>mircea_popescu</strong> To some degree. Thats the key. They centralise to some degree. Anyway. Suppose tomorrow the Earth goes through a singularity, a bizarre quantum absurdity which renders all cables inoperable for communication. All of them. What happens now ?<br />
+<strong>herbijudlestoids</strong> Well im not denying that you can still 'bitcoin', but it will be much harder to do things like verify transactions :P</p>
+<p><strong>mircea_popescu</strong> No, I mean to the world. Clearly you can't get your shit off your camera, unless it has bluetooth. And you will need IR keyboards and monitors.<br />
+<strong>herbijudlestoids</strong> Oh well... I usually discount all scenarios mad max and above.</p>
+<p><strong>mircea_popescu</strong> Now, once people get a few months/years to accomodate to the new situation, do you imagine human society would be meaningfully different ?<br />
+<strong>herbijudlestoids</strong> Sure.</p>
+<p><strong>mircea_popescu</strong> Like how ?<br />
+<strong>herbijudlestoids</strong> Lower aggregate cortisol due to lack of cabling issues? :P</p>
+<p><strong>mircea_popescu</strong> Lol exactly. Same shit with Bitcoin. No internet ? It'll go over ham radio. People don't change just because some shit breaks. They just... don't. Once they discovered cocaine, cocaine was in constant use. Permanently. Once they discovered jacking off, they've been jacking off. The only difference between the two is that the latter being also older actually CHANGED political structure, societal mores and the very laws of the state under its unyielding pressure. "Cause it's there", says <A href=https://bitcointalk.org/index.php?topic=435263.msg4782161#msg4782161>George</a>, and right he is. It's there, and it never is going away.<br />
+<strong>herbijudlestoids</strong> I don't disagree with the idea in principle, but likely in such an event it would result in a new blockchain etc.</p>
+<p><strong>mircea_popescu</strong> Maybe it will. I'm not really arguing any detail here, it'd be absurd to try.<br />
+<strong>herbijudlestoids</strong> Ye.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_52541" class="footnote">Charles Maurice de Talleyrand-Perigord. If you enjoy reading history, follow the life of this fellow, it's instructive. [<a href="#identifier_0_52541" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2014/democracy-and-finance-dont-mix-the-math-involved/">Democracy and finance don't mix - the math involved</a></div>
+                <div class="alignright"><a href="/2014/mpoe-january-2014-statement/">MPOE, January 2014 Statement</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/trilterviuri/" title="View all posts in Trilterviuri" rel="category tag">Trilterviuri</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2014/no-argument/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2014/no-argument/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>4 Responses</p>
+		
+		<ol class="commentlist">
+					</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-139917">
+					<div class='trackhead'>
+						<div class="commentcount">1</div>
+						<span class="authorlink"><a href='/2014/the-bezzle-usd-and-the-tide-usd?b=What%20could%20p&amp;e=%20so.#select' class='url'>The bezzle-USD and the tide-USD on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-139917" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] What could possibly posses people, what could lead otherwise quite rational, quite sane, apparently educated and informed into an argument with plain, obvious evident reality ? Well... here's the shocker : they're not in any sort of conflict with reality. They simply live... in a different reality. According to the world they live in, what they say is perfectly correct, and I'm just a little nuts. Like so. [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-140321">
+					<div class='trackhead'>
+						<div class="commentcount">2</div>
+						<span class="authorlink"><a href='/2014/no-you-dont-have-something-to-say-on-the-topic?b=ground%2C%20and%20&amp;e=%20HIS#select' class='url'>No, you don't have something to say on the topic. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-140321" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] ground, and it is a great advance brought about by Bitcoin, that such a thing exists. Otherwise, what is the USD M3 ? But you will notice that for this very reason it also is not HIS [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-143977">
+					<div class='trackhead'>
+						<div class="commentcount">3</div>
+						<span class="authorlink"><a href='/2017/the-ecu?b=Bitcoin%22%20sai&amp;e=%20ECu#select' class='url'>The ECu on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-143977" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] Bitcoin" said by proponents of entirely unbacked, absolutely worthless paper about the only transcendent. [&#8617;]Leaving aside the very inflationary underlying, consider that on September 2017 the ECu [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-145884">
+					<div class='trackhead'>
+						<div class="commentcount">4</div>
+						<span class="authorlink"><a href='/2019/continuing-with-the-reflective-history-of-the-republican-forum-still-on-logday-659-year-6-dtr?b=notable%20a%20da&amp;e=have#select' class='url'>Continuing with the reflective history of the republican forum -- still on logday 659 (year 6 d.Tr.) on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-145884" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] notable a day as far as anyone knew before. The only item published on Trilema that day was this "No argument" piece resulting from line 451, and otherwise... do you remember anything noteworthy to have [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authorc0b790f" id="authorc0b790f" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emailc0b790f" id="emailc0b790f" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urlc0b790f" id="urlc0b790f" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="52541" /></p>
+				<input type="hidden" name="comment_post_time" value="1766130799-207.241.237.181" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2025 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-52541")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-52541");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-52541");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

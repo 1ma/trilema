@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_mar2019g.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Introducing the qntra on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Mediocrity is not a lack of intelligence.<br />Mediocrity is intelligence entirely dedicated to self-preservation.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-57095"><div class="post" id="post-57095">                    <h1><a href="/2014/introducing-the-qntra/" rel="bookmark" title="Permanent Link to Introducing the qntra">Introducing the qntra</a></h1>                        <div class="date">                                     Monday, 06 October, Year 6 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>First, a little bit of history (from <a href="/forum-logs-for-30-sep-2014#1443231">irc</a>, of course, quoting in relevant part) :</p>
+<blockquote><p><strong>September 30, around 5am</strong><sup><a href="#footnote_0_57095" id="identifier_0_57095" class="footnote-link footnote-identifier-link" title="Ever notice how the city never sleeps ?">i</a></sup></p>
+<p><strong>mircea_popescu</strong> Cazalla listen, we need someone to make a proper bitcoin news venue. Instead of linking to a coindesk piece, just rewrite it so it's no longer FUCKTARDED, publish it and link that. Win-win.<br />
+<strong>cazalla</strong> I looked elsewhere but it seems he spoke to them about it.</p>
+<p><strong>mircea_popescu</strong> Only reason anyone's speaking to them is because of this false perception of "leadership", exactly same reason derps flock to tardstalk. It's a shithole of the first degree, and it only continues to exist because everyone's like... meh, whatever, ragazines<sup><a href="#footnote_1_57095" id="identifier_1_57095" class="footnote-link footnote-identifier-link" title="Back in the day trade mags still did something other than provide an alternative junk mail delivery vehicle, they were called trade rags, generally for good cause. Meanwhile any semblance of trade is gone, so they're rag magazines, ie, ragazines.">ii</a></sup>. It wasn't so bad back when the Bitpay &#038; co set of scammers<sup><a href="#footnote_2_57095" id="identifier_2_57095" class="footnote-link footnote-identifier-link" title="Yes, they ARE a set of scammers. Review, if nothing else, their fraudulent and environmentally hostile attempts to keep MtGox trading while insolvent for a little bit longer, after having kept it appearing solid for a year after it had received its death at the first Bitcoin conference. That is quite exactly scamming, had they simply followed instead of delving in the delusion of leadership a lot less BTC would have been lost by a lot less derps. Because no, the however many thousands were not lost when MtGox finally admitted to it. They were lost all over the intervening year. So how do you call a group of people who conspire to hide losses from you in the hope that they can lose more in the future, if not scammers ?
+And it's by no means the first time, either. The Bitcoin Foundation is a scammer crew. Always has been, always will be.">iii</a></sup> that had stolen Bitcoin Magazine<sup><a href="#footnote_3_57095" id="identifier_3_57095" class="footnote-link footnote-identifier-link" title="Yeah, some Romanian kid, one Mihai Alisie joined the crew as a gofer and then one day ran off with the keys, locking the editors out of their own offices. Theft through and through, by the book.">iv</a></sup> were still hoping that brand's not now dead, but meanwhile...<sup><a href="#footnote_4_57095" id="identifier_4_57095" class="footnote-link footnote-identifier-link" title="Because people like to delude themselves with the sweet, seductive siren sounds of `so what if you got called out on Trilema, not like it's the end of your trading days`. It never works, of course, but the derps never end.">v</a></sup><br />
+<strong>cazalla</strong> Is that an endoresment to start one?</p>
+<p><strong>mircea_popescu</strong> Definitely. I'm sick of reading fucktarded goop because that's where people link for a story like that because apparently nobody else wrote it. It's like having all fruit glacee'd in shit. How about someone start a greengrocer already, we don't need any of this glacee business.<br />
+<strong>kakobrekla</strong> Mostly only people who already know the real story are interested in it, not your average reader.</p>
+<p><strong>mircea_popescu</strong> The average reader'd be interested in where his butthole is, if he could strain his brain enough to learn he even has one.<br />
+<strong>Vexual</strong> I'm thinkin paywall.<br />
+<strong>kakobrekla</strong> I think the question 'who are you writing for' is in place. For us - redundant.</p>
+<p><strong>mircea_popescu</strong> Hm. Problem is if you let this shit continue indefinitely you'll have an endless stream of idiots with firmly entrenched idiocies. "99% don't give a shit about gavin's latest stupidity, but this is not a signal to stfu and go home". Before that, "99% didn't give a shit about bitcoind 0.7 or .8 or .9, but CORE DEVS!!!" Well done, core devs for a project that massively ignores you.<br />
+<strong>kakobrekla</strong> Way too much stuff continues to continue and noone can do shit.<br />
+*	BingoBoingo wonders where a managing editor might be found. Experience with this seems to be the scarce piece.</p>
+<p><strong>mircea_popescu</strong> The problem is the sort of drive. What's needed is someone willing and able to put 16 hour days into this for years. An Arrington<sup><a href="#footnote_5_57095" id="identifier_5_57095" class="footnote-link footnote-identifier-link" title="Man lived off pizza and Mountain Dew in solitary confinement for a decade or so.">vi</a></sup> is what's needed in this space. And by god this is the chance for someone like that to become something like that.<sup><a href="#footnote_6_57095" id="identifier_6_57095" class="footnote-link footnote-identifier-link" title="Because no, Tech Crunch doesn't just happen overnight.">vii</a></sup><br />
+<strong>dub</strong> What we really need is btc onion.</p>
+<p><strong>mircea_popescu</strong> Nah, <a href=/2013/valiant-prince-mp-explores-the-mother-of-all-echo-chambers-a-saga-of-our-times/>SA</a> got that covered.<br />
+<strong>BingoBoingo</strong> This is true.<br />
+<strong>cazalla</strong> I'll have a think about it, I don't want to say yes unless I'll actually commit to it and have a plan of attack.</p>
+<p><strong>mircea_popescu</strong> Ideally a team.<br />
+<strong>kakobrekla</strong> And lots of CSS.</p>
+<p><strong>mircea_popescu</strong> No CSS.<br />
+<strong>Vexual</strong> RSS?<br />
+<strong>dub</strong> Bootstrap?<sup><a href="#footnote_7_57095" id="identifier_7_57095" class="footnote-link footnote-identifier-link" title="He's not trolling, he just has a disabilitit.">viii</a></sup><br />
+<strong>kakobrekla</strong> HTML3 and CSS5</p>
+<p><strong>mircea_popescu</strong> And none of the fucktarded retardation of that guy what's his name, the wanna-be competition for coindesk and co. The guy that was here for five minutes but then concluded he has better things to do, with the same stupid head that then generated that entire "taking full responsibility" fiasco.<br />
+<strong>cazalla</strong> Coinfire?</p>
+<p><strong>mircea_popescu</strong> Right.<br />
+<strong>cazalla</strong> It became even stupider. coinfire.cf/lets-get-meta-site-ownership-via-token/<br />
+<strong>assbot</strong> Let's Get Meta with Site Ownership via Token - Coin Fire</p>
+<p><strong>mircea_popescu</strong> It's been going to shit ever since the guy ran out of his 6 months of time<sup><a href="#footnote_8_57095" id="identifier_8_57095" class="footnote-link footnote-identifier-link" title="Burn rate burns, burn baby burn!">ix</a></sup> and "had to make revenue". His attempts are so naive and idiotic it pains. Definitely sunk the modicum of credibility he had amassed within two weeks. Which is what I mean. No movements like that. You run into management problems, come here and ask. And it's unfortunate, too, because all that was easily avoidable. But Tim gotta Tim all over the Tim.<sup><a href="#footnote_9_57095" id="identifier_9_57095" class="footnote-link footnote-identifier-link" title="This Tim.">x</a></sup><br />
+<strong>kakobrekla</strong> You defo need a few persons for this and compensated for.</p>
+<p><strong>mircea_popescu</strong> You can just exploit the current idiots. Read and rewrite Coindesk and co.<br />
+<strong>cazalla</strong> That would be enough to get it off the ground until it has traction.<br />
+<strong>Vexual</strong> That Huffington lady got richer with her news aggregator than she did maring into shipping.</p>
+<p><strong>mircea_popescu</strong> Exactly. And you'll know you got the traction cause they start bitching. And it'll be a fine thing too. Hurting stuff like Coindesk is worth it just on that basis alone.<br />
+<strong>BingoBoingo</strong> I dunno that Coindesk puts out enough material... Too many non-stories.</p>
+<p><strong>mircea_popescu</strong> To add salt to the cuts you can do a weekly roundup and mock their unpublishable shit.<br />
+<strong>kakobrekla</strong> Go ahead and try then.</p>
+<p><strong>mircea_popescu</strong> Cazalla see if danielpbarron feels like it. JuliaTourianski what are you doing these days ?<br />
+<strong>cazalla</strong> I would want to run something like that by myself at first and bring people in later, too many chefs and all that<br />
+<strong>Duffer1</strong> What would be written about that isn't already covered by bit-ass?<br />
+<strong>BingoBoingo</strong> cazalla: I'd be up for some story authoring, contributing to the cause. The too many chefs problem isn't about having too many people so much as a shitty heirarchy.</p>
+<p><strong>mircea_popescu</strong> BingoBoingo has it I think. Just don't try and run "teams", you'll be fine.<br />
+<strong>BingoBoingo</strong> It's the editors/writers problem that among other shit killed Coinfire. Like the Chefs/Cooks problems that makes most people's restaurant dreams fail</p>
+<p><strong>thestringpuller</strong> What is Coinfire?<br />
+<strong>BingoBoingo</strong> Coinfire is this site that was promising for a week and a half then turned full derp.</p>
+<p><strong>cazalla</strong> Most importantly, do I name the site prefixcoin.com, coinsuffix.com or perhaps even bitsuffix.com
+</p></blockquote>
+<p><strong>That was part one of the show. Then around half past six that same morning,</strong></p>
+<blockquote><p><strong>mircea_popescu</strong> thickasthieves> just make the b-a blogroll into a magazine and we can appoint an editor for choosing which stories are big on the homepage :) <<< nah the problem is that <a href=http://blogs.bitcoin-assets.com/>b-a blogs</a> are author driven, and authors can't generally be arsed to discuss events like leotreasure getting stolen from. This is why a newspaper is not just editors. Gotta have someone out there on the beat, too. But calling it The Biz is a great idea.<br />
+<strong>asciilifeform</strong> Leotreasure getting stolen from << lol, so that's an 'event' ? Squirrel run over on my street, also 'event' ?</p>
+<p><strong>mircea_popescu</strong> Yes. People wanna talk about these, and so coindesk ends up linked. This is a problem.<br />
+<strong>JuliaTourianski</strong> You know coindesk does not pay their writers in BTC? Also, they change 90% of their writers' articles without consent.<br />
+<strong>punkman</strong> Do you know what they pay per article? $10-$20?<br />
+<strong>JuliaTourianski</strong> Erm I can ask.</p></blockquote>
+<p><strong>Then after noon, bout 4 or so :</strong></p>
+<blockquote><p><strong>punkman</strong> BTW unnamed source says coindesk pays around $90 per article.<br />
+<strong>bounce</strong> Sounds like easy money.<br />
+<strong>mircea_popescu</strong> Like hell they do. $90 buys you an hour's work of a professional. Their articles are 15 minute jobs by 3rd worlders. 9 bux is a gross exaggeration. (Easy to arb, too - go on fiverr, have 20 people write articles, get 2 accepted by coindeks, profit). coindesk.com/Screen-Shot-2014-07-03-at-4.40.08-PM-300x185.png << wtf. screenshot of what ? How is this related to some bitcoin corp. Cazalla if you put up random stock footage of dressed Uruguayan chicks I'ma kill you.<br />
+<strong>cazalla</strong> I thought you said copy Coindesk?</p></blockquote>
+<p><strong>And then, a week later : </strong></p>
+<blockquote><p><strong>justusranvier</strong> mircea_popescu: What's gntra?<br />
+<strong>mircea_popescu</strong> qntra. This maybe Coindesk killer. <a href="http://qntra.net/">http://qntra.net/</a><br />
+<strong>assbot</strong> Qntra.net - The #1 Bitcoin Site For News, Views &#038; Commentary<br />
+<strong>kakobrekla</strong> Cuntra?<br />
+<strong>mircea_popescu</strong> Pretty much.</p></blockquote>
+<p>It's a bit early to say if it will or it won't amount to anything, that sort of thing takes time. It is however not too early to say that it's going splendidly so far. If it keeps going like it's started, there's simply no way it could fail to take over. So there you go : </p>
+<p><a href="http://qntra.net/"><img src="/wp-content/uploads/2014/10/qntra.png" alt="qntra" title="qntra" width="560" height="234" class="aligncenter size-full wp-image-57097" /></a></p>
+<p>Good luck!</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_57095" class="footnote">Ever notice how the city never sleeps ? [<a href="#identifier_0_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_57095" class="footnote">Back in the day trade mags still did something other than provide an alternative junk mail delivery vehicle, they were called trade rags, generally for good cause. Meanwhile any semblance of trade is gone, so they're rag magazines, ie, ragazines. [<a href="#identifier_1_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_57095" class="footnote">Yes, they ARE a set of scammers. Review, if nothing else, their fraudulent and environmentally hostile attempts to keep MtGox trading while insolvent for a little bit longer, after having kept it appearing solid for a year after it had received its death at the <A href=/2013/the-stuff-all-good-conspiracy-theories-start-with/>first Bitcoin conference</a>. That is quite exactly scamming, had they simply followed instead of delving in the delusion of leadership a lot less BTC would have been lost by a lot less derps. Because no, the however many thousands were not lost when MtGox finally admitted to it. They were lost all over the intervening year. So how do you call a group of people who conspire to hide losses from you in the hope that they can lose more in the future, if not scammers ?</p>
+<p>And it's by no means the first time, either. The <a href=/2014/the-sins-of-the-group-of-posers-behind-the-so-called-bitcoin-foundation/>Bitcoin Foundation is a scammer crew</a>. Always has been, always will be. [<a href="#identifier_2_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_57095" class="footnote">Yeah, some Romanian kid, one <a href=/2012/ciuciu-bond/#comment-87630>Mihai Alisie</a> joined the crew as a gofer and then one day ran off with the keys, locking the editors out of their own offices. Theft through and through, by the book. [<a href="#identifier_3_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_57095" class="footnote">Because people like to delude themselves with the sweet, seductive siren sounds of "so what if you got called out on Trilema, not like it's the end of your trading days". It never works, of course, but <a href=/2014/so-the-dollar-vigilante-scam-ring-is-going-to-jail/#comment-108121>the derps never end</a>. [<a href="#identifier_4_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_57095" class="footnote">Man lived off pizza and Mountain Dew in solitary confinement for a decade or so. [<a href="#identifier_5_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_57095" class="footnote">Because no, Tech Crunch doesn't just happen overnight. [<a href="#identifier_6_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_57095" class="footnote">He's not trolling, he just has a disabilitit. [<a href="#identifier_7_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_57095" class="footnote">Burn rate burns, burn baby burn! [<a href="#identifier_8_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_9_57095" class="footnote"><a href=http://contravex.com/2014/08/12/tim-swansons-pr-challenges/>This Tim</a>. [<a href="#identifier_9_57095" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2014/mpif-fmpif-september-2014-statement/">MPIF (F.MPIF) September 2014 Statement</a></div>
+                <div class="alignright"><a href="/2014/the-lorax/">The Lorax</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/meta-psihoza/" title="View all posts in Meta psihoza" rel="category tag">Meta psihoza</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2014/introducing-the-qntra/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2014/introducing-the-qntra/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>One Response</p>
+		
+		<ol class="commentlist">
+					</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-108705">
+					<div class='trackhead'>
+						<div class="commentcount">1</div>
+						<span class="authorlink"><a href='http://qntra.net/2014/10/write-for-qntra-earn-equity-in-qntra/' class='url'>Write For Qntra, Earn Equity In Qntra</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-108705" title="">Monday, 13 October 2014</a>
+					</div>
+					<p>[...] contact either cazalla or Bingoboingo if you wish to discuss it further and learn more about how Qntra got its start here. Original content with sources.&nbsp;&#8617;You will require an MPEx account or broker, CoinBr for [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author7b9f704" id="author7b9f704" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email7b9f704" id="email7b9f704" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url7b9f704" id="url7b9f704" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="57095" /></p>
+				<input type="hidden" name="comment_post_time" value="1772789269-204.62.248.254" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-57095")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-57095");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-57095");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

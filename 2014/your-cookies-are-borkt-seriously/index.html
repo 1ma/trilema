@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_may2014.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Your cookies are borkt. Seriously. on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Joe Bidden Reales<br />La Al Paispcelea Congres!
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-52605"><div class="post" id="post-52605">                    <h1><a href="/2014/your-cookies-are-borkt-seriously/" rel="bookmark" title="Permanent Link to Your cookies are borkt. Seriously.">Your cookies are borkt. Seriously.</a></h1>                        <div class="date">                                     Sunday, 02 February, Year 6 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>Let's start with a conversation : </p>
+<blockquote><p><strong>mircea_popescu</strong> So since pretty much anyone here has a better knowledge of webstuff than I do, here's a question : Inasmuch as you're going to do a site with accounts, which people can log in over http (stupid as this may be)<sup><a href="#footnote_0_52605" id="identifier_0_52605" class="footnote-link footnote-identifier-link" title="Don't start with `but herp MP, https!` Https is http for the needs of this conversation.">i</a></sup> wouldn't the best practice be, that upon user registration you generate a user salt and a nonce, send these as a hashed cookie, and upon each subsequent login you a) check if the user has the old cookie ; b) hash the salt, store it, increment the nonce, store it ; c) send a new cookie ? If your salt+nonce -> cookie process is deterministic you can even verify it's the same actual user to any arbitrary degree of fineness (such as, same ip or w/e). The question being, is anyone currently doing this ? (Obviously in this case by "login" I mean, any http request to your server at all)<sup><a href="#footnote_1_52605" id="identifier_1_52605" class="footnote-link footnote-identifier-link" title="That's right : whenever your user is `logging in` you're in fact looking at a registration event. Whenever he's asking for a new page, any new page whatsoever, you're looking at a login event. The fact that common parlance in the field is blind to this reality doesn't exactly plead in the favour of that group's intelligence, at least not in the eyes of security people.">ii</a></sup>.</p>
+<p>[A little later]</p>
+<p><strong>pankkake</strong> Most websites, and almost all frameworks I've seen, only use a cookie that isn't refreshed, and is either left to expire stupidly, or never expiring. If you add a signed timestamp to the cookie, maybe you can limit logins from old stolen cookies.<br />
+<strong>mircea_popescu</strong> So then this'd be beyond my comprehension. Why in the fuck ? Obviously you have to chain cookies if you're using that retarded method of keeping track of user state.</p>
+<p><strong>KRS-</strong> Good luck with that cookie strategy if you are using multiple web servers.<br />
+<strong>mircea_popescu</strong> What'd be the problem ?</p>
+<p><strong>pankkake</strong> It's a signed cookie, not session cookie; and managing sessions over multiple servers is possible too. But usually the process is that you have an auth cookie (lifetime = high), and a session cookie (lifetime = short) and we're only talking about the auth cookie.<br />
+<strong>nubbins`</strong> Managing sessions over several servers is commonplace.<br />
+<strong>mircea_popescu</strong> So is the session cookie changed on each pageload ?</p>
+<p><strong>pankkake</strong> No, it doesn't change, that's the point. Unless you store session data in it, but usually it's just a secret ID.<br />
+<strong>mircea_popescu</strong> Well that's fucktarded.</p>
+<p><strong>KRS-</strong> Load balanced web servers would associate that cookie to one particular web server, if the load balancer stategy isn't carefully chosen (if possible) when the load balancer shifts traffic the cookie could become invalid beecause another web server doesn't know about the cookie.<br />
+<strong>nubbins`</strong> ^ have seen this. Had to troubleshoot a web app once where there was a round-robin load balancing setup. each new page request launched a new session, up to a max of 3 (the number of servers).<br />
+<strong>mircea_popescu</strong> KRS- Inasmuch as they all run your code they all know about the cookie.</p>
+<p><strong>KRS-</strong> I've dealt with this problem before.  You have to carefully pick a load balanced strategy or pick another session persistence.<br />
+<strong>mircea_popescu</strong> Why so much derp ;/</p>
+<p>[A little even later-er]</p>
+<p><strong>pankkake</strong> http://docs.pylonsproject.org/projects/pyramid/en/latest/api/authentication.html see reissue_time, it looks like those guys thought of it too :) Sadly the gpg over http projects seem to go nowhere.</p></blockquote>
+<p>Now, let's try to specify this thing.</p>
+<p>1. Users create new accounts on your site through whatever process, such as mailing you their last electricity bill and pictures of random wall patterns, or their amputated thumb and foreskin. If you're not a medieval outfit somehow inexplicably stranded on the Internet 500 years after your expiry date, the process will include PGP signatures.</p>
+<p>2. Users "log into" their accounts, which is to say they <strong>register</strong> new stateful sessions with your webserver over the stateless protocol known as http[s]. This could be done in whatever manner it's currently done, which definitely sucks but doesn't make up a topic of this conversation.</p>
+<ul>
+On the server side you generate a salt for each user (S), and null a nonce (N).<sup><a href="#footnote_2_52605" id="identifier_2_52605" class="footnote-link footnote-identifier-link" title="There is no benefit to using a value other than null. The salt should ideally be obtained by hashing the output of an actual RNG. PRNGs are not nearly as good, and besides, RNGs are not expensive - any webserver handling user `logins` should have a dedicated RNG. Which does not mean `an Intel diddled on-chip piece of crap`, by the way.">iii</a></sup>, which are a) stored ; b) put through C(S, N, X<sup><a href="#footnote_3_52605" id="identifier_3_52605" class="footnote-link footnote-identifier-link" title="X may be whatever information about the user's system you may wish to obtain. It could be their IP. It could be the content of a hidden form field. It could be anything you wish it to be and it can definitely be null.">iv</a></sup>) which generates a cookie which is sent to the client.
+</ul>
+<p>3. Users make requests to your server, which is to say, log into it. By, for instance, accessing a page.</p>
+<ul>
+On the server side, you take your S, N (and if X is not null, the observer X), calculate the C, compare it to the C the client reports. If they don't match you redirect the client to 2. If they do match you hash the S (with a salt!), obtaining S'. You increment N, obtaining N'. You adjust X if needed. You calculate the new C(S', N', X') and send it to the client.
+</ul>
+<p>This very simple yet universally ignored security model <strong>ensures</strong> :</p>
+<ul>
+<li>No cookie stealing. You can publish everyone's cookies in plain view for all the good it's going to do anyone. </li>
+<p></p>
+<li>Much easier to limit session riding. Something as simple as a confirm page becomes an unsurmountable obstacle to the attacker.</li>
+<p></p>
+<li>New login kills old cookies, definitely. This may seem like hardly worth the mention until you consider all the edge cases of cookie expiration. It will save you time and code, yo!</li>
+<p></p>
+<li>You can display a definite and binding pagecount for that session somewhere your client can see it on the page and appreciate your unmatched security focus. Because unlike all the other idiots out there saying the words "security focus", you <em>demonstrate the actual thing.</em> Big, big difference.</li>
+</ul>
+<p>Just scratching the surface here. Seriously people, stahp! What r u doing ?!</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_52605" class="footnote">Don't start with "but herp MP, https!" Https is http for the needs of this conversation. [<a href="#identifier_0_52605" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_52605" class="footnote">That's right : whenever your user is "logging in" you're in fact looking at a <em>registration</em> event. Whenever he's asking for a new page, any new page whatsoever, you're looking at a <em>login</em> event. The fact that common parlance in the field is blind to this reality doesn't exactly plead in the favour of that group's intelligence, at least not in the eyes of security people. [<a href="#identifier_1_52605" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_52605" class="footnote">There is no benefit to using a value other than null. The salt should ideally be obtained by hashing the output of an actual RNG. PRNGs are not nearly as good, and besides, RNGs are not expensive - any webserver handling user "logins" should have a dedicated RNG. Which does not mean "an Intel diddled on-chip piece of crap", by the way. [<a href="#identifier_2_52605" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_52605" class="footnote">X may be whatever information about the user's system you may wish to obtain. It could be their IP. It could be the content of a hidden form field. It could be anything you wish it to be and it can definitely be null. [<a href="#identifier_3_52605" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2014/how-to-make-money-on-the-internet-while-pretending-you-know-what-youre-talking-about-and-accumulating-a-legion-of-mindless-followers-for-fun-and-profit/">How to make money on the Internet while pretending you know what you're talking about and accumulating a legion of mindless followers - for fun and profit!</a></div>
+                <div class="alignright"><a href="/2014/how-many-years-you-got/">How many years you got ?</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/meta-psihoza/" title="View all posts in Meta psihoza" rel="category tag">Meta psihoza</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2014/your-cookies-are-borkt-seriously/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2014/your-cookies-are-borkt-seriously/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>3 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-97888" class="commentbody"><div class="commenthead"><img alt='pankkake`s avatar' src='http://headfucking.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://headfucking.net/' class='url'>pankkake</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97888" title="">Sunday, 2 February 2014</a>
+							</div>
+						<p>If by cookie stealing you mean stealing it from the client computer, yes. Otherwise you can still eavesdrop.</p>
+<p>If you chose to invalidate each older nonce after new requests, you're going to have to store them. Why not. However you're probably going to have to handle users opening multiple pages at once, and having multiple browsers (not that hard, store a cookie to distinguish which browser is which). And in the end, the attacker can still make a request instead of you, he just has to make the next request before you do.</p>
+<p>In the end, you have a system that is overkill if you want to prevent stealing the cookie from the computer, and isn't enough to protect from eavesdropping; the time based tokens are enough and transport security should take care of the rest.</p>
+<p>Any better solution would require browser cooperation or JavaScript.</p>
+						</li>
+
+										<li id="comment-97889" class="commentbody"><div class="commenthead"><img alt='pankkake`s avatar' src='http://headfucking.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink"><a href='http://headfucking.net/' class='url'>pankkake</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97889" title="">Sunday, 2 February 2014</a>
+							</div>
+						<p>Interestingly, you can compare browsers and SSH.</p>
+<p>SSH doesn't lie to you. When you connect for the first time to a server, it doesn't accept the certificate, and displays the fingerprint for you to check. Browsers trust external services, where any of them has ultimate authority.</p>
+<p>SSH allows you to use a password, or better, a client side-key. (Actually, you can do even more custom stuff if you want.)<br />
+SSH is stateful, though you can use it for one-time requests if you want to.<br />
+Browsers have nothing of the sort; users have to authenticate with things than can be replayed.<br />
+Added bonus: multiplexing.</p>
+						</li>
+
+										<li id="comment-97890" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-97890" title="">Sunday, 2 February 2014</a>
+							</div>
+						<p>No but look,</p>
+<blockquote><p>he just has to make the next request before you do</p></blockquote>
+<blockquote><p>Something as simple as a confirm page becomes an unsurmountable obstacle to the attacker.</p></blockquote>
+<p>So he's made the request before you do, and updated your cookies. Now what ? He has to get you to let him ride again, and he doesn't have enough info to construct the request he needs anyway.</p>
+<blockquote><p>If you chose to invalidate each older nonce after new requests, you’re going to have to store them. Why not.</p></blockquote>
+<blockquote><p> which are a) stored</p></blockquote>
+<p>You only store the latest. There's no requirement that you support tabbed browsing in your logged in site, for one. If what the guy is doing is surfing pics he doesn't actually need to be logged in. If what he;s doing is banking you don't need five tabs open. </p>
+<p>Moreover, you can serialize the requests like anything else, after all simultaneity doesn't exist in the real world. For that matter you can simply log him out if you get requests faster than one a minute, why not ? Nobody said security is convenient to any arbitrary degree of convenience. Let the user learn this.</p>
+<blockquote><p> and isn’t enough to protect from eavesdropping</p></blockquote>
+<p>There's no way to protect http from eavesdropping, it's designed to be and functions as a plaintext channel. You can either implement end to end encryption like MPEx or else learn to live with the fact - the <strong>fact</strong> that your communication is plaintext. No matter what you do. A fine example here is the fate of the SR pile of fail (and for that matter : some of the latter scriptkiddies vieing to fill that void of fail actually came up with models such as "paste your gpg secret key in here for security". <a href=http://www.deepdotweb.com/wp-content/uploads/2014/01/avid.png >Not kidding</a>!)</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authord4a1448" id="authord4a1448" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emaild4a1448" id="emaild4a1448" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urld4a1448" id="urld4a1448" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="52605" /></p>
+				<input type="hidden" name="comment_post_time" value="1780839051-18.97.9.174" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-52605")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-52605");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-52605");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

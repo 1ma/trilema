@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_apr2017bis.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>The forum and its implementation. on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">The fates are cruel an' the chances are slim<br />so grab a good sieve and dig in.<br />~<a href=/2020/nannare/#comment-147503>my elder slavegirl</a>
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-54471"><div class="post" id="post-54471">                    <h1><a href="/2014/the-forum-and-its-implementation/" rel="bookmark" title="Permanent Link to The forum and its implementation.">The forum and its implementation.</a></h1>                        <div class="date">                                     Friday, 16 May, Year 6 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>As per <a href="/2014/a-complete-theory-of-economics/">A complete theory of economics</a>, part III, Bitcoin  will have to have a public forum, displaying the properties described there : identifying participants, permitting the conveyance of information and associating information with identity.</p>
+<p>For many years, Bitcoin relied for this function on a "forum" - an obsolete, broken web package<sup><a href="#footnote_0_54471" id="identifier_0_54471" class="footnote-link footnote-identifier-link" title="I won't go into a detailed list of all the 30 or so separate breaches it has endured over the five short years of its existence. Suffice it to mention cosbycoin and the fact that currently (starting whenever last year a human being last looked at that thing) users can't change their avatars. Because the upload process has a hole in it, that nobody can be bothered to fix.">i</a></sup> which I won't link to (but <a href="https://bitcointa.lk/">here's a mostly decent archive</a>). </p>
+<p>Originally, which is to say in the 2009 - 2010ish interval, this poor substitute more or less worked, allowing communication between the <em>relevant</em> parties, and allowing the education of noobs.<sup><a href="#footnote_1_54471" id="identifier_1_54471" class="footnote-link footnote-identifier-link" title="This distinction is important. The public forum does not serve the function of `allowing communication`, just like that, indistinctly. The participants are sharply divided between the relevant and the irrelevant, whether they know this or not, and whether they'd be inclined to accept it or not. Communication, which is to say bidirectional information flows, happens between the former. Towards the latter information flows unidirectionally : they have nothing to say. Whether they know this or not. ">ii</a></sup> It never worked very well, and as early as 2011 the people that matter were already communicating via irc<sup><a href="#footnote_2_54471" id="identifier_2_54471" class="footnote-link footnote-identifier-link" title="Thus enforcing the separation through a modest but apparently insurmountable technical barrier. Hey, even if you use webirc, you still gotta figure out where to type!">iii</a></sup>. Some efforts were also made towards the education of noobs<sup><a href="#footnote_3_54471" id="identifier_3_54471" class="footnote-link footnote-identifier-link" title="Notably, through the creation of a subreddit which was hopefully going to soak up most terminal retards and keep them there, and through more direct educational efforts, such as MPOE-PR">iv</a></sup>, but with an ever-increasing deluge of nuts<sup><a href="#footnote_4_54471" id="identifier_4_54471" class="footnote-link footnote-identifier-link" title="As explained last year, 
+mircea_popescu Anyway, to get back to the prev point, the way it usually works is like this : muppet (usually young, ambitious, socially marginal character) finds out about Bitcoin. Within a day he's bought some, and spends the next few days not sleeping enough and reading bullshit sources a la reddit. Within a week he's put most of his available cash into it, and is getting to a manic phase. Consider : http://bitbet.us/bet/519/btc-network-difficulty-to-top-1b-before-2014/#c2087 So by now he's ripe for the plunder. Makes some `investments` on the power of social proof, gets raped, gets depressed and gets to hear from all the (few) people in his life about how he failed again. After all, he ain't socially marginal for nothing, he's socially marginal because he has mental habits that don't promote success. And that's all, it took three weeks. Next month, new guy hears about bitcoin.
+BingoBoingo Lol, Maybe someone ought to sell Lithium Soda for BTC.
+mircea_popescu Except he wouldn't take it. MPOE-PR sells lithium soda. Our noob is more likely to ignore her.
+Duffer1 And they don't even know you're actually trying to help them by paying her to do it.
+mircea_popescu Well some figure it out eventually.
+You would think this nonsensical behaviour is limited to the 20 something unemployed and unemployable scummy loser. This is not true in any sense. 
+It applies equally well to `the press`. Consider the sad story of Max Keiser getting raped last Spring. What did that do for him ? He made a scamcoin (keisercoin), which failed horribly. He then pumped a different scamcoin (aurora) which idem failed horribly. He's still hanging on to the shreds of his pretense to credibility and reputation, sure. But they're shreds. 
+How did that help self-proclaimed pundits a la Dr. Foreskin ? He went through the same ringer, six months later. How is this and that helping some random schmuck or another ? In no way, not at all, to absolutely no degree it helps them. 
+So you're ready to grant it doesn't help the press, either, and perhaps imagine this is because the press is manned by fundamentally the same scummy, unemployable (and in fact unemployed) losers. That may be true, but we're still not done : supposed lawyers and supposed investors are faring no better. You can say 
+TALKING ABOUT BITCOIN, EVEN IF IN A GROUP, DOES NOT MAKE YOU PART OF BITCOIN.
+
+until you turn blue in the face, it's not liable to be useful to these people. Why not ? 
+Well, this is where the fun starts. You know how a thirteen year old that's learned how to push the gas pedal thinks `ok now he knows how to drive` and wants you to `LET HIM DRIVE ON HIS OWN!!!` ? That's exactly the same broken mental process, because given a sufficiently revolutionary technology, most people revert to infantile behaviours. In fact this could work well as a measurement of the importance of technology. You call it `how exciting it is`.
+The only way forward is beating the shit out of them, followed by public display of the mangled results, for humiliatory purposes. They'll hate you for it, of course. They'll say BAD THINGS™ about you, of course. But in the end, children are children and adults are their masters. Just the way the cookie crumbles.">v</a></sup> further impeding communication and with a complete failure of responsibility on the part of the people that were supposed to, and had promised to help<sup><a href="#footnote_5_54471" id="identifier_5_54471" class="footnote-link footnote-identifier-link" title="Michael Marquardt trying to make ends meet out of collecting payola from the various scammers ; Peter Vessenes trying to pretend like his Bitcoin failed businesses are generating revenue through collecting payola from the various scammers, etc etc.">vi</a></sup>, the entire thing circled the drain for a year or so before I finally decided to pull the plug. </p>
+<p>That decision does not principally result from the webforum being a good idea badly implemented. One can always get rid of problem people, and generally speaking implementation problems can always be fixed. That decision stems from the webforum being a marginal idea which has long outlived its utility.</p>
+<p>A much better system (and one towards which I've been pushing for <a href="/forum-logs-for-01-may-2013#648825">well over a year now</a>) works like this : a shared, real time channel, and a collection of individually maintained libraries. </p>
+<p>The former is, of course, #bitcoin-assets. The latter are <a href="/2014/people-have-made-blogs/">everyone's blogs</a>. There are very good reasons why this compound system is in fact much better. Let's go for a cursory scratch on the surface : </p>
+<ul>
+<li><strong>Resilience.</strong> To take down a forum you need to DDOS the server hosting it. This is trivial, and has happened numerous times in the past. To take down the current model, you need to DDOS Freenode + every single blogger's independent webhost. This is not feasible (and we know this is not feasible because <a href="/2013/the-many-ways-available-for-talking-to-mpex/">it's tested</a>, not because we presume it would be, or it "sounds like" it would be).</li>
+<p></p>
+<li><strong>Security.</strong> To corrupt either the record of past conversations or the flow of current conversation one merely needs to hack the server hosting the forum. This is trivial, and has happened numerous times in the past<sup><a href="#footnote_6_54471" id="identifier_6_54471" class="footnote-link footnote-identifier-link" title="Moderators deleting stuff would be the most basic, if quite toxic form of hacking. Because yes, social engineering is a threat to security, and by far the most dangerous sort.">vii</a></sup>. To corrupt the records kept by the hybrid system one'd have to both destroy the public log and each and every individual private log, because people idling in the channel also log it.<sup><a href="#footnote_7_54471" id="identifier_7_54471" class="footnote-link footnote-identifier-link" title="Arguably such attacks are easier on the blog side of things, seeing how any random participant could later alter his own blogposts in any manner. (This is of course discouraged, and for very good reasons, even if it may seem to the naive observer that deleting something is a better approach. It never is, nothing can ever be undone. It's always better to mend than to try and pretend like undo exists.)
+Nevertheless, should relevant material be quoted by another blogger, it does become undeleteable in the same manner irc conversations are, and the whole system encourages this reciprocal mirroring of sayings and ideas. Which is not merely a good thing, but outright a great thing, cosubstantial with all historical grandeur.">viii</a></sup> </li>
+<p></p>
+<li><strong>Quality.</strong> This is by far the best part. You need voice to talk in #bitcoin-assets. You need for someone to care for your blog to be included in the conversation. Both of these are obtained by saying something interesting at least some of the time. The implicit filtering the hybrid system allows is so far above anything that can be done on a webforum I scarcely see any sort of comparison possible. I certainly wouldn't be able to go back, myself. </li>
+</ul>
+<p>There is of course a lot of overlap between the hot irc core and the strong blog shell, and it goes both ways : on one hand a very solid referencing system<sup><a href="#footnote_8_54471" id="identifier_8_54471" class="footnote-link footnote-identifier-link" title="Props to kako for introducing linkable lines in the daily chatlogs!">ix</a></sup> turns the irc channel into a de facto blog, and short points that don't seem meaty enough for a blog post often end up introduced there, at least as far as I'm concerned. On the other hand there's "<a href="https://www.google.com/search?q=site:trilema.com+all+good+things+of+course&#038;complete=0">all good things, of course</a>" and stuff like </p>
+<blockquote><p>Mircea Popescu @Mircea_Popescu · May 15 @FnxTX @bitcoinpete Go for it. And also, why aren't you in -assets ?</p>
+<p>Josh Walker @FnxTX · May 15 @Mircea_Popescu @bitcoinpete I'll expand on idea in free time; maybe delegate. Always mobile; never much liked mIRC etc. You post best logs.</p></blockquote>
+<p>which turn the blog into a de facto IRC. Which overlap is good, and definitely productive.</p>
+<p>In short : we don't really need social media. It doesn't solve any problem we actually have, nor does it solve any problem actually well. We have much better solutions : cheaper, more effectual, more robust, easier to maintain, easier to deploy, further reaching and more powerful. So no, there's not going to be a return of MPOE-PR. There's no need to.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_54471" class="footnote">I won't go into a detailed list of all the 30 or so separate breaches it has endured over the five short years of its existence. Suffice it to mention <a href="http://buttcoin.org/bitcointalk-forums-hacked-bill-cosby-pimping-new-cosbycoins™-to-all-the-members-breaking">cosbycoin</a> and the fact that currently (starting whenever last year a human being last looked at that thing) users can't change their avatars. Because the upload process has a hole in it, that nobody can be bothered to fix. [<a href="#identifier_0_54471" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_54471" class="footnote">This distinction is important. The public forum does not serve the function of "allowing communication", just like that, indistinctly. The participants are sharply divided between the relevant and the irrelevant, <a href="/2013/youre-the-guy-who-wasnt-good-enough-to-sling-dope/">whether they know this or not</a>, and whether they'd be inclined to accept it or not. Communication, which is to say bidirectional information flows, happens between the former. Towards the latter information flows unidirectionally : they have nothing to say. Whether they know this or not.  [<a href="#identifier_1_54471" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_54471" class="footnote">Thus enforcing the separation through a modest but apparently insurmountable technical barrier. Hey, even if you use webirc, you still gotta figure out where to type! [<a href="#identifier_2_54471" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_54471" class="footnote">Notably, through the creation of a subreddit which was hopefully going to soak up most terminal retards and keep them there, and through more direct educational efforts, such as MPOE-PR [<a href="#identifier_3_54471" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_54471" class="footnote">As <a href="/forum-logs-for-15-dec-2013#1003170">explained last year</a>, </p>
+<blockquote><p><strong>mircea_popescu</strong> Anyway, to get back to the prev point, the way it usually works is like this : muppet (usually young, ambitious, socially marginal character) finds out about Bitcoin. Within a day he's bought some, and spends the next few days not sleeping enough and reading bullshit sources a la reddit. Within a week he's put most of his available cash into it, and is getting to a manic phase. Consider : http://bitbet.us/bet/519/btc-network-difficulty-to-top-1b-before-2014/#c2087 So by now he's ripe for the plunder. Makes some "investments" on the power of social proof, gets raped, gets depressed and gets to hear from all the (few) people in his life about how he failed again. After all, he ain't socially marginal for nothing, he's socially marginal because he has mental habits that don't promote success. And that's all, it took three weeks. Next month, new guy hears about bitcoin.<br />
+<strong>BingoBoingo</strong> Lol, Maybe someone ought to sell Lithium Soda for BTC.<br />
+<strong>mircea_popescu</strong> Except he wouldn't take it. MPOE-PR sells lithium soda. Our noob is more likely to ignore her.<br />
+<strong>Duffer1</strong> And they don't even know you're actually trying to help them by paying her to do it.<br />
+<strong>mircea_popescu</strong> Well some figure it out eventually.</p></blockquote>
+<p>You would think this nonsensical behaviour is limited to the 20 something unemployed and unemployable scummy loser. This is not true in any sense. </p>
+<p>It applies equally well to "the press". Consider the sad story of <a href="/2013/in-which-noobs-learn-lessons-and-pay-for-the-privilege/">Max Keiser getting raped last Spring</a>. What did that do for him ? He made a scamcoin (keisercoin), which failed horribly. He then pumped a different scamcoin (aurora) which idem failed horribly. He's still hanging on to the shreds of his pretense to credibility and reputation, sure. But they're shreds. </p>
+<p>How did that help self-proclaimed pundits a la <a href="/2014/these-fucktards-have-to-be-immortalised-theyre-worse-than-dr-foreskin-even/">Dr. Foreskin</a> ? He went through the same ringer, six months later. How is this and that helping <a href="/Mircea_Popescu/status/467082522804092928" rel="nofollow">some random schmuck</a> or another ? In no way, not at all, to absolutely no degree it helps them. </p>
+<p>So you're ready to grant it doesn't help the press, either, and perhaps imagine this is because the press is manned by fundamentally the same scummy, unemployable (and in fact <a href="/Mircea_Popescu/status/467241714542206976" rel="nofollow">unemployed</a>) losers. That may be true, but we're still not done : <a href="/2014/in-which-we-teach-basic-reading-comprehension-to-a-certain-mr-preston-byrne/">supposed lawyers</a> and <a href="/forum-logs-for-14-may-2014#1265522">supposed investors</a> are faring no better. You can say </p>
+<blockquote><h1><font color=red>TALKING ABOUT BITCOIN, EVEN IF IN A GROUP, DOES NOT MAKE YOU PART OF BITCOIN.</font></h1>
+</blockquote>
+<p>until you turn <a href="/2014/a-compendium-of-basic-points-about-bitcoin-for-the-benefit-of-various-confused-noobs/">blue</a> in <a href="/2013/in-re-noobs-and-conventions/">the face</a>, it's not liable to be useful to these people. Why not ? </p>
+<p>Well, this is where the fun starts. You know how a thirteen year old that's learned how to push the gas pedal thinks "ok now he knows how to drive" and wants you to "LET HIM DRIVE ON HIS OWN!!!" ? That's exactly the same broken mental process, because given a sufficiently revolutionary technology, most people revert to infantile behaviours. In fact this could work well as a measurement of the importance of technology. You call it "how exciting it is".</p>
+<p>The only way forward is beating the shit out of them, followed by public display of the mangled results, for humiliatory purposes. They'll hate you for it, of course. They'll say BAD THINGS™ about you, of course. But in the end, children are children and adults are their masters. Just the way the cookie crumbles. [<a href="#identifier_4_54471" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_54471" class="footnote">Michael Marquardt trying to make ends meet out of collecting payola from the various scammers ; Peter Vessenes trying to pretend like his Bitcoin failed businesses are generating revenue through collecting payola from the various scammers, etc etc. [<a href="#identifier_5_54471" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_54471" class="footnote">Moderators deleting stuff would be the most basic, if quite toxic form of hacking. Because yes, <a href="/2014/o-hai-let-me-verify-your-identity/">social engineering is a threat to security</a>, and by far the most dangerous sort. [<a href="#identifier_6_54471" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_54471" class="footnote">Arguably such attacks are easier on the blog side of things, seeing how any random participant could later alter his own blogposts in any manner. (This is of course <a href="/forum-logs-for-09-may-2014#1256842">discouraged</a>, and for very good reasons, even if it may seem to the naive observer that deleting something is a better approach. It never is, nothing can ever be undone. It's always better to mend than to try and pretend like undo exists.)
+<p>Nevertheless, should relevant material be quoted by another blogger, it does become undeleteable in the same manner irc conversations are, and the whole system encourages this reciprocal mirroring of sayings and ideas. Which is not merely a good thing, but outright a great thing, cosubstantial with all historical grandeur. [<a href="#identifier_7_54471" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_54471" class="footnote">Props to kako for introducing linkable lines in the daily chatlogs! [<a href="#identifier_8_54471" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2014/these-people-should-be-shot-basically/">These people should be shot, basically.</a></div>
+                <div class="alignright"><a href="/2014/a-useful-list-of-things/">A useful list of things</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/bitcoin/" title="View all posts in Bitcoin" rel="category tag">Bitcoin</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2014/the-forum-and-its-implementation/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2014/the-forum-and-its-implementation/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>6 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-132126" class="commentbody"><div class="commenthead"><img alt='Diana Coman`s avatar' src='http://ossasepia.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://ossasepia.com' class='url'>Diana Coman</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-132126" title="">Tuesday, 5 November 2019</a>
+							</div>
+						<p>You used "blogposts" !!!11 (footnote viii) What <a href="http://logs.ossasepia.com/log/trilema/2019-11-05#1949532" >desophistication</a> is this :P</p>
+						</li>
+
+										<li id="comment-132127" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-132127" title="">Tuesday, 5 November 2019</a>
+							</div>
+						<p>I used it with derogatory intent!</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-99975">
+					<div class='trackhead'>
+						<div class="commentcount">3</div>
+						<span class="authorlink"><a href='http://bitcoinpete.com/2014/05/16/who-sucks-more-circle-or-twobitidiot/' class='url'>Who Sucks More, Circle or TwoBitIdiot? | When Bitcoin Met Pete</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-99975" title="">Saturday, 17 May 2014</a>
+					</div>
+					<p>[...] in dabbling with particle physics. They don&#8217;t get it and they probably never will, so let&#8217;s leave Bitcoin to the adults, neh?   Although I have not yet had a chance to play around with the wallet myself (I’m told an [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-132124">
+					<div class='trackhead'>
+						<div class="commentcount">4</div>
+						<span class="authorlink"><a href='http://fixpoint.welshcomputing.com/2019/the-road-to-ossasepia-part-1/?b=Republicope&amp;e=Repu#select' class='url'>The road to Ossasepia, part 1 &laquo; Fixpoint</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-132124" title="">Tuesday, 5 November 2019</a>
+					</div>
+					<p>[...] Republic operates through a forum consisting of an IRC channel of record where those of sufficient standing converse in real time, [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-132635">
+					<div class='trackhead'>
+						<div class="commentcount">5</div>
+						<span class="authorlink"><a href='http://dorion-mode.com/2019/12/contribution-guidelines-for-tmsr-os/?b=OS%20are%20t&amp;e=OS%20are%20the%20implementation%20tools%20of%20economy%2C%20i.e.%20medium%20of%20exchange%201%2C%20punishment%2' class='url'>Contribution Guidelines for TMSR OS &laquo; Dorion Mode</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-132635" title="">Saturday, 14 December 2019</a>
+					</div>
+					<p>[...] OS are the implementation tools of economy, i.e. medium of exchange 1, punishment gazette 2 and public forum 3, along with "the masterclass in economy masquerading as a video [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-140146">
+					<div class='trackhead'>
+						<div class="commentcount">6</div>
+						<span class="authorlink"><a href='/2014/the-fallacy-machine?b=proper%2C%20that&amp;e=ll%20a#select' class='url'>The fallacy machine on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-140146" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] proper, that's exactly what idiocy is. [&#8617;]This would be one of the many fundamental reasons the old forum is not salvageable. Sensible men, even should they like a waterfront, make not their house in the river, but uphill a [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author1353d96" id="author1353d96" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email1353d96" id="email1353d96" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url1353d96" id="url1353d96" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="54471" /></p>
+				<input type="hidden" name="comment_post_time" value="1771330490-18.97.14.88" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-54471")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-54471");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-54471");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

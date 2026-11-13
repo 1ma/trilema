@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_may2014.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Let's invent a new game! on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Heretiquarium.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-52831"><div class="post" id="post-52831">                    <h1><a href="/2014/lets-invent-a-new-game/" rel="bookmark" title="Permanent Link to Let&#039;s invent a new game!">Let's invent a new game!</a></h1>                        <div class="date">                                     Thursday, 20 February, Year 6 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>It all started as all good things start these days : on irc.<sup><a href="#footnote_0_52831" id="identifier_0_52831" class="footnote-link footnote-identifier-link" title="Told ya...">i</a></sup></p>
+<p><strong>cads</strong> Hey guys, are you familiar with the multi-armed bandit problem?<br />
+<strong>mircea_popescu</strong> Yes.</p>
+<p><strong>moiety</strong> I thought most bandits had multiple arms.<br />
+<strong>mircea_popescu</strong> It's a formulation of the explore/exploit dilemma.</p>
+<p><strong>cads</strong> moiety: A one armed bandit is a slot machine, while the multi-armed bandit problem considers the best play in a situation with multiple slot machines with uncertain odds.<br />
+<strong>mircea_popescu</strong> Like suppose you're naked outdoors circa 4500 bc, and very hungry. You find a bush with berries. How long do you spend grazing and when do you leave looking for more bushes ?</p>
+<p><strong>moiety</strong> When you have collected them all from the first.<br />
+<strong>mircea_popescu</strong> Yes well, it gets more complicated than that.</p>
+<p><strong>moiety</strong> I know sorry I couldn't resist.<br />
+<strong>mircea_popescu</strong> God forbid someone marries you.</p>
+<p><strong>moiety</strong> I think we can all safely assume thats not going to happen.<br />
+<strong>mircea_popescu</strong> Attn all present JPM bankers: the girl won't leave till she's bled you dry!</p>
+<p><strong>moiety</strong> LOL!<br />
+<strong>mircea_popescu</strong> hehe<sup><a href="#footnote_1_52831" id="identifier_1_52831" class="footnote-link footnote-identifier-link" title="There's a huge discussion of pole dancing we're skipping here. O you wanted to read it ? Tits! I mean, tough!">ii</a></sup>.</p>
+<p><strong>asciilifeform</strong> Re: multi-armed bandit: http://lalandlab.st-andrews.ac.uk/tournaments/tournament1/sociallearning.html This is old news; 2nd tournament is mostly done now, too.<br />
+<strong>mircea_popescu</strong> Basically the appeal of Civ was exactly this.</p>
+<p><strong>asciilifeform</strong> Contest inspired by Axelrod's prisoner's dilemma tournament.<br />
+<strong>mircea_popescu</strong> You know this inspires me ? One could formalise the problem with strings.</p>
+<p><strong>asciilifeform</strong> They sorta did.<br />
+<strong>moiety</strong> That's just along the road from me!<br />
+<strong>mircea_popescu</strong> Hear me out : you define actual words in the dictionary as "good stuff", and each player gets a selection of poems to complete. Words themselves are worth points, filled lines are worth more points, filled poems even more. Then you give everyone strings, and they can read one char at a time for a cost. Or skip the string, for a larger cost. Obviously player can only eat a word if the whole word has been read.</p>
+<p><strong>asciilifeform</strong> This sound like fun, but the contest was a robot-writing one rather than between players directly. The final reports are worth reading.<br />
+<strong>mircea_popescu</strong> Yes yes! You have to write the scripts for this, I was just describing what your bot is supposed to do. Well not your "your". One's.</p>
+<p><strong>asciilifeform</strong> What's the goal? To reproduce the poem before the other players?<br />
+<strong>mircea_popescu</strong> Get most moneyz. The key here, of course, being that the strings are not all created equal. Each string has its own per-character entropy, from epsilon to 8-epsilon.</p>
+<p><strong>asciilifeform</strong> 'Read one character at a time' << from another player's slate?<br />
+<strong>mircea_popescu</strong> No, the string is in the middle. "All players get copies of the same strings" say.</p>
+<p><strong>asciilifeform</strong> Might want to describe this for the simple (i.e. mathematically)<br />
+<strong>mircea_popescu</strong> That'll be hard ;/ Ok but let me try. The game board consists of an endless set of strings, which all start as natural language constructs and are "decayed" by bit flipping by an actual RNG. Once the decay is complete the game board is ready. Any number of players can play. Each player gets the same copy of the same list of strings. At any point each player has the choice of either reading one more character from their current string or advance to the next string. Each player has a pre-given "Table" consisting of a number of natural language poems. These are actual literature. Whenever a player has read a natural language word (ie, found in the dictionary) out of the string (exact match, no mixing of letters or anything Scrabble-ish) he now has that word. The word on itself is worth something. If the word is actually part of one of the player's poems on their table, it's worth more. If the player completes a line or a poem, more bonuses. He wins with the highest score once all players have read "all" strings.<sup><a href="#footnote_2_52831" id="identifier_2_52831" class="footnote-link footnote-identifier-link" title="Obviously `all` will have to get defined somehow on an endless board. The last player with money could be a definition, you get negative you're out. Arbitrary string counts could also be used. Or whatever.">iii</a></sup></p>
+<p><strong>asciilifeform</strong> Sounds like a variation on 'Erudit'<br />
+<strong>mircea_popescu</strong> Does it ? Cause that's what I was looking for, to see if this is original or I'm just ineptly stumbling on well known (to everyone else) history.</p>
+<p><strong>asciilifeform</strong> And it's not clear, from this description, that the ideal strategy is any kind of problem. s/erudit/scrabble<br />
+<strong>mircea_popescu</strong> Why is that ?</p>
+<p><strong>asciilifeform</strong> Well, consider a bot. he can contain whatever, so he has an embedded dictionary (for the natural language of the poems). Or, failing that, simply the set of necessary words (all words from his poem slate).<br />
+<strong>mircea_popescu</strong> No problem. So ? It is a given the bot would contain the dictionaries, sure.</p>
+<p><strong>asciilifeform</strong> If the current buffer at any time does not match the beginning of any useful word, switch. Unless i'm missing something.<br />
+<strong>mircea_popescu</strong> Uh. So you switch on character 1 of all strings ?</p>
+<p><strong>asciilifeform</strong> Not all, but once 'x' becomes 'xy' and there is no 'xylophone' in the table...<br />
+<strong>mircea_popescu</strong> Seems to me a better strategy may be to stick with a not-so-entropic string than to switch and perhaps get a very entropic string. Even if the xy atm has no xylophone.</p>
+<p><strong>asciilifeform</strong> Illustrate?<br />
+<strong>mircea_popescu</strong> Ok. String one : xygfredfoxjumpedoverstan.<br />
+String two acadafabadabababbadaafa.</p>
+<p><strong>asciilifeform</strong> From whence do the strings come?<br />
+<strong>mircea_popescu</strong> They all start as natural language constructs and are fuzzed to different (and unknown to players) degrees. Some are very badly fuzzed. Some very slightly. Some in between.</p>
+<p><strong>asciilifeform</strong> Random selections from dictionary, then permuted a character at a time before start? And with varying degrees of noise?<br />
+<strong>mircea_popescu</strong> Random selections from the set from which poems given out, and then noised. Basically the player becomes an exercise to measure the fuzzer parameters in a half-blind fashion.</p>
+<p><strong>asciilifeform</strong> But noised to differing degrees, deliberately?<br />
+<strong>mircea_popescu</strong> Yeah.</p>
+<p><strong>asciilifeform</strong> Then strategy is clear, measure the noise.<br />
+<strong>mircea_popescu</strong> That in principle is clear, but it helps as much as "capture enemy pieces" helps in chess I suspect.</p>
+<p><strong>asciilifeform</strong> Certainly.<br />
+<strong>mircea_popescu</strong> Because measuring the noise has a cost in itself. Moreover, take our original two strings. When do you measure the noise ? xy is noisier than ac. Sampling problems. xyg way noisier than aca.</p>
+<p><strong>asciilifeform</strong> Noise being 'frequency of substrings that contain no valid words,' perhaps.<br />
+<strong>mircea_popescu</strong> 2nd still less noisy.</p>
+<p><strong>asciilifeform</strong> Fuck, I've played this game! With genetic sequences. Long story.<br />
+<strong>mircea_popescu</strong> I was going to say, basically this game is the game of fucking life. Every programmer ever has basically played this with compilers and errors and blabla. Every engineer idem.</p>
+<p><strong>asciilifeform</strong> I meant, literally this game. With homology modelling.<br />
+<strong>mircea_popescu</strong> O wow srsly ? Is it named anything ?</p>
+<p><strong>asciilifeform</strong> Not afaik.<br />
+<strong>mircea_popescu</strong> Hey.</p>
+<p><strong>asciilifeform</strong> But an actual expert might know. (I was thrown into that line of work by accident.)<br />
+<strong>mircea_popescu</strong> I guess ima clean it up and put it on the T.</p>
+<p><strong>asciilifeform</strong> I also have a hunch that it is a variant of Knapsack Problem.<br />
+<strong>mircea_popescu</strong> It certainly is. I'm just not sure it's reducible to it.</p>
+<p>So now, as the old greeting goes... what do you know, what do you say ?</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_52831" class="footnote">Told ya... [<a href="#identifier_0_52831" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_52831" class="footnote">There's a huge discussion of pole dancing we're skipping here. O you wanted to read it ? Tits! I mean, tough! [<a href="#identifier_1_52831" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_52831" class="footnote">Obviously "all" will have to get defined somehow on an endless board. The last player with money could be a definition, you get negative you're out. Arbitrary string counts could also be used. Or whatever. [<a href="#identifier_2_52831" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2014/the-nigger-a-practical-exercise/">The nigger, a practical exercise.</a></div>
+                <div class="alignright"><a href="/2014/smg-eulora-v004/">S.MG - Eulora v0.0.4</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/trolloludens/" title="View all posts in Trolloludens" rel="category tag">Trolloludens</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2014/lets-invent-a-new-game/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2014/lets-invent-a-new-game/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>4 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-98157" class="commentbody"><div class="commenthead"><img alt='ESRogs`s avatar' src='http://twitter.com/esrogs/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='https://twitter.com/esrogs' class='url'>ESRogs</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-98157" title="">Thursday, 20 February 2014</a>
+							</div>
+						<p>I'm not sure I understand the rules.  Are there spaces?  </p>
+<p>Let's say the dictionary is English words, and I read in "fad", and the next letter is 'e' and I read that too.  Do I get points after 'fad' (since that is a word), and also after I read in the 'e' (since 'fade' is a word)?</p>
+<p>What if there was an 'x' in front -- do I still get points after I've read in "xfad" because a suffix of what I've read is a word?</p>
+						</li>
+
+										<li id="comment-98158" class="commentbody"><div class="commenthead"><img alt='Bugpowder`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Bugpowder</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-98158" title="">Thursday, 20 February 2014</a>
+							</div>
+						<p>Semi-rational mutagenesis.</p>
+<p><a href="http://nar.oxfordjournals.org/content/28/16/e78">http://nar.oxfordjournals.org/content/28/16/e78</a></p>
+						</li>
+
+										<li id="comment-98159" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-98159" title="">Thursday, 20 February 2014</a>
+							</div>
+						<p>Bugpowder> Semi-rational mutagenesis<br />
+Bugpowder> mircea_popescu: I played that game quite a bit in grad school.<br />
+Bugpowder> For example <a href="http://nar.oxfordjournals.org/content/28/16/e78">http://nar.oxfordjournals.org/content/28/16/e78</a><br />
+mircea_popescu> Bugpowder o hey so it has a name and everything ?<br />
+mircea_popescu> asciilifeform check it out<br />
+Bugpowder> Well, it's not exactly the same game but similar enough<br />
+Bugpowder> You use degenerate PCR primers to evolve and screen fluorescent protein genes<br />
+mircea_popescu> shorter alphabet basicall ?<br />
+Bugpowder> trying to find an new one that matches<br />
+Bugpowder> well... 4 characters<br />
+mircea_popescu> shorter alphabet / longer verses.<br />
+Bugpowder> but you mutate base on the codons<br />
+* punkman1 has quit (Ping timeout: 272 seconds)<br />
+Bugpowder> so 3^3 'letters'<br />
+mircea_popescu> interesting<br />
+Bugpowder> since you need 3 to actually code an amino acid.<br />
+* punkman (~punkman@unaffiliated/punkman) has joined #bitcoin-assets<br />
+mircea_popescu> but isn't it 3^4 then ?<br />
+Bugpowder> uhhh<br />
+Bugpowder> 4^3<br />
+Bugpowder> yeah<br />
+mircea_popescu> right<br />
+Bugpowder> though some represent the same letter<br />
+Bugpowder> <a href="http://dps.plants.ox.ac.uk/langdalelab/protocols/PCR/degenerate_primer.pdf">http://dps.plants.ox.ac.uk/langdalelab/protocols/PCR/degenerate_primer.pdf</a><br />
+Bugpowder> So you can specify ATGC<br />
+mircea_popescu> well cool!</p>
+<p><a href="http://btcbase.org/log/?date=20-02-2014#518259">http://btcbase.org/log/?date=20-02-2014#518259</a></p>
+<p>Meta-problem solved :)</p>
+						</li>
+
+										<li id="comment-98160" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-98160" title="">Thursday, 20 February 2014</a>
+							</div>
+						<p>@<b>ESRogs</b> In principle particular variants of the game could played which counted both fad and fade or forced you to pick one. I would guess in all meaningful variants xfade would be legitimately read as fade, so basically you're allowed to select any substring that's a word out of your string.</p>
+<p>Obviously this is more exploratory than set in stone, some practice'd be required to refine the best ruleset for whatever circumstance.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author793ace2" id="author793ace2" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email793ace2" id="email793ace2" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url793ace2" id="url793ace2" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="52831" /></p>
+				<input type="hidden" name="comment_post_time" value="1745462921-18.97.14.90" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2025 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-52831")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-52831");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-52831");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>
