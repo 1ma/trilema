@@ -9,4 +9,9 @@
 
 	try_files {path} {path}/ {path}/index.html
 	file_server
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
 }
