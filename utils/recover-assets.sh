@@ -5,7 +5,7 @@ set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 DOMAIN="http://trilema.com"
-SLEEP_BETWEEN=0.2
+SLEEP_BETWEEN=0.4
 
 info() { echo "  $*" >&2; }
 
