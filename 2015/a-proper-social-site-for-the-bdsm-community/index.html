@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_jul2019h.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>A proper social site for the BDSM community on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">024776FFD3CBD21C872ECCD26AD078C5<br />BA0586E2E57CF68515E3C4828A673A6E
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-61125"><div class="post" id="post-61125">                    <h1><a href="/2015/a-proper-social-site-for-the-bdsm-community/" rel="bookmark" title="Permanent Link to A proper social site for the BDSM community">A proper social site for the BDSM community</a></h1>                        <div class="date">                                     Thursday, 23 April, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>I. Use javacript to </p>
+<ol>
+<li>Locally generate a (RSA) public-private keypair. Store both as base64 moduli<sup><a href="#footnote_0_61125" id="identifier_0_61125" class="footnote-link footnote-identifier-link" title="See Hanewinkel's tool for this purpose - notice that he also has a javascript encryption implementation on the other page there.">i</a></sup> in separate cookies<sup><a href="#footnote_1_61125" id="identifier_1_61125" class="footnote-link footnote-identifier-link" title="Note that the hardening of the privkey bearing cookie is a very iffy problem - I sadly don't know enough about the whole webshitstack to specify this correctly. Please help.">ii</a></sup>.</li>
+<p>	
+<li>Decrypt all elements sent encrypted to the local privkey and inject them into the DOM.</li>
+<p>	
+<li>Encrypt all submitted elements (text and pictures) going out through POST requests. Keep state of the list of foreign keys to which material should be encrypted.</li>
+</ol>
+<p>II. Use whatever you use to host a website interfacing with I. above. The website should at a minimum offer </p>
+<ol>
+<li>a plaintext meet and greet space, </li>
+<p>	
+<li>a means for users to sort  and be sorted into groups, </li>
+<p>	
+<li>a means to readily update content once intended recipients change.</li>
+</ol>
+<p>All binary resources (ie images, videos, whatever) should be proxied via single use URL (once a GET request is served for that URL, it is inactivated. All text resources should be injected in the DOM locally, after having been decrypted locally via js. </p>
+<p>This arrangement is not particularly bandwidth intensive (at least in the case of text, encryption serves as de-facto compression) and not particularly CPU intensive (users do most of the heavy lifting locally, so you get to leverage the pooled CPU of the community). It is very much legally immune : the operator can never be served a supoena of any particular utility, seeing how the website database servers merely host encrypted material to which the operator does not hold the key.</p>
+<p>Open for comments.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_61125" class="footnote">See <a href="http://www.hanewin.net/encrypt/PGpubkey.htm">Hanewinkel's tool</a> for this purpose - notice that he also has a javascript encryption implementation on the other page there. [<a href="#identifier_0_61125" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_61125" class="footnote">Note that the hardening of the privkey bearing cookie is a very iffy problem - I sadly don't know enough about the whole webshitstack to specify this correctly. Please help. [<a href="#identifier_1_61125" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2015/the-triviality-of-slaying-the-surviving-socialist-beast/">The triviality of slaying the surviving socialist beast</a></div>
+                <div class="alignright"><a href="/2015/a-new-lordship-list/">A new Lordship List ?</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/job-board/" title="View all posts in Job Board" rel="category tag">Job Board</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2015/a-proper-social-site-for-the-bdsm-community/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2015/a-proper-social-site-for-the-bdsm-community/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>30 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-113824" class="commentbody"><div class="commenthead"><img alt='irdial`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">irdial</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113824" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>This is, unsurprisingly, a much better idea than mine:</p>
+<p><a href="http://qntra.net/2015/04/theymos-complies-with-yet-another-subpoena/#comment-18827">http://qntra.net/2015/04/theymos-complies-with-yet-another-subpoena/#comment-18827</a></p>
+<p>because it completely removes the need to write separate native or Java, Air, whatever clients to access a forum, and provides the same level of owner deniability and user privacy, in browsers everyone already runs by default.</p>
+<p>Its incredible, though not surprising, that Discourse hasn't built its platform to do this from the start; they've concentrated only on the sheen and not the ever present fundamental threat of storing messages in plaintext.</p>
+						</li>
+
+										<li id="comment-113825" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113825" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>The only way something like this can be financed is via Bitcoin's MPEx. Obviously USG's VC circus wouldn't touch anything actually functional in regards to privacy with someone else's ten foot pole. So no, it's not surprising they failed.</p>
+						</li>
+
+										<li id="comment-113826" class="commentbody"><div class="commenthead"><img alt='Max`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Max</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113826" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>What happens if the cookies are cleared? How would you recreate the keyset in a deterministic manner with enough entropy? Ask the user to re-enter his password?</p>
+						</li>
+
+										<li id="comment-113829" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113829" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>Ask the user to save his cookies in a file somewhere.</p>
+<p>If they're (well, the privkey) ever cleared he's starting a new account.</p>
+						</li>
+
+										<li id="comment-113830" class="commentbody"><div class="commenthead"><img alt='anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">anon</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113830" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>Idea: most systems (yes even Windows) have ssh in some form or another. Have ssh generate a keypair, then the user can just paste the keys into his browser cookie interface.</p>
+						</li>
+
+										<li id="comment-113831" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113831" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>I'm not so sure that's such a good idea, sounds more like a bondogle. Nevertheless, because of how js works, the user can do this at any point he feels like, the site'd never know.</p>
+						</li>
+
+										<li id="comment-113832" class="commentbody"><div class="commenthead"><img alt='Max`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Max</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113832" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>You'd pretty much end up with a social network of men. The inconvenience in your implementation is unbearable, platonified due to your low social intelligence.</p>
+<p>We could also eliminate theft of cars if only every driver would carry around his engine with him. Much brilliance, very wow.</p>
+						</li>
+
+										<li id="comment-113836" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113836" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>Leaving aside the part where you seem to imply that women are stupid on the strength of merely being women (ironically enough, in the same breath you discuss "social intelligence") : care to explain the inconvenience ? Most people's browsers are chock full of cookies set to never expire, they don't even seem to know.</p>
+						</li>
+
+										<li id="comment-113837" class="commentbody"><div class="commenthead"><img alt='Max`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Max</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113837" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>Nobody implied that. The bottom line is consider the number of women who employ crypto/PGP, it is so minuscule that your BDSM community would be a faggot paradise. You are free to experiment to come to the same conclusion.</p>
+<p>Men are more stupid and more smart than women, which is to say women are more average whereas men range from the PGP using masterrace to the vertical bags of western meat. To us (actual) men, women are "stupid" in the sense that they do not use PGP like men of low social standing.</p>
+<p>The question was what happens IF the cookies are removed, not WILL they get removed, losing access to your profile once your cookies are removed or you decide to use a different machine is idiotic.</p>
+						</li>
+
+										<li id="comment-113840" class="commentbody"><div class="commenthead"><img alt='William Dunne`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">William Dunne</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113840" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>Is this a job posting? Might be interested if so.</p>
+						</li>
+
+										<li id="comment-113842" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113842" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>@<b>Max</b> Your confusion is too amply stratified for my meagre patience. </p>
+<p>@<b>William Dunne</b> It is, yes.</p>
+						</li>
+
+										<li id="comment-113843" class="commentbody"><div class="commenthead"><img alt='William Dunne`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">William Dunne</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113843" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>@Max it would all be done in browser, they don't need to know they're using encryption</p>
+						</li>
+
+										<li id="comment-113852" class="commentbody"><div class="commenthead"><img alt='William Dunne`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">William Dunne</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113852" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>Oh, and as for key generation I would simply generate in JS and then encrypt them using the users password - they can then be uploaded to the server allowing the users to get a backup (automatically) while the admin doesn't have to have control. Encrypting the encryption keys.</p>
+						</li>
+
+										<li id="comment-113855" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113855" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>This breaks the "we have nothing for you to supoena" bit. Let the users save a file, it won't KILL THEM.</p>
+						</li>
+
+										<li id="comment-113856" class="commentbody"><div class="commenthead"><img alt='funkenstein`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">funkenstein</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113856" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>You might be interested, for historical purposes, in "Applied Cryptography" - B. Schneier, Section 6.6, Protocol #3:<br />
+"...  Together, they can determine whether or not they share the same fetish.  If they do, they might look forward to a happy relationship.  If they don't, they can part company, secure in the knowledge that their particular personal information remains confidential.  No one, not even the Secure Multiparty Computation Dating Service (TM), will ever know."</p>
+						</li>
+
+										<li id="comment-113857" class="commentbody"><div class="commenthead"><img alt='David FRANCOIS`s avatar' src='http://fr.anco.is/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink"><a href='http://fr.anco.is' class='url'>David FRANCOIS</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113857" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>I think this is a half-measure that doesn't really work.</p>
+<p>It suffers from the same fundamental problem blockchain.info does, subpoena the website owner, have him inject some malicious JS payload that sends back the GPG keys, wait a couple of weeks, you can now decrypt 90% of the DB.</p>
+						</li>
+
+										<li id="comment-113858" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113858" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>@<b>funkenstein</b> Top kek.</p>
+<p>@<b>David FRANCOIS</b> a) this is intended to be web-safe not bitcoin-safe ; b) we're not hosting anything any further except on bulletproof hosts specifically dedicated to breaking the law (as per <a href=/2015/on-how-i-ended-up-suing-phoenix-nap-llc-on-how-ira-r-cadwells-mom-stephanies-going-to-lose-her-chula-vista-home-on-how-marcus-bohn-is-going-to-catch-a-lot-of-shit-for-that-on-assorted-othe/ >this</a>) and c) user doesn't have to re-download the javascript necessarily, once he has a key he can use the old js.</p>
+						</li>
+
+										<li id="comment-113860" class="commentbody"><div class="commenthead"><img alt='William Dunne`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink">William Dunne</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113860" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>The SubPoena bit can be sorted in the same way that you sorted the SEC</p>
+						</li>
+
+										<li id="comment-113861" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113861" title="">Thursday, 23 April 2015</a>
+							</div>
+						<p>At the very least you could put up a canary I guess.</p>
+						</li>
+
+										<li id="comment-113885" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113885" title="">Friday, 24 April 2015</a>
+							</div>
+						<p>Isn't this approximately how (RIP) Lavabit worked ?</p>
+						</li>
+
+										<li id="comment-113886" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113886" title="">Friday, 24 April 2015</a>
+							</div>
+						<p>I thought lavabit had the actual keys.</p>
+						</li>
+
+										<li id="comment-113887" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113887" title="">Saturday, 25 April 2015</a>
+							</div>
+						<p>&gt; I thought lavabit had the actual keys.</p>
+<p>It had an ssl cert, that usg for some peculiar reason demanded a copy of (would not - or could not - use their 'god mode' apparently.) But it also had something like this proposed mechanism in place. If Levison had given up the cert, the next step would have been a standard mitm where users are served a diddled js which sends back the key.</p>
+						</li>
+
+										<li id="comment-113888" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113888" title="">Saturday, 25 April 2015</a>
+							</div>
+						<p>This is not what I recall. What I recall is that the site had an actual master key.</p>
+						</li>
+
+										<li id="comment-117274" class="commentbody"><div class="commenthead"><img alt='Framedragger`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink">Framedragger</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117274" title="">Wednesday, 18 May 2016</a>
+							</div>
+						<p>Some comments:</p>
+<p>&gt; I. Use javacript to<br />
+&gt;<br />
+&gt;    Locally generate a (RSA) public-private keypair.</p>
+<p>First off: even if there was a way to verify integrity, authnenticity etc. of JS code (see below - can use Subresource Integrity if browsers support it - if not - does it not boil down to trusting the server again - because no way to "pin" a JS resource?), wouldn't users be prone to a "swap keys" kind of attack by the server? i.e.: when server is requested to provide some resource authored by some user, the server provides a *different* user key ID - one which corresponds to a keypair the compromised server had generated itself - and when the PK for that key ID is requested by user, the MitM PK is served. One would need to verify key IDs via side channels, and/or have a way of importing keypairs generated elsewhere. Both are possible, but key ID side channel verification won't be done by most users...; and as to the latter, I would dread the idea of importing my private keys to the browser (even with some way of verifying that it's all legit, web crypto API is sound, no leaks, a pinned JS resource with known hash is served, etc etc.)</p>
+<p>Re. ECC vs. RSA: I know that ECC may not be liked here (for good reasons - e.g. if one curve is fucked then *all* who use that curve are fucked; cf. one particular modulus in some RSA keypair is botched =&gt; only one person is fucked) - but - would ECC (implemented in web crypto API (which guarantees better PRNG than JS can ever hope to do - seriously, doing crypto in JS is usually a bad idea...), or in e.g. <a href="https://crypto.stanford.edu/sjcl/">https://crypto.stanford.edu/sjcl/</a> - well-respected but possibly young-ish (though now sort of mature) library) be considered instead of RSA? Particular algorithms would have to be used for encryption, signing etc. though (such as <a href="https://cr.yp.to/ecdh.html">https://cr.yp.to/ecdh.html</a>). Would result in significantly smaller keys (especially as key size is increased: RSA modulus grows faster than elliptic curve size). The main benefit would probably be encryption/decryption speed (signing would be slower, though). Key generation time would be deterministic (cf. RSA). There are decent-looking implementations in JavaScript, but I (too?) have a *special* degree of wariness when it comes to crypto in JS (or anything in JS, for that matter). So would have to make sure implementation used is good, etc. However, maybe RSA is just simpler and more straightforward.</p>
+<p>That being said, SJCL may be a good choice. (Examples of RSA and ECC using SJCL: <a href="http://www-cs-students.stanford.edu/~tjw/jsbn/">http://www-cs-students.stanford.edu/~tjw/jsbn/</a>). I'd still be worried about getting good entropy in JS - random number generation in JS has been criticized quite a bit; it's a nuanced thing (doesn't help that the language is shit... implicit type "coercion"...) Newer browsers support web crypto: <a href="https://github.com/diafygi/webcrypto-examples">https://github.com/diafygi/webcrypto-examples</a> ; also note general concerns re. PRNG and client-side crypto: <a href="http://stackoverflow.com/questions/1130296/generating-an-rsa-keypair-in-javascript">http://stackoverflow.com/questions/1130296/generating-an-rsa-keypair-in-javascript</a></p>
+<p>One particular UX-level disadvantage would be that not all OpenPGP client applications support ECC, so if one wanted to do things with their browser-stored keys, it may not be as easy.</p>
+<p>Nice reading to set the mood re. crypto in JS: <a href="https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful/">https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful/</a> ; + to check on current status of w3's web crypto API; use Content Security Policy etc.</p>
+<p>Provide hashes for JS source files if browser supports - in particular, check Subresource Integrity (https://www.w3.org/TR/SRI/ and <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</a>) (this would allow content pinning, so to speak). Also <a href="https://www.w3.org/TR/csp-cookies/">https://www.w3.org/TR/csp-cookies/</a> for cookies.</p>
+<p>&gt; Store both as base64 moduli in separate cookies.</p>
+<p>Initial iteration may as well do it this way. At the end of the day, if someone has access to local browser data, that data can be stolen. Only other storage location is html5 localStorage, but even making the (dangerous) assumption that all modern browsers support it *and* that users allow for websites to use localStorage, I don't see any advantage here. Symmetrically encrypt local cookie data with a passphrase stored on the server, decrypting on-the-fly? If someone is targetting a user of this service in particular, then this is not much more secure (and adds additional dependency for a particular backend server instance on the user's part).</p>
+<p>Symmetrically encrypt local cookie data using a passphrase the user has to enter (encryption/decryption done by JS)? This would be more in line with how OpenPGP clients ask for a passphrase etc.; but would this add actual security (attacker gets physical access to machine and the cookie data is not decrypted at that point in time), or would it only add to some form of appearance of additonal security?</p>
+<p>&gt; Decrypt all elements sent encrypted to the local privkey and inject them into the DOM.</p>
+<p>&gt; Encrypt all submitted elements (text and pictures) going out through POST requests. Keep state of the list of foreign keys to which material should be encrypted.</p>
+<p>Re. encrypt POST data &amp; foreign keys: so the idea is that when user submits data (of any kind), it is encrypted to (1) the public key stored locally, and (2) to every other key taken from some list (produced from, I suppose, e.g. group members (of a group the user is part of))?</p>
+<p>Given how MPEx works, I wonder, would you envision here having an explicit constraint that *no* additional unencrypted user data would be stored on the server - except for their public keys? So essentially the backend serves (1) public keys as requested (identified by key ID); (2) encrypted blobs (these blobs have key IDs associated to them); and (3) *some* info for groups - map of group names and IDs? And membership info? Re. latter, not clear how the alternative (i.e. not storing user/group mappings unencrypted on the server) would work; e.g. group membership of a particular user would have to be stored encrypted with private key. (JS downloads this particular blob, now has relevant key IDs for encryption, etc.) Becomes tricky with sorting and search. If needed, server may perhaps not know of group *names*, only IDs: user1 invites user2 to group, and as part of the invite sends the group name (and additional metainfo for group if needed) to user2 (encrypted with user2's key). Issues with trust, etc. Unsure if this kind of screwing-about is needed for names only (I suppose depends on how particular/private it may get, e.g. "X town's east-side grandmas").</p>
+<p>&gt; II. Use whatever you use to host a website interfacing with I. above. The website should at a minimum offer</p>
+<p>&gt;    a plaintext meet and greet space,</p>
+<p>By plaintext do you mean "just text", or "not encrypted to anyone's key"? I assume the latter?</p>
+<p>&gt;    a means for users to sort and be sorted into groups,</p>
+<p>Option for unlisted/listed groups? When user creates group, they, I assume, become its admin (for purposes of altering metainfo / description / etc as well as for adding/removing users)?</p>
+<p>&gt;    a means to readily update content once intended recipients change.</p>
+<p>As in, an easy way (in terms of interface etc.) to change content of any partiular blob by Bob when Bob is the author of that blob?</p>
+<p>&gt; All binary resources (ie images, videos, whatever) should be proxied via single use URL (once a GET request is served for that URL, it is inactivated. All text resources should be injected in the DOM locally, after having been decrypted locally via js.</p>
+<p>Sounds good. Does this imply that you would see these binary resources as not being encrypted? I mean, this simplifies matters (viewing profiles etc) - but just to be clear - these resources are not encrypted (unless user chooses to? - for sharing with some particular group/person? - so there is a choice.)</p>
+<p>&gt; This arrangement is not particularly bandwidth intensive (at least in the case of text, encryption serves as de-facto compression)</p>
+<p>I don't think so (re. encryption as compression). Encryption does not necessarily remove statistical redundancies (which is what compression would work on) by making the resulting data smaller. In any case, compressing first (DEFLATE is fast) and then encrypting would make sense to me, no? (Though see side channel attacks involving a "compression oracle" - hell, maybe just do encryption/decryption and no compression, at least as a first iteration).</p>
+<p>&gt; and not particularly CPU intensive (users do most of the heavy lifting locally, so you get to leverage the pooled CPU of the community). It is very much legally immune : the operator can never be served a supoena of any particular utility, seeing how the website database servers merely host encrypted material to which the operator does not hold the key.</p>
+<p>Yeah, these are nice indeed.</p>
+						</li>
+
+										<li id="comment-117275" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">25</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117275" title="">Wednesday, 18 May 2016</a>
+							</div>
+						<p>> no way to "pin" a JS resource?</p>
+<p>Wait, what ? Admittedly I'm no javascript expert, but you could obviously shasum all the files that get loaded and have samples up for display ?</p>
+<p>> One would need to verify key IDs via side channels</p>
+<p>Without getting into a complete discussion of what you say here specifically, in principle I suspect the agreement is that a proper site wouldn't work with the sort of tools the <a href=/2016/die-neue-ss/ >subhumans</a> use, which is why this whole idea probably reduces to <a href=http://btcbase.org/log-search?q=gossipd >gossipd</a>. </p>
+<p>> dread the idea of importing my private keys to the browser</p>
+<p>Yeah, this is scandalous wtf. Nevertheless - you're using OTR via say IRC without importing your private key, yes.</p>
+<p>> one particular modulus in some RSA keypair is botched => only one person is fucked</p>
+<p>Except everyone uses an exponent of <a href=/2016/the-recent-phuctor-finds-explained/ >fucking thirty-five</a>. Except for the people who use one, of course.</p>
+<p>> be considered instead of RSA?</p>
+<p>The only thing considered instead of RSA is <a href=http://btcbase.org/log-search?q=cramer+shoup >C-S</a>.</p>
+<p>> random number generation in JS has been criticized quite a bit</p>
+<p>Quite a bit is <a href=http://btcbase.org/log/2016-05-03#1461714 >putting it mildly</a>. </p>
+<p>> One particular UX-level disadvantage would be that not all OpenPGP<br />
+> client applications support ECC, so if one wanted to do things with<br />
+> their browser-stored keys, it may not be as easy.</p>
+<p>Lord have mercy, see all the threads were we wanted to transform ssh RSA keys into pgp RSA keys and discovered that "totally by accident and chance" such a tool doth not exist and has to be written de novo, in 2016. Twenty years later.</p>
+<p>> html5 localStorage [...] I don't see any advantage here</p>
+<p>Me either. But hey, the web has "progressed" right ? </p>
+<p>> Symmetrically encrypt local cookie data with a passphrase stored on the server</p>
+<p>So you've just de-rsa'd it.</p>
+<p>> having an explicit constraint that *no* additional unencrypted user<br />
+> data would be stored on the server</p>
+<p>This is another point where the web model dies in favour of the gossipd model.</p>
+<p>> By plaintext do you mean "just text", or "not encrypted to anyone's key"? I assume the latter?</p>
+<p>I actually meant the former.</p>
+<p>> As in, an easy way (in terms of interface etc.) to change content of any partiular blob by Bob when Bob is the author of that blob?</p>
+<p>Something like that.</p>
+<p>> compressing first (DEFLATE is fast) and then encrypting would make sense to me, no?</p>
+<p>It's what was being contemplated, "encryption is de facto compression" aims to mean "nobody's going to bother encrypting and not throw a compression in also".</p>
+						</li>
+
+										<li id="comment-117277" class="commentbody"><div class="commenthead"><img alt='Framedragger`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">26</div>
+								<span class="authorlink">Framedragger</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117277" title="">Wednesday, 18 May 2016</a>
+							</div>
+						<p>&gt;&gt; no way to "pin" a JS resource?</p>
+<p>&gt; Wait, what ? Admittedly I'm no javascript expert, but you could obviously shasum all the files that get loaded and have samples up for display ?</p>
+<p>Of course, (technically) yes, however, from an actual user experience perspective, I think this "being able to shasum and compare against signed samples or whatnot" feature is not as useful as you may think it may be: if there is no way for the *browser* to pin a resource (which essentially means "trust the server first time I load the page, hash this thing and then alert user if hash has changed, and do not execute automatically in that case"), it's still dangerous. Consider that (by virtue of the whole browser stack being so fucked) when you open a page with JS in it, you're kind of "installing" and running a new app every time you load it.</p>
+<p>If I go to a page and my browser (being the steaming pile of shit that it is) automatically runs all it cans (seriously: did you know that browsers may attempt to eval() a file if file type is unknown, *hoping* it may be JS (and doing their discovery process this way)?? - see bashing by one James Mickens, systems engineer: <a href="http://scholar.harvard.edu/files/mickens/files/towashitallaway.pdf">http://scholar.harvard.edu/files/mickens/files/towashitallaway.pdf</a> ), it's sort of useless if I later discover that, wait, shasum mismatch, I just executed shitty JS code. Now, I can make my browser not do that (auto execute), but I don't want to manually compare checksums every time I load a page, either.</p>
+<p>Can check on browser extensions etc etc, but the point is, it's nice if you can tell the browser to only trust this particular version of the file, and warn you *before* it gets any funny ideas of executing it - just that. W3C appears to have standardized such enforced resource pinning. Using this in addition to samples, and say, a nice signed message with hashes in it may be enough. (But if you run an older browser which doesn't give a fuck what it's served, god help you! But then it's your fault anyway, so.)</p>
+<p>&gt; gossipd</p>
+<p>Yeah, maybe it does. I take it you mean <a href="/2015/artifexd-a-better-ircd-rfc/">/2015/artifexd-a-better-ircd-rfc/</a> - interesting proposal. I wonder if you'd still think doing a JS version of the social site to be worth it? I stumbled upon this particular post sort of accidentally, after looking for frontend-based discussion board implementations. I'd imagine an implementation for a more generic public key + encrypted blob system, with such a BDSM community social site being a further customization of that system. Having the latter in decent less-shitty form would surely be nice.</p>
+<p>&gt; The 35 exponent.</p>
+<p>Hah, oops, well fuck. Gonna check it (Phuctor and its findings) in more detail, this is entertaining!</p>
+<p>&gt; Cramer–Shoup</p>
+<p>Aha. RSA seems the way to go as of now, then.</p>
+<p>&gt; RNG in JS</p>
+<p>Yeah, fuck that shit. Web crypto API (standardized browser API) may be the way to go here (https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues e.g.), but it still feels dirty.</p>
+<p>&gt;&gt; Symmetrically encrypt local cookie data with a passphrase stored on the server</p>
+<p>&gt; So you've just de-rsa'd it.</p>
+<p>Yeahyeah, this breaks the initial idea. (Private key would still not be handed to the server, note; but this would have implications for dependence on particular server as well as some form of legal deniability on the server's part...)</p>
+<p>Re. all else, gotcha. So someone is working on gossipd I take it - interesting.</p>
+<p>I'd still like to implement this. I don't know - maybe doing all of the above in the browser *is* futile and prone to disaster. Possibly it's still a worthy idea, I think.</p>
+<p>May have further follow-up points later on.</p>
+						</li>
+
+										<li id="comment-117279" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">27</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117279" title="">Wednesday, 18 May 2016</a>
+							</div>
+						<p>> Yeah, maybe it does.</p>
+<p>See, thinking about it any way you wish, the upside of using a browser (random lazy derp can just go to an url) is not really a match for the upside of using a dedicated app (you can use p2p distributed hash tables for crying out loud!).</p>
+<p>There's just no life in this idea as originally thought out, a browser thing.</p>
+<p>> I take it you mean</p>
+<p>That, at origin, a lot of subsequent discussion in the forum hence, refining etc. Even <a href=http://btcbase.org/log/2016-05-16#1467075 >yesterday</a>. </p>
+<p>> So someone is working on gossipd I take it</p>
+<p>The person named has been awol for a while. But it's not fair to say people aren't working. Currently the cud of the thing is being chewed.</p>
+						</li>
+
+										<li id="comment-117298" class="commentbody"><div class="commenthead"><img alt='Framedragger`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">28</div>
+								<span class="authorlink">Framedragger</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117298" title="">Friday, 20 May 2016</a>
+							</div>
+						<p>Pardon me for being too easily excitable about these things, but maybe there really is a a point to be made when you said "the correct path is to take a decent crypto lib, a distributed-hashtable-storage thing from one of the p2p torrent tools, and make a real social media app". However, I would personally settle for some kind of federated server solution, with end-to-end encryption and RSA keypair based identities (so no (explicit, at least) trust in the server). Ideally server-to-server sync, but this can come later.</p>
+<p>There's XMPP, there are ways to do end-to-end encrypted group chats (e.g. what open whisper systems do (mpOTR has too many unresolved flaws iirc)), etc. Not to say that this would need to stick to XMPP in some way, but, dunno, keep it simple / reuse good things. Perhaps just interface with gnupg, generate a keypair, and use gnupg for encryption/decryption/signing; and do some very simple/straightforward content GETing / POSTing. Group membership info may be stored on server. Doesn't sound too bad of an approach. If one were to demand higher integrity/authenticity promises (in regards to e.g. group membership info stored on server), one could think of employing a public ledger for this kind of stuff.</p>
+						</li>
+
+										<li id="comment-117300" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">29</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117300" title="">Friday, 20 May 2016</a>
+							</div>
+						<p>Explain the difference between p2p and "federated server". All p2p is flexibly "federated server" necessarily, neh ?</p>
+<p>GNUPG is a horrible pile of shit currently in the process of being rewritten by tmsr. I wouldn't want it reused ; I suspect most of the "good things" are in the same situation. If you read the logs for the past coupla years you'll see we had started from your position, and slowly discovered that no, the stack is rotten to the core, and almost everything's either entirely useless or in need of a full rewrite.</p>
+						</li>
+
+										<li id="comment-124279" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">30</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-124279" title="">Tuesday, 16 January 2018</a>
+							</div>
+						<p><a href="http://btcbase.org/log/2018-01-16#1771055">http://btcbase.org/log/2018-01-16#1771055</a></p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author95748f7" id="author95748f7" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email95748f7" id="email95748f7" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url95748f7" id="url95748f7" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="61125" /></p>
+				<input type="hidden" name="comment_post_time" value="1770956265-18.97.14.85" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-61125")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-61125");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-61125");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

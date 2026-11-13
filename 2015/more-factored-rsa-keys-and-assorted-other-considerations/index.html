@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_jul2020c.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>More factored RSA keys, and assorted other considerations on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Lucruri fine pentru oameni subtiri.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-61760"><div class="post" id="post-61760">                    <h1><a href="/2015/more-factored-rsa-keys-and-assorted-other-considerations/" rel="bookmark" title="Permanent Link to More factored RSA keys, and assorted other considerations">More factored RSA keys, and assorted other considerations</a></h1>                        <div class="date">                                     Wednesday, 20 May, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>This is going to be a lengthy article that - like pretty much everything else<sup><a href="#footnote_0_61760" id="identifier_0_61760" class="footnote-link footnote-identifier-link" title="I am aware most articles are written in a manner that makes them superficially appear approachable, easy and fun. This is absolutely never the case. I would know, because I write them. They are fun to write, yes, but they're not supposed to be fun to read.">i</a></sup> on Trilema - deals with complex matter broadly unfamiliar to most certified experts in the respective fields, let alone the general public. To avoid personal injury, tread softly, mutter to yourself quietly and re-read insistently. </p>
+<p><center><br />
+<hr />
+<h1>Part One : The Conundrum</h1>
+<hr /></center></p>
+<p>The verbiage on Phuctor's <a href="http://nosuchlabs.com/theory">theory page</a> reads in relevant part :</p>
+<blockquote><p>We do not display factored keys, at all, nor do we display factored moduli per se (but an attacker keeping close tabs on the universal product might, conceivably, obtain some sort of a guess). Should your key prove to be weak we will try to email you a notification. We will also remove your key from the site, so your previously working url would no longer work. Thus you have two ready ways to identify such an emergency : either by receiving an email warning, if your email address quoted in the key works, or by failing to find your key after you had introduced it.</p></blockquote>
+<p>When Phuctor was originally released, <a href="http://www.loper-os.org/?p=1331">back in October</a> <strong>2013</strong>, it was intended and consequently designed as a user-powered, one signature at a time sort of affair. This changed later on, when we decided to allocate actual computational resources to the task. At that time the approach changed in tandem, from "wait for users to post a key" to simply churning the entire keyserver set. This evolution leaves that verbiage in the lurch, or as Stan put it, "I still can't fathom why you threw that in there."</p>
+<p>I obviously can fathom - after all, I'm the one that put it in. The admittedly parochial logic behind it was based on some presuppositions meanwhile invalidated : 1) that the set of tested keys will at all points be a minor fraction of the total visible keys ; 2) that the set of weak keys found will at all points be so tiny as to not raise significant problems with emailing the owners and 3) that we are acting in a world that is both larger than us and more important than us, a sleeping giant that we do not wish to upset.</p>
+<p>Experience hence has shown the folly of all these presuppositions, as experience always does. Specifically : </p>
+<p><strong>As far as the first is concerned</strong>, there are strictly insurmountable problems with keeping information secret. "Information wants to be free" may not be <em>sensu stricto</em> correct, and may certainly be entirely nonsensical as used by the derps that came up with it. Nevertheless, there is something there : how would I keep anyone who feels like it from running the same very basic math on the same publicly accessible set of numbers ? Upon meditation, the "for all we know others unknown are at the current time in possession of the same information we have" <a href="/2015/full-disclosure-4096-rsa-key-in-the-strongset-factored/?b=for%20all%20we%20know&#038;e=information%20we%20have#select">problem</a> can not actually be resolved through increasing the paranoia level with regards to server security from just under nine thousand to well over nine thousand. One doesn't need to root my computer in order to add two and two, he can do that on his own computer just as well.</p>
+<p>This aside, how exactly is one going to implement the "we won't tell on your key" policy ? Do we show all keys as "passed" even if they aren't ? ♫<em>But you don't want to lie, not to the young...</em>♪ Yet if we don't, what is the difference between the key not being displayed and the key getting a big fat red warning ? Obviously, some naive observers might be fooled. <em>Cui bono</em>, fooling the naive observers ? The entire point of this entire exercise is to reduce the disadvantage of the naive, after all.</p>
+<p><strong>As far as the second is concerned</strong>, we went in with the expectation, and I quote, </p>
+<blockquote><p>Since there's about 4 million keys (a little under) in the bundle of publicly known keys that it is processing, if you're even vaguely mathematically literate and even marginally aware of what exactly theoretical RSA promises, you would on the strength of this introduction expect a key to be factored just a little before Elvis comes back as the Queen of England. So did we. So did everyone else.</p></blockquote>
+<p>There was absolutely no expectation any key will ever be factored through this mechanism. Ever. This is the truth.</p>
+<p><strong>As far as the third is concerned</strong>, well... let's give the mic over to Naggum for a moment :</p>
+<blockquote><p>The problem is that "exploitation" happens only to people stupider (and consequently less informed) than the "exploiter". </p>
+<p>The root cause of this whole world problem is that some people are smarter than others. There are two basic solutions to this problem: Kill all the morons, or kill all the brains. If you look at how several political regimes have behaved throughout history, you might get the impression that they are precisely adopting one of those two options. (Social democracy is a little more advanced: Kill everything outside 2 sigma.)  World history and evolution and nature in general keep telling us something we humans do not want to hear: Some people _have_ to die for the rest of us to live better. The only question that political systems can answer is _who_ gets to live or die. Those who do not realize this will not live well before they die young. Our current political systems have created a world where people are afraid that we are not "sustainable". Of course we are not. But instead of killing contemporary people, we are killing future people. It is definitely not sustainable to keep everybody alive forever. We will, eventually, resort to killing a lot of people, and I mean a _lot_, like probably half of the planet's population, because, like fruit flies in a laboratory jar that runs out of sugar, we will be too many before we get the point. And that is OK with me, I do not plan to hang around forever, and neither do I want children to make things worse. But in the end, nature exploited us, not vice versa, because people are generally stupid and ill-informed about the choices they make. (Which is probably what some people _really_ mean when they say people are not rational.)</p></blockquote>
+<p>The fact of the matter is that we're people well outside two sigma<sup><a href="#footnote_1_61760" id="identifier_1_61760" class="footnote-link footnote-identifier-link" title="I don't mean him, or me, I mean us. This is what the entire point of the Republic is : a place for the only people who matter, that `just so happen` to be the people everyone's trying to murder.">ii</a></sup>, which means both that "the world" is <a href="/2014/the-womans-job/?b=The%20point&#038;e=the%20world#select">roughly the size of half a chickenshit</a> in comparison, and already as hostile as it can ever get. </p>
+<p>Seriously, I should care that "the Internet community" will get upset, for reasons ? Fuck "the Internet community", <a href="/2015/on-how-i-ended-up-suing-phoenix-nap-llc-on-how-ira-r-cadwells-mom-stephanies-going-to-lose-her-chula-vista-home-on-how-marcus-bohn-is-going-to-catch-a-lot-of-shit-for-that-on-assorted-othe/#selection-209.135-221.245">I wouldn't trade away a strand of chewed gum for the whole lot of it</a>. Moreover, it's already upset. It'll never get more upset. The mere fact that we exist <a href="/forum-logs-for-09-mar-2012#135311">punctures</a> its ever-paramount narrative, and that's really all it takes and all there is.</p>
+<p>The "Internet community" of dullards, normies and business majors is fundamentally lazy, fundamentally stupid, and already penned and handled by <a href="/2012/strategic-superiority-a-saga/?b=You%20are%20grossly&#038;e=Western%20society#select">the exact people who should be handling it</a>. Not our problem, not our interest and not a valid point of consideration or concern or in other words - If you're not in the WoT, you are not a person.</p>
+<p><strong>So therefore</strong>, for the aforestated reasons and after very careful deliberation<sup><a href="#footnote_2_61760" id="identifier_2_61760" class="footnote-link footnote-identifier-link" title="I seriously lost two nights' sleep over this, which is rare with me.">iii</a></sup>, the original policy is rescinded. We will be publishing broken keys freely, periodically, and without any attempt to insulate their owners or anyone else from the fallout. That's it.</p>
+<p><center><br />
+<hr />
+<h1>Part Two : The Broken Keys</h1>
+<hr /></center></p>
+<p>We have <del datetime="2015-05-20T07:58:16+00:00">thirteen</del><sup><a href="#footnote_3_61760" id="identifier_3_61760" class="footnote-link footnote-identifier-link" title="Fuck me it found two more while I was doing the write-up.">iv</a></sup> fifteen keys so far.<sup><a href="#footnote_4_61760" id="identifier_4_61760" class="footnote-link footnote-identifier-link" title="So far in this context means that Phuctor has processed 159`336 keys.">v</a></sup> Here they are :</p>
+<ol>
+<li><a href="http://nosuchlabs.com/gpgkey/602BCEE3339AE47E388CA9A5472A563CFB8F73F66CCB3E69553B41BF6261ACBE">51EAB526D87542022AA1BC85E99EF4B451221121</a><sup><a href="#footnote_5_61760" id="identifier_5_61760" class="footnote-link footnote-identifier-link" title="Numeric value : 8170230239603769466339755071101546492494075988067987304148498844617761721719
+21668594148071323527016137506405823108520062504849249423700259406905313281403901410082762
+09715956022146304892433619238402677750217726273104520032220014977312750288854523497313948
+08876445851926006310589628761141569342488951719592469695976371272800102721435938852409408
+77456234662196130491400738438731832514335353824697930453078426722191105157568392826870043
+65570800854541114336776383656601174049938345659212966258500488037677759771497802354243442
+19142011195376854891735099423290906316620146500331426421109143608494218561796112264508065
+62235534802516081595259914768497444702718749402330070488028751073730349460752771915484847
+39938563152470848764607993657241039896758289598318764079807230936209472765416762862010598
+14590215482904158000967692144374256909343720156287960274982199024412881893983863598466616
+23243493534897411417685435424010451956954083531228374002591372549525280610594684910812811
+28743648120708976312542424779304404330973726946870971067987226927285538994538538646776550
+98806489297434982143295782888749871937684393533823052601084256880241476568069324740588889
+92099083804597481699305852902662863062054067183925164590726103552998367994727700722491707.">vi</a></sup> [H. Peter Anvin &lt;hpa-squee-infradead.org>; H. Peter Anvin (hpa) &lt;hpa-squee-zytor.com>; H. Peter Anvin &lt;h.peter.anvin-squee-intel.com>;], divisible by 231.</li>
+<p></p>
+<li><a href="http://nosuchlabs.com/gpgkey/E3A686D5C76C7C2A8BA31B60A2D9AC8E530BADB22BEA5B4CDFD885A6A099042C">1482E27395532CEC191ADD937765EA7193E6924C</a><sup><a href="#footnote_6_61760" id="identifier_6_61760" class="footnote-link footnote-identifier-link" title="Numeric value : 3031874832053583743418292416372595502099634576341315290167303447940896540435
+52345310511975303590935244481948247376401432307103818091777320274166257340264331696427788
+43820440287608502427017776857269490773429050263926830246409710132226138115684031880138324
+99315445911152479447953897832028961727910760577857345909513420880711566183055344315448208
+15189782112077811874252865235796365042902051353241295725761213063753498336305286779774625
+74313488820577959634372076837817948119361159907327939505395820850075258926732304880546382
+18121459625570075016156281579252730109288078262517095342621532804321605585499878821551725
+4263519.">vii</a></sup> [Tony Pelaez (HarryGuerilla) &lt;tnyplz-squee-gmail.com>;], divisible by 21.</li>
+<p></p>
+<li><a href="http://nosuchlabs.com/gpgkey/72D7C7A3CED4581D1261408DFFC140745C8B735BF463DC5610E47F7DAAE1BE70">EF010E6F351E447C96C91AF1293987A8466F60E1</a><sup><a href="#footnote_7_61760" id="identifier_7_61760" class="footnote-link footnote-identifier-link" title="Numeric value : 8197390857930122495849886562470137189068756241045853345396708829779573185913
+78792339415324255980163059743127714787086007659129438357469037360629245249705616603601365
+63597964146991710522851815219493862072638245521162544016209541093774656536696344417650823
+49152687118176002646235036007018218530990808110784085609984103493668490069882331296050726
+59148709662519992770928241586882303261927623688308807480924828026178227826500232989258797
+61721238970587973321189711176439396770655963604567146740276786029404138338726088474566611
+34442803025681035341370085255365136140771869414017143486972849683925905356740246160827637
+44494544558022802316339056649025168309463869160798052335969727740908414036010857683088184
+61710283106767985721173378055475097926017173809924807346856948601492783226587906746941939
+36060958883108067041074467521324201140558209298564151341183396803584754058788057295587730
+56569821737406806683979766620026684983212939057835493907061843702537913655031320296990391
+00326043248192047531754247006078437079036897801687200801156127058901013497147676702383977
+92795134394789315147677565147168277841479001338032176084161559558010542509101918915636532
+15342770779317932920084062741642010198566264962129579715127047847615770686855802050721189.">viii</a></sup>, [Debarshi Ray &lt;rishi.is-squee-lostca.se>; Debarshi Ray (GNU Developer) &lt;rishi-squee-gnu.org>; Debarshi Ray (GMail Account) &lt;debarshi.ray-squee-gmail.com>; Debarshi Ray (Red Hat Employee) &lt;debarshir-squee-redhat.com>; Debarshi Ray (Fedora Packager) &lt;rishi-squee-fedoraproject.org>; Debarshi Ray (GNOME Developer) &lt;debarshir-squee-src.gnome.org>; Debarshi Ray (GNOME Foundation Member) &lt;debarshir-squee-gnome.org>; Debarshi Ray (Freedesktop.org Developer) &lt;debarshir-squee-freedesktop.org>; Debarshi Ray (Student at University of Helsinki) &lt;debarshi.ray-squee-helsinki.fi>;], divisible by 9.</li>
+<p></p>
+<li><a href=http://nosuchlabs.com/gpgkey/94310C1835DE2A6ADD23793B77106B4B16ED520F9829FF98B2C551742A7EC75E>A50591247C8E37A64117B74F78AB527059E13694</a> and B01584E9F6CB9E76DEA61E2A73786CA0F4EACC4F<sup><a href="#footnote_8_61760" id="identifier_8_61760" class="footnote-link footnote-identifier-link" title="Numeric values : 25526728199009057709398989586453690214904358229000555691738418155709599299
+18160940994757774003022518929810044066740604565527975700160861486821065474174387293826935
+59662145362339218055437009235577983172238607640347230823715572532055273632167902408545124
+80788484485298963611047591040747211019092370621057704528363385920290537397040177458849430
+94689834455986241625199628124838834820988620591040907862034577387030435001900586859440322
+09067799996713635313458853612476941709302609689124628629849821403812266273651103048895862
+07282737805245223854336961443695677803916743852838594109393768608251819065306021206057809
+048295897
+and
+254471910020622974741613878533246957366345522968779071910619797751416162710425629338257850
+156214306739276378255808049277464512466694513005396516900934317779045890004040559857294380
+564181148461993661282908043780818992490345911046618480065856408662978878438851761341763509
+237996998282198949871374657292359910532065350788049403374666549631113167000243930234183333
+495764615993982749946613023097306372588785602877941865079249724490743458909135780965633992
+284013600110504114134841012605185623803267848957450921144290192844350798393278473476083455
+86307186831172171955343555350038959105541680962601456297155387993164183508343.">ix</a></sup> [grenzenlosnaiv &lt;grenzenlosnaiv-squee-live.de>;], divisible by 17742509903907 and 4294967297 respectively.<sup><a href="#footnote_9_61760" id="identifier_9_61760" class="footnote-link footnote-identifier-link" title="Noting that 17742509903907 / 4294967297 = 4131 and the German meaning of the `grenzenlosnaiv` string, it is very likely this key exists as a training exercise for parties unknown.">x</a></sup></li>
+<p></p>
+<li><a href=http://nosuchlabs.com/gpgkey/8FD900729BD063FFD5B8CB3D6C7828574ADFE7DF6046F67D7982DF35DFF18EAA>1F75CF2DD19ABC516D58454B0846265183C9F86F</a> and 29A9D31313C5E0E8B73F8D155CF76C1F591D4EFF<sup><a href="#footnote_10_61760" id="identifier_10_61760" class="footnote-link footnote-identifier-link" title="Numeric values : 16672257823521270371961164662125862296899812729169425291114489871863688113
+67122963460006314830485743876540906881863271070920033024495963439286236322049961116516443
+71368137287076681934969061181392776722975670973820744407487192112162201006712752084027830
+44034022429423104279321017051078834408051586643315905452258822023212127325203856713926663
+36628944779423111210830696700670806871753004469452802841901468552421016817404854350172137
+16808018858975821015063666477169095086019680246350759221785200965931506062120690355105370
+53261504301271697889391638721378329772344005716520375774724704751488265269774432055008867
+229275469
+and 
+63111812154962004116209412772135771764335180129874077503652320692902196823033111148598717
+65660824814553154059429259638225867434239907928572987056097422649628064116861025113336284
+55324434899298910704343021088751740670011136739823871025094632000111152696756229356518569
+85187113817556050366609536875064937003150568571348567021875134271124971561538241658995689
+60541365507282340768521118761247054438227698903952331114489434247743079966115954652649104
+49172801887558399253096341610653488516924974363644661037775426721231658928989538345259343
+6521547118378104303751147008586189340679520589366968743556304798004917247994251759.">xi</a></sup> [Saeid &lt;zarghani.s-squee-gmail.com>;], divisible by 73014444049 and 270582939711 respectively.</li>
+<p></p>
+<li><a href=http://nosuchlabs.com/gpgkey/8BE6D699C631055360A2B55CD6AAEBAAC1C91F872E97936AC73A1790F694079B>89FAD5E452080D47B11508148CA2B56B92E193C9</a><sup><a href="#footnote_11_61760" id="identifier_11_61760" class="footnote-link footnote-identifier-link" title="Numeric value : 117964043832425833134470740787358129784114456283752419342645582340953251431
+48578558765309942999937387197801832249564462305216914764571810573887167594523290210967914
+04116232100723166335618288851166923558093098286166267626628137674357217659637821178898284
+73574169534012900636497385641932036608042904849263950188214230868921729578982513164932063
+73809247325314970758076327923827247266864977692292330458186586541299744720414305573769450
+51960323853627318325435606119355148304793407058340361907456768359973063438329538608005419
+79618873721400795779080118813418706279180898215088255657615452323556652196146569473073868
+54500851.">xii</a></sup> [Lou Anschuetz &lt;lou-squee-ece.cmu.edu>;], divisible by 4294967297.</li>
+<p></p>
+<li><a href=http://nosuchlabs.com/gpgkey/A4A03B0930DF4C9310EA12B231DA8A2F1EEF2488A8A52F811A062396F0E4C543>C1FEDFCEADA4849AFE940D192979698801093DA6</a> and 51D1FBC806EBF7EFA78D74092E271AF5D8322944<sup><a href="#footnote_12_61760" id="identifier_12_61760" class="footnote-link footnote-identifier-link" title="Numeric values : 816708949049219316249137802707618040343445921615851995965391153505370824748
+56664360460028004264449500871945629879290055404982628899216470128821039450960200583146680
+25193170055583650261114433119755132491163921835276644123947260793576455390847834402514136
+90337842919220026145606082508720088848598890301024115420804330103101427495459629407524084
+86164663244022832839322787188693133760127271244278458996880240344473319141667934707790399
+15724197918559633990059898867246909255081870669889825013484935133477808178535453323831842
+85888596659532771788536275859666005400618251605639212775146326729520107278181394188352770
+60404561906849840662206517465417579892599666355580498678265912741060282856126300266216736
+41760609255985078714350143523275328759106456435018048097111064392220193473863109522647664
+00746068888801637864717488325978701759621275112467360486617384536192578376764502915946183
+03602045560932690965022239335637306389766704319639368279979122869714354659291820581287126
+29017111447125931436198691729468886449421187304915037860804958873741941797115941531488261
+41847991713726697025209185534864453107762256723146159022094394936231658019824935209907447
+83682223742678848641605960916724945878393963569854451657597952828119471381594684211724764
+9
+and
+30272436267370592935927683546275707596211768532578881152780386765089694968550014063197482
+15344516176829167088048662433234621728486012336115797902534715097670596535588558118650239
+40977746729669103033881025402172779766776404798270810069039821750829724934647537688187789
+93321199200096396072303398683098042295937640783041329776470795092494232974452414868377494
+27825027048634761257953599619572197410684747518265364985855562443343643637469776953626136
+25258874763944618960610543058180905005340472180568558970964928040941234025709598582731597
+08019121330896859060262587884427398800064088529634352117284565739258028711652930425763310
+77755759669985137518098341461822232302796298950420639638764800291091063277609164433477144
+12544002395970052464660259148611244676047879611421598195059898939161463733632925981205958
+85465749574547687699075418613291138873247935061700600347838057013869166402764069292615374
+55452250857429515497694863647517049263964583701591007894970220027677592993225342421978606
+75045354932732689347255982379373625929001010227113820535039621871455162006022369107811987
+01951664649941425468152833958581674008838786108111225907798874331557671311370668193417952
+5009854277225103956061247800498802170252261111710555365880816565908566722983.">xiii</a></sup> [Christopher Winterbottom &lt;cqwberry-squee-gmail.com>;], divisible by 98784247831 and 30064771079 respectively.</li>
+<p></p>
+<li><a href=http://nosuchlabs.com/gpgkey/A2E79EF558F70013AEC0461FCCE1B3DD2C2D67242AEDA15EA5C2BE283491CD3D>F353FA51752FD981FE926C60E863669BEC4DA8F3</a> and F1573FEF30BE4BE50CD109AC3CAC41B5194C8916<sup><a href="#footnote_13_61760" id="identifier_13_61760" class="footnote-link footnote-identifier-link" title="Numeric values : 753231629734215095039311089646892853049081111032594923534482075739340266016
+37856106751590154109358122728299712877052359482752462718740410337240588794321640142886550
+83192423855568971677554301066731077513887982302526063007236613929745116067701523720058572
+14389485783779647945312609390161093580811684684584176647736984258266730468745091231754131
+48099900755304035582423436579058899950099238885085313418018438204661263296296360474488787
+38521515663164432530506106986859103914132106418684515388843478387728183646911706555351959
+06786355765882921864371694828638557543033284743572814292905853325384709890970441667372716
+74898538521340513314748139188394298509067702297008631280871057113465745527818280556700158
+98911867086343407362250584987574302248869107884810137359450826907280557890154398399182738
+48414718226279276387749234122917487389606300709396077642992077195767444792730429592490507
+75546729645078453563924998520884889112806996957379967728950970273926556751627876760711550
+93951090640975808386604339388913045163078767335243053093864294911420910293699644772373021
+19384077404629003519498936612630436228246571542992429033779830886921470891657566897297174
+39305268085608161462770405711678050850558118662086210821247936654551597592806936359715168
+1
+and
+65487389511097733523236551751948689607113248033298155484592472649627499169754702830189306
+78657959370411670127073765502590061403333134124670776696990859471566989028610685353285009
+11768678463614980094397492969316919268591710548465447455912048134236636858328385523978539
+82644737917185370141846097472351962344267367164868242481388096236682753269414251051781765
+77734834670332129839123263208668758028131671106139259946666183987551551308637440124384152
+46073372167852444090374019093851181379333581474552729347021592666657810596563662560031169
+77528444577348253993493248224572200189177833746239774046680672718868759550140707501008300
+24701680838000748740220676484084364567218076578592133282849704429532204901392504168237650
+60192612050400221008468212877403067238901306171444073779045299634744268048468177893966795
+63124845569385276771589340294675431851543329006006237877269091491322114750102770420863824
+20482572759627769565482018341248517157271233360867910286810334497049696741286179961722002
+94848196451674665075230305125121320600350879318603047022659522723314077309342833773551202
+20983530858434615625640442110354506401645560214301516012804040715184632521017733619272320
+7126620137630199683458747749046869956250863673881944589932269914259206065385.">xiv</a></sup> [Li-Wen Kuo &lt;li-wen-squee-gmx.de>;], divisible by 12884901891 and 21474836485 respectively.</li>
+<p></p>
+<li><a href=http://nosuchlabs.com/gpgkey/AA5C25311D1BFAFD266F2A12DD3C1468EF228931255F78A42868CE32662262F3>F1D9FE5073EC39F3558905668C97B382AC1729F4</a><sup><a href="#footnote_14_61760" id="identifier_14_61760" class="footnote-link footnote-identifier-link" title="Numeric value : 231036427461512813069782326469186742089206935382435884936326148373384936826
+66618943828237707563563567191567768366287903851601276211660367075075558865360113399385553
+26951298108747653706534259540439453383358205261358698396079714708891213475450942875181771
+45065395282461022992054746039501967530610007348868024842672720695787835890412423405234084
+89170547705084141480319545890060547864005718054327987768744667746409439647775858117289845
+09762175906646388935569017267676917725214022951441318524453690097898220489452803365591384
+61099779853243934970555470915573327297353910909059920488223388569170550698730292327738710
+63937409.">xv</a></sup> [Tobias Michelis &lt;michelis-squee-mi.uni-erlangen.de>;], divisible by 4294967297.</li>
+<p></p>
+<li><a href="http://nosuchlabs.com/gpgkey/5A9A2B2F5D586F12300DD59A67E3AA9F541F1C1C5B6EE4BAA63F65DE99ABDDAB">1A5E4C59222FF18F2D5E2406E1548C609A6137AA</a> and C8749C423CCE71A1230B138D2342919EC10A9C5C<sup><a href="#footnote_15_61760" id="identifier_15_61760" class="footnote-link footnote-identifier-link" title="Numeric values : 222567807409507066819438199932606490824445396425529801468396492110367893
+48111334813117913823222317749618626749516383215681163136110921477559313855276110774512129
+21848202120790522045879897158791414388648392398613547596701894675516410215291943521699501
+31876073234459906134472020552940692750890496620923040039616946450968406945043735527443740
+33506505249622606928703088789450194922083461855048828400362408415058546054733143383156891
+60640437522941861135600731717621660753862817281974831931680844013848452531041455855467138
+54757101807552572291061512264192357868900098951176075281231602495066972399560156435790481
+50192704621
+and
+25286784648294624481570535343637010718406459809243706575076548873485492686168555635562538
+32810101202314404468498636254537974504634961804346873044291454191913610075499996591439556
+24777770266168822439384588269333992453322600595230299600692066168101529002979316947217505
+73804691916791907761678804392601995848707582969637308818339820753913619751024047553325552
+94761379192874548094957794359119691525967129358370831291927000284693689250111471367088150
+36079226146034065545213426189899633491105175774573868161830680296889413143854464294540776
+58454923247735276780281924575559176175868196226600684019529354735523015770359339135.">xvi</a></sup> [Sebastian Heberer &lt;pirat-squee-drpest.de>;], divisible by 4294967297 and 12884901891 respectively.</li>
+</ol>
+<p><center><br />
+<hr />
+<h1>Part Three : Discussion</h1>
+<hr /></center></p>
+<p><strong>First off</strong>, and to get this out of the way : <a href="https://blog.hboeck.de/archives/872-About-the-supposed-factoring-of-a-4096-bit-RSA-key.html">Hanno Böck</a> just got caught lying. Specifically :</p>
+<blockquote><p>Last year I started a project to analyze the data on the PGP key servers. And at some point I thought I had found a large number of vulnerable PGP keys – including the key in question here. In a rush I wrote a mail to all people affected. Only later I found out that something was not right and I wrote to all affected people again apologizing. Most of the keys I thought I had found were just faulty keys on the key servers.</p></blockquote>
+<p>He did no such thing. Had he done such a thing, or anything even remotely similar to it, he would know about all this<sup><a href="#footnote_16_61760" id="identifier_16_61760" class="footnote-link footnote-identifier-link" title="Not to mention he wouldn't feel the need to use eight heaps of vague in the shape of `at some point` `large number` `something was not right` `most of the keys` bla bla in a four line paragraph.
+Seriously bitch, you did shit at some point last year ? What did you do, other than father a large number of Angelina Jolie's children, until you discovered that something was not right with most of her tits ?
+Dumbass.">xvii</a></sup>. That he has absolutely no idea about any of it, yet finds it within himself to make all-knowing statements of a certain tendency is all the smoking gun anyone could ever need.<sup><a href="#footnote_17_61760" id="identifier_17_61760" class="footnote-link footnote-identifier-link" title="Also, the claim that `keyservers will just accept any random data` is rank nonsense. If they did, I could just store fifty terrabytes worth of broken keys on their drives. But we'll leave this discussion for when the #b-a keyserver actually comes online.">xviii</a></sup></p>
+<p>I hold Paul Graham <em>personally</em> responsible for the fraudulent shenanigans dissected in <a href=/2015/on-how-the-factored-4096-rsa-keys-story-was-handled-and-what-it-means-to-you/>On how the factored 4096 RSA keys story was handled, and what it means to you</a>, and <em>I expect an apology</em>. Let me also underscore that I smushed the last too-big-for-his-britches schmuck that <a href="/2013/its-been-an-epic-few-days-what-happened/?b=This%20right%20here&#038;e=from%20MtGox#select">owed me an apology</a> and failed to make good. Don't make me Karpeles you, Graham. </p>
+<p><strong>Second off</strong>, you will notice the heterogenity of these vulnerable keys. For instance : not all of them are "signed" by simply copying the signature block off a valid key, like it was the case with the first one found. Some are not signed at all - which notably means that yes gpg will import, and yes gpg will use. A few are actually validly self-signed. There goes that "cosmic ray" theory, as entertaining as it was.</p>
+<p><strong>Third off</strong>, what do you make of this : </p>
+<p><a href="/wp-content/uploads/2015/05/rsa-mystery-one.png"><img src="/wp-content/uploads/2015/05/rsa-mystery-one-270x270.png" alt="rsa-mystery-one" title="rsa-mystery-one" width="270" height="270" class="alignleft size-thumbnail wp-image-61811" /></a> <a href="/wp-content/uploads/2015/05/rsa-mystery-two.png"><img src="/wp-content/uploads/2015/05/rsa-mystery-two-270x270.png" alt="rsa-mystery-two" title="rsa-mystery-two" width="270" height="270" class="alignleft size-thumbnail wp-image-61812" /></a></p>
+<p><a href="/wp-content/uploads/2015/05/rsa-mystery-three.png"><img src="/wp-content/uploads/2015/05/rsa-mystery-three-270x270.png" alt="rsa-mystery-three" title="rsa-mystery-three" width="270" height="270" class="alignleft size-thumbnail wp-image-61813" /></a> <a href="/wp-content/uploads/2015/05/rsa-mystery-four.png"><img src="/wp-content/uploads/2015/05/rsa-mystery-four-270x270.png" alt="rsa-mystery-four" title="rsa-mystery-four" width="270" height="270" class="alignleft size-thumbnail wp-image-61814" /></a></p>
+<p>Here's what Stan made of it : </p>
+<blockquote><p><code>
+<pre>#!/usr/bin/python
+
+import pgpdump
+import sys
+import os
+from shutil import copy
+
+####################################################################
+
+def get_rsa(pgpasc):
+    mods = []
+    exps = []
+    try:
+        packets = list(pgpdump.AsciiData(pgpasc).packets())
+        for p in packets:
+            if hasattr(p, 'modulus') and (p.modulus != None):
+                mods += [p.modulus]
+            if hasattr(p, 'exponent') and (p.exponent != None):
+                exps += [p.exponent]
+    except Exception, e:
+        print e
+    return [mods, exps]
+
+## Litmus for Shitgnomancy
+def litmus(path):
+    mods, exps = get_rsa(open(path, 'r').read())
+    ## Heuristic: at least one absurdly large exponent?
+    for e in exps:
+        if e > 65537:
+            return True
+    ## Heuristic: at least one possibly-shitgnomiferous modulus?
+    for m in mods:
+        if (m &#038; 0xFFFFFFFF) == ( (m >> 32) &#038; 0xFFFFFFFF):
+            return True
+
+####################################################################
+
+indir = sys.argv[1]
+outdir = sys.argv[2]
+pgpfiles = [os.path.join(indir,fn) for fn in next(os.walk(indir))[2]]
+keys = sorted(filter(lambda x: x.endswith('.gpg.asc'), pgpfiles))
+
+## Test each key in indir and if heuristic positive, copy to outdir.
+for k in keys:
+    if litmus(k):
+        print "Result: {0}".format(k)
+        copy(k, outdir)
+</pre>
+<p></code></p></blockquote>
+<p>To let him explain : </p>
+<blockquote><p>Dear MP,</p>
+<p>It appears that we have... something. Heuristic worked as follows (see litmus.py) : </p>
+<p>1. Flag RSA keys with outlandishly large exponents. This yielded up many things but no clear pattern thus far. We table it for later.<br />
+2. Flag RSA keys which appear to have the repeating 32-bit word pattern seen in the earlier curios. This ended up hitting pay dirt.</p>
+<p>litmus_mod_only contains the keys themselves. lusers.txt contains the parsed-out emails claimed in the keys. Start by reading these.</p>
+<p>Yours,<br />
+-S</p></blockquote>
+<p>Would you like to see the paydirt ? Sure. Here you go :</p>
+<ol>
+<li>Ludwig Hügelschäfer &lt;ludwig-squee-hammernoch.net></li>
+<li>Ludwig Hügelschäfer &lt;mlisten-squee-hammernoch.net></li>
+<li>Ludwig Hügelschäfer &lt;enigmail-mod-squee-hammernoch.net></li>
+<li>Ludwig Hügelschäfer &lt;ludwig.huegelschaefer-squee-gmx.de></li>
+<li>grenzenlosnaiv &lt;grenzenlosnaiv-squee-live.de></li>
+<li>Saeid &lt;zarghani.s-squee-gmail.com></li>
+<li>Lou Anschuetz &lt;lou-squee-ece.cmu.edu></li>
+<li>Christopher Winterbottom &lt;cqwberry-squee-gmail.com></li>
+<li>Li-Wen Kuo &lt;li-wen-squee-gmx.de></li>
+<li>Tobias Michelis &lt;michelis-squee-mi.uni-erlangen.de></li>
+<li>Sebastian Heberer &lt;pirat-squee-drpest.de></li>
+<li>Kosta &lt;kosta-squee-embros.org></li>
+<li>Christoph Giesel &lt;mail-squee-cgiesel.de></li>
+<li>Christoph Giesel &lt;chris-squee-cgiesel.de></li>
+<li>Christoph Giesel &lt;christoph-squee-cgiesel.de></li>
+<li>Raymond Häb &lt;ray-squee-haeb.eu></li>
+<li>Raymond Häb &lt;ray.haeb-squee-gmx.de></li>
+<li>Raymond Häb &lt;raymond.haeb-squee-rwth-aachen.de></li>
+<li>Kristof Koerner &lt;buero-squee-kristofkoerner.de></li>
+<li>Kristof Koerner &lt;bummtschak-squee-googlemail.com></li>
+<li>Kristof Koerner &lt;unterricht-squee-kristofkoerner.de></li>
+<li>Daniel Düngel &lt;pirat-squee-duengel.com></li>
+<li>PGP Global Directory Verification Key</li>
+<li>Philippe Baeriswyl &lt;philippe.baeriswyl-squee-liip.ch></li>
+<li>Charly Avital(RSA4096) &lt;shavital-squee-mac.com></li>
+<li>Charly Avital (RSA-AES256) &lt;shavital-squee-netbox.com></li>
+<li>Matthias &lt;kaizoku-squee-schmidt-system.de></li>
+<li>Ismael de Moura Costa (email pessoal) &lt;ismaelcosta-squee-unb.br></li>
+<li>Tim Fiedler &lt;tfcoding-squee-gmail.com></li>
+<li>Marcus Benjamin &lt;markymac99-squee-mac.com></li>
+<li>Stefan Thöne &lt;stefan-squee-frontflip.de></li>
+<li>Thomas Scholz &lt;ts-squee-elktc.org></li>
+<li>Thomas Scholz &lt;dings-squee-bums.li></li>
+<li>Thomas Scholz &lt;tscholz-squee-gmx.de></li>
+<li>Thomas Scholz &lt;tststs-squee-gugux.de></li>
+<li>Thomas Scholz &lt;thomas.scholz-squee-ploenk.net></li>
+<li>Thomas Scholz &lt;tscholz-squee-rz.uni-mannheim.de></li>
+<li>Thomas Scholz &lt;tscholz-squee-rumms.uni-mannheim.de></li>
+<li>Thomas Scholz &lt;thomas.scholz-squee-ca.uni-mannheim.de></li>
+<li>Thomas Scholz &lt;tscholz-squee-wendy.rz.uni-mannheim.de></li>
+<li>Thomas Scholz RUM-CA &lt;tscholz-squee-rz.uni-mannheim.de></li>
+<li>Thomas Scholz &lt;tscholz-squee-einstein.rz.uni-mannheim.de></li>
+<li>Thomas Scholz &lt;thomas.scholz-squee-mail.ca.uni-mannheim.de></li>
+<li>Thomas Scholz &lt;thomas.scholz-squee-einstein.rz.uni-mannheim.de></li>
+<li>Thomas Scholz INTERN &lt;tscholz-squee-mailtux.ca.uni-mannheim.de></li>
+<li>Thomas Scholz &lt;thomas.scholz-squee-crypto.nc1UW1aoi420d85w1SoS.de></li>
+<li>http://www.crypto.nc1UW1aoi420d85w1SoS.de (official homepage)</li>
+<li>Shumitsu Muryokoin &lt;shumitsu-squee-muryokoin.org></li>
+<li>Martin M. Stoppler &lt;martin-squee-stoppler.de></li>
+<li>4D Admilon Consulting &lt;4D_info-squee-admilon.net></li>
+<li>Felix Arndt &lt;kontakt-squee-felixarndt.de></li>
+<li>Dominik Rapp &lt;dominikrapp-squee-zoho.com></li>
+<li>Henry Hertz Hobbit &lt;hhhobbit-squee-gmail.com></li>
+<li>Henry Hertz Hobbit &lt;hhhobbit-squee-hotmail.com></li>
+<li>Henry Hertz Hobbit &lt;hhhobbit-squee-securemecca.net></li>
+<li>Henry Hertz Hobbit &lt;henryhertzhobbit-squee-yahoo.com></li>
+<li>Michael Starck &lt;michael.starck-squee-piratenpartei-hessen.de></li>
+<li>Robert Manigk &lt;p1ng0ut-squee-arcor.de></li>
+<li>Shingondo &lt;shingondo-squee-shingondo.org></li>
+<li>Ben Donnachie &lt;benjamin-d-squee-ntlworld.com></li>
+<li>Ben Donnachie &lt;benjamin_d-squee-ntlworld.com></li>
+<li>Ben Donnachie &lt;bd348-squee-student.open.ac.uk></li>
+<li>Benjamin Donnachie &lt;benjamin-squee-py-soft.co.uk></li>
+<li>Ben Donnachie &lt;benjamin-squee-pythagoras.no-ip.org></li>
+<li>Ben Donnachie &lt;benjamin.donnachie-squee-ntlworld.com></li>
+<li>Benjamin Donnachie &lt;benjamin.donnachie-squee-ntlworld.com></li>
+<li>Matthias Klein &lt;mco500-squee-arcor.de></li>
+<li>Matthias Klein &lt;matthias.klein-squee-web.de></li>
+<li>Matthias Klein &lt;matthias.klein-squee-live.de></li>
+<li>Matthias Klein &lt;web-junkie-squee-t-online.de></li>
+<li>Matthias Klein &lt;privat-squee-matthias-klein.eu></li>
+<li>Matthias Klein &lt;kontakt-squee-matthias-klein.eu></li>
+<li>Matthias Klein &lt;m.klein.ge-squee-googlemail.com></li>
+<li>Matthias Klein &lt;matthias-squee-piratenpartei-gelsenkirchen.de></li>
+<li>Thomas Weitzel &lt;tweitzel-squee-synformation.com></li>
+<li>Tim Fiedler &lt;tfcoding-squee-gmail.com></li>
+<li>Christopher Hart &lt;hartct-squee-gmail.com></li>
+<li>Jeremy Low &lt;jeremylow-squee-gmail.com></li>
+<li>Axel Rau (Computing -squee- Chaos Claudius) &lt;Axel.Rau-squee-Chaos1.DE></li>
+<li>Carl Christoph Leimbrock &lt;christoph.leimbrock-squee-gmx.de></li>
+<li>matkoya-squee-gmail.com &lt;matkoya-squee-gmail.com></li>
+<li>Jürgen Neuwirth &lt;juergen.neuwirth-squee-piratenpartei-bayern.de></li>
+<li>Charly Avital (Test2) &lt;shavital-squee-mac.com></li>
+<li>Vincent Thenhart &lt;email_vincent-squee-web.de></li>
+<li>Vincent Thenhart &lt;vincent.thenhart-squee-piraten-rlp.de></li>
+<li>Charly Avital &lt;shavital-squee-mac.com></li>
+<li>Charly Avital (GnuPG) &lt;shavital-squee-mac.com></li>
+<li>Charly Avital &lt;shavital-squee-netvision.net.il></li>
+<li>SlowFax &lt;slowfax-squee-googlemail.com></li>
+<li>Christian Vögl &lt;voegl.m-squee-t-online.de></li>
+<li>Robert L. Vaessen (MobileMe key generated with gpg) &lt;rvaessen-squee-me.com></li>
+<li>Robert J. Hansen</li>
+<li>Robert J. Hansen &lt;rjh-squee-sixdemonbag.org></li>
+<li>Karsten Krüger (Privater Key von Karsten Krüger) &lt;kk-squee-kkrueger.de></li>
+<li>Martin Weinelt &lt;mweinelt-squee-gmail.com></li>
+<li>Martin Weinelt &lt;martin-squee-linuxlounge.net></li>
+<li>Martin Weinelt &lt;martin.weinelt-squee-stud.tu-darmstadt.de></li>
+<li>Martin Weinelt (BP DART-Racing WS2010/11) &lt;martin.weinelt-squee-dart-racing.de></li>
+<li>debian.sur5r.net Archive Automatic Signing Key (sur5r) &lt;debian-squee-sur5r.net></li>
+<li>Leonardo Zillo Monte Xillo &lt;leonardo-squee-zillo.it></li>
+<li>Piraten | Martin Letzel &lt;piratenpartei-squee-letzel.org></li>
+<li>Stefan Körner &lt;stefan-squee-skworld.de></li>
+<li>Apple Product Security &lt;product-security-squee-apple.com></li>
+<li>Torsten Ennenbach &lt;torsten.ennenbach-squee-set-sign.de></li>
+<li>Paul Karrer &lt;p.karrer-squee-arrowecs.at></li>
+<li>Konstantin Pisarenko &lt;kpisarenko-squee-gmail.com></li>
+<li>Andreas Heimann &lt;Andreas.Heimann-squee-piratenpartei-hessen.de></li>
+<li>Henry Irish &lt;henryirish-squee-me.com></li>
+<li>Lukas D. Jacobs &lt;ich-squee-lukasjacobs.de></li>
+<li>Lukas D. Jacobs &lt;pirat-squee-lukasjacobs.de></li>
+<li>Lukas David Jacobs &lt;ich-squee-lukasjacobs.de></li>
+<li>Lukas David Jacobs &lt;pirat-squee-lukasjacobs.de></li>
+<li>Kristian Biss (Mfr Voll Name) &lt;Kristian.Biss-squee-piraten-mfr.de></li>
+<li>Trotzik (Bei Zeus die Dicken schon wieder) &lt;trotzik-squee-piraten-mfr.de></li>
+<li>Stephen Domorod III (Stephen at Domorod dot Org) &lt;stephen-squee-domorod.org></li>
+<li>Matthias Pannek &lt;matthias-squee-pannek.de></li>
+<li>Jeffrey Rolland &lt;jrolland-squee-softhome.net></li>
+<li>Christian Busch &lt;chris-squee-debilux.org></li>
+<li>Christian Busch (Jabber) &lt;chris-squee-im.debilux.org></li>
+<li>Charly Avital (1.0.7) &lt;shavital-squee-mac.com></li>
+<li>Charly Avital (1.0.7) &lt;shavital-squee-netbox.com></li>
+<li>Charly Avital (1.0.7) &lt;shavital-squee-netvision.net.il></li>
+<li>Larry B. Macy, Ph.D. &lt;macy-squee-upenn.edu></li>
+<li>ms-squee-shingondo.org &lt;ms-squee-shingondo.org></li>
+<li>Andrew Orr &lt;andrew-squee-andreworr.ca></li>
+<li>Jochen Schäfer &lt;js.josch-squee-gmx.de></li>
+<li>Jochen Schäfer &lt;jochen-squee-joschs-robotics.de></li>
+<li>Jochen Schäfer &lt;jochen.schaefer-squee-joschs-robotics.de></li>
+<li>Luciano Buszmicz (Never forget: 2 + 2 = 5 for extremely large values of 2.) &lt;lbuszmicz-squee-zimbra.itx.net></li>
+<li>Herbert Saurugg &lt;herbert.saurugg-squee-bmlv.gv.at></li>
+<li>Herbert Saurugg (aufgrund der Umstellung auf BMLVS - 2009) &lt;herbert.saurugg-squee-bmlvs.gv.at></li>
+<li>Karsten Krüger (für die vertraulichen Dinge des Lebens) &lt;kk-squee-kkrueger.de></li>
+<li>Marco Hien &lt;marco.hien-squee-math.uni-augsburg.de></li>
+<li>M_Schmidt Admilon &lt;beta-squee-admilon.net></li>
+<li>PGP Corporation Update Signing Key</li>
+<li>PGP Corporation Update Signing Key &lt;update-key-squee-pgp.com></li>
+<li>Sven Arnold &lt;psykoman-squee-system-failures.org></li>
+<li>Julia Reda &lt;reda.julia-squee-googlemail.com></li>
+<li>Kai Schmalenbach &lt;davekay.de-squee-gmail.com></li>
+<li>Kai Schmalenbach &lt;schmalenbach-squee-metaq.de></li>
+<li>Kai Schmalenbach &lt;kaischmalenbach-squee-metaq.de></li>
+<li>Thomas Hofmann &lt;toho89-squee-gmail.com></li>
+<li>Andreas Heimann &lt;andi-heimann-squee-gmx.de></li>
+<li>Matthias_Schmidt &lt;ms-squee-schmidt-system.de></li>
+<li>Paul Okkerse (Hoofd ICT) &lt;paulokkerse-squee-huighaverlag.nl></li>
+<li>Simon Lange &lt;pirat.simon-squee-me.com></li>
+<li>Andreas Fleig &lt;andreasfleig-squee-googlemail.com></li>
+<li>Carl Christoph Leimbrock &lt;christoph.leimbrock-squee-gmx.de></li>
+<li>Carsten Lenz &lt;carsten.lenz-squee-piraten-ulm.de></li>
+<li>Matthias Schmidt &lt;matthias.schmidt-squee-admilon-consulting.de></li>
+<li>Stephan Urbach &lt;stephan.urbach-squee-german-bash.org></li>
+<li>Herr Urbach &lt;stephan.urbach-squee-piratenpartei-hessen.de></li>
+<li>Tim Fiedler &lt;tifi-squee-goapple.de></li>
+<li>Raphael Randschau &lt;nicolai86-squee-me.com></li>
+<li>Raphael Nicolai Fabian Randschau (Uni Kiel) &lt;rra-squee-informatik.uni-kiel.de></li>
+<li>Marcus Benjamin &lt;markymac99-squee-mac.com></li>
+<li>Marcus Benjamin &lt;markymac-squee-charter.net></li>
+<li>Christoph Giesel &lt;christoph.giesel-squee-piraten-lsa.de></li>
+<li>Heiko &lt;pirat-barnim-squee-piratenbrandenburg.de></li>
+<li>ms-squee-admilon.net &lt;ms-squee-admilon.net></li>
+<li>Shell Arkell &lt;shell-squee-zenrio.net></li>
+<li>Ralf Oltmanns &lt;ralf-squee-it-roxx.de></li>
+<li>Ralf Oltmanns &lt;ralf-squee-oltmanns.name></li>
+<li>Ralf Oltmanns &lt;osm-squee-abo.ist-total.net></li>
+<li>Ralf Oltmanns (Piratenpartei Deutschland Landesverband Bayern) &lt;pirat-squee-oltmanns.name></li>
+</ol>
+<p>Are you on this list ? We probably have your private key.<sup><a href="#footnote_18_61760" id="identifier_18_61760" class="footnote-link footnote-identifier-link" title="You will notice that most but not all the names in the first list are also in the second list. Of the ones that are on both lists, some have a surviving key (so far). Others, like for instance Sebastian Heberer, do not. 
+Of the names that are only on the first list, all seem to be sharing the `divisible by very low factors` and `fake key with pasted over signature block` characteristics of the original HPA key.
+It would appear then that there are at least two different classes of diddled keys visible in the public keyset. (Three if you count obvious exercises like EF010E6F351E447C96C91AF1293987A8466F60E1 separately).">xix</a></sup></p>
+<p>And the best part ? I'm not even sure <em>this</em> was actually what the shitgnomes were trying to cover up. Stay tuned, the saga of Phuctor continues. </p>
+<p>PS. I am really looking forward to more "oh, we did this last year and forgot to mention it to anyone" + "oh nothing really happened, it's just how the Internet works" + assorted nonsense. Go for it boys, the comedy goldmines await your labour!</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_61760" class="footnote">I am aware most articles are written in a manner that makes them superficially appear approachable, easy and fun. This is absolutely never the case. I would know, because I write them. They are fun to write, yes, but they're not supposed to be fun to read. [<a href="#identifier_0_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_61760" class="footnote">I don't mean him, or me, I mean us. This is what the entire point of <a href="/2015/the-definitive-sovereign/">the Republic</a> is : a place for the only people who matter, that "just so happen" to be the people everyone's trying to murder. [<a href="#identifier_1_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_61760" class="footnote">I seriously lost two nights' sleep over this, which is rare with me. [<a href="#identifier_2_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_61760" class="footnote">Fuck me it found two more while I was doing the write-up. [<a href="#identifier_3_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_61760" class="footnote">So far in this context means that Phuctor has processed 159`336 keys. [<a href="#identifier_4_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_61760" class="footnote">Numeric value : 8170230239603769466339755071101546492494075988067987304148498844617761721719<br />
+21668594148071323527016137506405823108520062504849249423700259406905313281403901410082762<br />
+09715956022146304892433619238402677750217726273104520032220014977312750288854523497313948<br />
+08876445851926006310589628761141569342488951719592469695976371272800102721435938852409408<br />
+77456234662196130491400738438731832514335353824697930453078426722191105157568392826870043<br />
+65570800854541114336776383656601174049938345659212966258500488037677759771497802354243442<br />
+19142011195376854891735099423290906316620146500331426421109143608494218561796112264508065<br />
+62235534802516081595259914768497444702718749402330070488028751073730349460752771915484847<br />
+39938563152470848764607993657241039896758289598318764079807230936209472765416762862010598<br />
+14590215482904158000967692144374256909343720156287960274982199024412881893983863598466616<br />
+23243493534897411417685435424010451956954083531228374002591372549525280610594684910812811<br />
+28743648120708976312542424779304404330973726946870971067987226927285538994538538646776550<br />
+98806489297434982143295782888749871937684393533823052601084256880241476568069324740588889<br />
+92099083804597481699305852902662863062054067183925164590726103552998367994727700722491707. [<a href="#identifier_5_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_61760" class="footnote">Numeric value : 3031874832053583743418292416372595502099634576341315290167303447940896540435<br />
+52345310511975303590935244481948247376401432307103818091777320274166257340264331696427788<br />
+43820440287608502427017776857269490773429050263926830246409710132226138115684031880138324<br />
+99315445911152479447953897832028961727910760577857345909513420880711566183055344315448208<br />
+15189782112077811874252865235796365042902051353241295725761213063753498336305286779774625<br />
+74313488820577959634372076837817948119361159907327939505395820850075258926732304880546382<br />
+18121459625570075016156281579252730109288078262517095342621532804321605585499878821551725<br />
+4263519. [<a href="#identifier_6_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_61760" class="footnote">Numeric value : 8197390857930122495849886562470137189068756241045853345396708829779573185913<br />
+78792339415324255980163059743127714787086007659129438357469037360629245249705616603601365<br />
+63597964146991710522851815219493862072638245521162544016209541093774656536696344417650823<br />
+49152687118176002646235036007018218530990808110784085609984103493668490069882331296050726<br />
+59148709662519992770928241586882303261927623688308807480924828026178227826500232989258797<br />
+61721238970587973321189711176439396770655963604567146740276786029404138338726088474566611<br />
+34442803025681035341370085255365136140771869414017143486972849683925905356740246160827637<br />
+44494544558022802316339056649025168309463869160798052335969727740908414036010857683088184<br />
+61710283106767985721173378055475097926017173809924807346856948601492783226587906746941939<br />
+36060958883108067041074467521324201140558209298564151341183396803584754058788057295587730<br />
+56569821737406806683979766620026684983212939057835493907061843702537913655031320296990391<br />
+00326043248192047531754247006078437079036897801687200801156127058901013497147676702383977<br />
+92795134394789315147677565147168277841479001338032176084161559558010542509101918915636532<br />
+15342770779317932920084062741642010198566264962129579715127047847615770686855802050721189. [<a href="#identifier_7_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_61760" class="footnote">Numeric values : 25526728199009057709398989586453690214904358229000555691738418155709599299<br />
+18160940994757774003022518929810044066740604565527975700160861486821065474174387293826935<br />
+59662145362339218055437009235577983172238607640347230823715572532055273632167902408545124<br />
+80788484485298963611047591040747211019092370621057704528363385920290537397040177458849430<br />
+94689834455986241625199628124838834820988620591040907862034577387030435001900586859440322<br />
+09067799996713635313458853612476941709302609689124628629849821403812266273651103048895862<br />
+07282737805245223854336961443695677803916743852838594109393768608251819065306021206057809<br />
+048295897</p>
+<p>and</p>
+<p>254471910020622974741613878533246957366345522968779071910619797751416162710425629338257850<br />
+156214306739276378255808049277464512466694513005396516900934317779045890004040559857294380<br />
+564181148461993661282908043780818992490345911046618480065856408662978878438851761341763509<br />
+237996998282198949871374657292359910532065350788049403374666549631113167000243930234183333<br />
+495764615993982749946613023097306372588785602877941865079249724490743458909135780965633992<br />
+284013600110504114134841012605185623803267848957450921144290192844350798393278473476083455<br />
+86307186831172171955343555350038959105541680962601456297155387993164183508343. [<a href="#identifier_8_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_9_61760" class="footnote">Noting that 17742509903907 / 4294967297 = 4131 and the German meaning of the "grenzenlosnaiv" string, it is very likely this key exists as a training exercise for parties unknown. [<a href="#identifier_9_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_10_61760" class="footnote">Numeric values : 16672257823521270371961164662125862296899812729169425291114489871863688113<br />
+67122963460006314830485743876540906881863271070920033024495963439286236322049961116516443<br />
+71368137287076681934969061181392776722975670973820744407487192112162201006712752084027830<br />
+44034022429423104279321017051078834408051586643315905452258822023212127325203856713926663<br />
+36628944779423111210830696700670806871753004469452802841901468552421016817404854350172137<br />
+16808018858975821015063666477169095086019680246350759221785200965931506062120690355105370<br />
+53261504301271697889391638721378329772344005716520375774724704751488265269774432055008867<br />
+229275469</p>
+<p>and </p>
+<p>63111812154962004116209412772135771764335180129874077503652320692902196823033111148598717<br />
+65660824814553154059429259638225867434239907928572987056097422649628064116861025113336284<br />
+55324434899298910704343021088751740670011136739823871025094632000111152696756229356518569<br />
+85187113817556050366609536875064937003150568571348567021875134271124971561538241658995689<br />
+60541365507282340768521118761247054438227698903952331114489434247743079966115954652649104<br />
+49172801887558399253096341610653488516924974363644661037775426721231658928989538345259343<br />
+6521547118378104303751147008586189340679520589366968743556304798004917247994251759. [<a href="#identifier_10_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_11_61760" class="footnote">Numeric value : 117964043832425833134470740787358129784114456283752419342645582340953251431<br />
+48578558765309942999937387197801832249564462305216914764571810573887167594523290210967914<br />
+04116232100723166335618288851166923558093098286166267626628137674357217659637821178898284<br />
+73574169534012900636497385641932036608042904849263950188214230868921729578982513164932063<br />
+73809247325314970758076327923827247266864977692292330458186586541299744720414305573769450<br />
+51960323853627318325435606119355148304793407058340361907456768359973063438329538608005419<br />
+79618873721400795779080118813418706279180898215088255657615452323556652196146569473073868<br />
+54500851. [<a href="#identifier_11_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_12_61760" class="footnote">Numeric values : 816708949049219316249137802707618040343445921615851995965391153505370824748<br />
+56664360460028004264449500871945629879290055404982628899216470128821039450960200583146680<br />
+25193170055583650261114433119755132491163921835276644123947260793576455390847834402514136<br />
+90337842919220026145606082508720088848598890301024115420804330103101427495459629407524084<br />
+86164663244022832839322787188693133760127271244278458996880240344473319141667934707790399<br />
+15724197918559633990059898867246909255081870669889825013484935133477808178535453323831842<br />
+85888596659532771788536275859666005400618251605639212775146326729520107278181394188352770<br />
+60404561906849840662206517465417579892599666355580498678265912741060282856126300266216736<br />
+41760609255985078714350143523275328759106456435018048097111064392220193473863109522647664<br />
+00746068888801637864717488325978701759621275112467360486617384536192578376764502915946183<br />
+03602045560932690965022239335637306389766704319639368279979122869714354659291820581287126<br />
+29017111447125931436198691729468886449421187304915037860804958873741941797115941531488261<br />
+41847991713726697025209185534864453107762256723146159022094394936231658019824935209907447<br />
+83682223742678848641605960916724945878393963569854451657597952828119471381594684211724764<br />
+9</p>
+<p>and</p>
+<p>30272436267370592935927683546275707596211768532578881152780386765089694968550014063197482<br />
+15344516176829167088048662433234621728486012336115797902534715097670596535588558118650239<br />
+40977746729669103033881025402172779766776404798270810069039821750829724934647537688187789<br />
+93321199200096396072303398683098042295937640783041329776470795092494232974452414868377494<br />
+27825027048634761257953599619572197410684747518265364985855562443343643637469776953626136<br />
+25258874763944618960610543058180905005340472180568558970964928040941234025709598582731597<br />
+08019121330896859060262587884427398800064088529634352117284565739258028711652930425763310<br />
+77755759669985137518098341461822232302796298950420639638764800291091063277609164433477144<br />
+12544002395970052464660259148611244676047879611421598195059898939161463733632925981205958<br />
+85465749574547687699075418613291138873247935061700600347838057013869166402764069292615374<br />
+55452250857429515497694863647517049263964583701591007894970220027677592993225342421978606<br />
+75045354932732689347255982379373625929001010227113820535039621871455162006022369107811987<br />
+01951664649941425468152833958581674008838786108111225907798874331557671311370668193417952<br />
+5009854277225103956061247800498802170252261111710555365880816565908566722983. [<a href="#identifier_12_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_13_61760" class="footnote">Numeric values : 753231629734215095039311089646892853049081111032594923534482075739340266016<br />
+37856106751590154109358122728299712877052359482752462718740410337240588794321640142886550<br />
+83192423855568971677554301066731077513887982302526063007236613929745116067701523720058572<br />
+14389485783779647945312609390161093580811684684584176647736984258266730468745091231754131<br />
+48099900755304035582423436579058899950099238885085313418018438204661263296296360474488787<br />
+38521515663164432530506106986859103914132106418684515388843478387728183646911706555351959<br />
+06786355765882921864371694828638557543033284743572814292905853325384709890970441667372716<br />
+74898538521340513314748139188394298509067702297008631280871057113465745527818280556700158<br />
+98911867086343407362250584987574302248869107884810137359450826907280557890154398399182738<br />
+48414718226279276387749234122917487389606300709396077642992077195767444792730429592490507<br />
+75546729645078453563924998520884889112806996957379967728950970273926556751627876760711550<br />
+93951090640975808386604339388913045163078767335243053093864294911420910293699644772373021<br />
+19384077404629003519498936612630436228246571542992429033779830886921470891657566897297174<br />
+39305268085608161462770405711678050850558118662086210821247936654551597592806936359715168<br />
+1</p>
+<p>and</p>
+<p>65487389511097733523236551751948689607113248033298155484592472649627499169754702830189306<br />
+78657959370411670127073765502590061403333134124670776696990859471566989028610685353285009<br />
+11768678463614980094397492969316919268591710548465447455912048134236636858328385523978539<br />
+82644737917185370141846097472351962344267367164868242481388096236682753269414251051781765<br />
+77734834670332129839123263208668758028131671106139259946666183987551551308637440124384152<br />
+46073372167852444090374019093851181379333581474552729347021592666657810596563662560031169<br />
+77528444577348253993493248224572200189177833746239774046680672718868759550140707501008300<br />
+24701680838000748740220676484084364567218076578592133282849704429532204901392504168237650<br />
+60192612050400221008468212877403067238901306171444073779045299634744268048468177893966795<br />
+63124845569385276771589340294675431851543329006006237877269091491322114750102770420863824<br />
+20482572759627769565482018341248517157271233360867910286810334497049696741286179961722002<br />
+94848196451674665075230305125121320600350879318603047022659522723314077309342833773551202<br />
+20983530858434615625640442110354506401645560214301516012804040715184632521017733619272320<br />
+7126620137630199683458747749046869956250863673881944589932269914259206065385. [<a href="#identifier_13_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_14_61760" class="footnote">Numeric value : 231036427461512813069782326469186742089206935382435884936326148373384936826<br />
+66618943828237707563563567191567768366287903851601276211660367075075558865360113399385553<br />
+26951298108747653706534259540439453383358205261358698396079714708891213475450942875181771<br />
+45065395282461022992054746039501967530610007348868024842672720695787835890412423405234084<br />
+89170547705084141480319545890060547864005718054327987768744667746409439647775858117289845<br />
+09762175906646388935569017267676917725214022951441318524453690097898220489452803365591384<br />
+61099779853243934970555470915573327297353910909059920488223388569170550698730292327738710<br />
+63937409. [<a href="#identifier_14_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_15_61760" class="footnote">Numeric values : 222567807409507066819438199932606490824445396425529801468396492110367893<br />
+48111334813117913823222317749618626749516383215681163136110921477559313855276110774512129<br />
+21848202120790522045879897158791414388648392398613547596701894675516410215291943521699501<br />
+31876073234459906134472020552940692750890496620923040039616946450968406945043735527443740<br />
+33506505249622606928703088789450194922083461855048828400362408415058546054733143383156891<br />
+60640437522941861135600731717621660753862817281974831931680844013848452531041455855467138<br />
+54757101807552572291061512264192357868900098951176075281231602495066972399560156435790481<br />
+50192704621</p>
+<p>and</p>
+<p>25286784648294624481570535343637010718406459809243706575076548873485492686168555635562538<br />
+32810101202314404468498636254537974504634961804346873044291454191913610075499996591439556<br />
+24777770266168822439384588269333992453322600595230299600692066168101529002979316947217505<br />
+73804691916791907761678804392601995848707582969637308818339820753913619751024047553325552<br />
+94761379192874548094957794359119691525967129358370831291927000284693689250111471367088150<br />
+36079226146034065545213426189899633491105175774573868161830680296889413143854464294540776<br />
+58454923247735276780281924575559176175868196226600684019529354735523015770359339135. [<a href="#identifier_15_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_16_61760" class="footnote">Not to mention he wouldn't feel the need to use eight heaps of vague in the shape of "at some point" "large number" "something was not right" "most of the keys" bla bla in a four line paragraph.</p>
+<p>Seriously bitch, you did shit <em>at some point</em> last year ? What did you do, other than father <em>a large number</em> of Angelina Jolie's children, until you discovered that <em>something was not right</em> with <em>most of her tits</em> ?</p>
+<p>Dumbass. [<a href="#identifier_16_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_17_61760" class="footnote">Also, the claim that "keyservers will just accept any random data" is rank nonsense. If they did, I could just store fifty terrabytes worth of broken keys on their drives. But we'll leave this discussion for when the <a href="/2015/mats-pgp-keyserver/">#b-a keyserver</a> actually comes online. [<a href="#identifier_17_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_18_61760" class="footnote">You will notice that most but not all the names in the first list are also in the second list. Of the ones that are on both lists, some have a surviving key (so far). Others, like for instance <a href="http://nosuchlabs.com/gpgkey/5A9A2B2F5D586F12300DD59A67E3AA9F541F1C1C5B6EE4BAA63F65DE99ABDDAB">Sebastian Heberer</a>, do not. </p>
+<p>Of the names that are only on the first list, all seem to be sharing the "divisible by very low factors" and "fake key with pasted over signature block" characteristics of the original HPA key.</p>
+<p>It would appear then that there are at least two different classes of diddled keys visible in the public keyset. (Three if you count obvious exercises like EF010E6F351E447C96C91AF1293987A8466F60E1 separately). [<a href="#identifier_18_61760" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2015/the-fetlife-meatlist-volume-xii/">The Fetlife Meatlist - Volume XII</a></div>
+                <div class="alignright"><a href="/2015/the-issue-of-exponents-in-rsa/">The issue of exponents in RSA</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/breaking-news/" title="View all posts in Breaking News" rel="category tag">Breaking News</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2015/more-factored-rsa-keys-and-assorted-other-considerations/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2015/more-factored-rsa-keys-and-assorted-other-considerations/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>18 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-114286" class="commentbody"><div class="commenthead"><img alt='grenzenlosnaive`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">grenzenlosnaive</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114286" title="">Thursday, 21 May 2015</a>
+							</div>
+						<p>&gt; grenzenlosnaiv </p>
+<p>:D</p>
+						</li>
+
+										<li id="comment-114287" class="commentbody"><div class="commenthead"><img alt='grenzenlosnaive`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">grenzenlosnaive</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114287" title="">Thursday, 21 May 2015</a>
+							</div>
+						<p>Even if the 'obscure German mail client' thing was bullshit, it strikes how well represented Germany is in the list of lusers.</p>
+						</li>
+
+										<li id="comment-114288" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114288" title="">Thursday, 21 May 2015</a>
+							</div>
+						<p>This it does.</p>
+<p>Care to share the story of the Grepunzel key ?</p>
+						</li>
+
+										<li id="comment-114299" class="commentbody"><div class="commenthead"><img alt='Alex`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Alex</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114299" title="">Thursday, 21 May 2015</a>
+							</div>
+						<p>Out of curiosity, did you obtain complete factorizations of any of the RSA moduli above?<br />
+Computing \phi(n), and thus the secret exponent d is unfeasible without knowing the complete factorization of n and even in the case of an ill formed (e.g. random large number) n significantly large factors are most likely to be in.<br />
+In case you got complete factorizations, did you check whether the self-signature on the pubkey packet was correctly reproducible with your private key? Otherwise, this may just be the result of a corruption of key material (not good on the functional standpoint, but not a broken keypair).</p>
+						</li>
+
+										<li id="comment-114301" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114301" title="">Friday, 22 May 2015</a>
+							</div>
+						<p>The assumption that "large factors are likely to be in a random large n" is incorrect. The probabilty is computable and not very high. The rest of your questions are actually covered in the source material - reading which is both a required by your declared curiosity and unavoidable from a comprehension standpoint. There really is <em>nothing</em> one can do to understand something other than read.</p>
+						</li>
+
+										<li id="comment-114302" class="commentbody"><div class="commenthead"><img alt='lobbes`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">lobbes</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114302" title="">Friday, 22 May 2015</a>
+							</div>
+						<p>Thank you for spelling this shit out for me. I know enough to know I understand roughly none of it, but also know enough to know that I should put in the time to educate myself. </p>
+<p>The problem is usually having no way of knowing what source material is a) relevant and b) valid</p>
+						</li>
+
+										<li id="comment-114303" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114303" title="">Friday, 22 May 2015</a>
+							</div>
+						<p>So it is. The meagre counterpart to that problem being that as one attempts to educate himself, the differences between relevant and irrelevant, valid and invalid become more and more apparent, and readily observable. So it's not all midnight black.</p>
+						</li>
+
+										<li id="comment-114304" class="commentbody"><div class="commenthead"><img alt='Alex`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Alex</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114304" title="">Friday, 22 May 2015</a>
+							</div>
+						<p>Concerning the b-smoothness of large n: can you provide a quantitative estimate of the largest factors as a function of the size of n instead of "not very high"?</p>
+<p>Having read the source material again, I could not find any evidence of validation of the correct retrieval of the secret keys.<br />
+The only claim explicitly made is that some of them are divisible by a known factor, but nothing is said on the primality of the remaining cofactor.<br />
+If the remaining cofactor is not prime, n has not been factored, and thus the secret exponent cannot  be computed.</p>
+<p>For instance, take the modulus of:<br />
+EF010E6F351E447C96C91AF1293987A8466F60E1 Debarshi Ray<br />
+In the provided material you note that it's divisible by nine, but the result of the division is not prime.<br />
+In particular, the cofactor is divisible by 110923,199974947 (obtained via a run of Pollard's p-1) and the<br />
+remaining cofactor from these divisions is still not prime (Miller-Rabin primality test, which yields<br />
+no false positives for compositeness).<br />
+Similarly, the modulus of Peter Anvin's key is also divisible by  19 and 7704959, in addition to 3, 7 and 11 as<br />
+you pointed out, and the cofactor is still composite in this case too.<br />
+Thus, given the provided material, there is no evidence in the provided material that you know the complete<br />
+factorization of the modulus of the key.</p>
+<p>I would regard as non deniable evidence something as text file signed by the private key corresponding to one of the keypairs<br />
+claimed to be broken containing, e.g., this post.</p>
+						</li>
+
+										<li id="comment-114308" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114308" title="">Friday, 22 May 2015</a>
+							</div>
+						<p>Alex,</p>
+<p>Take a look at precisely how this class of mutilated keys (which include your example) was created. Specifically,</p>
+<p>1) 64-bit window over the legit modulus is taken, where upper 32 are set to equal the lower. Then move 64 upwards, repeat.</p>
+<p>2) The public exponent is changed to 281479271743489.</p>
+<p>I have not yet taken the time to work out the number-theoretic implications of (1). However, my current conjecture is that it has essentially the same effect as choosing an entirely random integer for the modulus.</p>
+<p>As for (2), the enemy (it is abundantly clear that we are looking at the work of human hands) may very well be relying on possession of known signatures to make use of (2).</p>
+<p>In short, we do not yet know for how many of the samples the private key may be obtained with reasonable effort, publicly-known methods, and while lacking any samples of material signed with these keys.</p>
+<p>Plenty of work to be done here!</p>
+						</li>
+
+										<li id="comment-114312" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114312" title="">Friday, 22 May 2015</a>
+							</div>
+						<p>@<b>Alex</b> It is difficult to estimate how much you know about the topic on the basis of what you've said so far, but perhaps <a href="https://primes.utm.edu/howmany.html">https://primes.utm.edu/howmany.html</a> might be interesting ?</p>
+<blockquote><p>In particular, the cofactor is divisible by 110923,199974947</p></blockquote>
+<p>The full factorization of the found keys was deliberately left as an exercise to the reader, for now. See <a href=http://btcbase.org/log/?date=22-05-2015#1142819 >here</a>.</p>
+<p>What you would regard or wouldn't regard as whatever is a matter about as interesting as what any other "Alex" thinks about the weather and the Queen of England. Ye ken ?</p>
+						</li>
+
+										<li id="comment-114313" class="commentbody"><div class="commenthead"><img alt='Obama's Red Stapler`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Obama's Red Stapler</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114313" title="">Friday, 22 May 2015</a>
+							</div>
+						<p>&gt; Miller-Rabin primality test, which yields<br />
+&gt; no false positives for compositeness</p>
+<p>This is incorrect. The original Miller algorithm was deterministic, but it relied on an unproven assertion about the zeros of a certain L-function. The Rabin upgrade removed that problem and also made it probabilistic, which means that both the quality of your RNG and the count of runs are important in estimating the likeliness of corectness of your result. This becomes especially relevant with large numbers, as Apocalyptic correctly points out <a href="http://btcbase.org/log/?date=20-05-2015#1140983" >here</a>.</p>
+						</li>
+
+										<li id="comment-114314" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114314" title="">Friday, 22 May 2015</a>
+							</div>
+						<p>What he literally says is that M-R yields no false composites, which IS correct : if you get a factor of n, you've most definitely got a factor of n (also trivial to check). </p>
+<p>Meanwhile he is apparently turning around and using that as if it meant that M-R yielding no factor means n is prime, which indeed is incorrect.</p>
+						</li>
+
+										<li id="comment-114319" class="commentbody"><div class="commenthead"><img alt='Peru Ana`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">Peru Ana</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114319" title="">Friday, 22 May 2015</a>
+							</div>
+						<p>Not my field, but I have been trying to follow the discussions. I read the tree Trilema articles on the topic and most of the #bitcoin-assets discussions. There is one thing I don't understand: if the large number N is the product of two primes, p and q, and someone obtains two other numbers, p' and q' which while prime or not nevertheless multiply to the same N, are not they now able to do anything the owner (who has p and q) can do, whatever that may be?</p>
+<p>Example:<br />
+.p = 7 and q = 12, mistakenly believed by owner to be prime. So N = 84.<br />
+.Phuctor finds that 84 is divisible by 3.<br />
+.p'=28 and q' = 3 can now be constructed, so that N' = N = 84.<br />
+Why does it matter whether p' is a prime or is not a prime? Apparently somehow RSA worked with q not being prime, so why wouldn't it work with p' not being prime? </p>
+<p>Thanks!</p>
+						</li>
+
+										<li id="comment-117096" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117096" title="">Friday, 22 April 2016</a>
+							</div>
+						<p>If N is the product of two prime numbers, there exist no other numbers that multiplied yield the same N.</p>
+						</li>
+
+										<li id="comment-117311" class="commentbody"><div class="commenthead"><img alt='Adlai`s avatar' src='/wheresmycookie/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink"><a href='/wheresmycookie' class='url'>Adlai</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117311" title="">Sunday, 22 May 2016</a>
+							</div>
+						<p>CTRL-Fing phuctor stats pages for my name is the only news I need "on the inside".</p>
+<p>Hope everybody is happy with the MPExplosion! Fireworks are the best, forget the rest, I'm a pyromaniac under test//////////</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-141446">
+					<div class='trackhead'>
+						<div class="commentcount">16</div>
+						<span class="authorlink"><a href='/2015/the-strange-case-of-the-unentropic-entropy-and-other-bedtime-stories-of-primes-and-people?b=discussed%20pr&amp;e=et%27s#select' class='url'>The strange case of the unentropic entropy and other bedtime stories of primes and people. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-141446" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] discussed prior (principally having to do with how the part of the world made up by you sucks irredeemably, by the way) Phuctor now very conveniently links broken keys straight off its stats page. Let's [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-142051">
+					<div class='trackhead'>
+						<div class="commentcount">17</div>
+						<span class="authorlink"><a href='/2016/the-recent-phuctor-finds-explained?b=of%20course%2C%20i&amp;e=%3B%5D%20%20#select' class='url'>The recent Phuctor finds, explained. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142051" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] of course, is not without its own pitfalls. [&#8617;]Such as perhaps an overflow of some kind, as the most obvious, banal example. [&#8617;]   [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-142074">
+					<div class='trackhead'>
+						<div class="commentcount">18</div>
+						<span class="authorlink"><a href='/2016/psa-hanno-bock-still-a-deceitful-shitbag?b=might%20rememb&amp;e=t%20to#select' class='url'>PSA : Hanno Böck, still a deceitful shitbag. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142074" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] might remember Hanno Böck getting caught lying back in 2015 : Hanno Böck just got caught lying. Specifically : Last year I started a project to [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author66e9e47" id="author66e9e47" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email66e9e47" id="email66e9e47" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url66e9e47" id="url66e9e47" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="61760" /></p>
+				<input type="hidden" name="comment_post_time" value="1780699474-18.97.14.86" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-61760")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-61760");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-61760");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_mar2019c.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>So how's magic work ? on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Repressing the female point of view<br />every day since 2008.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-60635"><div class="post" id="post-60635">                    <h1><a href="/2015/so-hows-magic-work/" rel="bookmark" title="Permanent Link to So how&#039;s magic work ?">So how's magic work ?</a></h1>                        <div class="date">                                     Wednesday, 18 March, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>Some guy on tumblr has <a href="http://su3su2u1.tumblr.com/tagged/Hariezer-Yudotter/chrono">a whole bunch of posts</a> dissecting exactly how much of an imbecile Eliezer Yudkowsky is<sup><a href="#footnote_0_60635" id="identifier_0_60635" class="footnote-link footnote-identifier-link" title="You recall, the twerp who put out a challenge, got owned, and then used the imaginary time-travelling unit in his head to pretend it never actually happened. Such redditard generation, much wow, great justice.">i</a></sup>. They're both very good at it : the guy on tumblr at dissecting, and Eliezer Yudkowsky at being... well... Eliezer Yudkowsky.</p>
+<p>I stopped reading at #<a href=http://su3su2u1.tumblr.com/post/97789680783/chapter-18-what>18</a>, because I think I've seen enough from that source : random <a href="/2011/copilul-anal/">anal child</a> and his daydreaming / fantasies of being me.<sup><a href="#footnote_1_60635" id="identifier_1_60635" class="footnote-link footnote-identifier-link" title="Amusingly enough, most of the events described in this frustrated wet dream of a `fanfic` actually happened, as such, to better people. Except in a different context and working on slightly different premises - which makes Yudkowsky's version sound like the science of Caragiale's waiter : he understands what should happen, but has no idea as to why or how it'd happen, and so ends up with a self-contradictory, hamfisted confabulation.">ii</a></sup> Whether this representation exactly or inexactly maps on the real object is unimportant : if it does or if it doesn't, we won't find out through further processing of material from this source.<sup><a href="#footnote_2_60635" id="identifier_2_60635" class="footnote-link footnote-identifier-link" title="For what it's worth, alf broadly seems to agree, sui generis.">iii</a></sup></p>
+<p>A recurrent point throughout the dissection is, quoted <em>pars pro toto</em>,</p>
+<blockquote><p>I am immensely frustrated that I’m 10 chapters into this thing, and we still don’t have any experiments regarding the rules of magic.  </p></blockquote>
+<p>This happens to be a topic of major intellectual interest for me, through the following circumstances : as the lead designer on <a href="http://mpex.co/?mpsic=S.MG">S.MG</a>'s flagship <a href="/minigame-smg-february-2015-statement">Eulora</a> MMORPG, on one hand, and as a nutty perfectionist and consummate callophile (could you tell ?) on the other, I'm stuck making sense of magic, and then putting it all down in good notation, too! Sucks being me, huh ?<sup><a href="#footnote_3_60635" id="identifier_3_60635" class="footnote-link footnote-identifier-link" title="Yes, Yudkowsky, it sucks being the almighty omnipotent five year old the thought of which has you salivating. It's not a matter of status, it's not a matter of finally filling that void nagging away at your idea of self. I never had those problems. 
+The problems of the rich aren't absent, as the poor imagine them to be, `if I didn't have to get up to go to work I'd have no problems`. Au contraire.
+It'd suck a lot more for you, of course, so you have a lot be thankful for : the half brain you do have, the time traveling piece you don't have, these in your case are great blessings. Grandeur is not for everyone.">iv</a></sup></p>
+<p>As far as "how does magic go", here's a few (yet disjointed) thoughts :</p>
+<ol>
+<li><strong>Magic as illusionism.</strong> This is what's generally meant by "magic" in showbiz : a person that's good at coldcalling, misdirecting the audience and other such basic tools of the trickster can create the <em>impression</em> of a reality different from actual reality.<sup><a href="#footnote_4_60635" id="identifier_4_60635" class="footnote-link footnote-identifier-link" title="People are very much inclined to fall for this, which I suspect comes directly from their being mammals : it is a precondition of sexuate reproduction that individuals forego their own interest in favour of the `greater` interest of the genes they carry. It seems directly necessary from this not that all mammals would naturally fall for `alternate realities` disjunct from actual reality, but moreover that any old idiocy could be represented to such broken-by-design timepieces as `real`. Hey, if you can be made to believe getting pregnant is a good idea, there necessarily isn't going to be an end to the nonsense you'll eat up. And you necessarily can be made to believe getting pregnant is a good idea, seeing how - here we are.">v</a></sup> While this provides a rather fertile ground narratively, it's easy to do very poorly<sup><a href="#footnote_5_60635" id="identifier_5_60635" class="footnote-link footnote-identifier-link" title="Pamela's dream is perhaps the best example of that.">vi</a></sup> and moreover it doesn't work all that well visually, which is problematic for a computer game.</li>
+<p>
+<li><strong>Magic as science.</strong> "Any sufficiently advanced technology is indistinguishable from magic" speaketh Clarke, and he has a point. There's not even much need for this scientific "magic" to stick with rules we're familiar with. After all, stuff like cellphones, television sets or what have you seemingly break the world, at least according to a medieval mind<sup><a href="#footnote_6_60635" id="identifier_6_60635" class="footnote-link footnote-identifier-link" title="Then again the medieval mind is known for its very brittle constitution - even something as simple as a round Earth famously breaks it. Consider the famous Slocum-Kruger exchange.">vii</a></sup> and - whore that it is - in spite of being thus broken the world doesn't seem much worse for the wear, if at all.<sup><a href="#footnote_7_60635" id="identifier_7_60635" class="footnote-link footnote-identifier-link" title="This, if you're curious, is a learned reference to, among other things, a great story by Ion Creanga, in which a dimwitted husband encourages his supposedly dimwitted friend to fuck the wife - only to have a change of heart midway :
+—Încet, măi nătărăule, că mi-i spinteca nevasta… Hai, scoală-te acum de pe dînsa, mormolocule!…
+—Poți să-l mai lași oleacă, băică, nu-l zminti tocmai acum, că parcă mă unge cu unt, zise Catrina, trăgîndu-și răsuflarea, de parcă se frigea…
+">viii</a></sup> The problem with this approach is that... well... it's rather unsatisfying, isn't it ? Also not exactly trivial to get right. On one hand nobody reads textbooks for entertainment<sup><a href="#footnote_8_60635" id="identifier_8_60635" class="footnote-link footnote-identifier-link" title="Which is why most of the higher science fiction fails - if you accomplish the feat of printing the phonebook of the future nobody will want to read it, just like they don't read the phonebook of the recent past.">ix</a></sup> ; on the other hand the few that do read it mostly do it to nitpick. It quickly becomes a massively scaling problem, while the rewards are barely linear.</li>
+<p>
+<li><strong>Magic as religion.</strong> That's fundamentally what Moses does, he "believes in God so hard" that his stick turns into a snake or whatever. Idem what the various self improvement writers do, Mays, Marx, Ziggler, King-jr, Carnegey etc : they pick some god, squint really hard and lo and behold! <a href="/2014/breaks-over-back-to-the-basement/#footnote_0_56576">spooks</a> turn into people left and right while everyone gets their old and sinful soul washed into midwestern sensibilities! The problem with this is that it's pretty retarded, and in how exactly it mimics the workings of bureaucracy quite impolitic. And, of course, how hard it is to do right - but that's by now a refrain.</li>
+</ol>
+<p>That's it, these are the only three ways magic can work. Either because it's not really working, or because it's how things were working all along<sup><a href="#footnote_9_60635" id="identifier_9_60635" class="footnote-link footnote-identifier-link" title="And the only new thing in the world is the history you didn't know.">x</a></sup>, or else it's just what <a href="/2012/the-taming-of-the-shrew/">Simon says</a>. </p>
+<p>The secret, it would seem, for good #1 magic is subtlety. The gap between what is perceived and what's really there must share <a href="/2009/lectia-de-humor/">the discussed characteristics of humor</a> : it should be entirely and unexpectedly surprsing. </p>
+<p>Meanwhile the secret for good #2 magic is parsimony. The least said the better, and this approach will only work if and to the degree that a lot is packed in very little. Kinda how "elegance" works in math, for that matter, which is as close as scientists get to magic anyway.</p>
+<p>Finally, the secret for good #3 magic is <a href="/2013/dear-guardian-stop-being-retarded/#comment-95603">leadership</a>. If your god isn't awesome, nobody will be bothered to hear the droning story of his mediated exploits.</p>
+<p>And I think that's that. All it takes, really, for excellent magic in fiction is either surprise, or parsimony, or else leadership (which is to say good characters). All these happen to be qualities of good writing, which should broadly explain why so many poor writers take refuge into writing genre fiction : it's the exact same process that has Yudkowsky constantly <a href="http://su3su2u1.tumblr.com/post/97748993633/apart-from-your-criticism-which-is-interesting">telling the reader</a> what he should be showing the reader : they imagine that if their writing "has magic in it", then... well... it has magic in it. Without the quotes. </p>
+<p>Obviously, it doesn't work - but that hasn't yet stopped anyone.</p>
+<p>PS. Dear su3su2u1 whoever you might be, if you happen to read this drop by #bitcoin-assets sometime.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_60635" class="footnote">You recall, the twerp who put out a challenge, <a href="/2015/the-harry-potter-challenge/">got owned</a>, and then used the imaginary time-travelling unit in his head to pretend it never actually happened. Such redditard generation, much wow, great justice. [<a href="#identifier_0_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_60635" class="footnote">Amusingly enough, most of the events described in this frustrated wet dream of a "fanfic" actually happened, as such, to better people. Except in a different context and working on slightly different premises - which makes Yudkowsky's version sound like the science of <a href="/2011/encomiasmul-romanesc/">Caragiale's waiter</a> : he understands what should happen, but has no idea as to why or how it'd happen, and so ends up with a self-contradictory, hamfisted confabulation. [<a href="#identifier_1_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_60635" class="footnote">For what it's worth, <a href="/forum-logs-for-12-jan-2012#">alf broadly seems to agree</a>, <em>sui generis</em>. [<a href="#identifier_2_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_60635" class="footnote">Yes, Yudkowsky, it <em>sucks</em> being the almighty omnipotent five year old the thought of which has you salivating. It's not a matter of status, it's not a matter of finally filling that void nagging away at your idea of self. I never had those problems. </p>
+<p>The problems of the rich aren't absent, as the poor imagine them to be, "if I didn't <em>have to</em> get up to go to work I'd have no problems". <em>Au contraire</em>.</p>
+<p>It'd suck <a href="/forum-logs-for-19-jul-2014#1344316">a lot more</a> <em>for you</em>, of course, so you have a lot be thankful for : the half brain you do have, the time traveling piece you don't have, these in your case are great blessings. Grandeur is not for everyone. [<a href="#identifier_3_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_60635" class="footnote">People are very much inclined to fall for this, which I suspect comes directly from their being mammals : it is a precondition of sexuate reproduction that individuals forego their own interest in favour of the "greater" interest of the genes they carry. It seems directly necessary from this not that all mammals would naturally fall for "alternate realities" disjunct from actual reality, but moreover that any old idiocy could be represented to such broken-by-design timepieces as "real". Hey, if you can be made to believe getting pregnant is a good idea, there necessarily isn't going to be an end to the nonsense you'll eat up. And you necessarily can be made to believe getting pregnant is a good idea, seeing how - here we are. [<a href="#identifier_4_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_60635" class="footnote">Pamela's dream is perhaps the best example of that. [<a href="#identifier_5_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_60635" class="footnote">Then again the medieval mind is known for its very brittle constitution - even something as simple as a round Earth famously breaks it. Consider the famous Slocum-Kruger exchange. [<a href="#identifier_6_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_60635" class="footnote">This, if you're curious, is a learned reference to, among other things, a great story by Ion Creanga, in which a dimwitted husband encourages his supposedly dimwitted friend to fuck the wife - only to have a change of heart midway :</p>
+<blockquote><p>—Încet, măi nătărăule, că mi-i spinteca nevasta… Hai, scoală-te acum de pe dînsa, mormolocule!…<br />
+—Poți să-l mai lași oleacă, băică, nu-l zminti tocmai acum, că parcă mă unge cu unt, zise Catrina, trăgîndu-și răsuflarea, de parcă se frigea…</p></blockquote>
+<p> [<a href="#identifier_7_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_60635" class="footnote">Which is why most of the higher science fiction fails - if you accomplish the feat of printing the phonebook of the future nobody will want to read it, just like they don't read the phonebook of the recent past. [<a href="#identifier_8_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_9_60635" class="footnote">And the only new thing in the world is the history you didn't know. [<a href="#identifier_9_60635" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2015/a-trip-you-may-have-taken-redux/">A Trip You May Have Taken, redux</a></div>
+                <div class="alignright"><a href="/2015/the-genetics-of-intelligence/">The genetics of intelligence</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/gandesc-deci-gandesc/" title="View all posts in Gandesc, deci gandesc" rel="category tag">Gandesc, deci gandesc</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2015/so-hows-magic-work/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2015/so-hows-magic-work/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>3 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-113152" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='http://www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113152" title="">Wednesday, 18 March 2015</a>
+							</div>
+						<p>Eliezer ended up in the end turning his tale into an origin story because it was the easiest way out, which is what origin stories are. He also exits and re-enters the source materials canon as is convenient for himself in spite of his explicit premise having been that he was only changing one character.</p>
+<p>For the magic he says he's doing 2, but ends up doing 3 because he wants an elite based on 1 for purposes outside of this or any other story.</p>
+<p>Almost as bad as everything else was he used the origin story to create a magical unicorn princess in order absolve himself of all loose ends . Because why should he think a story and an end to the story when he can instead Deus ex Unicorn princess.</p>
+						</li>
+
+										<li id="comment-113153" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113153" title="">Wednesday, 18 March 2015</a>
+							</div>
+						<p>Deus ex unicorn princess lol. DEUP!!!</p>
+<p>Anyway, claims to "only change one character" are to be taken with more salt than average derp's worth, dressed. It is insanely hard to do, which is why most rewrites end up touching everything everywhere. Rare is the case when the original author fucked up a character only, so their work can be fixed without having to fix anything else about it. </p>
+<p>Which reminds me, I should probably do <a href=/2012/sa-facem-o-pastisa/ >this</a> in English sometime.</p>
+						</li>
+
+										<li id="comment-113154" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='http://www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113154" title="">Wednesday, 18 March 2015</a>
+							</div>
+						<p>The 18 chapters of reviews honestly could have been skipped by reading the last actual chapter, just reading the book the German way.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authorcd2d460" id="authorcd2d460" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emailcd2d460" id="emailcd2d460" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urlcd2d460" id="urlcd2d460" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="60635" /></p>
+				<input type="hidden" name="comment_post_time" value="1764980705-18.97.9.172" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2025 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-60635")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-60635");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-60635");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

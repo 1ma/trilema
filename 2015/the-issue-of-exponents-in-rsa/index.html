@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_mar2019g.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>The issue of exponents in RSA on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">The scandalous blog of a sexual predator.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-61843"><div class="post" id="post-61843">                    <h1><a href="/2015/the-issue-of-exponents-in-rsa/" rel="bookmark" title="Permanent Link to The issue of exponents in RSA">The issue of exponents in RSA</a></h1>                        <div class="date">                                     Thursday, 21 May, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>You might perhaps remember <a href="http://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=patch;h=04376627a67d7af83e839ce11ee4f93433bc5af5">this patch</a> :</p>
+<blockquote><pre>  /* Find an public exponent.
+       Benchmarking the RSA verify function with a 1024 bit key yields
+       (2001-11-08):
+         e=17    0.54 ms
+         e=41    0.75 ms
+         e=257   0.95 ms
+         e=65537 1.80 ms
+
+       This code used 41 until 2006-06-28 when it was changed to use
+       65537 as the new best practice.  See FIPS-186-3.
+     */</pre>
+</blockquote>
+<p>Well...  am I the only one nonplussed by all this "we use «best practices» fixed exponent" bullshit ? </p>
+<p>It's an unavoidable magic number, okay. But it's also the sort of magic number that should eminently be a knob for the user to turn. I say a proper PGP implementation would have e user-settable at the key generation phase (with 65536+1 as a default, sure).</p>
+<p>Looking into this matter, there are <a href="/wp-content/uploads/2015/05/prime-word.txt">6544 prime numbers</a> between 1 and 65`536. It should not be too difficult to create the list of prime numbers<sup><a href="#footnote_0_61843" id="identifier_0_61843" class="footnote-link footnote-identifier-link" title="We want e to always be prime because we're afraid that idiot software implementations assume e to be prime and then check that e is coprime to (p − 1)(q − 1) by simply trying to divide the product. Because hey, `it's faster` hurr durr.">i</a></sup> of the form p1 * 65536 + p2, where p1 and p2 are prime themselves. Off to the hacks!</p>
+<ul>
+[ <em>Assorted cloinking noises and a faint buzzing in the distance...</em> ]</ul>
+<p>Yes, here we go : <a href="/wp-content/uploads/2015/05/prime-64b.txt">a list of all prime numbers</a> of the form p1 * 65536 + p2, where p1 and p2 are prime themselves, up to 100`000`000<sup><a href="#footnote_1_61843" id="identifier_1_61843" class="footnote-link footnote-identifier-link" title="You don't want the public exponent to be too big because de = 1 mod phi(pq) and there are some known attacks for the case where d < ~0.3 * e. Since the product is ~18 digits (210 ~= 103 and therefore 264 > 1018), picking an e with at most 8 digits ensures d is always larger.">ii</a></sup> (1.2MB).<sup><a href="#footnote_2_61843" id="identifier_2_61843" class="footnote-link footnote-identifier-link" title="And here is a list of all prime numbers of the form p1 * 65536 + p2, where p1 and p2 smaller than 256 and prime themselves :
+65537, 65539, 65543, 65579, 65609, 65633, 65687, 65699, 65717, 65729, 65777, 131101, 131113, 131143, 131203, 131221, 131251, 131311, 196613, 196661, 196681, 196687, 196709, 196717, 196739, 196771, 196799, 196831, 196837, 327721, 327739, 327829, 327853, 327871, 458789, 458819, 458849, 458879, 458891, 458963, 458981, 458993, 720899, 720901, 720913, 720943, 720997, 721003, 721087, 721129, 851971, 852011, 852149, 852167, 852179, 852191, 852197, 1114117, 1114159, 1114213, 1114249, 1114261, 1114303, 1245187, 1245191, 1245227, 1245281, 1507369, 1507501, 1900597, 1900603, 1900711, 1900777, 2031713, 2031767, 2031779, 2031839, 2424833, 2424839, 2424971, 2425043, 2686979, 2686993, 2687023, 2687029, 2687059, 2687143, 2687149, 2818157, 2818229, 2818271, 3080251, 3080263, 3080359, 3080419, 3080431, 3080443, 3473419, 3473521, 3473557, 3473641, 3473647, 3866627, 3866647, 3866713, 3866791, 3866857, 3997769, 3997859, 3997919, 4391039, 4391063, 4653059, 4653139, 4653169, 4653247, 4653307, 4784141, 4784237, 4784267, 4784279, 4784321, 5177351, 5177363, 5177387, 5177441, 5177453, 5439547, 5439619, 5439667, 5439727, 5832709, 5832763, 6357011, 6357023, 6357101, 6357203, 6357233, 6619139, 6619141, 6619159, 6619219, 6619303, 6619363, 6619369, 6750209, 6750221, 6750251, 6750407, 6750437, 7012363, 7012393, 7012543, 7143443, 7143467, 7143491, 7143581, 7405571, 7405627, 7405639, 8323103, 8323109, 8323151, 8323169, 8323229, 8323253, 8585287, 8585389, 8585449, 8978449, 8978479, 8978491, 8978503, 8978539, 9109547, 9109571, 9109577, 9109613, 9109697, 9109703, 9764971, 9764977, 9765001, 9765037, 9765043, 9765061, 9895939, 9895943, 9896039, 9896147, 10289183, 10289333, 10289351, 10682387, 10682429, 10682471, 10682561, 10682597, 10944523, 10944529, 10944613, 10944649, 10944763, 11337751, 11337757, 11337787, 11337877, 11337961, 11337967, 11337979, 11730949, 11730973, 11730997, 11731033, 11731141, 11731171, 11862029, 11862083, 11862167, 11862239, 12517387, 12517399, 12517489, 12648451, 12648521, 12648659, 12910819, 13041683, 13041767, 13041803, 13041893, 13828109, 13828169, 13828247, 13828253, 14614559, 14614631, 14614709, 14614727, 14614757, 14876713, 14876731, 14876761, 14876773, 14876803, 14876821, 15007781, 15007823, 15007847, 15007901, 15007907, 15007943, 15269911, 15269929, 15269959, 15270019, 15270127, 15270139, 15663121, 15663133, 15663157, 15663211, 15663217, 15663283, 15663331, 15794213, 15794237, 15794243, 15794249, 15794333, 15794369, 16449541, 16449547, 16449703, 16449709.">iii</a></sup> All sorts of interesting looking stuff in there, like 71237, 77699, 100019, 137383, 69696797 etc.</p>
+<p>Is this going to be slower than the 65537 default ? Yes. Stop being poor.</p>
+<p>Is this going to be less secure than the 65537 default ? No. <a href="/2013/how-to-airgap-a-practical-guide/?b=If%20you%20are%20able&#038;e=lot%20wiser#select">Because</a> : </p>
+<blockquote><p>If you are able to brew your own set of hardware, such as for instance out of ARM processors, or FPGA boards which you program yourself, or soldered together Z80s or whatever else, it's a great idea to do so. Just as long as you actually know what you're doing, this sort of arrangement increases the costs of attacking your setup astronomically. It's not likely practical for most people, but if it's practical for you then by all means - and in any case the attempt will likely leave you a lot wiser.</p></blockquote>
+<p>When it comes to digital security, you want to not follow the NIST as often as you can get away with it - for the simple reason that the NIST works for the same people the <a href="/2015/on-how-the-factored-4096-rsa-keys-story-was-handled-and-what-it-means-to-you/?b=What%20they%20publish&#038;e=considerations#select">propaganda machine</a> works for, and that's most definitely not you. Decentralisation is the name of the game. While there are places where standards are useful and necessary, their presence anywhere else is absolutely evil. There most certainly SHOULD NOT exist a standard for RSA exponents in the shape of "use X".</p>
+<p>Note that it is not said nor implied here that there's any sort of <em>theoretical</em> vulnerability related to using 65537 as an exponent for RSA.<sup><a href="#footnote_3_61843" id="identifier_3_61843" class="footnote-link footnote-identifier-link" title="Or for that matter any other number, provided q and p are then chosen correctly, and leaving aside the issues related to the nefarious interaction of small exponents and bad padding.">iv</a></sup> The point is that you don't know what exact implementation flaws the NSA is or may be relying on, and for this reason giving as little quarter as possible is the correct policy.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_61843" class="footnote">We want e to always be prime because we're afraid that idiot software implementations assume e to be prime and then check that e is coprime to (p − 1)(q − 1) by simply trying to divide the product. Because hey, "it's faster" hurr durr. [<a href="#identifier_0_61843" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_61843" class="footnote">You don't want the public exponent to be too big because de = 1 mod phi(pq) and there are some known attacks for the case where d < ~0.3 * e. Since the product is ~18 digits (2<sup>10</sup> ~= 10<sup>3</sup> and therefore 2<sup>64</sup> > 10<sup>18</sup>), picking an e with at most 8 digits ensures d is always larger. [<a href="#identifier_1_61843" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_61843" class="footnote">And here is a list of all prime numbers</a> of the form p1 * 65536 + p2, where p1 and p2 smaller than 256 and prime themselves :</p>
+<p>65537, 65539, 65543, 65579, 65609, 65633, 65687, 65699, 65717, 65729, 65777, 131101, 131113, 131143, 131203, 131221, 131251, 131311, 196613, 196661, 196681, 196687, 196709, 196717, 196739, 196771, 196799, 196831, 196837, 327721, 327739, 327829, 327853, 327871, 458789, 458819, 458849, 458879, 458891, 458963, 458981, 458993, 720899, 720901, 720913, 720943, 720997, 721003, 721087, 721129, 851971, 852011, 852149, 852167, 852179, 852191, 852197, 1114117, 1114159, 1114213, 1114249, 1114261, 1114303, 1245187, 1245191, 1245227, 1245281, 1507369, 1507501, 1900597, 1900603, 1900711, 1900777, 2031713, 2031767, 2031779, 2031839, 2424833, 2424839, 2424971, 2425043, 2686979, 2686993, 2687023, 2687029, 2687059, 2687143, 2687149, 2818157, 2818229, 2818271, 3080251, 3080263, 3080359, 3080419, 3080431, 3080443, 3473419, 3473521, 3473557, 3473641, 3473647, 3866627, 3866647, 3866713, 3866791, 3866857, 3997769, 3997859, 3997919, 4391039, 4391063, 4653059, 4653139, 4653169, 4653247, 4653307, 4784141, 4784237, 4784267, 4784279, 4784321, 5177351, 5177363, 5177387, 5177441, 5177453, 5439547, 5439619, 5439667, 5439727, 5832709, 5832763, 6357011, 6357023, 6357101, 6357203, 6357233, 6619139, 6619141, 6619159, 6619219, 6619303, 6619363, 6619369, 6750209, 6750221, 6750251, 6750407, 6750437, 7012363, 7012393, 7012543, 7143443, 7143467, 7143491, 7143581, 7405571, 7405627, 7405639, 8323103, 8323109, 8323151, 8323169, 8323229, 8323253, 8585287, 8585389, 8585449, 8978449, 8978479, 8978491, 8978503, 8978539, 9109547, 9109571, 9109577, 9109613, 9109697, 9109703, 9764971, 9764977, 9765001, 9765037, 9765043, 9765061, 9895939, 9895943, 9896039, 9896147, 10289183, 10289333, 10289351, 10682387, 10682429, 10682471, 10682561, 10682597, 10944523, 10944529, 10944613, 10944649, 10944763, 11337751, 11337757, 11337787, 11337877, 11337961, 11337967, 11337979, 11730949, 11730973, 11730997, 11731033, 11731141, 11731171, 11862029, 11862083, 11862167, 11862239, 12517387, 12517399, 12517489, 12648451, 12648521, 12648659, 12910819, 13041683, 13041767, 13041803, 13041893, 13828109, 13828169, 13828247, 13828253, 14614559, 14614631, 14614709, 14614727, 14614757, 14876713, 14876731, 14876761, 14876773, 14876803, 14876821, 15007781, 15007823, 15007847, 15007901, 15007907, 15007943, 15269911, 15269929, 15269959, 15270019, 15270127, 15270139, 15663121, 15663133, 15663157, 15663211, 15663217, 15663283, 15663331, 15794213, 15794237, 15794243, 15794249, 15794333, 15794369, 16449541, 16449547, 16449703, 16449709. [<a href="#identifier_2_61843" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_61843" class="footnote">Or for that matter any other number, provided q and p are then chosen correctly, and leaving aside the issues related to the nefarious interaction of small exponents and bad padding. [<a href="#identifier_3_61843" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2015/more-factored-rsa-keys-and-assorted-other-considerations/">More factored RSA keys, and assorted other considerations</a></div>
+                <div class="alignright"><a href="/2015/the-bed-sitting-room/">The Bed Sitting Room</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/gandesc-deci-gandesc/" title="View all posts in Gandesc, deci gandesc" rel="category tag">Gandesc, deci gandesc</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2015/the-issue-of-exponents-in-rsa/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2015/the-issue-of-exponents-in-rsa/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>One Response</p>
+		
+		<ol class="commentlist">
+					</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-115012">
+					<div class='trackhead'>
+						<div class="commentcount">1</div>
+						<span class="authorlink">Choose your own exponents in RSA? | Question and Answer</span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-115012" title="">Wednesday, 12 August 2015</a>
+					</div>
+					<p>[...] another interesting post, one of the developers/security researchers behind Phuctor suggests that using different exponents [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author952023e" id="author952023e" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email952023e" id="email952023e" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url952023e" id="url952023e" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="61843" /></p>
+				<input type="hidden" name="comment_post_time" value="1780926587-18.97.14.91" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-61843")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-61843");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-61843");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

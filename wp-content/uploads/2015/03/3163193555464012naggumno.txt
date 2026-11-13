@@ -1,0 +1,148 @@
+Path: news.uni-hamburg.de!cs.tu-berlin.de!unlisys!news.snafu.de!blackbush.xlink.net!npeer.kpnqwest.net!EU.net!Norway.EU.net!127.0.0.1!nobody
+From: Erik Naggum <erik@naggum.no>
+Newsgroups: comp.lang.lisp
+Subject: Re: can lisp do what perl does easily?
+Date: 28 Mar 2000 00:52:35 +0000
+Organization: Naggum Software; vox: +47 8800 8879; fax: +47 8800 8601; http://www.naggum.no
+Lines: 129
+Message-ID: <3163193555464012@naggum.no>
+References: <8bml8e$p5h$1@nnrp1.deja.com>
+NNTP-Posting-Host: gate.dn.nhst.no
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+X-Trace: oslo-nntp.eunet.no 954205750 3465 195.0.192.66 (28 Mar 2000 01:09:10 GMT)
+X-Complaints-To: newsmaster@eunet.no
+NNTP-Posting-Date: 28 Mar 2000 01:09:10 GMT
+mail-copies-to: never
+User-Agent: Gnus/5.0803 (Gnus v5.8.3) Emacs/20.5
+Xref: news.uni-hamburg.de comp.lang.lisp:46891
+
+* ; ; ; h e l m e r . . . <assemblage@t-three.com>
+| I have been slowly learning lisp over the past year and have had someone
+| mention to me that I should learn perl, for jobs etc.
+
+  the unemployed programmer had a problem.  "I know", said the programmer,
+  "I'll just learn perl."  the unemployed programmer now had two problems.
+
+  having a job is not unimportant, but if knowing perl is a requirement for
+  a particular job, consider another one before taking that one.  this is
+  true even if you know perl very well.  life is too long to be an expert
+  at harmful things, including such evilness as C++ and perl.
+  
+  I once studied perl enough to read perl code and spot bugs in other
+  people's programs (but later gained the wisdom that this was not an
+  accomplishment -- spotting a bug in a perl program is like spotting the
+  dog that brought the fleas), but I don't write in it and I don't ever
+  plan to use it for anything (part of my new position is quality assurance
+  for the systems I'm inheriting responsibility for, and part of any
+  serious QA is removing perl code the same way you go over a dilapidated
+  building you inherit to remove chewing gum and duct tape and fix whatever
+  was kept together for real).  also, very much unlike any other language I
+  have ever studied, perl has failed to stick to memory, a phenomenon that
+  has actually puzzled me, but I guess there are some things that are so
+  gross you just have to forget, or it'll destroy something with you.  perl
+  is the first such thing I have known.
+
+  this is your brain.  this is perl.  this is your brain on perl.  any
+  questions?
+
+| If I learn lisp well will I be able to do what people do with perl[?]
+
+  no, you won't.  however, there is a very important clue to be had from
+  this: what people do with perl is wrong.  perl makes a whole lot of tasks
+  easy to do, but if you look closely, you will see that those tasks are
+  fundamentally braindamaged, and should never have been initiated.  perl
+  is perhaps the best example I can think of for a theory I have on the
+  ills of optimization and the design choices people make.  most people,
+  when faced with a problem, will not investigate the cause of the problem,
+  but will instead want to solve it because the problem is actually in the
+  way of something more important than figuring out why something suddenly
+  got in their way out of nowhere.  if you are a programmer, you may reach
+  for perl at this point, and perl can remove your problem.  happy, you go
+  on, but find another problem blocking your way, requiring more perl --
+  the perl programmer who veers off the road into the forest will get out
+  of his car and cut down each and every tree that blocks his progress,
+  then drive a few meters and repeat the whole process.  whether he gets
+  where he wanted to go or not is immaterial -- a perl programmer will
+  happily keep moving forward and look busy.  getting a perl programmer
+  back on the road is a managerial responsibility, and it can be very hard:
+  the perl programmer is very good at solving his own problems and assure
+  you that he's on the right track -- he looks like any other programmer
+  who is stuck, and this happens to all of us, but the perl programmer is
+  very different in one crucial capacity: the tool is causing the problems,
+  and unlike other programmers who discover the cause of the problem sooner
+  or later and try something else, perl is rewarding the programmer with a
+  very strong sense of control and accomplishment that a perl programmer
+  does _not_ try something else.
+
+  it's not that perl programmers are idiots, it's that the language rewards
+  idiotic behavior in a way that no other language or tool has ever done,
+  and on top of it, it punishes conscientiousness and quality craftsmanship
+  -- put simply: you can commit any dirty hack in a few minutes in perl,
+  but you can't write an elegant, maintainabale program that becomes an
+  asset to both you and your employer; you can make something work, but you
+  can't really figure out its complete set of failure modes and conditions
+  of failure.  (how do you tell when a regexp has a false positive match?)
+
+  a person's behavior is shaped by the rewards and the punishment he has
+  received while not thinking about his own actions.  few people habitually
+  engage in the introspection necessary to break out of this "social
+  programming" or decide to ignore the signals that other people send them,
+  so this is a powerful mechanism for programming the unthinking masses.
+  rewarding idiotic behavior and punishing smart behavior effectively
+  brainwashes people, destroying their value systems and their trust in
+  their own understanding and appreciation of the world they live in, but
+  if you're very good at it, you can create a new world for them in which
+  all of this makes sense.
+
+  to really destroy any useful concepts of how software is supposed to work
+  together, for instance, the best possible way is to ridicule the simple
+  and straightforward concepts inherent in Lisp's read and print syntax,
+  then ridicule the overly complex and entangled concepts in stuff like IDL
+  and CORBA, which does basically the same thing as Lisp's simple syntax,
+  and then hail the randomness of various programs that output junk data,
+  because you can easily massage the data into the randomness that some
+  other program accepts as input.  instead of having syntax-driven data
+  sharing between programs, you have code-driven glue between programs, and
+  because you are brainwashed perl idiot, this is an improvement, mostly to
+  your job security.  and once you start down this path, every move forward
+  is a lot cheaper than any actual improvements to the system that would
+  _obviate_ the need for more glue code.  however, if you never start down
+  this path, you have a chance of making relevant and important changes.
+
+  that's why, if you learn Lisp and become a good programmer, you will
+  never want to do what people do with perl.  as such a good programmer,
+  one in five managers will notice that you solve problems differently and
+  will want to hire you to clean up after the perl programmers he used to
+  be mortally afraid of firing, and you can push any language you want at
+  this point -- just make sure you can find more programmers he can hire
+  who know it and always keep your code well-documented and readable -- you
+  do _not_ want to make any other programming language appear as random as
+  perl to any manager.  perl is already a "necessary evil", but still evil,
+  while other languages don't have the "necessary" label, so if you screw
+  up, it will hurt other programmers, too.  this problem can always be
+  minimized by simply being good at what you do.  few perl programmers are
+  actually good at anything but getting perl to solve their _immediate_
+  problems, so you have an incredible advantage if you're a good Lisper.
+
+  I'll concede, however, that it is very important to be able to understand
+  what perl programmers do.  if you don't understand what they are talking
+  about, you won't understand what they are actually trying to accomplish
+  with all the incredibly braindamaged uses of hash tables and syntactic
+  sadomasochism, and you won't be able to see through their charades and
+  "just one more hack, and I'll be there" lies.
+
+  here's a simple rule to use on perl programmers.  if a solution is clean
+  and complete, it will immediately look like a tremendous amount of work
+  to a perl programmer, which it will: writing code that does the right
+  thing in perl is incredibly arduous.  this is the only positive use for
+  perl programmers.  like a really bad horror movie, where the evil guys
+  have no redeeming qualities whatsoever and will hate anything beautiful
+  or good, a true perl programmer will have a strong emotional reaction to
+  any really good solution: there's no way he can improve on it with his
+  perl hackery, and the very existence of his expertise is threatened.
+
+  then there are good programmers who know and use perl for some tasks, but
+  more than anything else know when _not_ to use it.  they are _very_ rare.
+  
+#:Erik

@@ -1,0 +1,2140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_jul2019c.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>[Artifexd] A better ircd [RFC] on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Joe Bidden Reales<br />La Al Paispcelea Congres!
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-59103"><div class="post" id="post-59103">                    <h1><a href="/2015/artifexd-a-better-ircd-rfc/" rel="bookmark" title="Permanent Link to [Artifexd] A better ircd [RFC]">[Artifexd] A better ircd [RFC]</a></h1>                        <div class="date">                                     Monday, 05 January, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p><em>This is a RFC stage spec. It means it is not yet mature, and you are more than welcome to help refining it. The preferred avenue is through making comments below.</em></p>
+<p>1. At startup, program<sup><a href="#footnote_0_59103" id="identifier_0_59103" class="footnote-link footnote-identifier-link" title="You can write it in whatever you please as long as it compiles on linux.">i</a></sup> reads from local configuration files<sup><a href="#footnote_1_59103" id="identifier_1_59103" class="footnote-link footnote-identifier-link" title="These must be text files.">ii</a></sup> : </p>
+<ol type=a>
+<li>A public/private keypair<sup><a href="#footnote_2_59103" id="identifier_2_59103" class="footnote-link footnote-identifier-link" title="Steal gpg code - any version prior to the Snowden defection.">iii</a></sup> ; a "for" key fingerprint<sup><a href="#footnote_3_59103" id="identifier_3_59103" class="footnote-link footnote-identifier-link" title="Full fingerprints are always used, everywhere, throughout.">iv</a></sup> ; a local salt.</li>
+<li>A list of IPs, each with an associated public key, a "for" field containing a key fingerprint, a pgp-signed document by the for key certifying the validity of the IPs public key <em>with an expiration unixtime</em><sup><a href="#footnote_4_59103" id="identifier_4_59103" class="footnote-link footnote-identifier-link" title="There should be a special, fixed format for these.">v</a></sup> in case the for field differs and a nickname.</li>
+<li>A list of key fingerprints, with associated trust ratings as signed integer and a comment, signed by the "for" key.</li>
+</ol>
+<p>2. Program connects to each of the IPs listed on port 1337, sends a Hello packet encrypted to that IPs public key containing its public key, its "for" fingerprint, a signed certificate for the IP fingerprint if necessary, a session salt derived from hashing<sup><a href="#footnote_5_59103" id="identifier_5_59103" class="footnote-link footnote-identifier-link" title="All references to hashing require sha-512, no exception.">vi</a></sup> some source of entropy<sup><a href="#footnote_6_59103" id="identifier_6_59103" class="footnote-link footnote-identifier-link" title="Such as urandom.">vii</a></sup> with its local salt and a nonce. Each subsequent packet will increment that nonce by 1. </p>
+<p>3. While functioning, program will accept connections on 1337 by listed IPs only. </p>
+<p>4. While functioning, program will maintain a bundle of current public messages, composed of the "for" key fingerprint, a timestamp, a text field. Every second, for each IP in its list, program will add a a hash of the timestamp with the proper session salt for each session, encrypt the bundle to that session's destination IP and send it over. </p>
+<p>5. While functioning, program will process bundles sent by open sessions, decrypting the sent bundle, verifying timestamp hash matches timestamp, and updating its own bundle to insert any missing messages. Any errors or unexpected conditions dropped to log.</p>
+<p>6. While functioning, program will display current bundle of messages to user, something like : </p>
+<blockquote><p>FB0A C0EB 867C 3172 ADCF 5DD1 46FD 816F 1020 ED78 for 6160 E1CA C8A3 C529 66FD 7699 8A73 6F0E 2FB7 B452 1420477939 Hi there</p></blockquote>
+<p>The "fingerprint for fingerprint" part should be maskable by the user, through allocating any arbitrary nickname he wishes to any fingerprint or combination thereof.</p>
+<p>7. While functioning, program will accept messages from the user, format them accordingly and insert them in its current bundle.</p>
+<p>8. Private message functionality should be implemented as direct-link exceptions : messages received from an IP and originating from that same IP are to be treated as private messages to the user, not included in the public bundle and reported separately.</p>
+<p>9. Program will not communicate the IPs of any of its correspondents to any of its correspondents. Program will not respond to any requests coming on port 1337 from IPs not in its list. </p>
+<p>10. Program will compile the Web of Trust based on the signed lists received from its correspondents and display it to the user. </p>
+<p>UPDATE, Jan 6th : As per <a href="/forum-logs-for-06-jan-2015#1562867">discussion on b-a</a>, <a href="http://bitcoin-otc.com/viewratingdetail.php?nick=artifexd&#038;sign=ANY&#038;type=RECV">Artifexd</a> will be in charge of this project.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_59103" class="footnote">You can write it in whatever you please as long as it compiles on linux. [<a href="#identifier_0_59103" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_59103" class="footnote">These must be text files. [<a href="#identifier_1_59103" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_59103" class="footnote">Steal gpg code - any version prior to the Snowden defection. [<a href="#identifier_2_59103" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_59103" class="footnote">Full fingerprints are always used, everywhere, throughout. [<a href="#identifier_3_59103" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_59103" class="footnote">There should be a special, fixed format for these. [<a href="#identifier_4_59103" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_59103" class="footnote">All references to hashing require sha-512, no exception. [<a href="#identifier_5_59103" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_59103" class="footnote">Such as urandom. [<a href="#identifier_6_59103" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2015/jurov-binary-maintenance-for-eulora/">[jurov] Binary maintenance for Eulora</a></div>
+                <div class="alignright"><a href="/2015/mpex-smpoe-december-2014-statement/">MPEx (S.MPOE) December 2014 Statement</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/job-board/" title="View all posts in Job Board" rel="category tag">Job Board</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2015/artifexd-a-better-ircd-rfc/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2015/artifexd-a-better-ircd-rfc/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>46 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-111175" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111175" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>This is almost exactly it. Except for the dependence on IP - that one is catastrophic. You want a <a href="http://btcbase.org/log/?date=08-12-2014#948348" >connection-less protocol</a>, for two reasons:</p>
+<p>a) The enemy can diddle IP any way he likes, and send packets apparently originating at an arbitrary source, without breaking a sweat. Existing routing fabric is actually set up to enable this. (Ask them why, not me. But no prizes for guessing.)</p>
+<p>b) A connection-less protocol readily sets you up for transition to comm channel media where the concept of 'originating address' does not apply - shortwave radio, pigeons, messages in bottles, wherever.</p>
+<p>Ultimately the only interesting attribute of an incoming packet is whether it is 1) new 2) signed by a blessed pubkey. The former is readily established by keeping 'hellos' short and embedding epoch time in the signed block. The latter is likewise trivial to verify.</p>
+<p>IP filtering is a tremendously poor anti-DOS mechanism, on account of (a).</p>
+<p>Ultimately the answer is to use UDP packet of bare-minimal length that holds 'hello' (key, nonce, signature). These can be accepted from whatever source (e.g. radio and pigeon) and verified rapidly, at line-speed (eventually - in custom logic?)</p>
+<p>The only concepts of 'source' and 'destination' that really make sense for this application are the public/private keypairs.</p>
+<p>Also there's <a href="http://btcbase.org/log/?date=06-01-2015#966265" >this.</a> I can't help but wonder who else will confess to having worked on more or less precisely this kind of apparatus.</p>
+						</li>
+
+										<li id="comment-111176" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111176" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>I wouldn't be against an UDP implementation provided someone's capable to do it right.</p>
+						</li>
+
+										<li id="comment-111208" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111208" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>The enemy can't diddle IP anyway he likes on TCP connection.  For a connection to make it past the SYN stage, the attacker would have to have traffic for the "fake" IP address to actually make it back to him.  While this could happen in via some sort of BGP compromise, it is far from trivial.</p>
+<p>Contrast that to changing the source IP address on a UDP packet.  That is trivial.</p>
+<p>I am not arguing that TCP is superior to UDP for this particular application, but only that the IP diddle-ability of TCP is not a valid argument.</p>
+						</li>
+
+										<li id="comment-111209" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111209" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>I imagine what he had in mind was the first upstream router being adversary.</p>
+						</li>
+
+										<li id="comment-111210" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111210" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>artifexd:</p>
+<p>1) IP spoofing - works. For several effective values of 'works.' If you wish to argue otherwise, argue to someone who isn't under regular NTP reflection attack.</p>
+<p>2) Changing source address on UDP packet won't matter, because a correct implementation of the scheme disregards alleged addresses as identification entirely, relying solely on public key cryptosignatures.</p>
+						</li>
+
+										<li id="comment-111211" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111211" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>But 1 doesn't work for a full connection, merely for syn flooding n'est pas ?</p>
+						</li>
+
+										<li id="comment-111212" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111212" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>The NTP reflection attack only works because it is a NTP runs over connectionless UDP.  Thus I can send an NTP server a UDP packet with your IP address as the source and the NTP server will send its response to you.</p>
+						</li>
+
+										<li id="comment-111213" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111213" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>artifexd: for further discussion of the hypothetical, please assume a maximally compromised box immediately upstream of your system. That means arbitrarily-diddled IP header contents.</p>
+<p>The notion of permanently marrying the thing to IP per se (with the attendant notions of source/destination geography) is disastrously wrongheaded.</p>
+						</li>
+
+										<li id="comment-111214" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111214" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>Assuming a maximally compromised box between me and the rest of the universe means that nothing can be trusted.  At all.</p>
+<p>I couldn't even pull your public key from the mit keyserver because it could be swapped out in route.</p>
+<p>Assuming a maximally compromised box between me and the rest of the universe means that all is lost. Period. Full stop.</p>
+						</li>
+
+										<li id="comment-111215" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111215" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>artifexd:</p>
+<p>&gt; I couldn't even pull your public key from the mit keyserver because it could be swapped out in route... Assuming a maximally compromised box between me and the rest of the universe means that all is lost. Period. Full stop.</p>
+<p>This is disastrously mistaken, because out-of-band key exchange exists (sneaker-net.)</p>
+						</li>
+
+										<li id="comment-111216" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111216" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>But you just violated your own maximally compromised assumption.</p>
+						</li>
+
+										<li id="comment-111217" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111217" title="">Tuesday, 6 January 2015</a>
+							</div>
+						<p>Mircea Popescu:</p>
+<p>Violated how? Assumed a compromised upstream machine (ISP), not a compromised universe with my brain captive in an enemy's jar.</p>
+						</li>
+
+										<li id="comment-111218" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111218" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>At the risk of repeating myself, I would like to make the case for public keys as the only identifying marks in the proposed scheme (vs. any reliance on IP addresses, which really presumes an Internet circa 1989, which has unfortunately been replaced with a somewhat different, fouler-smelling kind of Internet.)</p>
+<p>Apparatus should work in the same way as, e.g., MPEx - should not matter how a message packet makes its way to the destination, so long as it carries a WoT-passing signature from the standpoint of the recipient.</p>
+<p>In the same vein, Mr. X should be able to hold an encrypted (signature on the outside) message meant for Mr. Y, for a spell. The day will come, I believe, when some people worth talking to will have very intermittent connectivity (perhaps once in a year!) See below.</p>
+<p>Whitelist pubkeys, not IPs. This will enable transition to a communication mechanism other than the traditional Net, whose peaceful days, I believe, are numbered.</p>
+						</li>
+
+										<li id="comment-111219" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111219" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>All of the talk of how IP addresses in packets can be compromised aside, I do agree that limiting who can connect to who via IP addresses in a static text file is less than ideal.  My reasons are different though.</p>
+<p>1) IP addresses change, even for a static geographic location.  Even more so if it is a mobile device.<br />
+2) How would brand new servers connect if existing servers only accept connection from IPs that I already know about.</p>
+<p>Instead... </p>
+<p>Uh, yeah. What Stanislav Datskovskiy wrote about public keys.</p>
+						</li>
+
+										<li id="comment-111220" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111220" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>I'll also add that any reliance, or even encouragement of, the use of static IPs, will - in practice - lead to folks running 'bouncers' (the way customary among irc users) with predictable consequences (moderately valuable targets for compromise. especially given the penchant various folks have for skimping on hosting cost and running inside virtual machines of various descriptions.)</p>
+						</li>
+
+										<li id="comment-111221" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111221" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>Another observation: a 'for' key that signs 'for' itself is a violation of airgap principle. Aka a walking corpse.</p>
+						</li>
+
+										<li id="comment-111222" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111222" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>1) Create master identity key pair (this is you. don't lose. evah.)<br />
+2) Create slave identity key pair(s)<br />
+3) Sign slaves with master<br />
+4) Publish master public key as identity<br />
+5) ircd uses slave identities while communicating. The master private never ever gets loaded into memory. Hell, it doesn't even have to be on a connected machine. Ever.<br />
+6) Have some method for revoking compromised slave keys.</p>
+<p>So, in the end, ircd would accept keys signed with the master as proxies for the master.</p>
+						</li>
+
+										<li id="comment-111223" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111223" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>The original reason the MPEx model was replaced with an IP bastard version was my attempt to be less MP-ish and cater to the needs of the world. I guess it wasn't the smartest move. Gotta learn one of these days that trying to be "reasonable" never pays, and stick to being reasonable instead.</p>
+<p>As to @<b>artifexd</b>'s point that </p>
+<blockquote><p>2) How would brand new servers connect if existing servers only accept connection from IPs that I already know about.</p></blockquote>
+<p>This is fundamental. If you used a key based system you STILL would only talk to users you know about. This is part and parcel of the b-a voice model, and it's how things work. Unless someone goes out of his way to credit noobs, noobs sit and twiddle thumbs. The assumption that "new" can automatically join the fray is unwarranted.</p>
+						</li>
+
+										<li id="comment-111224" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111224" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>Mircea Popescu:</p>
+<p>The way to deal with n00bs, if so inclined, is designated 'zoo' gateways having own keys, under which the n00bs collectively (!) speak, and are listened to (or not) on a particular day/hour depending on the 'radiation level outside the bunker.'</p>
+						</li>
+
+										<li id="comment-111225" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111225" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>Even in #b-a, noobs can sit quietly, listen, and hopefully learn.  This would prevent them from even joining the network at all.</p>
+						</li>
+
+										<li id="comment-111226" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111226" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>artifexd:</p>
+<p>&gt; 1) - 4)   5) ircd uses slave identities while communicating. The master private never ever gets loaded into memory. Hell, it doesn't even have to be on a connected machine. Ever.</p>
+<p>Glad to see that you arrived at the one and only correct answer.</p>
+<p>6) Ephemeral keys (<a href="http://btcbase.org/log/?date=16-12-2014#954197" >see my discussion on #b-a</a> should expire as a matter of course when a replacement one is proclaimed by a user - who signs it on his airgapped machine and loads in the result.)</p>
+						</li>
+
+										<li id="comment-111227" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111227" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>artifexd:</p>
+<p>&gt; This would prevent them from even joining the network at all.</p>
+<p>They can listen in specially-designated 'www-gatewayed' read-only zoos, reminiscent of www Freenode interfaces, kept by any fully-fledged participant who wishes to suffer the cost.</p>
+						</li>
+
+										<li id="comment-111228" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111228" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>Kinda the companion for this project would be a webserver gateway, open to the Internet. But that shouldn't be too hard to do.</p>
+						</li>
+
+										<li id="comment-111230" class="commentbody"><div class="commenthead"><img alt='punkman`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink">punkman</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111230" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>A destination field (fingerprint or #channel string) would be nice to have in messages. The client should probably encrypt private messages to destination fingerprint's pubkey.</p>
+						</li>
+
+										<li id="comment-111233" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">25</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111233" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>Not that the thing wouldn't be readily extended to supply it, but does the "channel" abstraction even make any sort of sense ? What exactly would it be ? </p>
+<p>In the old days of centralised servers it served as a way to trick <a href=/2014/the-problem-of-enforcement/ >the naive youth</a> into thinking they are in control. With an open model the concept doesn't seem to translate.</p>
+						</li>
+
+										<li id="comment-111234" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">26</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111234" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>The "bundles of messages" that one server sends another should be a consistent size.  Too little data? Pad it with noise.  Too much data? Messages have to wait.</p>
+<p>The size doesn't need to be the same from one server to another, but it should be static for a given server.</p>
+<p>It will increase bandwidth usage and, possibly, delay message transmission, but it will prevent an outsider from tracking who is talking to who.</p>
+						</li>
+
+										<li id="comment-111235" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">27</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111235" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>As you well observe, this thing is in fact Bitcoin without the shared public ledger (kept instead as a virtual private ledger by each node).</p>
+						</li>
+
+										<li id="comment-111236" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">28</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111236" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>artifexd:</p>
+<p>&gt; ...should be a consistent size. Too little data? Pad it with noise. Too much data? Messages have to wait.</p>
+<p>See recent thread on #b-a regarding 'erasure coding.' Rather elegant way to eliminate dependence on TCP (you get ordering and correction of omitted frags for free when you use something like 'raptor code'), frustrate traffic analysis, and solve several related problems.</p>
+<p>In my original experiment, two nodes in contact with one another settle on a bit-rate and transmit state (fountain-code fragments) continuously, 24/7.</p>
+						</li>
+
+										<li id="comment-111237" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">29</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111237" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>In theory, one could send a message 'for' a fingerprint that does not correspond to an instance of ircd (gotta think of a better name).  That message should get transmitted throughout the network, right?  </p>
+<p>Might then a fingerprint that does not correspond to a machine refer to what current irc calls a channel?</p>
+						</li>
+
+										<li id="comment-111238" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">30</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111238" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>No, because anyone can join what's currently called a channel, whereas only the recepient should read what's a "for" message. Which is why the direct vs indirect route distinction in the spec.</p>
+						</li>
+
+										<li id="comment-111240" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">31</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111240" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>FB0A C0EB 867C 3172 ADCF 5DD1 46FD 816F 1020 ED78 for 6160 E1CA C8A3 C529 66FD 7699 8A73 6F0E 2FB7 B452 1420477939 Hi there</p>
+<p>That translates to: The entity that possesses the key which fingerprints to FB0A C0EB 867C 3172 ADCF 5DD1 46FD 816F 1020 ED78 wishes to say "Hi there" to the entity that possesses the key which fingerprints to 6160 E1CA C8A3 C529 66FD 7699 8A73 6F0E 2FB7 B452 1420477939.  Right?</p>
+<p>So how to I communicate a single message to multiple people?  Multiple messages?  Is the recipient an array?  Is there a fingerprint that aliases to multiple fingerprints?</p>
+						</li>
+
+										<li id="comment-111241" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">32</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111241" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>Wrong. The entity which posseses the key 6160 E1CA C8A3 C529 66FD 7699 8A73 6F0E 2FB7 B452 1420477939 sends the message Hi there, which is being relatyed by an entity which posseses key "FB0A C0EB 867C 3172 ADCF 5DD1 46FD 816F 1020 ED78". Whether this is good enough to relay the message or not is to be decided by recipient.</p>
+<p>In retrospect the use of "for" is probably uninspired, and I was so warned. But it's a for like in "qui facit per alium facit per se", he who does for another does for himself. X [doing] for Y.</p>
+						</li>
+
+										<li id="comment-111242" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">33</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111242" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>artifexd:</p>
+<p>&gt; So how to I communicate a single message to multiple people? Multiple messages? Is the recipient an array? Is there a fingerprint that aliases to multiple fingerprints?</p>
+<p>Here is another way to think of it, which may help.</p>
+<p>A keyholder may transmit two kinds of message:</p>
+<p>a) A bitstring signed with an ephemeral key, presently valid (a signature with his permanent key was transmitted at one point, and has not been superseded since.) This string is meant to be retained 'in saecula saeculorum', showing that 'thus spoke Mr. PERMANENTKEYFP on the Unix epoch time T.' Whoever is able to read this, can store it, relay to others, to whoever he wants.</p>
+<p>b) A bitstring signed (as above) consisting of an enciphered string, but likewise carrying along a destination (pubkey fingerprint) - the intended reader. As described in Mircea's article, this normally wants to travel directly from one operator to another. But, on account of proper crypto being in use, there is no reason why it cannot travel in some other, more painful way if it must.</p>
+<p>A node operator, when he is not producing new strings of either type himself, is really carrying on with collecting (and displaying) newly-minted (A)s and (B)s - but only those emitted by folks in his WoT or within D degrees of it.</p>
+<p>To collect, he may ask the other end of the wire to return bitstrings such as 'latest timestamp of Mr. X, who is in my WoT, having spoken' or 'global hash of what you know Mr. X to have uttered' (of the 'a' / saecula saeculorum packet type exclusively, naturally), and the like. Thus, two nodes in communication with one another are continuously reconciling their stores of (a), as well as exchanging any (b) which their operators may wish to send.</p>
+<p>mircea_popescu: if any of the above conflicts with your mental image of the design, do tell.</p>
+						</li>
+
+										<li id="comment-111243" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">34</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111243" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>Imagine server A (with fingerprint A) wants to send a message.<br />
+Imagine server A is connected to server B (with fingerprint B) and server C (with fingerprint... uh... C)<br />
+Server A transmits this to both B and C:<br />
+A for A 'message'</p>
+<p>Server B transmits this to C:<br />
+B for A 'message'</p>
+<p>And server C transmits this to B:<br />
+C for A 'message'</p>
+<p>At which point the message has completely populated the network and is no longer transmitted.</p>
+<p>Does all that look right?</p>
+<p>Does 'A for A' look funny?  It certainly makes for a simpler parser.</p>
+						</li>
+
+										<li id="comment-111244" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">35</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111244" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>artifexd:</p>
+<p>Considerably easier if done with some amount of 'pulling' rather than 'pushing.'<br />
+Consult literature re: 'gossip protocols' to learn more specifically how.</p>
+						</li>
+
+										<li id="comment-111245" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">36</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111245" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<blockquote><p>Does 'A for A' look funny? It certainly makes for a simpler parser. </p></blockquote>
+<p>A for A is not intended to be used except if the user simply lets the server use his own key. Generally it would be A for X, which thenm moves to C for X and B for X. Other than that, yes, that's the intended functioning.</p>
+						</li>
+
+										<li id="comment-111246" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">37</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111246" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<blockquote><p>Generally it would be A for X, which thenm moves to C for X and B for X.</p></blockquote>
+<p>Assuming X is the user's fingerprint...<br />
+Wait, so a single "ircd" could be the entry point for several users? </p>
+<p>I was imagining the server is the user is the pubkey identity.</p>
+<p>This just got more complicated.</p>
+						</li>
+
+										<li id="comment-111247" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">38</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111247" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>Each server is the "entry" point for whichever messages it chooses to relay. If A tells B about a message, who in turn tells about it to C, there's no reason to assume C has a direct connection to A to check. Therefore, messages written by both the single user of A and the single user of B appear to C as originating from B.</p>
+<p>In other words, there's no assumption made about how many people use any one server, nor is such useful.</p>
+						</li>
+
+										<li id="comment-111248" class="commentbody"><div class="commenthead"><img alt='Anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">39</div>
+								<span class="authorlink">Anon<img src="/wp-content/themes/trilema/images/insigna-printre-primii.png" class="insigna" alt="insigna de prim sosit" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111248" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>A.This is all very interesting</p>
+<p>B.If C receives a message from "B for X", how does C know if in fact X authorized this? At most he could see that X authorizes A, but A is not B. For all you know, B is making up messages from X and delivering them to C.</p>
+						</li>
+
+										<li id="comment-111249" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">40</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111249" title="">Wednesday, 7 January 2015</a>
+							</div>
+						<p>Yes, this is exactly the point. C trusts B, hence B is in his list. If B violates that trust, C will remove him, and thus resolve the problem. </p>
+<p>Meanwhile for Z, the operator of C, the situation presents itself as such : users whom he trusts, and thus are in his list, send messages which can be verified, as they're directly relayed. All other users, who connect to him through these, may only be verified and for that matter only interest to the degree one trusts the connection through which they arrive. Thus user K, of which Z has no idea, will be (correctly) represented as "someone whom Y knows and vouches enough for to forward his comments" if Y is the user of B and B is the apparent source of K's messages.</p>
+<p>Maybe the name of this should be gossipd, because that's exactly what it does.</p>
+						</li>
+
+										<li id="comment-111278" class="commentbody"><div class="commenthead"><img alt='pletzalcoatl`s avatar' src='/dead_external_sites/thewhet.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">41</div>
+								<span class="authorlink"><a href='http://thewhet.net' class='url'>pletzalcoatl</a><img src="/wp-content/themes/trilema/images/insigna-criptograf.png" class="insigna" alt="insigna de criptograf" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111278" title="">Thursday, 8 January 2015</a>
+							</div>
+						<p>An account of the relevant convo on #bitcoin-assets, snipped from the logs, cleaned of meta and off-topic:</p>
+<p><a href=http://btcbase.org/log/?date=05-01-2015#966026>January 5th, 2015</a></p>
+<p>mircea_popescu: <a href="/2015/open-a-better-ircd-rfc/" >/2015/open-a-better-ircd-rfc/</a> < < pls to rfc<br />
+ben_vulpes: mircea_popescu: "Helo" -> "Hello" ?<br />
+mircea_popescu: mebbe "heyo" ? make an argentine joke right in the spec!<br />
+ben_vulpes: hueo<br />
+mircea_popescu: in keeping with the naming conventions introduced, everyone can call the helo packet whatever they wish :D<br />
+davout: i want an OHAI packet<br />
+davout: opening a connection<br />
+mircea_popescu: you got it<br />
+davout: said connection being terminated by a KTHXBYE packet<br />
+mircea_popescu: no terminations rly.<br />
+ben_vulpes: ("BAI")<br />
+davout: LOLWUT packets to be used for the filling of sequence gaps<br />
+mircea_popescu: many moons ago some kids did write some thing that used the PIZDA/PULA convention.<br />
+mircea_popescu: ie, started with cunt, ended with cock.<br />
+mircea_popescu: was the best thing ever for a summer.<br />
+davout: what do you mean by "a signed certificate for the IP fingerprint if necessary" ?<br />
+mircea_popescu: well how do you know X is allowed to speak for me ?<br />
+mircea_popescu: unless the server is actually using my own keypair. which it conceivably could.<br />
+davout: GPG-signatures?<br />
+davout: ok<br />
+davout: server keypair<br />
+mircea_popescu: basically, program has one, you have one. you can if you wish use the same. don;'t have to.<br />
+davout: so if i understand correctly the daemon has its own keypair, the "for" keypair would be the user's<br />
+mircea_popescu: yep<br />
+davout: makes sense, the hash, salt and nonce fiddling is to prevent against replay right?<br />
+mircea_popescu: davout no, it's to make mitm and masquerading much harder.<br />
+davout: apart from replaying i can't think of an example where GPG isn't enough a protection already<br />
+davout: s/enough/enough of/<br />
+mircea_popescu: a replay "attack" coming from a trusted host carries a very large cost. they'll get banned.<br />
+mircea_popescu: tbh the l2 list etc has been a revelation in computer security for me.<br />
+mircea_popescu: it's been much better stated by smarter men, of course. <a href="http://www.ranum.com/security/computer_security/editorials/dumb/" >http://www.ranum.com/security/computer_security/editorials/dumb/</a><br />
+davout: i was thinking rely on GPG and simply encode a nonce in the message<br />
+mircea_popescu: davout suppose i send spoofed ip messages.<br />
+mircea_popescu: i can encode to your public key.<br />
+mircea_popescu: what now ?<br />
+mircea_popescu: in the design as is, now you reject my junk because i don't know the salts.<br />
+davout: i discard your messages since it doesn't bear a valid GPG signature<br />
+mircea_popescu: messages don't need to be signed.<br />
+mircea_popescu: and this deliberately.<br />
+davout: if they were wouldn't that remove the salts requirements?<br />
+mircea_popescu: it would but it's moot, because i'm not about to require people to sign everything they say.<br />
+davout: because if you know the server's key, you're probably aware of the salts etc<br />
+davout: ic<br />
+mircea_popescu: how does that work ? you know my ip and his gpg pubkey.<br />
+mircea_popescu: how does this make it probable you have root on my box ?<br />
+davout: i meant if you raped the server for its key, you may as well have the salt and stuff<br />
+mircea_popescu: pubkey ?<br />
+davout: both<br />
+mircea_popescu: o you meant in your signed alt-spec. mkay.<br />
+davout: i didn't think of the requirement to sign as an issue actually<br />
+mircea_popescu: actually, it occurs to me this needs some padding.<br />
+kakobrekla: it seems ircd centralization has been a problem since forever and noone has bothered to solve it<br />
+mircea_popescu: pretty much.<br />
+mircea_popescu: it's all rotten to the core, conceptually. what the shit is a "moderator" anyway ?<br />
+BingoBoingo: mircea_popescu it's all rotten to the core, conceptually. what the shit is a "moderator" anyway ? < < They are the person at the nightclub who makes sure you drink the two drink medium, but get you off the premises if you actually get drunk.<br />
+mircea_popescu: i thought it was the dumb bitch on tv that acted important and prevented anyone from making any sense<br />
+BingoBoingo: mircea_popescu i thought it was the dumb bitch on tv that acted important and prevented anyone from making any sense < < AH, the asshole enforcing moderate talking instrad of moderate drinking. Easy to mix those assholes up.</p>
+</p>
+<p><a href="http://btcbase.org/log/?date=06-01-2015#966376" >January 6th, 2015</a></p>
+<p>asciilifeform: mircea_popescu: i sent in a comment re: 'ircd' article a few hrs ago.<br />
+mircea_popescu: a ok. <a href="/2015/open-a-better-ircd-rfc/#comment-111175" >/2015/open-a-better-ircd-rfc/#comment-111175</a><br />
+mircea_popescu: "The enemy can diddle IP any way he likes," < < sure, but that's why salt is there.<br />
+mircea_popescu: i can appreciate the purity of your vision, but i'd rather have this work on current hardware. what else is there ?<br />
+asciilifeform: enemy cannot hijack session by spoofing packets, but can get really annoying<br />
+mircea_popescu: how ?<br />
+asciilifeform: dos<br />
+mircea_popescu: gimme like a scenario.<br />
+mircea_popescu: nope. port just ignores him.<br />
+asciilifeform: expends cpu cycles on doing so<br />
+asciilifeform: at any rate, no magical hardware needed!<br />
+mircea_popescu: providing he finds your ip (which i doubt), you can just switch it too.<br />
+mircea_popescu: for that matter i envisage most people using this on multiple ips<br />
+asciilifeform: the hello-in-udp-mtu lives happily on existing linux/commonplace archs<br />
+mircea_popescu: i wouldn't be against this being implemented in udp in any case.<br />
+asciilifeform: no need to keep track of ips, and to marry the notion of 'origin address'<br />
+mircea_popescu: just, needs an extra engineer.<br />
+asciilifeform: the other nice thing re: udp is that a connectionless/stateless protocol frustrates traffic analysis very well.<br />
+asciilifeform: in my 'error coding' scheme, the station transmits at all times.<br />
+asciilifeform: anyone who wants to receive the current pubmessage snapshot can start listening at any point, and will eventually end up with it<br />
+asciilifeform: after approximately 1.03N bytes for a payload originally length N<br />
+asciilifeform: why mircea_popescu had to ruin my surprise gift to the fine folks of #b-a. i was gonna roll that thing out with cardano.<br />
+asciilifeform: now one of you lot will end up having to write it!<br />
+mircea_popescu: well cuz i didnt know, cuz someone didn't tell me<br />
+asciilifeform: from scratch.<br />
+mircea_popescu: cuz no mail apparently.<br />
+asciilifeform: mircea_popescu does not like surprise<br />
+asciilifeform: lol<br />
+asciilifeform: at any rate, i did bring it up in here on a few occasions. but did append the gotcha, 'not ready for battlefield because little time' - which is presently true</p>
+<p><a href="http://btcbase.org/log/?date=06-01-2015#966891" >...later that day</a></p>
+<p>mircea_popescu:asciilifeform <a href="/2015/open-a-better-ircd-rfc/#comment-111208" >/2015/open-a-better-ircd-rfc/#comment-111208</a><br />
+mircea_popescu: artifexd ya was just looking for you in the list lol<br />
+artifexd: I have decided that I like this ircd project.<br />
+mircea_popescu: o hey.<br />
+mircea_popescu: can you actually do it ?<br />
+artifexd: I like it to the point of being willing to commit time to do it.<br />
+mircea_popescu: am i s/open/artifexd/ ?<br />
+asciilifeform: <a href="/2015/open-a-better-ircd-rfc/#comment-111210" >/2015/open-a-better-ircd-rfc/#comment-111210</a><br />
+asciilifeform: answerd<br />
+artifexd: Would you like to discuss in here or keep it in the comments?<br />
+*: asciilifeform believes that the scheme as originally described is disastrously mistaken<br />
+mircea_popescu: coments best!<br />
+artifexd: mircea_popescu> am i s/open/artifexd/ ? < < huh?<br />
+rithm: port 1337 tho kinda elitist don't you think<br />
+TomServo: Nah, just leetist<br />
+rithm: 7000 would be more in line as a "standard" irc port with security<br />
+asciilifeform: but this isn't irc !<br />
+TomServo: a port is a port<br />
+rithm: riiiight<br />
+asciilifeform: has no one actually -read- the thing ?<br />
+artifexd: mircea_popescu> can you actually do it ? < < There are mad amounts of detail to work out. That said, yes. I can do it.<br />
+rithm: so it's a new rfc and interoperability means nothing<br />
+rithm: i forgot it's unicorn land please continue<br />
+kakobrekla: i think the idea is to fix shit, not make it more beautiful.<br />
+rithm: seems like centralized mechanism to prevent mitm, really only becomes decentralize with more /links<br />
+asciilifeform: centralized ?<br />
+asciilifeform: rithm: did you actually read mircea_popescu's article ?<br />
+rithm: i think i'm looking at it now<br />
+mircea_popescu: artifexd am i editing the thing to reflect you're doin' it.<br />
+rithm: b. A list of IPs<br />
+rithm: the "thing" scales with /links to other "things"<br />
+mircea_popescu: <rithm> port 1337 tho kinda elitist don't you think < < yes, i do.<br />
+rithm: so the client is the server in this scenario or not? is it more p2p or not because i'm not seeing this definition in the language<br />
+rithm: traditional irc is clinet/server but this isn't irc<br />
+mircea_popescu: there is no "Server"<br />
+mircea_popescu: much like in bitcoin, some will run larger clients which people can reliably connect to.<br />
+mircea_popescu: but they'd still be running the client code, more or less.<br />
+rithm: if it scales verically like "interaction" with this thing creates a new "server" then that doesn't sound centralized<br />
+mircea_popescu: </rithm><rithm> so it's a new rfc and interoperability means nothing < < interoperability with what ?<br />
+asciilifeform: active thread on mircea_popescu's site, btw<br />
+rithm: not that architecture, but I'm not reading that definition on trilema<br />
+rithm: TFA title says ircd but it's not something to interoperate with any known ircd correct<br />
+mircea_popescu: correct.<br />
+asciilifeform: perhaps misleading title, 'better ircd', i admit i almost postponed reading it when first saw on account of this<br />
+mircea_popescu: ftr, the car was called "a better horse buggy" originally.<br />
+punkman: forward secrecy would be nice if possible<br />
+mircea_popescu: if one doesn't buy into the entire "branding, even if or especially if before the fact" one's stuck with this. i don't mind it so much.<br />
+mircea_popescu: punkman forward secrecy is a one on one affair, mostly. the salt is supposed to implement as much as it's possible, and the lack of signatures.<br />
+mircea_popescu: perhaps i don't actually see the whole ball there tho.<br />
+asciilifeform: mircea_popescu: i argue that all transmissions must be signed, if this is to be the thing it is really meant to be.<br />
+mircea_popescu: but seriously, let's move all discussion on the article, otherwise it'll be hard to fish from logs later on<br />
+*: mircea_popescu shall make further responses there.</rithm></p>
+<p><a href="http://btcbase.org/log/?date=07-01-2015#967155" >January 7th, 2015</a></p>
+<p>artifexd: mircea_popescu: Do you envision the ircd project have the end goal of replacing the freenode #b-a channel or is it only supposed to be a way for one individual to communicate with another individual?<br />
+asciilifeform: artifexd: answer not obvious from the article ?<br />
+mircea_popescu: artifexd it's supposed to replace ircd as a secure, fast and reliable means to communicate directly with others.<br />
+mircea_popescu: arguably ircd isn't really any of these, but going by intent rather than practice.<br />
+*: asciilifeform also points out that, as written, apparatus is also meant to replace the classical 'wot'<br />
+mircea_popescu: obviously, will have to.<br />
+asciilifeform: or at least offer a parachute of it.<br />
+mircea_popescu: i thought about it for a while, but fundamentally, wot has a lot of trouble existing independent of the forum.<br />
+mircea_popescu: such as, in medieval times punishment lists were put out in the marketplace.<br />
+asciilifeform: as late as 18th c. actually.<br />
+mircea_popescu: right.<br />
+asciilifeform: as well as the actual punishments.<br />
+mircea_popescu: <a href="http://seclists.org/fulldisclosure/2006/Jun/843" >http://seclists.org/fulldisclosure/2006/Jun/843</a> < < old lilo drama, if anyone's unsatisfied by the piles of bitcoin drama we have fresh on tap.<br />
+*: asciilifeform has been enjoying 'Seeing Justice Done. The Age of Spectacular Capital Punishment in France.' (Paul Friedland.)<br />
+mircea_popescu: (possibly the first in the trend of white trash "do-ologists", something that's apparently coming en vogue what with all the couch surfing entrepreneurs)<br />
+asciilifeform: i vaguely recall reading his obituary ?<br />
+mircea_popescu: yeah died at some point last decade<br />
+mircea_popescu: reading the comments, this new ircd thing is actually fucking exciting.<br />
+kakobrekla: yeah you basically invented ethereum or something<br />
+mircea_popescu: eh ?<br />
+kakobrekla: >As you well observe, this thing is in fact Bitcoin without the shared public ledger (kept instead as a virtual private ledger by each node).<br />
+kakobrekla: very blockchain 2.0<br />
+mircea_popescu: heh</p>
+<p>asciilifeform: artifexd, others: <a href="/2015/artifexd-a-better-ircd-rfc/#comment-111236" >/2015/artifexd-a-better-ircd-rfc/#comment-111236</a><br />
+artifexd: !s erasure coding<br />
+assbot: 5 results for 'erasure coding' : <a href="http://s.b-a.link/?q=erasure+coding" >http://s.b-a.link/?q=erasure+coding</a><br />
+asciilifeform: artifexd: there are several known ways of doing a 'fountain code' (term of art) - where a bitstring, B, is transformed into a number, N, of shorter bitstrings, whereby X of N can be collected, in any order, and with certain quantity of errors permissible, to reconstitute B.<br />
+asciilifeform: X*N is naturally larger than B. by how much - depends on particular algorithm chosen.<br />
+asciilifeform: the most classic, 'naive' algo for this, known to nearly everyone under one name or another, is reed-solomon.<br />
+asciilifeform: but very high overhead.<br />
+mircea_popescu: right, this is an excessive approach<br />
+asciilifeform: this is one of the very few mathematical/computation subfields where there was real progress in the past twenty years.<br />
+artifexd: I fear that the more complicated the math, the more likely I am to screw it up.<br />
+asciilifeform: something like 'raptor' algorithm gives overhead of, iirc, 3-5%.<br />
+asciilifeform: artifexd: a good compromise, probably, would be the Luby transform.<br />
+asciilifeform: it can be implemented without unusual effort or mathematical education.<br />
+artifexd: Is "can be transmitted via carrier pigeon" really a priority for this project?<br />
+asciilifeform: not as such, imho<br />
+mircea_popescu: nah.<br />
+asciilifeform: but there is no particular reason to glue it to ip on protocol level<br />
+mircea_popescu: ideally we keep away from any really dumb ideas that'd prevent moving away from the current situation<br />
+mircea_popescu: but otherwisew this is supposed to work today.</p>
+<p>asciilifeform: if you can get packet P from your box to other end, using paper letter, but not the net - should be able to do so<br />
+artifexd: TCP does offer advantages. Not having to reinvent/reimplement transmission reliability/ordering is not a minor thing.<br />
+mircea_popescu: agreed.<br />
+asciilifeform: not having to worry about syn floods, etc. plus frustrating most existing traffic analysis widgetry - udp, if done correctly, is a serious win<br />
+asciilifeform: the connection-tracking apparatus of tcp is really half the force behind the sting of 'ddos'<br />
+artifexd: syn floods are a solved problem<br />
+mircea_popescu: it requires someone to do it correctly.<br />
+asciilifeform: undergrad-level problem<br />
+mircea_popescu: artifexd that all depends. relativelysolved lol<br />
+artifexd: Boxes that sit in front of the server that establishes connections and only passes on the connected ones can be bought of the shelf, right?<br />
+mircea_popescu: everything can be bought of the shelf neh ?<br />
+asciilifeform: incidentally, here's a small idea. instead of transmitting snapshots of global state (of 'channel'), have each packet be a reconciliation of one particular pubkey's history. that way there is no need to reassemble gigantic blob.<br />
+artifexd: As far as traffic analysis goes, as long as all of the transmissions are opaque noise (because they are encrypted) and are of constant size, analysis is impossible.<br />
+asciilifeform: artifexd: it is also necessary that they have no temporal correlation to anything.<br />
+artifexd: Right. But "once a second" is in the first draft of the rfc.<br />
+asciilifeform: artifexd: this requires a fixed, steady flow of bits between the two points.<br />
+artifexd: Yes.<br />
+mircea_popescu: artifexd more's the point, i don't specifically give a shit about "analysis"<br />
+mircea_popescu: let the derps analyze it until they fall over. this retreat of person to "anonymity" is exactly the wrong strategic moves.<br />
+mircea_popescu: if the state controls the field of identity it doesn't need much more.<br />
+mircea_popescu: no, i shan't live by any entities' permission. the state will live by my permission, or go down in a hail of bullets and flame thrower exhaust.<br />
+asciilifeform: not suggesting that 'anonymity' warrants complicating design, but if it can be dropped by the gods from the sky at no cost, no reason not to pick up.<br />
+mircea_popescu: sure, that much.<br />
+mircea_popescu: on a more practical angle, you will note that the various entities relying on "secrecy" are in jail, from the pirate robets to the shrem dude. even "thanking the judge for a justice well done".<br />
+mircea_popescu: should be obvious that model does not work. it doesn't, specifically because it caters to the idiocy it proposes very flimsily to be "against".<br />
+asciilifeform: 'prison is like the grave, room can be found for everyone' (ru proverb)<br />
+artifexd: Fountain codes, insomuch as I don't understand them, complicate the design. Padding the the structure that gets encrypted doesn't.<br />
+artifexd: It is also possible that my own ignorance is complicating the design.<br />
+mircea_popescu: artifexd nothing prevents the thing to be further upgraded later on.<br />
+artifexd: true story<br />
+asciilifeform: artifexd: you don't strictly speaking need fountain code in first version of this apparatus.<br />
+mircea_popescu: for that matter, we have a much shittier version currently,<br />
+mircea_popescu: and it's worked nothing short of splendidly for many years.<br />
+mircea_popescu: improvements don't have to be absolute solutions to be useful. they just have to be absolute improvements.</p>
+<p>asciilifeform: artifexd: i was trying to suggest another way whereby no packet needs to exceed udp's mtu in size, or be guaranteed to reach its destination in the first try<br />
+artifexd: 576 bytes ain't a lot of space.<br />
+asciilifeform: artifexd: this would be - to reconcile history per-pubkey, rather than global.<br />
+asciilifeform: 576 can hold a 2048-bit (ephemeral rsa key!) sig, a reasonably long key fp, and small payload.<br />
+mircea_popescu: another advantage to tcp is that you don't really get to care about mtus and all that.<br />
+asciilifeform: also appreciate a fine point:<br />
+mircea_popescu: it is in my eyes much more valuable to have a working prototype rapidly, that then can be extended (and nothing will prevent a future client to filter traffic any way itchooses, say by accepting udp only)<br />
+asciilifeform: with udp, a box running said protocol cannot be distinguished by enemy from one which is not<br />
+asciilifeform: if he is not physically sitting on the wire<br />
+mircea_popescu: asciilifeform so ?<br />
+asciilifeform: if uninteresting, disregard.<br />
+mircea_popescu: if done right, a reasonable expectation will be that any box is running it anyway.<br />
+artifexd: Or just put it on port 80<br />
+asciilifeform: i like 'unscannable for', not because of any derping re: 'anonymity', but from sheer delight in the morale hit to enemy<br />
+mircea_popescu: that's a bit rich.<br />
+asciilifeform: who likes things to be countable<br />
+asciilifeform: and 'quantifiable'<br />
+asciilifeform: 'threat assessment111!!!11'<br />
+mircea_popescu: asciilifeform do not code for your enemy lol.<br />
+mircea_popescu: we're doing this for ourselves.<br />
+asciilifeform: when we make bullet - we make for enemy<br />
+asciilifeform: not usually for self<br />
+mircea_popescu: this is a tractor not a bullet.<br />
+asciilifeform: tractor with 'maxim.'<br />
+mircea_popescu: if the owner wieshes, sure.</p>
+<p>asciilifeform: i wouldn't bother arguing the udp/tcp point were it not for the fact that this is not a decision that can be easily re-visited.<br />
+asciilifeform: for instance, if you immediately go with 4096-bit ephemeral keys, you're already at 512b. for sig alone.<br />
+mircea_popescu: why not ?<br />
+mircea_popescu: but there can be a later protocol extension covering udp<br />
+mircea_popescu: and it will get more eyeballs reading code on the strength of the already existing thing.<br />
+asciilifeform: it'll be a bit of a procrustean bed<br />
+mircea_popescu: fwiw i wouldn't use sub 4kb keys anyway.<br />
+asciilifeform: me neither<br />
+mircea_popescu: so then.<br />
+asciilifeform: but that was merely one example.<br />
+asciilifeform: (perfectly legit) question was 'wtf should we give a damn about udp mtu, it's a bore'<br />
+asciilifeform: answer is, for the same reason that, after a certain date, rifle calibers were X inch sixteenth lines and not some random contemporary fellow's little finger.<br />
+asciilifeform: with udp, you can make the 'friend or foe?' decision upon receipt of a single (!) packet.<br />
+asciilifeform: can silently drop it if 'foe.'<br />
+asciilifeform: without allocating memory.<br />
+asciilifeform: if it is not obvious why this is tremendously valuable, try to think about it for a few minutes.<br />
+*: asciilifeform will not waste the gentlemens' time by belabouring the point further<br />
+mircea_popescu: dude, it will be 5 years before anyone even figures out there's something to attack.<br />
+asciilifeform: actually i envision a department hastily assembled, of folks much like myself but underemployed, set to work on it.<br />
+mircea_popescu: heh.<br />
+mircea_popescu: in 2016.<br />
+mircea_popescu: and they'll fail.<br />
+asciilifeform: not even usg as such, needed for this. the crapware folks will readily latch on to anything like a solution to what ails them - which proposed apparatus is; and the antivirus folks will immediately proceed to piss out whatever fluids they can muster, against the problem<br />
+asciilifeform: if correctly built, apparatus will remain standing. but the notion that no one will see it fit to pour excrement upon the head of the early incarnation - is a mistake.<br />
+mircea_popescu: i'd bet you but we can't use bitbet because it doesn't take gavin btc.<br />
+asciilifeform: l0l</p>
+<p>artifexd: I'm burning up a lot (ok, more than a few) credits on <a href="/2015/artifexd-a-better-ircd-rfc/" >/2015/artifexd-a-better-ircd-rfc/</a><br />
+mircea_popescu: artifexd now you are on to my secret plan<br />
+asciilifeform: artifexd: iirc comments on trilema don't require credits<br />
+artifexd: refreshing the page to see new comments does.<br />
+*: asciilifeform confesses that he has never purchased a credit on mircea_popescu's site...<br />
+mircea_popescu: artifexd use one more then, i answer't.<br />
+asciilifeform: mircea_popescu: s/relied/relayed ?<br />
+artifexd: Oh! That shifts my interpretation somewhat.<br />
+mircea_popescu: asciilifeform aye ty<br />
+mircea_popescu: artifexd i guess in retrospect the use of "for" was misguided. chetty warned me, too.<br />
+mircea_popescu: but it's for as in, "i am doing in the name of x, ie, for x"<br />
+artifexd: So the "Hi there" part could include destination information in addition to the message. Much like irc does now.<br />
+asciilifeform: i'd suggest term 'of', and use mathematical notation subkey(ofkey)<br />
+artifexd: XFF?<br />
+asciilifeform: artifexd: imho the 'hello' should stick to bare minimum - establishing the right of the interlocutor to speak to what is on the other end.<br />
+asciilifeform: if successful (he signed nonce with an ephemeral key for which the machine being spoken to possesses a valid primary wot-key signature, or is in fact transmitting a new ephemeral pubkey signed by such a wotkey) - this creates a session.<br />
+asciilifeform: artifexd: i will not belabour the point, i think you will arrive at the correct answers on your own. they will fall into place in your head.<br />
+mircea_popescu: qui facit per alium facit per se sort of "for"<br />
+asciilifeform: this is one of those problems where it is almost unavoidable.<br />
+mircea_popescu: artifexd yes, it could, of course.</p>
+<p>asciilifeform: artifexd, mircea_popescu, others - <a href="/2015/artifexd-a-better-ircd-rfc/#comment-111242" >/2015/artifexd-a-better-ircd-rfc/#comment-111242</a><br />
+artifexd: asciilifeform, mircea_popescu, et al: <a href="/2015/artifexd-a-better-ircd-rfc/#comment-111243" >/2015/artifexd-a-better-ircd-rfc/#comment-111243</a><br />
+asciilifeform: artifexd: <a href="/2015/artifexd-a-better-ircd-rfc/#comment-111244" >/2015/artifexd-a-better-ircd-rfc/#comment-111244</a><br />
+artifexd: Anybody have a good name for this project? ircd isn't going to cut it.<br />
+mike_c: why? let the other ircd change it's name.<br />
+asciilifeform: mike_c: terrible thing to do.<br />
+mike_c: just teasing the bitcoin foundation :D<br />
+asciilifeform: mike_c: phoundation - deserved the treatment; old warhorse irc - doesn't<br />
+BingoBoingo: ArseD?</p>
+<p>asciilifeform: artifexd: if you're up for it, we can continue the thread here while trilema is down<br />
+artifexd: Sure<br />
+artifexd: What'd you say?<br />
+asciilifeform: artifexd: the mechanism for doing what ought to be done has a generic name: 'gossip protocol'<br />
+asciilifeform: that is, you utter a certain thing, or rather, sequence of things, and wish for said fact to become 'universal knowledge' at some point<br />
+asciilifeform: and it is accomplished by people talking to one another: 'have you heard xxxxx?' 'nope, do tell.' or 'sure, heard all about it.'<br />
+asciilifeform: bitcoin implements one variant of this.<br />
+asciilifeform: i will argue that you will want to, in general, 'hash-chain' all of your public (type 'a' in my last visible comment) messages.<br />
+asciilifeform: hash-chain or some variation on that theme is the only way an operator can be certain of possessing an unbroken chain of what a particular key has uttered.<br />
+artifexd: Now you're talking about a lot of back and forth instead of the bundle approach.<br />
+artifexd: I could see the value in that if maintaining an unbroken history was important.<br />
+asciilifeform: if you take the bundle approach, you are suddenly faced with a multitude of very arbitrary decisions re: what ought to be included in bundle.<br />
+asciilifeform: thing is, you need a hard-reliable mechanism regardless of what you do, if only on account of having the WoT in this thing.<br />
+asciilifeform: so it may as well apply to everything.<br />
+asciilifeform: there is no reason to bring 'net splits' into existence again.</p>
+<p>artifexd: If you do the gossip thing then each server needs to maintain a history (of possibly infinite length)<br />
+asciilifeform: like bitcoin.<br />
+artifexd: And now we have a blockchain growth problem.<br />
+asciilifeform: how is it a problem ?<br />
+mircea_popescu: srsly, no blockchain.<br />
+asciilifeform: no blockchain. just chain.<br />
+mircea_popescu: the messages should be kept around for a short interval (hour ?) while the user can retain them as long as he wants.<br />
+mircea_popescu: but basically the bundle should cover the last hour.<br />
+asciilifeform: if no chain: malicious node can selectively drop messages.<br />
+asciilifeform: notice you don't have to store the chain permanently<br />
+asciilifeform: just rolling window.<br />
+artifexd: An hour? Shit. I was thinking 5 seconds.<br />
+mircea_popescu: asciilifeform so ?<br />
+artifexd: If a bundle is sent every second.<br />
+mircea_popescu: artifexd ah that's a point. my 1hour was outer limit.<br />
+asciilifeform: a window of 5 seconds will give quite a few dropped messages.<br />
+mircea_popescu: this is likely actually.<br />
+asciilifeform: why not allow a node to store as much history as he wishes to expend on disk<br />
+mircea_popescu: because not its job.<br />
+artifexd: Why? If you're connected when a message comes across the wire, you get it. If not, you don't. Much like irc now.<br />
+asciilifeform: and synchronize based on histories of individual pubkeys<br />
+mircea_popescu: because it's chat. if someone wants to log it, that's a diff story.<br />
+asciilifeform: the distinction between 'log' and 'allow very high-latency chat' is very thin.<br />
+asciilifeform: if i'm on a satellite modem, i doubt that one in ten messages of 5-second window will make it through to my node.<br />
+artifexd: Sure it would. If you have a connection to another server, it will send you all the messages it gets. Although I imagine some manner of "screw you, you're too slow" code will be needed eventually.<br />
+asciilifeform: this apparatus of yours is not merely ircd with new coat of paint. it is a very different animal mathematically, as you lot will soon realize.<br />
+mircea_popescu: it's okay for slow nodes to lose messages<br />
+mircea_popescu: this is what the definition of "Slow" is.<br />
+mircea_popescu: if i were to connect to irc with a 360 baud modem i would similarily lose messages.<br />
+artifexd: asciilifeform: What you want sounds very similar to bitmessage, no?<br />
+asciilifeform: perhaps root of disagreement is that i originally contemplated something more along the lines of a very fast usenet, rather than potentially slow chat.<br />
+asciilifeform: 'store and forward'<br />
+artifexd: usenet is pretty damn fast.<br />
+mircea_popescu: asciilifeform it's not really a log-with-chat.<br />
+mircea_popescu: it's a chat.,<br />
+asciilifeform: the 300 baud modem loses no usenet messages.<br />
+mircea_popescu: yes, because they're not signed nor crypted.<br />
+asciilifeform: even when they are.<br />
+artifexd: The storage requirements for a usenet server are stupid high.<br />
+asciilifeform: except in degenerate case, where modem and owner both crumble to dust before the transmission can finish<br />
+asciilifeform: through the ravages of time<br />
+mircea_popescu: a 360 baud modem loses 99% of usenet messages out of a pipe which puts out 36kbps worth of messages continuously.<br />
+asciilifeform: well yes.<br />
+mircea_popescu: how you slice the 99% is uninteresting.<br />
+asciilifeform: now answer under what circumstances one can accept a loss of even one packet of WoT computation.<br />
+mircea_popescu: asciilifeform that's in the hello message.<br />
+asciilifeform: hence atomic operation, aha<br />
+mircea_popescu: each server sends its own view, you compile what interests you.<br />
+asciilifeform: inescapably one will end up seeing slightly different WoTs, at least on their peripheries, at different times.<br />
+asciilifeform: i doubt that this can be avoided entirely<br />
+mircea_popescu: necessarioly.<br />
+mircea_popescu: thjere is no such thing as "one" wot.<br />
+mircea_popescu: for that matter, a "total score" is nonsense predicated on this mistaken view.<br />
+mircea_popescu: there is no center wot.<br />
+asciilifeform: only if it, as it does presently, lives in just one specially-designated temple<br />
+mircea_popescu: right.<br />
+mircea_popescu: which is kind-of why the "total score" nonsense is so hard entrenched.<br />
+mircea_popescu: the current implementation favours what is fundamewntally an erroneous view of thew wot as "one thing". it is not one thing.<br />
+asciilifeform: i've been wishing that folks would let go of it for quite some time.</p>
+<p>asciilifeform: !s kyristor<br />
+assbot: 14 results for 'kyristor' : <a href="http://s.b-a.link/?q=kyristor" >http://s.b-a.link/?q=kyristor</a><br />
+mircea_popescu: as assbot's usage over timne has shown<br />
+asciilifeform: before i learned of the wot that we now use.<br />
+asciilifeform: (*even before)<br />
+asciilifeform: the notion of 'trustworthiness' as a scalar is fundamental to scamatrons of all stripes.<br />
+asciilifeform: it isn't a scalar.<br />
+asciilifeform: <a href="http://btcbase.org/log/?date=12-11-2014#917896" >http://btcbase.org/log/?date=12-11-2014#917896</a><br />
+assbot: Logged on 12-11-2014 01:24:54; asciilifeform: ^ my ancient failed attempt at 'wot.' was to be used with another (never happened) apparatus, 'sollipse,' for running a 'multiverse' of wots.</p>
+<p>artifexd: Ok. The layers are forming in my head.<br />
+asciilifeform: mircea_popescu: 'gossipd' < < see 'gossip protocols', very interesting subfield in maths.<br />
+mircea_popescu: aham<br />
+asciilifeform: highly recommended to anyone who took part in or enjoyed reading this thread.<br />
+mircea_popescu: anyway, THAT is why not signed messages.<br />
+mircea_popescu: perfect deniability, much better than forward secrecy<br />
+mircea_popescu: jurov ^<br />
+asciilifeform: still need signed hellos<br />
+mircea_popescu: since by very definition gestapo can't trust A B C<br />
+mircea_popescu: asciilifeform sure, but not the same thing.<br />
+asciilifeform: mircea_popescu: complicates your design a bit, as now you have two classes of message<br />
+asciilifeform: instead of one<br />
+mircea_popescu: how so ?<br />
+asciilifeform: (wot operations still need to be signed, as well as 'hello' session negotiations.)<br />
+mircea_popescu: no.<br />
+asciilifeform: hm?<br />
+mircea_popescu: each server maintains his wot ratings, and theyt are sent out as part of hello procedure<br />
+mircea_popescu: each server compiles wot list for use of its user from helos received</p>
+<p>artifexd: Wait. Wut?<br />
+mircea_popescu: which part.<br />
+artifexd: You specifically don't want messages signed?<br />
+artifexd: For deniability?<br />
+mircea_popescu: there's no signing in there, is there ?<br />
+artifexd: There is not. I took that as an oversight.<br />
+mircea_popescu: <a href="http://btcbase.org/log/?date=05-01-2015#966081" >http://btcbase.org/log/?date=05-01-2015#966081</a> also.<br />
+assbot: Logged on 05-01-2015 17:59:47; davout: i was thinking rely on GPG and simply encode a nonce in the message<br />
+mircea_popescu: no, it's not an oversight.<br />
+artifexd: When a message A for B C comes over the wire, how can I trust that B actually said C?<br />
+mircea_popescu: hm ?<br />
+artifexd: Maybe A is trustworthy but got the message from D.<br />
+mircea_popescu: so ?<br />
+mircea_popescu: his job to police his lists.<br />
+artifexd: And D is full of shit.<br />
+artifexd: What stops server A from inventing messages by B?<br />
+mircea_popescu: don't trust people you don't trust and so you won't have to answer unpleasant questions from people whose trust you value.<br />
+mircea_popescu: nothing.<br />
+mircea_popescu: in fact, for all you know A sends whole different novels to B and C.<br />
+artifexd: That seems... less than ideal.<br />
+mircea_popescu: why ?<br />
+artifexd: Because we are building a new system from the ground up.<br />
+mircea_popescu: right.<br />
+mircea_popescu: so ?<br />
+artifexd: Everyone is already identified by crypto. Why not ensure that messages that say they are from a keyset actually came from the keyset?<br />
+mircea_popescu: because it's chat.<br />
+mircea_popescu: do you ordinarily sign contracts with people you chat with in the bus ?<br />
+artifexd: Kinda<br />
+mircea_popescu: well, i don't. i more often have sex with someone in the bus<br />
+mircea_popescu: than sign a contract there.<br />
+kakobrekla: dont chat with strangers.<br />
+artifexd: If by "sign" you mean "have some effing clue who just said that"<br />
+mircea_popescu: for that matter, imagine a "No" string signed. what now ?<br />
+mircea_popescu: i can use it later.<br />
+mircea_popescu: artifexd you have a clue : either your friend, or someone who only exists<br />
+mircea_popescu: in the sense your friend sayus he does.<br />
+mircea_popescu: this "objective existence of user" is a trap in our task here. it doesn' tserve, it hinders.<br />
+BingoBoingo: mircea_popescu for that matter, imagine a "No" string signed. what now ? < < This is the big.<br />
+artifexd: It would be a timestamped "No".<br />
+mircea_popescu: moreover, i wish to take this opportunity and link the important point of the "unsheathe your sword". inasmuch as people proceed on the "user objectively exists" and then try to "create anonimity" the unavoidable result is "anonimity is hard lolz".<br />
+mircea_popescu: the only entity served by this nonsense is nsa. users don't actually exist, outside of what the parties you trust say.<br />
+mircea_popescu: artifexd so if it is.</p>
+<p>artifexd: When you and I have a conversation on here (and gribble is around, and you ident to a key), then later you and I have another conversation (and, again, gribble is around and you ident to the same key), then I can trust that I am talking to the same person I was before.<br />
+artifexd: Signing messages would provide that same assurance. But automatically.<br />
+mircea_popescu: and if i am in your list and you in mine the same is preserved by gossipd.<br />
+artifexd: Wanna be somebody else, grab a new key.<br />
+mircea_popescu: without a requirement to sign.<br />
+mircea_popescu: however, if you only know asciilifeform and he;'s relying my chat,<br />
+mircea_popescu: for all practical purposes i am his 3rd split personality, a figment of his rich imagination.<br />
+artifexd: Exactly<br />
+mircea_popescu: this is ideal.<br />
+asciilifeform: let's see if i misunderstood something.<br />
+asciilifeform: in mircea_popescu's scheme, my wot-graph exists as a bitstring that my particular node will disgorge if asked?<br />
+mircea_popescu: incidentally, the evolution of this dev session clearly proves the superiority of chat over say bbs, of which forums and trilema comments are implementations.<br />
+asciilifeform: rather than permanent blockchain-style world record<br />
+mircea_popescu: asciilifeform well, disgorge on handshake but yea<br />
+asciilifeform: well then:<br />
+asciilifeform: let's imagine the good ship Mircea, a four-reactored former soviet nuke sub;<br />
+asciilifeform: a martian death ray takes out a satellite. the ship is now within five day's steam of the next chance for net connection<br />
+mircea_popescu: lol. the actual ship mircea is an old barque. <a href="http://en.wikipedia.org/wiki/Mircea_(ship)" ></a><a href="http://en.wikipedia.org/wiki/Mircea_">http://en.wikipedia.org/wiki/Mircea_</a>(ship)<br />
+asciilifeform: during these five days, how many sc4mz0rs will find themselves temporarily rehabilitated ?<br />
+asciilifeform: barque < < haha yes, knew this<br />
+mircea_popescu: asciilifeform you still have an old list.<br />
+asciilifeform: worse yet, if the boat were to perish in honourable combat, with all hands aboard, the global state of wot shall return to as if he and the crew had never lived ?<br />
+asciilifeform: aye i have an old list. but that's quite ad-hoc.<br />
+mircea_popescu: which ius no different from the current situation<br />
+asciilifeform: and i can't sign it with a fresh mircea-nonce.<br />
+asciilifeform: because i am me and not him<br />
+mircea_popescu: if i die tomorrow who will maintain my wot ?<br />
+mircea_popescu: uhhh... nobody.<br />
+asciilifeform: but it stays around as a statue, for so long as nanotube remains ungassed<br />
+mircea_popescu: asciilifeform no, but you can sign it with yours, if you wish. which correctly reflects the situation. "here are the words of great X i attest to"<br />
+asciilifeform: which in this one respect is an arguable improvement over the hypothetical apparatus<br />
+asciilifeform: mircea_popescu: aha!<br />
+mircea_popescu: i do not see it.<br />
+mircea_popescu: how do you know it's not been diddled ?<br />
+asciilifeform: that is an ad-hoc, bug-ridden reimplementation of the blockchain!<br />
+mircea_popescu: you'd have to ask an elder or two anyway.<br />
+asciilifeform: to borrow a greenspunish,<br />
+asciilifeform: *greenspunism<br />
+asciilifeform: 'those who will not' xxx 'are doomed to' yyy 'it'<br />
+mircea_popescu: inasmuch as my old wot is still signed with my old key, and you have a copy<br />
+mircea_popescu: it's as good as current thing, except better cuz signed.<br />
+asciilifeform: mircea_popescu: and then we get medieval-style rediscoveries of 'the latter gospel of mircea'<br />
+asciilifeform: why not cut straight to chase.<br />
+mircea_popescu: very theoretical possibility, as "the last words" are hard to fake online.<br />
+asciilifeform: not so much a concern re: fakes, but losses.<br />
+mircea_popescu: for all you know some validly signed material from 2012 satoshi emerges tomorrow. tis what it is.<br />
+mircea_popescu: for all you know it can even came in the shape of regular bitcoin txn.<br />
+asciilifeform: and say my sub, a considerably poorer vessel, only has connection when on equator. say, one day in 60, in sight of particular satellite.<br />
+mircea_popescu: will be honored once known. ignored meanwhiule.<br />
+asciilifeform: under the contemplated scheme, i may as well not bother to use wot then<br />
+asciilifeform: or would have to station it shore-side somehow<br />
+mircea_popescu: well, if you can only net once in 2 months you can only net once in 2 months.<br />
+mircea_popescu: some of your stuff will be out of date.<br />
+asciilifeform: we again arrive at a system of ad-hoc, bug-ridden relays and informal mirrors<br />
+mircea_popescu: i still dun see it.<br />
+mircea_popescu: but anyway, relays are strength not weakness here.<br />
+asciilifeform: when part of mechanism, by spec and by reliable practice sans hand-holding<br />
+asciilifeform: think of the advantage bitcoin has over hawala.<br />
+asciilifeform: hawala is more or less the same, but implemented in the informal, mouth-to-ear way contemplated above.<br />
+asciilifeform: ('the same' topologically! not mechanically, clearly)<br />
+mircea_popescu: what's adequate for moving currency is not adequate for moving words.<br />
+asciilifeform: wot, i'd say, falls somewhere between (or floating far in the state-space) from currency or mere words<br />
+mircea_popescu: i still can't possibly see what flaw you perceive with the wot part of gossipd<br />
+artifexd: So what is the value of this vice a private stock ircd with a gribble?<br />
+asciilifeform: the fact that my wot actions disappear when my node loses net<br />
+asciilifeform: i think it is ludicrous.<br />
+mircea_popescu: asciilifeform they don't dood. how do they disappear ?<br />
+asciilifeform: disappear until i get plugged back in<br />
+mircea_popescu: artifexd thgat it has no central servers, for one.<br />
+asciilifeform: which perhaps never, because atomic bomb fell on me.<br />
+mircea_popescu: asciilifeform anyone who saw the old ones has a copy!<br />
+mircea_popescu: this is just like it is now! everything!<br />
+asciilifeform: and what can they do with this copy?<br />
+asciilifeform: consult it while forming own wot ratings, informally?<br />
+mircea_popescu: anything ? they're signed by you. they're, until anyone hears better, your position.<br />
+asciilifeform: by what mechanism are they kept around in the world ?<br />
+asciilifeform: someone manually copied it to a text file at some point ?<br />
+mircea_popescu: by the same mechanism anything of anyone's kept around in the world : your friends have copies.<br />
+mircea_popescu: an' shall remember you.<br />
+mircea_popescu: chat is not an instrument to permanence. it's an instrument to chat.<br />
+mircea_popescu: permanence is to be ensured by other means<br />
+asciilifeform: chat - sure<br />
+asciilifeform: wot ??<br />
+mircea_popescu: (this doesn't replace notarybot, for instance)<br />
+asciilifeform: if wot ratings were archived - it could.<br />
+mircea_popescu: anyone can archive them!<br />
+mircea_popescu: yourself included.<br />
+asciilifeform: can != will reliably<br />
+mircea_popescu: i don't think you will find the computerized means to ensure immutability.<br />
+asciilifeform: let's ask - how many folks reading this have archived, e.g., the works of fermat ?<br />
+mircea_popescu: but for as long as anyone gives a shit, they'll be there.<br />
+asciilifeform: dead tree counts<br />
+asciilifeform: probably quite a few folks. but the thing that distinguishes fermat from wot is that wot needs to be at least quasi-'hot' to really work as intended, imho.<br />
+asciilifeform: a copy of my wotgraph kept around as a message in a bottle under nitrogen in my brother's house, say, will not really carry out its function as a live reflection of my wot-will.<br />
+asciilifeform: in real time.<br />
+mircea_popescu: because why not ?<br />
+asciilifeform: because it is in a bottle.<br />
+mircea_popescu: things change,you know. mayhap people you used to trust are nopw scammers<br />
+mircea_popescu: present wot would benefit immensely from some dead hand cleanning as it is.<br />
+asciilifeform: this is actually an ancient debate in the maths-of-p2p-nets world<br />
+mircea_popescu: i really do not wish to hear how much some long gone loser trusts whatever long gone scammer.<br />
+asciilifeform: whether father time should forget<br />
+asciilifeform: and if so, how.<br />
+mircea_popescu: exactly like indicated. will exists for as long as the hand lives to enforce it<br />
+mircea_popescu: once that's gone... main morte.<br />
+mircea_popescu: leave the earth to better, later men.<br />
+asciilifeform: there are obvious wins to this approach. but opens the question of what, e.g., my brother, is to do with my wotgraph once my ship goes down.<br />
+mircea_popescu: whatever he wants.<br />
+mircea_popescu: we knowthis because he is here. you, are not.<br />
+asciilifeform: assuming he wishes it to march on<br />
+asciilifeform: is he to host it on an 'obelisk' node which does nothing else but relay it ?<br />
+mircea_popescu: could, easily.<br />
+asciilifeform: or adjust his own graph-weights? (that would somewhat defeat the purpose of a wot, loses information)<br />
+mircea_popescu: also could, also easily.<br />
+mircea_popescu: what information was lost ?<br />
+mircea_popescu: the wot reflects wqhat things ARE. not what they were.<br />
+mircea_popescu: that's why if right now i change a rating, the old one's gone.<br />
+asciilifeform: where the change propagates.<br />
+asciilifeform: right now this seems far easier than it will turn out to be on adult apparatus.<br />
+mircea_popescu: aha ?<br />
+asciilifeform: the 'dynamicity' of new-wot (vs classical wot) creates some very strong incentives for hooligans of all stripes<br />
+asciilifeform: to attempt to disrupt signal, locate mirrors<br />
+mircea_popescu: i still don't see there's a difference.<br />
+asciilifeform: to create temporary warps in the fabric of wot.<br />
+mircea_popescu: are you sure those aren't simply the resuilts of "no more central server" ?<br />
+asciilifeform: well, in a sense they are; but we're really surrendering to entropy here far more than, imho, is necessary<br />
+mircea_popescu: entropy is to be embraced. it's no surender when you manage to flow with it.<br />
+asciilifeform: i won't argue that wot moves ought to be retained for all eternity; but will say that some automatic caching is necessary<br />
+mircea_popescu: the less you figh entropy while still doing your job, the longer you'll live.<br />
+asciilifeform: because things that are tedious and must be done manually, tend to not get done.<br />
+mircea_popescu: so anyone's free to implement all the caching one wants.<br />
+asciilifeform: let's say that a fair number of node operators wish to cache. now they are stuck retaining (and transmitting, regularly!) a vast number of duplicate copies of many wotgraphs<br />
+mircea_popescu: why ?<br />
+mircea_popescu: they can cache whichever way they wish/<br />
+asciilifeform: not so many ways to choose from if result is to behave functionally live<br />
+asciilifeform: (i.e., just as their own live wotgraph behaves)<br />
+asciilifeform: in the end, you end up with a poor reimplementation of 'blockchain' anyway<br />
+mircea_popescu: yes stan, if you wish to have a blockchain you will end up having to implement one.<br />
+mircea_popescu: o.O<br />
+asciilifeform: i will let this point prove itself, but was willing to argue for it to possibly save mircea_popescu and artifexd some unnecessary sweat</p>
+<p>artifexd: I still haven't processed the wot part of the spec. I'm still trying to understand why you wouldn't sign the messages. It seems to be asking for evil actors.<br />
+asciilifeform: <a href="http://pastebin.com/w5VYjyBu" >http://pastebin.com/w5VYjyBu</a> < < possibly very relevant<br />
+assbot: THE PETRIFIED WORLD (Robert Sheckley) - Pastebin.com ... ( <a href="http://bit.ly/1BxiUBn" >http://bit.ly/1BxiUBn</a> )<br />
+asciilifeform: (1971 story)<br />
+artifexd: Other than the argument that a signed "no" could be used for something malicious. Uh... It just means that you said no. It doesn't imply what you said no in response to. Just that you said no.<br />
+asciilifeform: this is why i suggested chaining.<br />
+asciilifeform: prevents a future forged conversation stitched out of words you have uttered.<br />
+asciilifeform: (of signed gibblets, anyway)<br />
+artifexd: millisecond timestamps and a counter would do that too.<br />
+mircea_popescu: artifexd explain why you WOULD sign them.<br />
+asciilifeform: artifexd: next thing you know we're doing lamport clocks.<br />
+artifexd: Actually, as fast as I type single second resolution timestamps would be enough.<br />
+mircea_popescu: and yes, unixtime timestamps.<br />
+artifexd: Why would I sign messages? Why would I appreciate messages that I receive to be signed?<br />
+mircea_popescu: why would you require chat lines be signed.<br />
+mircea_popescu: i mean, i understand, "it's how it's done". we're here because the current paradigm is - quite fundamentally - broken.<br />
+artifexd: Simple: I would sign all my messages so that if you told me that I said something that wasn't signed, I could legitimately call bullshit.<br />
+mircea_popescu: you can call bullshit in the gossipd as well.<br />
+mircea_popescu: that's provided.<br />
+asciilifeform: let's put it this way - if i wish for my words to successfully relay beyond my own node, i have to sign them with an ephemeral key<br />
+mircea_popescu: if you wish to elevate some chat to a contract, you directly can do that too.<br />
+mircea_popescu: by signign it.<br />
+asciilifeform: how is anything originating in my machine to leave my node without being signed ?<br />
+artifexd: I would appreciate signed messages so that I could have some moderate assurance that bob is actually bob and not some asshole evil server.<br />
+mircea_popescu: artifexd you have SOME assurance.<br />
+mircea_popescu: if you know bob, this is cryptographic.<br />
+mircea_popescu: if you do not know bob, that assurance is meaningless anyway.<br />
+asciilifeform: ^ not entirely<br />
+artifexd: I would have to have a direct connection to bob in order to believe anything with his fingerprint.<br />
+asciilifeform: you can still know that bob(today) is (or is not) same as bob(next month)<br />
+mircea_popescu: right.<br />
+mircea_popescu: which is EXACTLY as it is anyway<br />
+asciilifeform: not necessarily same person, but same key (e.g., is same bourbaki)<br />
+mircea_popescu: asciilifeform herp.<br />
+mircea_popescu: so you can still know... nothing much.<br />
+asciilifeform: arguing that this can be useful information<br />
+artifexd: Part of the trust is that you can handle a key.<br />
+asciilifeform: in some truly perverse cases<br />
+mircea_popescu: anything can be useful information.<br />
+mircea_popescu: artifexd if you don't know bob, for all you know he's lying to you.<br />
+mircea_popescu: ANYWAY.<br />
+mircea_popescu: with or without a key. there is no mechanical solution to trust<br />
+mircea_popescu: just like there are no mechanically generated random numbers.<br />
+*: asciilifeform did not imagine that there were.<br />
+mircea_popescu: i am aware the inept consensus today is to think that technology can solve trust.<br />
+artifexd: Trust doesn't mean that I take bob's word as gospel.<br />
+mircea_popescu: the reason this is even specced is to provide some sanity while everyone wastes their life in that ai quest.<br />
+asciilifeform: 'trust' is probably a word that will have to be retired, like phlogiston.<br />
+artifexd: Trust in this case means that, as asciilifeform said, bob(today) is bob(next month)<br />
+asciilifeform: nooo<br />
+asciilifeform: trust is simply an obsolete, pre-scientific word.<br />
+artifexd: I mean as in trust the message<br />
+asciilifeform: please don't put it on life support, it needs to die<br />
+mircea_popescu: artifexd hardly if that.<br />
+mircea_popescu: for all you know bob is part of a 500 key ring operated by 5k monkeys.<br />
+artifexd: signed messages allow someone to build an identity<br />
+mircea_popescu: sure, they do.<br />
+mircea_popescu: but more's the point : signed messages allow the world to build an adversative identity of someone.<br />
+mircea_popescu: this is pointedly against the purpose of chat.<br />
+artifexd: As you have preached in the past, the identity built over time, secured by wot, has value.<br />
+artifexd: Take away the ability to build an identity and what's left?<br />
+mircea_popescu: it does, and that's exactly what;s happening, in the proper model. people chat. on that chat they build contracts. their contract history is fixed in a wot.<br />
+mircea_popescu: there's a great progression at work there.<br />
+artifexd: The key in the wot has no relation AT ALL to the message I just received with a fingerprint.<br />
+mircea_popescu: such ability is not taken away.<br />
+artifexd: Could be him. Could not. Who knows.<br />
+mircea_popescu: it does, if the sender is in your list.<br />
+mircea_popescu: it does not, if he is not.<br />
+mircea_popescu: in the case at hand, i'd know you are you, but i wouldn't know dddddd is anyone in particular.<br />
+mircea_popescu: this is correct.<br />
+mircea_popescu: because in point of fact ddddd is noone in particular.<br />
+mircea_popescu: they even say this, the various random guys the wind blows in. "who are you ?" "nobody in particular".</p>
+<p>artifexd: How do you imagine bootstrapping this thing?<br />
+artifexd: Do we get in here, ident, and pass around ip addresses?<br />
+artifexd: Is that the start?<br />
+mircea_popescu: pretty much<br />
+mircea_popescu: you know, just like "up me please" but not centrally maintained.<br />
+mircea_popescu: just ask your friends.<br />
+thestringpuller: mircea_popescu: what would the result of someone forking the WoT be?<br />
+mircea_popescu: a wot fork ?<br />
+mircea_popescu: right.<br />
+thestringpuller: altgribble becomes hitler and makes his own db clones from nanotubes<br />
+thestringpuller: some "people" start using it<br />
+thestringpuller: but nanotube never comes back<br />
+mircea_popescu: what's wrong with using an alt wot ?<br />
+thestringpuller: or comes back months later (super worst case)<br />
+thestringpuller: that's my question<br />
+mircea_popescu: if you trust whoever maintains it... go ahead.<br />
+mircea_popescu: i have nfi who even runs altgribble. who is it ?<br />
+thestringpuller: well altgribble was generatlized example</p>
+<p>artifexd: After the thing is up and running for 6 months. How does some insightful dude off the street get in? Look for a public (and thus completely untrusted) access ircd that will let him connect and hope to build an identity to the point that you say "hey insightful_dude_from_the_street", what's your ip address? I'll let you connect to me because you say useful<br />
+artifexd: shit"?<br />
+mircea_popescu: artifexd either that, or otherwise getting into a relationship with one of the people in<br />
+mircea_popescu: how does one get into l1 atm ?<br />
+mircea_popescu: l2*<br />
+mircea_popescu: how did lampelina come in ? kako added her to his node and said "hey, lampelina is this hot blondy I met in a bar."<br />
+mircea_popescu: if she starts doing evil shit like forwarding messages from obama, it'll look like obama: hey dudes, i smoke the c0k! to us,<br />
+artifexd: You have to beg for a chance to demonstrate the ability to be interesting before you get a chance to get judged.<br />
+mircea_popescu: but it'll look like obama[via lampelina] to kako. who can then go gtfo wtf you smokin beich ?!<br />
+mircea_popescu: artifexd you gotta get an up before you can voice. eh ?<br />
+kakobrekla: actually snatched from irc not a bar and our gfs make bad examples for this.<br />
+artifexd: Yeah.<br />
+mircea_popescu: kakobrekla sorry</p>
+<p>artifexd: Fuck. What are we discussing.... Oh yeah. Why automatically adding any type of verification to a message is bad.<br />
+mircea_popescu: no.<br />
+artifexd: No?<br />
+mircea_popescu: we were discussing why it is good, and it turns out it isn't particularly, and so parsimony dictates it stays out.<br />
+kakobrekla: no sorry needed, its just that i dont put my penis into everyone that i would like to irc with.<br />
+artifexd: Preventing some douche from Bumfuck, Idaho from impersonating your hard built identity "isn't particularly good"?<br />
+mircea_popescu: artifexd this prevention is guaranteed by design as is.<br />
+mircea_popescu: he can only impersonate you to folk that don't know you.<br />
+artifexd: He can only impersonate me to people who don't have an absolutely direct connection to me.<br />
+mircea_popescu: or care to get one or know how.<br />
+mircea_popescu: technically, anyone can make a gpg key and name it Mircea Popescu<br />
+mircea_popescu: so what if it's the wrong numbers ?<br />
+artifexd: That's why the fingerprint and the alias, right? Let the computer notice that the numbers don't match the the numbers that I identify as mircea.<br />
+mircea_popescu: for that matter, if we keep the A B C D ; X Y Z K convention, then A can impersonate K to Y only provided B isn't linked to C that is linked to D.<br />
+mircea_popescu: artifexd the computer wouldn't know.<br />
+mircea_popescu: if i get a fake key of you and sign it... it's good as far as the computer is concerned.<br />
+artifexd: Huh? Of course it would.<br />
+mircea_popescu: nope.<br />
+mircea_popescu: computer only finds through a direct connection.<br />
+artifexd: I have a fingerprint. Or a public key. I give that fingerprint or key a name. Anything not that key or fingerprint won't match to the name.<br />
+mircea_popescu: according to whom ?<br />
+mircea_popescu: asciilifeform lives in a submarine and never connects to you or your friends. i give him my own version of the "Artifex" key. he signs it.<br />
+mircea_popescu: bam.<br />
+artifexd: What does that have to do with anything>?<br />
+mircea_popescu: everything ?<br />
+mircea_popescu: it's exactly the scenario you're proposing.<br />
+artifexd: Nothing I, as artifexd with my key, say will ever show up as said by the same entity as whatever you say with your artifex key.<br />
+mircea_popescu: artifexd that's entirely up to me.<br />
+artifexd: Sure. If you have two keys in your wot and you want to give them both the same name. Knock yourself out.<br />
+artifexd: But *you* have to make the choice to be confusing.</p>
+<p>asciilifeform: here's an observation:<br />
+artifexd: The system would, without your interference, label the things I say and the things your artifex say as said by seperate entities.<br />
+asciilifeform: i am not presently authenticated via 'gribble'<br />
+mircea_popescu: artifexd dubious at best.<br />
+asciilifeform: how many of the folks present are ready to believe that this 'asciilifeform' is the same animal they are accustomed to enduring the company of in #b-a ?<br />
+asciilifeform: and why?<br />
+mircea_popescu: asciilifeform i can tell, you sound just like him.<br />
+asciilifeform: well sure.<br />
+asciilifeform: but this is an 'informal bug-ridden implementation' of message signing.<br />
+mircea_popescu: what, you just bathed in the same bath twice ?<br />
+asciilifeform: when i grunt on the impalement pole, i will probably not be able to deny these words either, to the inquisitor, for the same reason<br />
+asciilifeform: 'you sound just like him!'<br />
+artifexd: dubious? huh? how? the maths are the maths.<br />
+asciilifeform: hence the 'adverse identity' thing<br />
+asciilifeform: even if we have no sigs<br />
+mircea_popescu: asciilifeform i think you misrepresent the importance of this. currently, I can tell. *I*. Because i'm me, specifically. if you signed, so could preet.<br />
+mircea_popescu: you do not wish to make preet any gifts.<br />
+asciilifeform: sigs are pure win, for a creature like myself, just about everything that comes out of my mouth is 'signed' enough for inquisitor!<br />
+asciilifeform: why not sign for friends?<br />
+mircea_popescu: which is why this is an ircd fork rather than whatever, just apt-get it.<br />
+mircea_popescu: there is no such thing as "sign for friends" outside of the model detailed in my spec.<br />
+mircea_popescu: that's what that is. "signed, but for friends only"<br />
+asciilifeform: the only possible solution to preet signing as asciilifeform, or mircea_popescu, or whoever, is to pull the pin when he comes uninvited.<br />
+mircea_popescu: mno.<br />
+mircea_popescu: consider a bunch of chatlogs from gossipd presented in court.<br />
+mircea_popescu: "and then you said so and so" "um how you know this ?" "from node C" "well it lied to you"<br />
+mircea_popescu: "no it didn't!!1" "case dismissed" "but yur honor!!1"<br />
+asciilifeform: imho it is far from a sure thing that this will so much as add one drop of sweat to a usg inquisitor's work<br />
+artifexd: Your argument is that you WANT deniability?<br />
+mircea_popescu: artifexd my argument is that deniability must be baked in or not had.<br />
+mircea_popescu: and for chat it must be had. and so... it must be baked in.<br />
+artifexd: Hmmm.... this is not the project that I thought it was.<br />
+asciilifeform: mircea_popescu: there is another way to bake it in.<br />
+BingoBoingo: Even preet loses cases<br />
+mircea_popescu: artifexd it isn't ?<br />
+asciilifeform: mircea_popescu: consider: a subclass of private message where you ask a friend to pass along, to the 'room', some words.<br />
+mircea_popescu: asciilifeform aha ?<br />
+asciilifeform: explicitly proclaimed as 'not his own'<br />
+asciilifeform: the ears - can choose to believe, or not, naturally<br />
+asciilifeform: but this is inescapable<br />
+mircea_popescu: i don't follow.<br />
+asciilifeform: say mircea_popescu wishes to deniably utter the words 'brezhnev sucks'. he then asks me to utter, 'my friend, who wishes to stay unmarked, wishes to inform the ladies and gentlemen of this network that brezhnev sucks'<br />
+asciilifeform: we thus have a degree of deniability, about the same as in the case of no messages carrying signatures<br />
+mircea_popescu: artifexd suppose you don't reg your name, and someone comes in as artifexd and says things. should you be forced somehow to say if this is the case or not ?<br />
+mircea_popescu: asciilifeform i do not wish to stay unmarked.<br />
+asciilifeform: (contrieved example)<br />
+mircea_popescu: and i don't want "a degree" of deniability.<br />
+asciilifeform: as i reckon, same degree as the unsigned-message scenario<br />
+mircea_popescu: i want exactly what chat is : absolute deniability to the entire world, save your friends.<br />
+mircea_popescu: which is exactly how speech has functioned, since the dawn of time, to create what is known as the free world.<br />
+asciilifeform: 'absolutes' are tricky.<br />
+mircea_popescu: high time computers conform.<br />
+mircea_popescu: not with the spec as given, imo.</p>
+<p>asciilifeform: let's work out, using spec as given in mircea_popescu's article: what does an inquisitor know about a particular utterance<br />
+asciilifeform: if he were to put a node in his pocket<br />
+asciilifeform: or a series of nodes<br />
+mircea_popescu: okay.<br />
+asciilifeform: to how many possible pubkeys (and presumably, but not automagically, people) can he narrow down the 'brezhnev sucks' ?<br />
+asciilifeform: (typically)<br />
+mircea_popescu: i dun see how that'd be answered.<br />
+mircea_popescu: but i also have little interest in fighting the narrowing down. that's not really a good use of time.<br />
+asciilifeform: that's what 'deniability' means, unless i catastrophically misunderstand the concept<br />
+mircea_popescu: well, not how i understand it at any rate.<br />
+mircea_popescu: deniability is "you X" "no."<br />
+*: asciilifeform is transported to grade school mentally<br />
+mircea_popescu: as far as it's in the form "either you or A X" the only answer is "i don't care."<br />
+asciilifeform: teacher: 'it was one of you boys'<br />
+mircea_popescu: "get something substantial and bother me again"<br />
+artifexd: How many connections to other servers do you imagine that you will have? You as in you mircea_popescu.<br />
+artifexd: 10? 60? 2000?<br />
+artifexd: 1?<br />
+*: asciilifeform gets a distinct impression that mircea_popescu is still thinking of the adversary as being bound by laws, courts, procedures of evidence-gathering.<br />
+mircea_popescu: artifexd anywhere between a few dozen and a few thousands.<br />
+mircea_popescu: asciilifeform i am not thinking of an adversary. i am designing things correctly.<br />
+*: asciilifeform rather thinks that this is a military matter, where adversary can afford to ransack and search 100 houses but not 100,000, and hence his gathering bits of info - matters<br />
+mircea_popescu: asciilifeform that's a subplot i dun wanna enter into now - this is complex enough as it is - but suffice to say i am persuaded such situations are thermodynamiocally bound to narrow timespaces.<br />
+*: asciilifeform would much like to hear more about this later<br />
+mircea_popescu: ie, the police state only exists now and again, when the state of technology is poor enough.<br />
+asciilifeform: naggum had a piece where he confessed to thinking of 'open source' as a weapon, purpose-built for the destruction of a particular evil (microshit)<br />
+asciilifeform: that will have to be re-shaped into something quite else (his words) when enemy is dead<br />
+mircea_popescu: artifexd a 1mbps connection, which is reasonably common in households, should be able to support maybe a few hundred connections.<br />
+mircea_popescu: then again, the number of people people know is, from memory 1-200.<br />
+mircea_popescu: admitting everyone's awake at the same time.<br />
+*: asciilifeform still can't escape the feeling that hypothetical apparatus is a weapon, at least for the time being, that must be sharp enough to penetrate a particular tough grizzly hide if it is to carry on to being whatever it was meant to be...<br />
+mircea_popescu: and admitting everyone known is known to the same, high degree to warrant a connection.<br />
+mircea_popescu: asciilifeform it's merely meant to put chat on a sane footing.<br />
+mircea_popescu: since we're fixing ircd, might as well actually do it.<br />
+asciilifeform: at the very least, one ought to have the option of (unobtrusively!) signing every line<br />
+asciilifeform: i am quite ready to ephemeralkey-sign every line i have uttered in #b-a.<br />
+mircea_popescu: i don;'t see what in the spec would prevent anyone from so doing.<br />
+asciilifeform: in no small part because i cannot really picture my impalement or reprieve as hinging on attribution of what i've said<br />
+artifexd: I would think that instead of a list of ip addresses you would have a list of pubkeys and each pubkey has one (or more) ip addresses assigned to it. When you start up gossipd, it calls out to all the ip addresses in the lists and says "I'm bob, proven by this signature. Prove you are alice, with cryptoproof". If the answering box responds appropriately,<br />
+artifexd: cool. Keep the connection. If not, dump it.<br />
+asciilifeform: why is it necessary to involve ip addresses ?<br />
+mircea_popescu: asciilifeform gotta route packets somehow.<br />
+mircea_popescu: artifexd this could also work, as a handshakey sort of thing, sure.<br />
+artifexd: As a currently running gossipd, if I get a connection request with "I'm bob. Here's proof", then I accept the connection and add that ip address to my list for that key. (For later connecting to him)<br />
+asciilifeform: let's say i communicate over courier.<br />
+asciilifeform: what is my 'ip address' then ?<br />
+mircea_popescu: spec was simpler on the assumption that since the helo package is keyed to the supposed key of the server, there's no need to challenge<br />
+mircea_popescu: if hje can decrypt it's him alright.<br />
+mircea_popescu: asciilifeform it touches the network somewhere.<br />
+artifexd: Sure. Then the handshake doesn't go both ways, but the information shared is the same. I know you have the key you say you have. You know I have the key I say I have.<br />
+asciilifeform: mircea_popescu: when i sign my 'hello' i will have no idea where it will enter the network.<br />
+artifexd: I add the ip address to the key so when I start up, I have a place (or places) to look for you.<br />
+asciilifeform: it is quite impossible to sign your ip address if you communicate via courier who may stop at one of sixteen ports.<br />
+artifexd: asciilifeform: You have to have some way of receiving return messages, right?<br />
+asciilifeform: not necessarily<br />
+asciilifeform: it could be my final message as boat goes down.<br />
+mircea_popescu: asciilifeform then put it in a pastebin<br />
+asciilifeform: sent - in bottle.<br />
+mircea_popescu: and someone will link it.<br />
+asciilifeform: out of band?<br />
+mircea_popescu: sure.<br />
+asciilifeform: why is this necessary?<br />
+mircea_popescu: cause you're tryin to shoehorn nonchat uses of a chat network.<br />
+mircea_popescu: so you're going to have to carry the shoe horn yourself.<br />
+asciilifeform: by way of a considerably simpler design<br />
+asciilifeform: (unitary hello+signature packet)<br />
+artifexd: Sure. I have no issue with that.<br />
+mircea_popescu: uh.<br />
+mircea_popescu: the helo as it is contains some signed material.<br />
+mircea_popescu:what would you sign ?<br />
+*: asciilifeform will, likely, happily play with whatever apparatus you folks come up with, but wishes that the choice be an informed one on the part of the implementers, rather than happenstance.<br />
+artifexd: Sign whatever you want. As long as the timestamp is recent.<br />
+mircea_popescu: artifexd so how is it different from the project you thouight it was ?<br />
+asciilifeform: artifexd: <a href="http://btcbase.org/log/?date=07-01-2015#967274" >http://btcbase.org/log/?date=07-01-2015#967274</a> < < basic summary of the thing i was mainly on about.<br />
+assbot: Logged on 07-01-2015 01:22:05; asciilifeform: with udp, you can make the 'friend or foe?' decision upon receipt of a single (!) packet.<br />
+artifexd: I wasn't imagining so many direct connections.<br />
+mircea_popescu: artifexd well, dunbar's number as a general rule.<br />
+artifexd: I had imagined few connections, more routing.<br />
+mircea_popescu: should fit on consumer box.<br />
+mircea_popescu: if anyone runs a mega node, his hardware is his problem<br />
+artifexd: I had imagined #b-a but where everyone is ident'd all the time. No impersonating anyone else is remotely possible.<br />
+mircea_popescu: this would fit, if you cared to make it fit<br />
+mircea_popescu: currently therte's 140 people here.<br />
+*: asciilifeform also formed this impression.<br />
+mircea_popescu: so... yes.<br />
+artifexd: I start up my little process, it makes a connection to one or eight other people and it just works through the magic of maths.<br />
+mircea_popescu: nah. too easy to attack that graph.<br />
+asciilifeform: who among those present, other than mircea_popescu, wishes to be impersonateable (deniable) by default ?<br />
+artifexd: Not I<br />
+asciilifeform: not 'democratizing', just probing waters<br />
+mircea_popescu: what's the big deal ?<br />
+mircea_popescu: i am impersonated all the time, on all sorts of venues.<br />
+asciilifeform: mircea_popescu: and you like it ?<br />
+mircea_popescu: i have enough experience with it to know it does \exactly nothing.<br />
+asciilifeform: i, for one, would much prefer to have there be not the slightest chance that a fuckwit claiming to speak as me, but sans my key, can be believed<br />
+artifexd: I think you're accused of being other people more often than you are impersonated.<br />
+mircea_popescu: asciilifeform believed is one thing.<br />
+mircea_popescu: artifexd this is possible lol. but also a large number.<br />
+artifexd: asciilifeform: That is my desire as well<br />
+mircea_popescu: it won't be believed (meaningfully).<br />
+asciilifeform: will be believed by sufficiently many otherwise-clueful folks<br />
+mircea_popescu: what people who have no clue believe resting squarely outside not of your control, but THIS WORLD.<br />
+asciilifeform: because signatures are so rare.<br />
+mircea_popescu: perhaps this is what irks, such a clear statement of that inconvenient (but nevertheless true) fact<br />
+asciilifeform: if signatures were expected, impersonation would be strictly a preet-stole-key-and-i-didnt-pull-pin-in-time matter.<br />
+mircea_popescu: like in the case of rg ?<br />
+artifexd: What is "preet"?<br />
+mircea_popescu: this is an illusion.<br />
+asciilifeform: artifexd: an infamous judge where i live<br />
+asciilifeform: artifexd: 'kangaroo court'<br />
+asciilifeform: artifexd: he specializes in high-profile show trials. quite like roland freisler (top judge in 3rd reich)<br />
+mircea_popescu: artifexd the roland freisler of our times, preet bharara. crown's prosecutor for southern ny / rico conspiracy lynchpin.<br />
+artifexd: ok<br />
+mircea_popescu: lmao that sounded like a divisive question.</p>
+<p>asciilifeform: mircea_popescu: is it merely my puny brain, but i still don't grasp the 'signed-default is bad because preet can steal a key.' if preet gets a hold of my key, he may as well have put a bullet through my hide, stuffed the corpse, and proceeded to live on as it<br />
+asciilifeform: signed gossipd or not.<br />
+mircea_popescu: for my curiosity, people who run torrents : how many connections is common ? 10 ? 20 ? 40 ? 80 ? 160 ?<br />
+asciilifeform: depends on torrent for what.<br />
+mircea_popescu: asciilifeform not because "preet can steal a key"<br />
+mircea_popescu: i just meant, generally. i dun care for what, trying to see how this works in practice.<br />
+artifexd: The torrents that I have run get 15-20 connections<br />
+asciilifeform: just strikes me as a peculiar retreat from the whole 'let's bring an end to eternal september' thing<br />
+mircea_popescu: it's exactly that tho!<br />
+mircea_popescu: it actually puts an end to it.<br />
+asciilifeform: how?<br />
+asciilifeform: as it is, you're relying on the next hop node's operator to sign your words.<br />
+mircea_popescu: suppose you're an average derp. what do you do ?<br />
+asciilifeform: watch tv until die ?<br />
+mircea_popescu: problem solved, september ended.<br />
+mircea_popescu: i meant, what do you do to gossipd obvbiously.<br />
+asciilifeform: hm<br />
+asciilifeform: cajole a 'l33t3r' friend to give you an 'in', perhaps<br />
+mircea_popescu: asciilifeform then you piss me off, i frown at your friend, you're out.<br />
+asciilifeform: what did 'derps' do in 1991 ?<br />
+mircea_popescu: you made it 3 days.<br />
+mircea_popescu: now what ?<br />
+asciilifeform: this is the ideal working of the scenario, yes<br />
+mircea_popescu: ok, i frown at your friend, he demures, i delink him, you both are out.<br />
+mircea_popescu: 2 derps, 3 days.<br />
+asciilifeform: in practice, derp can often masquerade as simply an underenthusiastic or overworked 'actual person' for a spell.<br />
+mircea_popescu: ok...<br />
+mircea_popescu: in practice derps never manage this, if we're to go by history, but anyway.<br />
+asciilifeform: just recalling various guests in #b-a, and how long it took each to work his (often her) way out of the alimentary canal<br />
+mircea_popescu: who, specifically ?<br />
+*: asciilifeform digs log<br />
+asciilifeform: saffron<br />
+asciilifeform: ?<br />
+mircea_popescu: as far as i recall, for as far as my own chatlog is concerned, it took them exactly an hour longer than it took me to decide it's enough.<br />
+asciilifeform: indian candy<br />
+mircea_popescu: now, why shouldn't this be the situation to everyone ?<br />
+mircea_popescu: i wouldn't mind seeing either of those.<br />
+asciilifeform: merely examples of people who took weeks, rather than days<br />
+asciilifeform: aha but walked off rather than killfiled<br />
+mircea_popescu: was thinking more like xmj and his ilk.<br />
+asciilifeform: aha right<br />
+asciilifeform: better example<br />
+asciilifeform: or, what if herr pankkake had made things more difficult by slowly doing... his thing, rather than swapping uniforms in one fell swoop<br />
+mircea_popescu: i dun see how any of these are serious avenues to attack gossipd.<br />
+mircea_popescu: literally, all it takes is a one line edit.<br />
+asciilifeform: not so much 'attacks', but i for one was hoping to see this experiment as a beginning of the 'wot internet'<br />
+mircea_popescu: so it is.<br />
+mircea_popescu: imo, quite exactly.<br />
+asciilifeform: where eventually derps will not be able to send a packet, period.<br />
+mircea_popescu: but it's EXACTLY what it is!<br />
+asciilifeform: not if individual quanta aren't signed<br />
+mircea_popescu: they still need a friend to let them in.<br />
+asciilifeform: in mircea_popescu's current scheme, they still are signed, i'll point out. but ad-hoc, by the next hop node<br />
+mircea_popescu: you understand this ? nobody can police a list of 2bn ip addresses.<br />
+mircea_popescu: anyone can police the 200 people he himself knows.<br />
+asciilifeform: keys<br />
+asciilifeform: not people. or ip addresses<br />
+mircea_popescu: same thing.<br />
+mircea_popescu: blacklisting doesn't work, and whitelisting should be done locally, and responsibly.<br />
+*: asciilifeform does not disagree with this at all<br />
+mircea_popescu: but you disagree with the implementation of ewxactly this ?<br />
+asciilifeform: just not really grasping why we need the 'deniability' thing.<br />
+artifexd: nor I<br />
+asciilifeform: it seems to fly in the face of better-living-through-crypto<br />
+mircea_popescu: it's odd because to me it seems exactly opposite.<br />
+mircea_popescu: as in, why add clunk that actually harms and hinders, except to perpetuate what we generally agree is a harmful meme.<br />
+asciilifeform: how is message-is-standalong-quantum-that-traverses-the-net-on-its-authors-signatures-merits added clunk ?<br />
+mircea_popescu: excactly like that.<br />
+asciilifeform: *standalone<br />
+artifexd: Other than some extra bytes, how is it clunk? How does it harm or hinder?<br />
+mircea_popescu: ok, let me try and make the whole story.<br />
+mircea_popescu: currently : 1. friend to friend relations are entirely cryptographically secured. 2. unknown-to-unknown relations are not secured, and must proceed through a friend of either party to even happen.<br />
+mircea_popescu: what you propose : 1. friend to friend and unknown to unknown relations are the same thing.<br />
+*: asciilifeform is at a loss to see how this follows<br />
+artifexd: Uh... no.<br />
+mircea_popescu: this harms because : it gives unknowns a weight they should not have ; it removes the incentive for users to police at their local level ; it allows third parties to construct undeniable chatlogs that they had no business in.<br />
+mircea_popescu: anmd there's plenty more, but srsly... how much is needed.<br />
+asciilifeform: incidentally, in no holy book is it written that a pubkey is readily pinnable on a particular creature walking this earth<br />
+mircea_popescu: so ?<br />
+asciilifeform: one can have 'anonymity' or 'deniability' or whatnot, as commonly imagined, at the same time as signed-everything<br />
+mircea_popescu: and when you say no what do you mean no.<br />
+artifexd: It doesn't give weight to unknowns. It gives continuity do unknowns should they desire it.<br />
+mircea_popescu: asciilifeform not naturally.<br />
+mircea_popescu: artifexd that is weight.<br />
+mircea_popescu: the existence of unknowns should be entirely at the mercy of the knowns. no exceptions and no way out.<br />
+asciilifeform: mircea_popescu: by what mechanism do 'unknowns' transmogrify into 'knowns' in your cosmography ?<br />
+mircea_popescu: by whatever mechanism anyone chooses to use.<br />
+mircea_popescu: THEY have no power,<br />
+mircea_popescu: which is to say no obligatory mechanism exists.<br />
+artifexd: No. It is continuity. I assign weight to what they say by my judgement. They assign continuity to what they say by signing it.<br />
+mircea_popescu: artifexd it is not up to them. it is up to you.<br />
+mircea_popescu: the moment you add them to your list, they have continuity.<br />
+mircea_popescu: before that , they are ephemereal.<br />
+mircea_popescu: not their option. yours.<br />
+asciilifeform: mircea_popescu: at present time, an 'unknown' can generate a pgp key and carry on 'continuity' with it over whatever channel. we can't exactly prevent it<br />
+mircea_popescu: because we don't work for the group here. we work for the individual.<br />
+asciilifeform: nor have any good reason to try<br />
+mircea_popescu: asciilifeform this is a problem<br />
+artifexd: it allows third parties to construct undeniable chatlogs < < while true, I don't see the issue with it<br />
+mircea_popescu: it is not an advantage.<br />
+asciilifeform: and here is where i'm puzzled<br />
+asciilifeform: how not advantage<br />
+mircea_popescu: artifexd i do. it's the equivalent of making a weirdo reality where anyone who eavesdrops also has a recording device.<br />
+mircea_popescu: none of their fuckinbg business. if they weren't invited to participate they can not RELY on the discussion.<br />
+mircea_popescu: not to the detriment o the participants, in any case.<br />
+asciilifeform: but, carrying on with the analogy, recording machines exist.<br />
+asciilifeform: this is like a late-medieval knight wishing that cannon had not existed.<br />
+asciilifeform: fact is, they do<br />
+mircea_popescu: no. making it not exist.<br />
+mircea_popescu: fact is, they only do if you wish to implement them. i do not.<br />
+mircea_popescu: i don't see much has improved since the recording machine era. do you ?<br />
+asciilifeform: if specifically aiming for anonymity, deniability, one ends up designing a widget akin to 'tor'<br />
+asciilifeform: is this the intended shape ?<br />
+mircea_popescu: this specifically aims for reconstructing sane chat, online.<br />
+asciilifeform: i won't argue that a working 'tor' would not have its uses, but it is a very different animal from an 'adult' rebirth of internet circa 1989<br />
+mircea_popescu: rather than some conveniently diddled , horrible implementation designed for the needs of the nsa<br />
+mircea_popescu: (more generally, of the state)</p>
+<p>*: asciilifeform sees the genuine dilemma here. but sees it as a dilemma, not an open-and-shut case in favour of soft-anonymity<br />
+mircea_popescu: do tell.<br />
+mircea_popescu: i dun see any sort of dilemma.<br />
+asciilifeform: mircea_popescu does not like the notion of nsa goon having a non-deniable tape of anything he catches. (i don't much, either...) asciilifeform does not like that it is generally customary to speak unsigned, and thereby nsa goon can put words into his mouth, and a certain number of people will believe them<br />
+mircea_popescu: what the clueless "believe" can not ever be your concern.<br />
+mircea_popescu: it is folly to even consider this point. focus on what is within your control.<br />
+asciilifeform: it is when they lead me to the electric chair<br />
+mircea_popescu: not even then.<br />
+mircea_popescu: a screening of "a man for all seasons" is in order here.<br />
+asciilifeform: until the magic dawn when the last idiot is strangled with the guts of the last scammer, there will be ones who believe the crap.<br />
+mircea_popescu: quite exceptional walk through the very points involved.<br />
+mircea_popescu: asciilifeform that is neither here nor there.<br />
+mircea_popescu: fundamentally your argument reduces to a deep seated "all peoples matter"<br />
+asciilifeform: how ?<br />
+mircea_popescu: to the tune of monty pytrhon's every sperm is sacred. no, they do not.<br />
+asciilifeform: this inference is perplexing. i don't see how it follows.<br />
+mircea_popescu: asciilifeform because whythe fuck do you care what some people you doin't know say on any topic ?<br />
+asciilifeform: how does a bomzh, stinking in the street, who happens to have generated a pgp key, 'matter' ?<br />
+mircea_popescu: well since you're concerned with what he might say or believe, it seems he does.<br />
+asciilifeform: i'm concerned only in the particular corner case that he is actually my friend, who has been reduced to that condition by malefactors, but still remains in possession of his key.<br />
+mircea_popescu: i do not care what "buts" and "ifs" you add.<br />
+mircea_popescu: what remains is... you are concerned.<br />
+asciilifeform: i'd say 'generic bum' and 'mircea stripped of his clothing and cast adrift in shanghai' are different scenario, no ?<br />
+mircea_popescu: so how is this germane ?<br />
+mircea_popescu: obviously, if we're connected, you know my key.<br />
+mircea_popescu: at issue is your proposal to make this a reality for people you don't know.<br />
+asciilifeform: nope. i fully understand that the latter is neither possible nor desirable<br />
+mircea_popescu: so then what is the dilemma ?<br />
+asciilifeform: 'who signs'<br />
+mircea_popescu: you know my key, you directly verify my client is signing correctly, what is keft ?<br />
+mircea_popescu: left*<br />
+asciilifeform: in the scheme as presently described, your client is also signing (for the record of the hypothetical nsa goon, among others) a fairly arbitrary set of messages.<br />
+mircea_popescu: it is not signing them, no.<br />
+mircea_popescu: it is merely passing them along.<br />
+asciilifeform: it signs the session whereby they are given right to travel the net<br />
+mircea_popescu: "this is what i heard"<br />
+asciilifeform: well, yes<br />
+mircea_popescu: that, it does. but it makes no representation they are from me.<br />
+mircea_popescu: in fact, it speciically says they are not.<br />
+asciilifeform: and what is the intended mechanism for propagating a message which -does- make this claim ?<br />
+asciilifeform: laborious external signature, as at present time ?<br />
+mircea_popescu: for instance.<br />
+mircea_popescu: or, if you prefer, elevating the source to the rank of a connect.<br />
+mircea_popescu: thereby doing it all automatically.<br />
+asciilifeform: please briefly describe 'rank of connect'<br />
+mircea_popescu: the same relation as between you and me, in the scenario.<br />
+mircea_popescu: you have his key in the initfile, and so on.<br />
+asciilifeform: mircea_popescu: the tidbit that escapes me is how you came upon the idea that default-signed would empower, rather than lower into pederasty, the 'anonymous derp'<br />
+mircea_popescu: well that's the clou of the entire thing now innit.<br />
+asciilifeform: aha<br />
+asciilifeform: if i can grasp this, perhaps it will all make sense to my head.<br />
+mircea_popescu: i think i explained it half a dozen different ways, to exhaustion, but am at a loss as to why what seems obvious is not communicating itself.<br />
+mircea_popescu: let's go the other way. why do you think it would so lower them ?<br />
+asciilifeform: did i misunderstand, or did you say earlier that it would be a good thing if the street bomzh could not use pgp ?<br />
+asciilifeform: (and gain continuity thereby)<br />
+mircea_popescu: ok, let's work a different way. let us compare two scenarios.<br />
+mircea_popescu: in both cases, we are discussing user Panopticon, who sees all and says nothing. now, in spec as is, it is true that user P will know... nothing. correct ? whereas in your proposed spec, he would know... everything. correct ?<br />
+mircea_popescu: how is giving the bum EVERYTHING lowering him in any sense ?<br />
+asciilifeform: everything ?<br />
+mircea_popescu: and whence and wherefore should he have anything but nothing ?<br />
+mircea_popescu: well yes. all the signed chats of everyone = everything. absolutely as 1 = 1.<br />
+asciilifeform: if he truly knows 'everything', he can unmask the 'deniable' speakers likewise.<br />
+artifexd: I guess I like the default sign because I see myself as Panopticon. I don't talk much. But I watch and listen. Default-sign helps me.<br />
+asciilifeform: no need for signatures.<br />
+mircea_popescu: artifexd you might discover it hurts you, much like the low level usg employee who thinks the fed helps him would soon discover his lot would be better without that bit.<br />
+mircea_popescu: asciilifeform how ?<br />
+asciilifeform: if he truly knows 'everything' he can elementarily determine which earthly carcass crapped out which words.<br />
+mircea_popescu: not so.<br />
+mircea_popescu: for all he knows, they're all in cahoots, sending him lulz.<br />
+mircea_popescu: he can not determine this.<br />
+asciilifeform: presumably some earthly not-quite-everything was meant, rather than a 'divine' Everything<br />
+mircea_popescu: everything in the network duh.<br />
+asciilifeform: then mircea_popescu is correct<br />
+asciilifeform: hitler does know considerably more under the all-signed scenario than alternative.<br />
+mircea_popescu: more importantly, hitler IS a lot more in that than he would be in this.<br />
+asciilifeform: but if we actually want to go in that direction, the logical result is a gadget like 'tor', with bounces, mixes, etc.<br />
+asciilifeform: rather than lukewarm step in that direction, no?<br />
+mircea_popescu: this is paid for, somewhere, by someone. who is paying but me ? even if i can't show where it leeches me, it does. why should i ?<br />
+mircea_popescu: there's nothing lukewarm about this.<br />
+mircea_popescu: it is, unlike the tor etc bs, actually efficient.<br />
+asciilifeform: just seems like an attempt to build a stove-refrigerator hybrid. yes, can be done, yes, in some sense these are complementary machines. but - challenge.<br />
+mircea_popescu: nothing of the kind.<br />
+asciilifeform: (combination of 'tor'-like apparatus with 'wot', in particular)<br />
+mircea_popescu: the tor bs is an attempt to "fix" in implementation problems to whose existence it not merely contributes, but moore! whose existence it actually postulates.<br />
+mircea_popescu: it is fundamentally broken and will never work exactly because it simply presumes the adversary wins.<br />
+asciilifeform: speaking of the 'platonic' tor, rather than the cthonian horror of the actual proggy<br />
+mircea_popescu: wheras as proposed, gossipd makes the enemy outright impossible.<br />
+mircea_popescu: not even deliberately, just, as a side effect.<br />
+mircea_popescu: asciilifeform even the platonic.<br />
+mircea_popescu: structure it and i'll show you how it assumes it.<br />
+asciilifeform: well, 'platonic tor' is simply that a large number of people agree to 'play non-broken telephone' between me and a destination.<br />
+asciilifeform: thereby obscuring the existence of the conversation, within certain limits.<br />
+mircea_popescu: a destination you know nothing about.<br />
+asciilifeform: a destination you may or may not know something about out-of-band<br />
+mircea_popescu: so the fundamental statement is "the group is more important than the individual"<br />
+mircea_popescu: and you wish to know why it is broken by design ?<br />
+mircea_popescu: that's why.<br />
+mircea_popescu: once that's in there, of course fucking nsa.<br />
+asciilifeform: (e.g., i may know that it is a machine at ip p.q.r.s with rsa pubkey K)<br />
+asciilifeform: well yes. nsa comes inevitably in because you are trusting three strangers whom you know nothing about, to form the circuit.<br />
+mircea_popescu: derp.<br />
+mircea_popescu: now apply the same analysis to gossipd.<br />
+asciilifeform: gossipd proposes a scheme more akin to the traditional 'cell' organizations of revolutions, etc<br />
+asciilifeform: (i dare suggest that a node be referred to as 'cell', for extra lulz)<br />
+mircea_popescu: quite.<br />
+mircea_popescu: historically, the closer a relation, the more direct.<br />
+asciilifeform: aha<br />
+mircea_popescu: this is not some sort of random contrivance of boredom.<br />
+asciilifeform: it is the inevitable construction that stands.<br />
+mircea_popescu: this is specifically because, historically, the individual is more important than the group<br />
+asciilifeform: like bridge truss.<br />
+asciilifeform: (triangles)<br />
+mircea_popescu: which is how humanity managed to inch its way to this sad time when it's about to kill itself a thousand different ways<br />
+mircea_popescu: all born the same stupid place.<br />
+asciilifeform: which, in this context, place ?<br />
+mircea_popescu: "group is more important than individual"<br />
+mircea_popescu: a mental place.<br />
+asciilifeform: ah that.<br />
+mircea_popescu: myeah</p>
+<p>artifexd: This pretty much prevents one-way relationships, right?<br />
+artifexd: If you and I are online, unless we are both in each other's list, we will never direct-connect.<br />
+mircea_popescu: this part is finnicky. it shouldn't, ideally, but i don't see how it could be done.<br />
+artifexd: We have to both agree to trust each other.<br />
+mircea_popescu: right.<br />
+mircea_popescu: more importantly, connections on the internet don't work unilaterally.<br />
+mircea_popescu: so im guessing this is going to be forced by the medium.<br />
+artifexd: They do via UDP<br />
+mircea_popescu: if we were onm a purely broadcast network, it'd work right<br />
+mircea_popescu: myeah.<br />
+mircea_popescu: but udp is hard.<br />
+artifexd: No argument<br />
+mircea_popescu: im not entirely sure it is actually to any purpose important.<br />
+asciilifeform: udp is trivial!<br />
+asciilifeform: damnit.<br />
+asciilifeform: tcp is hard.<br />
+mircea_popescu: tcp is hard to employ usefully.<br />
+artifexd: upd is trivial for sending information if you don't care if they received it<br />
+artifexd: If you want a back and forth connection, you end up duplicating tcp yourself.<br />
+asciilifeform: artifexd: for sufficiently simple quanta, it is very easy to 'verify received' without duplicating all the cruft of tcp.<br />
+mircea_popescu: artifexd you will notice the spec is broadcast-oriented.<br />
+mircea_popescu: you don't really need to hear anything back from anyone.<br />
+*: asciilifeform believes the future to hold many one-way links<br />
+asciilifeform: shortwave radio, castaway bottles, obelisks.<br />
+mircea_popescu: artifexd nevertheless, since output is always encrypted to a key,<br />
+mircea_popescu: unilateral relations are really hard.<br />
+mircea_popescu: (i mean, as opposed to soft. it's not like twitter, follow X. it's the opposite, "send to X")<br />
+decimation: it occurs to me that one ought not design low level features into a communication system unless absolutely necessary<br />
+mircea_popescu: this about which bit ?<br />
+asciilifeform: decimation: that particular point of contention was about a kind of thing not readily retrofitted.<br />
+asciilifeform: it is a grave misconception that 'anything can be retrofitted.'<br />
+asciilifeform: if it were so, existing net protocols would suffice...<br />
+mircea_popescu: asciilifeform explain transsexuals then.<br />
+asciilifeform: decimation: <a href="http://btcbase.org/log/?date=07-01-2015#967274" >http://btcbase.org/log/?date=07-01-2015#967274</a><br />
+assbot: Logged on 07-01-2015 01:22:05; asciilifeform: with udp, you can make the 'friend or foe?' decision upon receipt of a single (!) packet.<br />
+asciilifeform: transsexuals ?<br />
+mircea_popescu: they get gender bits retrofitted. it's a joke.<br />
+asciilifeform: lol<br />
+asciilifeform: actually very pertitent<br />
+asciilifeform: good example of clumsy and very threadbare attempt at 'retrofit'<br />
+mircea_popescu: and impertinent at the same time!<br />
+asciilifeform: l0l<br />
+mircea_popescu: i might be especially thick, but i don't actually understand what decimation is saying.<br />
+mircea_popescu: which is the low level function ?<br />
+decimation: this was from a paper that was written by folks who designed early 80's network protocols<br />
+decimation: <a href="http://web.mit.edu/saltzer/www/publications/endtoend/endtoend.txt" >http://web.mit.edu/saltzer/www/publications/endtoend/endtoend.txt</a><br />
+*: asciilifeform happens to be a crackpot specializing in the subject of 'abstractions being interchangeably paperable over is a mega-lie, foundations matter forever'<br />
+asciilifeform: you will -never- get single-packet friend-or-foe with tcp or tcp-like apparatus.<br />
+asciilifeform: (nor an immediate transposability to shortwave/message-in-bottle)<br />
+decimation: I don't see why one couldn't route ircd on top of ascii's udp-wot-internet<br />
+decimation: (the new ircd being proposed here)<br />
+mircea_popescu: ah ah that's what you mean.<br />
+mircea_popescu: yes, once that happens, they could.<br />
+mircea_popescu: not before tho.<br />
+mircea_popescu: decimation did you actually read the whole discussion ?<br />
+decimation: I did. I find myself liking ascii's hardened bedrock<br />
+asciilifeform: hypothetical, sadly, bedrock<br />
+mircea_popescu: decimation how was the experience ?<br />
+*: asciilifeform does not have a battlefield-ready apparatus to offer<br />
+decimation: it was a good discussion, I also found it stimulating<br />
+decimation: but I do see the problem of broadcasting signed messages everywhere<br />
+mircea_popescu: cool.<br />
+adlai: is this udp-over-wot concept "too long to fit in the margin", or have you sketched something about about it somewhere?<br />
+asciilifeform: adlai: described it at some length in #b-a at various points in the past month; also in a few comments on mircea_popescu's site.<br />
+decimation: the interent, as exists, is like tor - in the sense that the group is trying to solve the individual's problem<br />
+asciilifeform: adlai: must note that it is originally entirely unrelated to mircea_popescu and artifexd's project<br />
+decimation: the only real method of escape is layer 1 routing<br />
+asciilifeform: !s udp<br />
+assbot: 22 results for 'udp' : <a href="http://s.b-a.link/?q=udp" >http://s.b-a.link/?q=udp</a><br />
+asciilifeform: enjoy<br />
+mircea_popescu: !s udp from:asciilifeform<br />
+assbot: 12 results for 'udp from:asciilifeform' : <a href="http://s.b-a.link/?q=udp+from%3Aasciilifeform" >http://s.b-a.link/?q=udp+from%3Aasciilifeform</a><br />
+adlai: sure, this "ircd" thingy is just the latest in an uncoordinated herd of attempts to attack this same general problem<br />
+asciilifeform: adlai: the way i understand it, we have at least three people right here who came up with very similar - but different in important respects - attempted solutions.<br />
+*: adlai . o ( one could say that mpex simulates udp on top of tcp )<br />
+mircea_popescu: one could say that, and be uncharitable.<br />
+adlai: not enough "quantum"?<br />
+mircea_popescu: lol<br />
+asciilifeform: mpex was not the inspiration for my version of the concept, but was the impetus for my coming to believe that it is buildable and worth confessing to people about<br />
+adlai: how so?<br />
+asciilifeform: proving the point that stateless, medium-agnostic 'connectionless' comms are the only solid way to go.<br />
+adlai: I guess it's an example of something which could work equally well over udp, and just happens to use tcp for convenience</p>
+<p><a href=http://btcbase.org/log/?date=07-01-2015#968464>...and shortly thereafter</a></p>
+<p>ben_vulpes: asciilifeform i like 'unscannable for', not because of any derping re: 'anonymity', but from sheer delight in the morale hit to enemy < < this one in particular<br />
+ben_vulpes: mircea_popescu [] and if i am in your list and you in mine the same is preserved by gossipd. < < means that if you want everything you say on the record, operate a server for your identity.<br />
+ben_vulpes: how to preserve the serenissima log semantics though? if all "chat lines" are wholly deniable, the notion of a public forum in which to do business publically falls apart.<br />
+ben_vulpes: it only works for us, and sort of right now (?!?!?) because once upon a time assbot relied on the "authedness" of users via the "gribble" service.<br />
+ben_vulpes: asciilifeform [] that is an ad-hoc, bug-ridden reimplementation of the blockchain! < < yeah but only half<br />
+mircea_popescu: ben_vulpes how does it fall apart ?<br />
+ben_vulpes: how does it maintain any sort of relevance, if it can be polluted by...<br />
+ben_vulpes: ah i guess the log only makes sense as maintained by someone in a wot<br />
+mircea_popescu: by ?<br />
+mircea_popescu: take the eutherium short as a good working example.<br />
+mircea_popescu: this identity, which may be me unless i deny it, proposes he will sign a contract so and so.<br />
+ben_vulpes: by anyone who cares to transmit with a bogus "from"<br />
+mircea_popescu: you agree to the terms.<br />
+mircea_popescu: the contract is forthwith produced.<br />
+mircea_popescu: now it's unrepudiable.<br />
+mircea_popescu: no contract appears. well... now you cantell whoever you see me through that wtf is this bs.<br />
+mircea_popescu: seems perfect.<br />
+ben_vulpes: i was commenting at the point in the discusison at which messages were unsigned. did messages become signed?<br />
+mircea_popescu: it is also EXACTLY how it worked,<br />
+mircea_popescu: except once the few derps flaked, i had nobody to complain to.<br />
+mircea_popescu: ben_vulpes no but recall the thing itself i refer to. a pastebin contract was in fact proferred.<br />
+ben_vulpes: sure<br />
+mircea_popescu: that.<br />
+ben_vulpes: forgive the dunce cap hanging over my eyes, but i'm entirely failing to see how this makes for an unrepudiable log of the forum.<br />
+mircea_popescu: it does not.<br />
+mircea_popescu: it only makes for an unrepudiable log of what matters.<br />
+ben_vulpes: "what matters" < < to a keyset though, not "to everyone"<br />
+mircea_popescu: because "everyone" does not matter.<br />
+mircea_popescu: no more overhanging mega-group.<br />
+mircea_popescu: people. just and only.<br />
+ben_vulpes: not a record of all strings sent to "#b-a", but a record of all strings sent to "#b-a" as seen by the lN of "assbot".<br />
+mircea_popescu: that exists, for each item in l(N).<br />
+mircea_popescu: and for them only.<br />
+*: mircea_popescu finds it funny how the same one stump trips erryone.<br />
+ben_vulpes: asciilifeform [] probably quite a few folks. but the thing that distinguishes fermat from wot is that wot needs to be at least quasi-'hot' to really work as intended, imho. < < strikes me that a series of "rating" messages should be parsed to build a rating history.<br />
+ben_vulpes: asciilifeform [] i won't argue that wot moves ought to be retained for all eternity; but will say that some automatic caching is necessary < < wotchains, perchance?<br />
+mircea_popescu: wots are trivially doublespent. as part of normal functioning.<br />
+BingoBoingo: mircea_popescu: Yeah. the skeleton in the RFC wasn't as revealing as the conversation was. gossipd putting the emphasis on Relay in IRC</p>
+<p><a href="http://btcbase.org/log/?date=07-01-2015#968864" >...and still later</a></p>
+<p>artifexd: mircea_popescu: Regarding gossipd, do you have any preference for the data flowing over the wire as binary or text?<br />
+artifexd: Binary would mean shorter messages because fingerprint a would only take up 20 bytes (instead of 40) and keys would not have to be armored. Text would make the flow easier to read/debug but the data would necessarily take up more space.<br />
+jurov: artifecd did you research some existing ideas?<br />
+jurov: i liked <a href="http://twistedmatrix.com/documents/8.2.0/api/twisted.protocols.amp.html" >http://twistedmatrix.com/documents/8.2.0/api/twisted.protocols.amp.html</a> but did not try it in practice<br />
+assbot: twisted.protocols.amp : API documentation ... ( <a href="http://bit.ly/14pFQG2" >http://bit.ly/14pFQG2</a> )<br />
+asciilifeform: artifexd: text?! wtf<br />
+asciilifeform: jurov: and what is that gnarly pythonism.<br />
+*: asciilifeform wonders if he woke up in some alternate universe #b-a full of www-dev folks<br />
+mircea_popescu: artifexd it's always encrypted, so what do you mean text ?</p>
+<p><a href="http://btcbase.org/log/?date=07-01-2015#968981" >...and still</a><br />
+ben_vulpes: asciilifeform [] hitler does know considerably more under the all-signed scenario than alternative. < < your sought "morale hit"<br />
+asciilifeform: ben_vulpes: i did, later, grasp mircea_popescu's deniable-transmission algo<br />
+ben_vulpes: gossipd when<br />
+mircea_popescu: as soon as artifexd gets exactly drunk enough ?<br />
+asciilifeform: ben_vulpes: trick is that two directly-connected cells may as well be exchanging signed msgs. but relayed msgs (in, e.g., cells a -> b -> c, from a to c) are 'gossip' - that is, 'deniable.'<br />
+mircea_popescu: asciilifeform precisely<br />
+ben_vulpes: clever, neh?<br />
+ben_vulpes: i imagine we'll all be running our own cells initially.<br />
+mircea_popescu: permanently ?<br />
+asciilifeform: ben_vulpes: how do you propose to use the hypothetical gizmo without running a cell ?<br />
+mircea_popescu: i suppose once webchat is enabled you could use that.<br />
+ben_vulpes: how does someone relay a message to a cell and from a cell to another cell?<br />
+mircea_popescu: dude just read it first lol;<br />
+mircea_popescu: ask after.<br />
+asciilifeform: ben_vulpes: manually configured peers<br />
+asciilifeform: ben_vulpes: do read mircea_popescu's article, it is very concise.<br />
+ben_vulpes: forgive the extremely poorly articulated comment.<br />
+ben_vulpes: i imagine a steady-state future where people operate gossipd cells in much the same way that ircd's are operated on fleanode.<br />
+asciilifeform: ben_vulpes: rather more like bitcoin - in that you introduce messages into the net by loading them into your own cell<br />
+asciilifeform: which then propagates to your peers<br />
+ben_vulpes: asciilifeform: <a href="https://blockchain.info/pushtx" >https://blockchain.info/pushtx</a><br />
+asciilifeform: (i forget if this was mircea_popescu's terminology in the original article, or not)<br />
+asciilifeform: ben_vulpes: aha but you cannot really have this, unless you - in particular - or one of your peers - wants to create a public toilet for spam and give it peerage<br />
+ben_vulpes: it *will* happen.<br />
+ben_vulpes: the structure of the thing implies many wots.<br />
+asciilifeform: if one carries on with such, may find himself on a rather smaller and lonelier gossipnet<br />
+asciilifeform: than before.<br />
+ben_vulpes: doubtful, see the ever prolix reddit.<br />
+asciilifeform: incidentally i don't recall if any of you lot suggested this, but: max-graph-degrees knob.<br />
+asciilifeform: for when you want a 'louder', 'more new blood' sort of experience - crank clockwise.<br />
+asciilifeform: for the radio aficionados among us, let's call it 'squelch'<br />
+mircea_popescu: ben_vulpes there's no value in imposing values for poeople.<br />
+mircea_popescu: just as long as i can isolate the redditd from my machine, the people who want to be in there are more then welcome to their own choices.<br />
+mircea_popescu: freedom is this, not something else.<br />
+ben_vulpes: i'm not suggesting any values be forced on anyone.<br />
+mircea_popescu: asciilifeform i thought it's implicit in the spec, in the "receiver decides if to relay" : you can configure a client to pass, to user or other clients, whatever you wish<br />
+asciilifeform: mircea_popescu: in a way, it is. but sort of left as an exercise.<br />
+mircea_popescu: yea. well honestly most everything is so left.<br />
+mircea_popescu:ben_vulpes granted. i just mean... so they do,more power to em.<br />
+*: ben_vulpes intends to run an open relay node - openly disclosed as such for those in the mood to twiddle knobs<br />
+ben_vulpes: cell, excuse me.<br />
+mircea_popescu: sure</p>
+						</li>
+
+										<li id="comment-111279" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">42</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111279" title="">Thursday, 8 January 2015</a>
+							</div>
+						<p>Hey, thanks for that. All 111911 bytes of it.</p>
+						</li>
+
+										<li id="comment-111385" class="commentbody"><div class="commenthead"><img alt='artifexd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">43</div>
+								<span class="authorlink">artifexd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111385" title="">Sunday, 11 January 2015</a>
+							</div>
+						<p>From: <a href="http://btcbase.org/log/?date=11-01-2015#972804">http://btcbase.org/log/?date=11-01-2015#972804</a></p>
+<p>artifexd:mircea_popescu: can you elaborate on "a pgp-signed document by the for key certifying the validity of the IPs public key with an expiration unixtimev in case the for field differs and a nickname"?<br />
+mircea_popescu:artifexd i can. what specifically ?<br />
+artifexd:I don't understand what you mean<br />
+artifexd:All the words make sense but when you put them in that order...<br />
+asciilifeform:artifexd: may help to read a certain thread:<br />
+asciilifeform:!s ephemeral key<br />
+assbot:13 results for 'ephemeral key' : <a href="http://s.b-a.link/?q=ephemeral+key">http://s.b-a.link/?q=ephemeral+key</a><br />
+ben_vulpes:asciilifeform: consider it an otherwise unremarkable arrowhead from the dig<br />
+mircea_popescu:let A connect to B. let A pass a message to B in the format "A for X, sup". B must find in the hello message through which A connected to it a document where X signs A's privkey,<br />
+ben_vulpes:me i'm just fascinated that the savages can bang such arms together with basalt and obsidian<br />
+asciilifeform:artifexd: generally, one ought not to connect one's wot private key to an automated, net-live apparatus. hence you sign another key with it, and use that.<br />
+mircea_popescu:that document must include a unixtime indicating expiry.<br />
+artifexd:What is the format of said document?<br />
+mircea_popescu:your problme.<br />
+asciilifeform:artifexd: the signature itself will almost certainly start life as a gpg output.<br />
+ben_vulpes:artifexd: formal grammar!<br />
+ben_vulpes:ignore me<br />
+mircea_popescu:formally or merely, ben_vulpes ?<br />
+asciilifeform:ben_vulpes is volunteering to write a backus-naur grammar ?<br />
+ben_vulpes:'twas an exhortation to make a bnf<br />
+artifexd:I am currently using pointers to exported key files instead of trying to shoehorn keys into config files.<br />
+mircea_popescu:baccus moar like it, amirite.<br />
+ben_vulpes:mircea_popescu knows my format :P<br />
+mircea_popescu:artifexd pointers, what kind ?<br />
+artifexd:filename<br />
+mircea_popescu:seems you're shoehorning the filesystem into it instead ?</p>
+						</li>
+
+										<li id="comment-111386" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">44</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-111386" title="">Sunday, 11 January 2015</a>
+							</div>
+						<p>Thanks for that!</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-140909">
+					<div class='trackhead'>
+						<div class="commentcount">45</div>
+						<span class="authorlink"><a href='/2015/no-such-labs-snsa-november-2014-and-december-2014-joint-statement?b=the%20project%20&amp;e=very#select' class='url'>No Such lAbs (S.NSA), November 2014 and December 2014 Joint Statement on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-140909" title="">Tuesday, 7 January 2020</a>
+					</div>
+					<p>[...] the project discussed under B seems to have taken off of its own accord. It will receive all the support it can receive, for clearly it is a very [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-142583">
+					<div class='trackhead'>
+						<div class="commentcount">46</div>
+						<span class="authorlink"><a href='/2016/gossipd-design-document?b=item%20herein%20&amp;e=mple#select' class='url'>[G]ossipd design document on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142583" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] item herein discussed started life almost two years ago as "a better ircd" (and of course independently throughout the minds composing our esteemed Republic). Ample [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author9000479" id="author9000479" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email9000479" id="email9000479" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url9000479" id="url9000479" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="59103" /></p>
+				<input type="hidden" name="comment_post_time" value="1784087740-18.97.14.91" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-59103")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-59103");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-59103");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

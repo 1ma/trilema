@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_apr2017.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>The four points of this morning, in color. Any questions ? on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Repressing the female point of view<br />every day since 2008.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-61487"><div class="post" id="post-61487">                    <h1><a href="/2015/the-four-points-of-this-morning-in-color-any-questions/" rel="bookmark" title="Permanent Link to The four points of this morning, in color. Any questions ?">The four points of this morning, in color. Any questions ?</a></h1>                        <div class="date">                                     Wednesday, 06 May, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p><strong>assbot</strong> Logged on 06-05-2015 16:29:14; ben_vulpes: | |     | |     ->08.68% (67,108,864B) 0x470070: ThreadGetMyExternalIP(void*) (net.cpp:379) << that this is a thing cracks me up<br />
+<font color=blue><strong>mircea_popescu</strong> It's actually a fine entry point to explain to anyone why exactly TCP/IP is so broken : because this IS NOT a trivial task. The price for IPv4 and its undocumented, buggy, slow and haphazardously<sup><a href="#footnote_0_61487" id="identifier_0_61487" class="footnote-link footnote-identifier-link" title="Yes, this is a word now. It means exactly what you imagine it means. Go spellcheck it for me!">i</a></sup> ad-hoc NAT-routing model is that you can't find out your IP by inspecting yourself. The half-assed, quarter-baked lazy slothful and AoL-Windowesque<sup><a href="#footnote_1_61487" id="identifier_1_61487" class="footnote-link footnote-identifier-link" title="Recall `yahoo chat` ? That.">ii</a></sup> implementation means that you can't simply dig hostname, as plenty of machines don't have one. So whatcha gonna do ?</font></p>
+<p><strong>ascii_field</strong> mircea_popescu has it.<br />
+<font color=red><strong>mircea_popescu</strong> And this is also a fine entry point for explaining to management noobs the meta point of why exactly a theoretical approach doesn't ever work. Yes, you could read the TCP/IP spec and look for holes. Those are the holes in the TCP/IP spec, not the holes in TCP/IP. It's horrible not so much for what it wants to be on paper, but for what its aspirations cause on the ground.<sup><a href="#footnote_2_61487" id="identifier_2_61487" class="footnote-link footnote-identifier-link" title="Exactly like in the case of any other prissy-whore, which is the category controlling this unfortunate space.">iii</a></sup></font></p>
+<p><strong>ascii_field</strong> And then the holes in the implementations... and the emergent crud from interplay of layers, etc.<br />
+<strong>mircea_popescu</strong> So Ima link this into the <a href=http://btcbase.org/log/?date=05-05-2015#1120895>CFO/accountant discussion</a> with Pierre_Rochard from yest.</p>
+<p><strong>nubbins`</strong> Wait now, who's <A href=http://btcbase.org/log/?date=06-05-2015#1122626>hanging wind chimes</a> from my what?<br />
+<strong>mircea_popescu</strong> Apparently the word is out. You and your bizarre kink.</p>
+<p><strong>nubbins`</strong> Matter of time, I guess. Incidentally, I used to keep a blog on this fetlife-esque website years and years ago. Memories have been coming back.<br />
+<strong>mircea_popescu</strong> Any good ? </p>
+<p><strong>nubbins`</strong> Yeah. Lotta skin. Privacy on actual lockdown.<br />
+<strong>mircea_popescu</strong> (BTW... fetlife scraping still ongoing. They "fixed" so many things meanwhile...<sup><a href="#footnote_3_61487" id="identifier_3_61487" class="footnote-link footnote-identifier-link" title="The `tech company` Bitlove LLC has been an unending font of amusement and a most dependable lolcow for #bitcoin-assets during the past... months! A whole quarter, really.
+Stuff they've done ?
+
+Banned calls from the user-agent `curl`. Because yes, adding a -A switch is so very hard. 
+
+Banned calls that didn't have a referrer set. Because seriously, user specified strings, that's where security is at. I'm kinda surprised they don't do the password hashing in javascript on the browser and just pass the thing directly to the server.
+
+Set up user-harassing rate limiting, according to user reports.
+
+Banned innumerable scrapper accounts, because yes, totally, that's what's going to do it.
+
+This list could go on for a while. Or it could include the historical lol of spurious legal threats that ended up landing naive bystanders in the soup, or the lashing at random people (a great way to fix holes is by building larger holes, apparently). Suffice it to say that the girls are starting to show the same sort of pity for this `tech company` as they would for your average Special Olympics participant. Which really isn't that far off - maybe what they do qualifies as `tech company` in Canada, but for the rest of the world... ">iv</a></sup>  )</p>
+<p><strong>nubbins`</strong> Saw!<br />
+<strong>mircea_popescu</strong> You know there's nothing shameful about being a slut.</p>
+<p>* nubbins` nods sagely<br />
+<strong>nubbins`</strong> No need to tell me. This site, iam.bmezine.com (still alive in a frankenstein-esque parody of its former self), was actually way ahead of its time.<br />
+<strong>mircea_popescu</strong> The way BMEzine worked is that a large group of brown shit (random idiots mostly looking into an intersting path to killing themselves, a service boxing did for most of the 1900s, up to about the 90s) got some yellow shit interspersed. These are people who they themselves saw a little further than most. To their reminescence, BMEzine, ie, what they saw there then, was way ahead of its time. So would have anything else been, wherever they happened to look. The rest are dead.</p>
+<p><strong>nubbins`</strong> As you'd imagine, iam.bmezine.com created an insular environment that convinced a lotta fucked up people that the fucked up things they wanted to do to themselves were acceptable. The better to cry discrimination, &#038;c<br />
+<strong>mircea_popescu</strong> Obviously.</p>
+<p><strong>nubbins`</strong> Anyway, sordid tale. Large chunk of my youth. Met a lotta friends and an almost-wife, lost not quite a pound of flesh but close enough to it. Founder ended up getting the site stolen from him by an ex, it went to shit, etc<br />
+<strong>mircea_popescu</strong> You know the story of collarme ?</p>
+<p><strong>nubbins`</strong> Naw.<br />
+<strong>mircea_popescu</strong> Ahaha. collarme.com</p>
+<p><strong>assbot</strong> Where is Collarme? | Where is Collarme? ...<br />
+<strong>mircea_popescu</strong> This ex stole just the domain names. PS - if you<sup><a href="#footnote_4_61487" id="identifier_4_61487" class="footnote-link footnote-identifier-link" title="Yes, I'm talking to you.">v</a></sup>'re into "building an online business" - forget the idiots trying to push "compliance" because they live off the USG dole so gotta pretend like the USG matters to even be able to get up in the morning. Exes are the real threat. They sunk a lot more ~profitable~ businesses than the various USG.Agency constructs.</p>
+<p><strong>nubbins`</strong> <a href=http://www.warrenellis.com/?p=5945>warrenellis.com</a><br />
+<strong>assbot</strong> Shannon Larratt Leaves ModBlog/BME | Warren Ellis ...<br />
+<strong>ben_vulpes</strong> Bizpartner's glider club is getting scammed with SEO. Someone's making and selling gift certificates on their behalf. Dudes at the field don't know the diff.<br />
+<strong>mircea_popescu</strong> Heh. This is also a lot more common than commonly known. "Gift certificates" has been the primary way to move value from business to scammer since the 90s. Not credit card fraud. This. Whether groupon (USG mafia) gets it or RU or CN mafia gets it... still gotten. But anyway, only notable for the ending of the original post : </p>
+<blockquote><p>However this conflict is resolved, I now know that I cannot rely upon my former partner and dearest friend and in the following year may work to build a BDSM dating site that is run effectively, responsibly and for the benefit of its users, not as a personal kingdom.</p></blockquote>
+<p>Muppets got it exactly fucking backwards.</p>
+<p><strong>nubbins`</strong> Heh. BME worked as a personal kingdom. Failed as a committee-run thing.<br />
+<strong>mircea_popescu</strong> Doh. The US worked as a personal kingdom. Failed, as a committee run thing.</p>
+<p><strong>ben_vulpes</strong> Most things do, if under competent kings right?<br />
+<strong>mircea_popescu</strong> Right. You don't get to even hear about them otherwise. By the time you hear about Amazon, or Apple<sup><a href="#footnote_5_61487" id="identifier_5_61487" class="footnote-link footnote-identifier-link" title="Alphabetic, k ?">vi</a></sup>, or whatever it's no longer on the table whether Bezos is or is not competent.</p>
+<p><strong>ascii_field</strong> Exes were sinking kingdoms and empires since t=-inf<br />
+<strong>mircea_popescu</strong> Yup. But anyway, moral being : forget about putting your time and effort into "compliance". For one thing it's stupid. For the other thing, who the fuck are they ?! And finally, it's deliberately made to not be a satisfiable requirement. Just there to soak up your time and resources. Outright ignore "compliance", spend the time and resources on the harem instead. Winning strategy. (And no, I am not aware you can be a successful king without a harem. Your gender is not particularly relevant, your sexual preferences are not particularly relevant either. But you will have a lot of intimate relationships with a lot of other people, who are comitted to you personally.)</p>
+<p><strong>nubbins`</strong> "One of the things I discovered is that if someone else has more money than you and are willing to spend it on lawyers, "right and wrong" are not very important!"<br />
+<strong>mircea_popescu</strong> Doh. Fetlife bitterly discovered same recently. Was kinda fun to watch.</p>
+<p><strong>ben_vulpes</strong> Guns by any other name kill as well.<br />
+<strong>nubbins`</strong> Ah, here we go.<br />
+<blockquote>BME was hugely profitable. That said, because I trusted others to manage my finances, I was under the impression that BME was barely breaking even though it really was a license to print money. I was much more interested in BME on a creative level than a business level.</p></blockquote>
+<p>That's the elevator version right there.<br />
+<strong>ben_vulpes</strong> I wonder to what degree that describes Burning Man's finances.<br />
+<strong>mircea_popescu</strong> Yeah, the funny thing about the human condition, in its fractally-deliberate misdesign<sup><a href="#footnote_6_61487" id="identifier_6_61487" class="footnote-link footnote-identifier-link" title="Al Pacino (as John Milton) has the scoop : 
+God? I'll tell you... let me give you a little inside information about God. God likes to watch. He's a prankster. Think about it. He gives man instincts. He gives you this extraordinary gift, and then what does He do? I swear, for his own amusement, his own private, cosmic gag reel... he sets the rules in opposition. It's the goof of all time. Look, but don't touch. Touch, but don't taste. Taste, but don't swallow. And while you're jumping from one foot to the next, what is He doing? He's laughing his sick, fucking ass off! He's a tightass! He's a sadist! He's an absentee landlord! Worship that? Never!
+">vii</a></sup>, is that the slaves are altogether more likely to be creative than the masters. <font color=green>Which is  a fine entry point for explaining to the naive why exactly a properly explicit master-slave relationship is the best intimate arrangement available.</font></p>
+<p><strong>ben_vulpes</strong> Harem and slave are similar concepts in this model of "leadership"? (Harem member I suppose that I mean).<br />
+<strong>mircea_popescu</strong> Similar but not identical, and the difference is way out of scope here. As to the above explanation, consider Moldbug's very valid discussion of the guy with the ring that could kill. He who is secure in his authority makes excellent leadership. He who is not - horribru. <font color = purple>And to do a meta point here, to go with the meta point above : this entire discussion is a fine point to explain to the managerially challenged why you can't "<A href=/2013/the-froth-of-our-days/>control the evaporation</a>". Where intelligent people lay, nubbins' lateral discussion of "bullshit nobody cares about" sparked stuff people do seem to care about. Lotta win in laterality.</font></p>
+<p><strong>ascii_field</strong> Fnargl! His bulbous majesty!<br />
+<strong>mircea_popescu</strong> Yeah, him. And incidentally, this is the secular driver of the collapse in quality of life and everything else seen since the 1700s (and it is a <em>horrid</em> collapse once you do inflation-adjustments) : back then leadership was secure, and therefore either good or motivated to improve, ever so marginally. Today most models sport insecure leadership, and so "corruption" (<A href=/2012/de-ce-coruptia-nu-va-putea-fi-niciodata-eliminata/>which is NEVER a problem</a>), ends up misrepresented as one.</p>
+<p><strong>ascii_field</strong> This was 98% of Mr. Mold's theme.<br />
+<strong>mircea_popescu</strong> It's valid.  </p>
+<p><strong>ascii_field</strong> Aha. It is obvious as daylight, to anyone who gives a damn.<br />
+<strong>mircea_popescu</strong> For that matter, the problem with Yarvin was not the broad strokes, but all the empty McDonalds wrappers he glued to them everywhere.</p>
+<p><strong>ascii_field</strong> What he found in the junkyard where he grew up - he glued, yes.<br />
+<strong>mircea_popescu</strong> I guess it's possible he's just a bodysnatcher victim, rather than outright ill intended. But this distinction without a difference /me can scarcely be interested in. Maybe if he had nice tits and i was fucking her. Maybe.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_61487" class="footnote">Yes, this is a word now. It means exactly what you imagine it means. Go <A href=http://btcbase.org/log/?date=29-04-2015#1115961>spellcheck it</a> for me! [<a href="#identifier_0_61487" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_61487" class="footnote">Recall "yahoo chat" ? <a href=http://ridiculousfish.com/blog/posts/YahooChatRooms.html>That</a>. [<a href="#identifier_1_61487" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_61487" class="footnote">Exactly like in the case of any other <a href=/forum-logs-for-06-may-2015#1719192>prissy-whore</a>, which is the category controlling this unfortunate space. [<a href="#identifier_2_61487" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_61487" class="footnote">The "tech company" Bitlove LLC has been an unending font of amusement and a most dependable lolcow for #bitcoin-assets during the past... months! A whole quarter, really.</p>
+<p>Stuff they've done ?
+<ul>
+<li>Banned calls from the user-agent "curl". Because yes, adding a -A switch is so very hard. </li>
+<p>
+<li>Banned calls that didn't have a referrer set. Because seriously, user specified strings, that's where security is at. I'm kinda surprised they don't do the password hashing in javascript on the browser and just pass the thing directly to the server.</li>
+<p>
+<li>Set up user-harassing rate limiting, according to <a href="/2015/fetlife-the-meat-market/#comment-114042">user reports</a>.</li>
+<p>
+<li>Banned innumerable scrapper accounts, because yes, totally, that's what's going to do it.</li>
+</ul>
+<p>This list could go on for a while. Or it could include the historical lol of spurious legal threats that ended up <a href="/2015/on-how-i-ended-up-suing-phoenix-nap-llc-on-how-ira-r-cadwells-mom-stephanies-going-to-lose-her-chula-vista-home-on-how-marcus-bohn-is-going-to-catch-a-lot-of-shit-for-that-on-assorted-othe/">landing naive bystanders in the soup</a>, or the <a href="/2015/what-amused-me-today/#footnote_3_61212">lashing at random people</a> (a great way to fix holes is by building larger holes, apparently). Suffice it to say that the girls are starting to show the same sort of pity for this "tech company" as they would for your average Special Olympics participant. Which really isn't that far off - maybe what they do qualifies as "tech company" in Canada, but for the rest of the world...  [<a href="#identifier_3_61487" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_61487" class="footnote">Yes, I'm talking to you. [<a href="#identifier_4_61487" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_61487" class="footnote">Alphabetic, k ? [<a href="#identifier_5_61487" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_61487" class="footnote">Al Pacino (as John Milton) has the scoop : </p>
+<blockquote><p>God? I'll tell you... let me give you a little inside information about God. God likes to watch. He's a prankster. Think about it. He gives man instincts. He gives you this extraordinary gift, and then what does He do? I swear, for his own amusement, his own private, cosmic gag reel... he sets the rules in opposition. It's the goof of all time. Look, but don't touch. Touch, but don't taste. Taste, but don't swallow. And while you're jumping from one foot to the next, what is He doing? He's laughing his sick, fucking ass off! He's a tightass! He's a sadist! He's an absentee landlord! Worship that? Never!</p></blockquote>
+<p> [<a href="#identifier_6_61487" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2015/gravatar-still-sucks/">Gravatar still sucks</a></div>
+                <div class="alignright"><a href="/2015/the-very-hard-and-unrewarding-life-of-ismail/">The very hard and unrewarding life of Ismail</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/zsilnic/" title="View all posts in Zsilnic" rel="category tag">Zsilnic</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2015/the-four-points-of-this-morning-in-color-any-questions/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2015/the-four-points-of-this-morning-in-color-any-questions/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>2 Responses</p>
+		
+		<ol class="commentlist">
+					</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-141348">
+					<div class='trackhead'>
+						<div class="commentcount">1</div>
+						<span class="authorlink"><a href='/2015/the-very-hard-and-unrewarding-life-of-ismail?b=came%20up%20with&amp;e=%20the#select' class='url'>The very hard and unrewarding life of Ismail on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-141348" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] came up with the bright "every business needs a website" nonsense, for all sorts of great reasons on paper, but with the only practical result being the above - to wit : unsecured inept shit ready for the [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-144112">
+					<div class='trackhead'>
+						<div class="commentcount">2</div>
+						<span class="authorlink"><a href='/2018/how-to-satisfyingly-have-sex-with-a-girl-under-12?b=give%20birth%20u&amp;e=age.#select' class='url'>How to satisfyingly have sex with a girl under 12 on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-144112" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] give birth under the age of 12iii ; but in an example of natural perversity (as there can be found many) it is almost universally the case she can enjoyiv (moderately vigorousv) copulation by that age. [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author6aebc62" id="author6aebc62" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email6aebc62" id="email6aebc62" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url6aebc62" id="url6aebc62" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="61487" /></p>
+				<input type="hidden" name="comment_post_time" value="1756627560-37.114.33.6" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2025 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-61487")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-61487");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-61487");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

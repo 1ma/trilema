@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_sep2016.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>The sad story of me sniffing varnish on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Din bube, mucegaiuri si noroi<br />Mi-am facut bici, si m-am cicat pe voi.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-61261"><div class="post" id="post-61261">                    <h1><a href="/2015/the-sad-story-of-me-sniffing-varnish/" rel="bookmark" title="Permanent Link to The sad story of me sniffing varnish">The sad story of me sniffing varnish</a></h1>                        <div class="date">                                     Wednesday, 29 April, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>When you're running through hundreds of GB's worth of bandwidth each month, and serving millions of hits, the thought might well occur that maybe you know... some caching would be a good idea. And so you figure hey, varnish worked splendidly in the past, should try it again.</p>
+<p>When you're a bright <del datetime="2015-04-28T22:12:38+00:00">young</del> chap with managerial (but nevertheless!) exposure to IT, and a server that's yours for the breaking... you might figure that hey! Let's have some fun!</p>
+<p>Sure enough, varnish installs in five minutes. Then you set apache to listen to port 8080, set varnish to connect on the back end to 8080 and to listen on 80 and you're all set. Except whoops... suddenly now qntra.net returns pages from trilema.com</p>
+<p>So you spend a little learning a new domain-speciffic language called vcl<sup><a href="#footnote_0_61261" id="identifier_0_61261" class="footnote-link footnote-identifier-link" title="Varnish Configuration Language">i</a></sup>, which is pretty retarded as far as languages go, but anyway. You create a config that correctly identifies the respective dedicated IPs and has varnish serve accordingly. Victory!</p>
+<p>At which point you notice that... well obviously varnish is a proxy, and so Apache would see its IP rather than the actual users'. This is a problem, for many reasons we won't go into. But if it's a problem, it also can be fixed, right ? </p>
+<p>Wrong. </p>
+<p>For one thing, there's two Apache modules that do the kindness of translating X-Forwarded-For headers into actual IP addresses : mod_rpaf and  mod_remoteip. Not only neither of these is included in apache by default, or in any way handled by cpanel, easyapache or any other automation script, but! - the latter only works for Apache 2.4.x and above, which we don't use for [flimsy] <a href="/forum-logs-for-28-apr-2015#1709734">reasons</a><sup><a href="#footnote_1_61261" id="identifier_1_61261" class="footnote-link footnote-identifier-link" title="See libnss discussions for context.">ii</a></sup>, whereas the former... no longer exists. Just like that, fuck you, it used to be on "stderr.net" but is no longer and if you want some random dude's github'd versions you're more than welcome. Signatures ? WoTs ? What is this, the future ?! Download random code off anon derps' social media profiles or go home!11</p>
+<p>So what do you do ?</p>
+<p>Eventually you find a "backward porting" of mod_remoteip for apache 2.2, because yeah, shit is so broken you actually have stand-alone modules that need to be backported. What is the point, even, why are they stand-alone then ?</p>
+<p>At which juncture, what do you do ? Compile random code and throw it on the server ? Or do you take the high road and actually read and review random code ? For free ? Why not put some valuable work and effort and time nobody's going to give you back into something that's <a href="/forum-logs-for-28-apr-2015#1709642">never ever going to be useful to anyone</a> !<sup><a href="#footnote_2_61261" id="identifier_2_61261" class="footnote-link footnote-identifier-link" title="I made a faint attempt to circumvent this problem. It went about as well as you'd expect.">iii</a></sup></p>
+<p>And so you do, and so the day passes, and lo and behold! You now have IPs passed correctly. </p>
+<p>Mostly.</p>
+<p>Oh joy of having succeeded at a task you set for yourself! Oh... what the shit ?</p>
+<blockquote><p>[Tue Apr 28 17:23:08 2015] [error] [client  �_] client denied by server configuration: /home/trilema/public_html/wp-admin/edit-comments.php, referer: /wp-admin/edit-comments.php<br />
+[Tue Apr 28 17:23:04 2015] [error] [client 8�b] client denied by server configuration: /home/trilema/public_html/wp-admin/edit-comments.php, referer: /wp-admin/edit-comments.php<br />
+[Tue Apr 28 17:18:25 2015] [error] [client ] client denied by server configuration: /home/trilema/public_html/wp-admin/images/wp-logo.gif, referer: /wp-admin/edit-comments.php<br />
+[Tue Apr 28 17:18:23 2015] [error] [client @�_] client denied by server configuration: /home/trilema/public_html/wp-admin/js/edit-comments.js, referer: /wp-admin/edit-comments.php<br />
+[Tue Apr 28 17:18:20 2015] [error] [client �a] client denied by server configuration: /home/trilema/public_html/wp-admin/js/common.js, referer: /wp-admin/edit-comments.php<br />
+[Tue Apr 28 17:18:19 2015] [error] [client  a] client denied by server configuration: /home/trilema/public_html/wp-includes/js/hoverIntent.js, referer: /wp-admin/edit-comments.php<br />
+[Tue Apr 28 17:18:18 2015] [error] [client ��a] client denied by server configuration: /home/trilema/public_html/wp-includes/js/jquery/jquery.js, referer: /wp-admin/edit-comments.php</p></blockquote>
+<p>Dude... seriously ?! </p>
+<p>Seriously. About one in ten requests, for reasons incomprehensible, has random junk in the IP field. So you spend a few hours trying to debug this shit and give up, because by now a whole rack of servers'd have been cheaper than what you'd be billing yourself if you were going to bill for this wasted day at all.</p>
+<p>In conclusion : </p>
+<blockquote><p><strong>jurov</strong> There's this saying about inspiration and perspiration, you know.<br />
+<strong>mircea_popescu</strong> Dude, come on, it's ridiculous. Imagine if cars worked like software works.</p>
+<ul>"Sorry honey, can't come to dinner, I'm apparently unable to find the entry to the Brooklyn Bridge today."<br />
+"Yes I know five billion people found it before. And yet..."<br />
+"Musta been a different car - and - gasoline combination I guess. Going back (on foot) to gas station trying some more combos."</ul>
+<p><strong>jurov</strong> Oh, they did, until very recently.<br />
+<strong>mircea_popescu</strong> Cars NEVER worked like software works, outside of a Laurel and Hardy short.</p>
+<p><strong>jurov</strong> I have 14y old Daewoo. We can split "never ever" hairs but the end result and frustration is the same.<br />
+<strong>mircea_popescu</strong> See jurov, the thing is... I have the OPTION to not own obscure exotic cars whose maker went out of business shortly after starting because he sucked. I can buy a fucking BMW. There ISN'T a BMW here. It's varnish or nginx. that's it. Not like I'm running unheard-of-software.</p></blockquote>
+<p>There's "free as in beer", there's "free as in freedom", and then there's "free as in your time's not worth anything". That's FOSS. </p>
+<p>There's no value and no utility in "Free and Open Source". It's a pastime, for a particular sort of imbecile (adolescent boys), like romantic comedies are a pastime for a different sort of imbecile (retarded women). It doesn't do anything, it doesn't achieve anything. It solves no problems - merely creates them. It's pure masturbation, broken piled upon broken that "sort-of works" and "kinda does a 90% of a job". Useless, pointless, offensive bullshit through and through.</p>
+<p>The only people I hate more than USG employees are... everyone on github. Go die in a fire. All of you. </p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_61261" class="footnote">Varnish Configuration Language [<a href="#identifier_0_61261" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_61261" class="footnote">See <a href="http://btcbase.org/log-search?q=libnss">libnss</a> discussions for context. [<a href="#identifier_1_61261" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_61261" class="footnote">I made <a href="/forum-logs-for-28-apr-2015#1709850">a faint attempt</a> to circumvent this problem. It went <a href="/forum-logs-for-28-apr-2015#1709325">about as well as you'd expect</a>. [<a href="#identifier_2_61261" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2015/chtulhu-emerges/">Chtulhu emerges!</a></div>
+                <div class="alignright"><a href="/2015/the-downtrodden-are-downtrodden-for-a-reason-step-on-their-faces/">The downtrodden are downtrodden for a reason. Step on their faces!</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/zsilnic/" title="View all posts in Zsilnic" rel="category tag">Zsilnic</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2015/the-sad-story-of-me-sniffing-varnish/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2015/the-sad-story-of-me-sniffing-varnish/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>3 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-113963" class="commentbody"><div class="commenthead"><img alt='pletzalcoatl`s avatar' src='/dead_external_sites/thewhet.net/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://thewhet.net' class='url'>pletzalcoatl</a><img src="/wp-content/themes/trilema/images/insigna-criptograf.png" class="insigna" alt="insigna de criptograf" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113963" title="">Wednesday, 29 April 2015</a>
+							</div>
+						<p>A valiant effort with an ending that isn't terribly surprising. What's a manager to do with a heap of stuff that isn't managed and doesn't wish to be?</p>
+						</li>
+
+										<li id="comment-113964" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-113964" title="">Wednesday, 29 April 2015</a>
+							</div>
+						<p>Burn it ?</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-141386">
+					<div class='trackhead'>
+						<div class="commentcount">3</div>
+						<span class="authorlink"><a href='/2015/full-disclosure-4096-rsa-key-in-the-strongset-factored?b=server%20load%20&amp;e=rot%2C#select' class='url'>Full disclosure : 4096 RSA key in the strongset factored. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-141386" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] server load was never above 0.5 ; Apache (unoptimized) chuggling quietly along, really nothing sensational to report. Even with all the software rot, [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author9a8e54a" id="author9a8e54a" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email9a8e54a" id="email9a8e54a" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url9a8e54a" id="url9a8e54a" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="61261" /></p>
+				<input type="hidden" name="comment_post_time" value="1769020067-18.97.9.170" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-61261")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-61261");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-61261");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

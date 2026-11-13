@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_may2019b.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Full disclosure : 4096 RSA key in the strongset factored. on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">The world’s greatest erotica writer.<br /><a href=/2019/i-own-erotica-like-zeus-owns-olympus/>By far</a>.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-61659"><div class="post" id="post-61659">                    <h1><a href="/2015/full-disclosure-4096-rsa-key-in-the-strongset-factored/" rel="bookmark" title="Permanent Link to Full disclosure : 4096 RSA key in the strongset factored.">Full disclosure : 4096 RSA key in the strongset factored.</a></h1>                        <div class="date">                                     Sunday, 17 May, Year 7 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>As you may or may not know, <a href="/2013/rng-board-is-here-cute-shirts-bonus/">No Such lAbs</a> (trading on MPEx as <a href="http://mpex.ws/?mpsic=S.NSA">S.NSA</a>) has been for a while using <a href="/2015/introducing-the-bitcoin-isp/">BISP</a> hardware to run Phuctor, a <a href="http://nosuchlabs.com/theory">RSA key factorization service</a>. </p>
+<p>As you can see, it employs bleeding edge Greek technology from 2`500 years ago, in the shape of Euclid's GCD<sup><a href="#footnote_0_61659" id="identifier_0_61659" class="footnote-link footnote-identifier-link" title="Incidentally, not that many algorithms over two thousand years old are still efficient, today. Remarkable, isn't it ?">i</a></sup> to try and find common factors among keys. Since there's about 4 million keys (a little under) in the bundle of publicly known keys that it is processing<sup><a href="#footnote_1_61659" id="identifier_1_61659" class="footnote-link footnote-identifier-link" title="Speaking of which - thanks a lot Gnu PG for making archival retarded.">ii</a></sup>, if you're even vaguely mathematically literate and even marginally aware of what exactly theoretical RSA promises, you would on the strength of this introduction expect a key to be factored just a little before Elvis comes back as the Queen of England. So did we. So did <a href="https://bitbet.us/bet/1144/phuctor-will-find-a-bad-key/">everyone else</a>.<sup><a href="#footnote_2_61659" id="identifier_2_61659" class="footnote-link footnote-identifier-link" title="50:1 odds against is a pretty decent approximation of `never`, seeing how what that says is `50 or more`.">iii</a></sup></p>
+<p>Imagine my surprise, and <a href="http://www.loper-os.org/">Stan</a>'s surprise, and everyone's surprise - including your own once you find that yes, it has broken a <em>pair of</em> keys. </p>
+<p>And it didn't even need the whole 4 million set - only a shade shy of 200k. If we were to liniarly extrapolate - which we won't<sup><a href="#footnote_3_61659" id="identifier_3_61659" class="footnote-link footnote-identifier-link" title="We won't because liniar approximation never fits this. It's either one exponential or the other : before anything is found, it's exponential one way, but after something is found it becomes exponential the other way. In short, it would not particularly surprise me at this point if we find thousands, not dozens.">iv</a></sup> - that'd mean we'll see dozens more before all of this is said and done.</p>
+<p>And it's not even an ancient 1024 bit key. No, it's a spiffy, relatively recent 4096 bit key, made 2011-09-22 and owned by someone in all likelyhood you know, or at any rate have heard of. Yes, that's right - the key's in the GPG strong set.</p>
+<p>It is our sad duty to inform Mr. H. Peter Anvin (hpa) that his key with fingerprint <a href="http://nosuchlabs.com/gpgkey/602BCEE3339AE47E388CA9A5472A563CFB8F73F66CCB3E69553B41BF6261ACBE">51EA B526 D875 4202 2AA1  BC85 E99E F4B4 5122 1121</a> is factorizable. And the first factor - get a load of this - is 231. Which... yes, 231 = 3 * 77. Way, way, <em>way</em> too small to be appearing here. How exactly it got past Pollard-rho and why exactly is 231 a factor in RSA keys is beyond the scope of this writing and sadly something we had not the time to investigate.</p>
+<p>Which brings us to the most bitter part of this entire discussion : the server hosting phuctor suddenly became inaccessible yesterday. It returned, apparently untouched, after the DC rebooted it. While this may be simple coincidence, we have at the present time no way to ascertain whether it is or it is not. Consequently, the originally intended, civilised process of emailing the victim, keeping things quiet for a while to give them time to update and so on is not practicable : for all we know others unknown are at the current time in possession of the same information we have. On the balance of these considerations, it is my decision that all this must be published immediately, with apologies to everyone on the receiving end. </p>
+<p>Nevertheless : emergency testing of all deployed RSA key generators must be undertaken now, to verify why exactly they would produce weak keys. Of special interest is, of course, the mechanism employed by Mr. Anvin himself, but one should not limit himself to that alone.</p>
+<p>Let the scramble begin!</p>
+<p><strong>Update :</strong> <em>Another</em> pair <a href="/forum-logs-for-17-may-2015#1731636">was found</a>. This also has one member in the strong set, but its owner is, apparently, luckier.</p>
+<p><strong>Update II :</strong> Amusingly enough, it seems Hacker News <a href="/forum-logs-for-17-may-2015#1732381">hand-diddled their story list</a> to remove this discussion. Way to go <a href="/2012/lets-have-fun-with-paul-graham/">Ydumbinator</a> crew!</p>
+<p><strong>Update III :</strong> Because half the interest seems to be for some reason along these lines - here, that's how being on popurls, twitter etc looks like :</p>
+<p><a href="/wp-content/uploads/2015/05/bw-trilema-today.png"><img src="/wp-content/uploads/2015/05/bw-trilema-today.png" alt="bw-trilema-today" title="bw-trilema-today" width="597" height="173" class="aligncenter size-full wp-image-61674" /></a></p>
+<p>The server load was never above 0.5 ; Apache (<a href="/2015/the-sad-story-of-me-sniffing-varnish/">unoptimized</a>) <a href="/forum-logs-for-17-may-2015#1731856">chuggling</a> quietly along, really nothing sensational to report. Even with all the software rot, hardware has progressed sufficiently since a decade ago so as to render "slashdotting" a historical relic rather than a fact of life. So it goes.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_61659" class="footnote">Incidentally, not that many algorithms over two thousand years old are still efficient, today. Remarkable, isn't it ? [<a href="#identifier_0_61659" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_61659" class="footnote">Speaking of which - thanks a lot Gnu PG for making archival <a href="/forum-logs-for-06-may-2015#1718978">retarded</a>. [<a href="#identifier_1_61659" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_61659" class="footnote">50:1 odds against is a pretty decent approximation of "never", seeing how what that says is "50 or more". [<a href="#identifier_2_61659" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_61659" class="footnote">We won't because liniar approximation never fits this. It's either one exponential or the other : before anything is found, it's exponential one way, but <em>after something is found</em> it becomes exponential the other way. In short, it would not particularly surprise me at this point if we find thousands, not dozens. [<a href="#identifier_3_61659" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2015/btc-the-most-recent-8chan-board/">/btc/, the most recent 8chan board</a></div>
+                <div class="alignright"><a href="/2015/on-how-the-factored-4096-rsa-keys-story-was-handled-and-what-it-means-to-you/">On how the factored 4096 RSA keys story was handled, and what it means to you.</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/breaking-news/" title="View all posts in Breaking News" rel="category tag">Breaking News</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2015/full-disclosure-4096-rsa-key-in-the-strongset-factored/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2015/full-disclosure-4096-rsa-key-in-the-strongset-factored/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>36 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-114209" class="commentbody"><div class="commenthead"><img alt='.`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">.</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114209" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>&gt; We won't because linear approximation never fits this. It's either one exponential or the other : before anything is found, it's exponential one way, but after something is found it becomes exponential the other way. In short, it would not particularly surprise me at this point if we find thousands, not dozens.</p>
+<p>Lovely delicious sigmoids.</p>
+						</li>
+
+										<li id="comment-114210" class="commentbody"><div class="commenthead"><img alt='Kimmo Alm`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Kimmo Alm</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114210" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>"We won't because liniar approximation never fits this."</p>
+<p>"liniar"</p>
+<p>Shit-FUCKING-listed!</p>
+						</li>
+
+										<li id="comment-114211" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114211" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>@<b>.</b> It's what it is.</p>
+<p>@<b>Kimmo Alm</b> Maaannnn... the problems you got, seriously.</p>
+						</li>
+
+										<li id="comment-114212" class="commentbody"><div class="commenthead"><img alt='Anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Anon</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114212" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>Warning to everybody looking at the references, do not join the freenode channel #bitcoin-assets mentioned in [ii]. Doing so will result in a denial of service attack being fired at your connecting IP address, something I learned the hard way.</p>
+						</li>
+
+										<li id="comment-114213" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114213" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>There was someone with a DDoS bot in there a few months back (see <a href="http://search.bitcoin-assets.com/?q=ddos">http://search.bitcoin-assets.com/?q=ddos</a> ), and for all we know this is still ongoing, so yes.</p>
+						</li>
+
+										<li id="comment-114214" class="commentbody"><div class="commenthead"><img alt='Alexandru C.`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Alexandru C.</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114214" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>woah if this is still ongoing regarding the ddos bot what  you propose ?</p>
+						</li>
+
+										<li id="comment-114215" class="commentbody"><div class="commenthead"><img alt='Hayden Jones`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Hayden Jones</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114215" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>this guy pawning himself off like some crypto-whiz when someone else found this key first...</p>
+<p>not to mention, this doof can't even spell 'linear'</p>
+						</li>
+
+										<li id="comment-114216" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114216" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>If you have money, use a strong VPS. If you don't, go in #freenode and ask for a cloak.</p>
+						</li>
+
+										<li id="comment-114218" class="commentbody"><div class="commenthead"><img alt='noway`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">noway</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114218" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>this is sick - no matter how the output became what it is, even though this would be THE MOST important question to answer. ahhhh</p>
+						</li>
+
+										<li id="comment-114219" class="commentbody"><div class="commenthead"><img alt='noway`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">noway</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114219" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>wtf. "claims" this is proven/true!</p>
+						</li>
+
+										<li id="comment-114222" class="commentbody"><div class="commenthead"><img alt='flying sheep`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">flying sheep</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114222" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>probably just a wrong copy on the server: <a href="https://news.ycombinator.com/item?id=9561179">https://news.ycombinator.com/item?id=9561179</a></p>
+<p>it doesn’t pass the self check and was probably broken while uploaded.</p>
+<p>therefore probably nothing really happened.</p>
+						</li>
+
+										<li id="comment-114223" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114223" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>And updated, again.</p>
+						</li>
+
+										<li id="comment-114224" class="commentbody"><div class="commenthead"><img alt='Hanno`s avatar' src='http://blog.hboeck.de/archives/872-About-the-supposed-factoring-of-a-4096-bit-RSA-key.html/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink"><a href='https://blog.hboeck.de/archives/872-About-the-supposed-factoring-of-a-4096-bit-RSA-key.html' class='url'>Hanno</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114224" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>The explanation of what's going on is relatively simple: It's just a faulty copy of the right key laying around on the keyservers. This happens because key servers don't check the uploaded keys. No faulty key generation involved.</p>
+<p>I wrote a detailed explanation:<br />
+<a href="https://blog.hboeck.de/archives/872-About-the-supposed-factoring-of-a-4096-bit-RSA-key.html">https://blog.hboeck.de/archives/872-About-the-supposed-factoring-of-a-4096-bit-RSA-key.html</a></p>
+						</li>
+
+										<li id="comment-114225" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114225" title="">Sunday, 17 May 2015</a>
+							</div>
+						<p>Updated even more.</p>
+						</li>
+
+										<li id="comment-114226" class="commentbody"><div class="commenthead"><img alt='simon2`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">simon2</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114226" title="">Monday, 18 May 2015</a>
+							</div>
+						<p>Hi,</p>
+<p>how do I check my own key? Because Phuctor shows me an Internal Server Error when I try to test  a key.<br />
+I downloaded pgpdump, which gives me "RSA n(4096 bits)" as a hex value. This should be the product of the two prime numbers, right?<br />
+So I checked this value with GMP</p>
+<p>  mpz_set_str (a," the hex value from pgpdump goes here...  ",16);<br />
+  std::cout</p>
+						</li>
+
+										<li id="comment-114227" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114227" title="">Monday, 18 May 2015</a>
+							</div>
+						<p>To check your own key, you would have to extract it (pgpdump works) and apply any factorization / prime number finder algo to it. Worst case scenario, get a list of prime numbers up to sqrt(key) and check each individually with mod. Otherwise can try something like Pollard-rho.</p>
+						</li>
+
+										<li id="comment-114229" class="commentbody"><div class="commenthead"><img alt='Jon Davis`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">Jon Davis</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114229" title="">Monday, 18 May 2015</a>
+							</div>
+						<p>" Amusingly enough, it seems Hacker News hand-diddled their story list to remove this discussion. Way to go Ydumbinator crew!"</p>
+<p>Way to act like a child, it doesn't lend much credence to your article when you act this way.</p>
+<p>They probably pinned it because the title and content is not quite accurate -- you found a problem with weak keys and didn't actually factor a 4096 bit key.</p>
+						</li>
+
+										<li id="comment-114230" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114230" title="">Monday, 18 May 2015</a>
+							</div>
+						<p>Bitch, I don't need any "credence" lent, and especially not from you lot. </p>
+<p>You, and I mean that term in a very broad sense, so as to include the whole stack of you idiots all the way to Paul Graham &#038; friends need me to lend you credence. Not the other fucking way around.</p>
+<p>So get lost with the bs.</p>
+						</li>
+
+										<li id="comment-114232" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114232" title="">Monday, 18 May 2015</a>
+							</div>
+						<p>@<b>Hanno</b> &#038; <b>flying sheep</b> (who, while probably not the same person, nevertheless ended up in the spam filter for some reason) : I will write up an article addressing this particular set of bullshit <a href=http://btcbase.org/log/?date=17-05-2015#1135474 >tomorrow</a>. I promise it will be good. Engage bated breath.</p>
+						</li>
+
+										<li id="comment-114235" class="commentbody"><div class="commenthead"><img alt='Kev`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink">Kev</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114235" title="">Monday, 18 May 2015</a>
+							</div>
+						<p>There's paid content on this blog? My god. </p>
+<p>You really have no idea what you are talking abut.</p>
+						</li>
+
+										<li id="comment-114236" class="commentbody"><div class="commenthead"><img alt='MichaelGG`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink">MichaelGG</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114236" title="">Monday, 18 May 2015</a>
+							</div>
+						<p>I don't understand your updates; how do they address the explanation given (that it's a tampered/error copy of a valid key)?</p>
+<p>The link to "Ydumbinator" talks about FB at $27, and that it'd never reach IPO levels again. How is that [unfortunately] incorrect prediction relevant?</p>
+<p>And what is meant by the graph? Is 7Mbps supposed to cause significant load?</p>
+						</li>
+
+										<li id="comment-114238" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114238" title="">Monday, 18 May 2015</a>
+							</div>
+						<p>@<b>Kev</b> You're welcome.</p>
+<p>@<b>MichaelGG</b> My updates address what I wish to address, not what you wish to address. Them's the breaks.</p>
+<p>I think your expectations seep into your reading comprehension, reducing you to this unfortunate position where you have really complicated problems with really simple things, as exemplified by the last issue you have. I find that either re-reading the source material immediately or else taking a walk (or a shower) after which re-reading the source material helps they in your position unstuck.</p>
+						</li>
+
+										<li id="comment-114239" class="commentbody"><div class="commenthead"><img alt='lmao`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">lmao</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114239" title="">Monday, 18 May 2015</a>
+							</div>
+						<p>nice bird hair lmao</p>
+						</li>
+
+										<li id="comment-114280" class="commentbody"><div class="commenthead"><img alt='TK`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink">TK</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114280" title="">Wednesday, 20 May 2015</a>
+							</div>
+						<p>Is there an offline factorization tester for weak primes? <a href="https://security.stackexchange.com/questions/89713/offline-rsa-strong-prime-test-similar-to-phuctor">https://security.stackexchange.com/questions/89713/offline-rsa-strong-prime-test-similar-to-phuctor</a></p>
+						</li>
+
+										<li id="comment-114282" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">25</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-114282" title="">Wednesday, 20 May 2015</a>
+							</div>
+						<p>What pray tell would be a weak prime ?</p>
+<p>If you mean, a to see if the modulus of a RSA key is factorizable, yes. There's probabilistic tests like Pollard-rho or Rabin-Miller, and there's the good old "try every prime up to sqrt(n)".</p>
+						</li>
+
+										<li id="comment-119497" class="commentbody"><div class="commenthead"><img alt='Rony ytpak`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">26</div>
+								<span class="authorlink">Rony ytpak</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119497" title="">Tuesday, 18 October 2016</a>
+							</div>
+						<p>Perhaps failure of phuctor server was actually a coincidence -_-</p>
+						</li>
+
+										<li id="comment-119498" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">27</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119498" title="">Tuesday, 18 October 2016</a>
+							</div>
+						<p>I'm not sure what you're saying. What are you saying ?</p>
+						</li>
+
+										<li id="comment-125962" class="commentbody"><div class="commenthead"><img alt='Fodboldtrøjer`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">28</div>
+								<span class="authorlink">Fodboldtrøjer</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-125962" title="">Monday, 11 June 2018</a>
+							</div>
+						<p>Wow cuz this is excellent job! Congrats and keep it up.</p>
+						</li>
+
+										<li id="comment-148587" class="commentbody"><div class="commenthead"><img alt='Richard Oddo`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">29</div>
+								<span class="authorlink">Richard Oddo</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148587" title="">Friday, 10 April 2020</a>
+							</div>
+						<p>My brother recommended I might like this blog. He was totally right, this post made my day.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-114217">
+					<div class='trackhead'>
+						<div class="commentcount">30</div>
+						<span class="authorlink">4096 RSA factorized. | No more cubes.</span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-114217" title="">Sunday, 17 May 2015</a>
+					</div>
+					<p>[...] claims to have factorized Peter Anvins gpg/RSA key. Sharen mit:Auf Facebook teilen (Wird in neuem Fenster geöffnet)Klicke, [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-114221">
+					<div class='trackhead'>
+						<div class="commentcount">31</div>
+						<span class="authorlink"><a href='http://blog.hboeck.de/archives/872-No,-nobody-has-factored-a-4096-bit-RSA-key.html' class='url'>Hanno's blog</a></span>&nbsp;(via Trackback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-114221" title="">Sunday, 17 May 2015</a>
+					</div>
+					<p><strong>No, nobody has factored a 4096 bit RSA key...</strong></p>
+<p>tl;dr News about a broken 4096 bit RSA key are not true. It is just a faulty copy of a valid key.</p>
+<p>Earlier today a blog post claiming the factoring of a 4096 bit RSA key was published and quickly made it to the top of Hacker News. The key in question...</p>
+				</li>
+
+				<li class="trackbody" id="comment-114237">
+					<div class='trackhead'>
+						<div class="commentcount">32</div>
+						<span class="authorlink">4096 RSA key in the strongset factored | infopunk.org</span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-114237" title="">Monday, 18 May 2015</a>
+					</div>
+					<p>[...] by  johnmountain   [link] [14 comments] [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-114270">
+					<div class='trackhead'>
+						<div class="commentcount">33</div>
+						<span class="authorlink">Two security researchers break RSA 4096 bit keys with ‘Phuctor | ZastMedia Blog</span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-114270" title="">Wednesday, 20 May 2015</a>
+					</div>
+					<p>[...] his Sunday’s blog post, Popescu mentioned: “expect a key to be factored just a little before Elvis comes back as the [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-141387">
+					<div class='trackhead'>
+						<div class="commentcount">34</div>
+						<span class="authorlink"><a href='/2015/on-how-the-factored-4096-rsa-keys-story-was-handled-and-what-it-means-to-you?b=Something%20ha&amp;e=ned.#select' class='url'>On how the factored 4096 RSA keys story was handled, and what it means to you. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-141387" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] Something happened. [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-141388">
+					<div class='trackhead'>
+						<div class="commentcount">35</div>
+						<span class="authorlink"><a href='/2015/on-how-the-factored-4096-rsa-keys-story-was-handled-and-what-it-means-to-you?b=this%20and%20the&amp;e=u%27ve#select' class='url'>On how the factored 4096 RSA keys story was handled, and what it means to you. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-141388" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] this and they'd be meatballs. &mdash;&mdash;&mdash;Short for "The Powers That Wanna Be". Because that's how it is. [&#8617;]You should see what the turnover for intelligence jobs @USG is like - you'd think you've [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-141424">
+					<div class='trackhead'>
+						<div class="commentcount">36</div>
+						<span class="authorlink"><a href='/2015/the-universal-rsa-keys?b=any%20further%20&amp;e=sant#select' class='url'>The "universal" RSA keys on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-141424" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] any further keys in the database, it'd be the first time since the original results were announced last Sunday that anyone proposed a useful, testable hypothesis - a sorer indictment of the soi dissant [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author7163201" id="author7163201" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email7163201" id="email7163201" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url7163201" id="url7163201" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="61659" /></p>
+				<input type="hidden" name="comment_post_time" value="1781318004-94.16.31.119" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-61659")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-61659");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-61659");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>
