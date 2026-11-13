@@ -13,8 +13,8 @@ Available at: [trilema-mirror.pages.dev](https://trilema-mirror.pages.dev)
 > Use the Tor Browser or host your own private copy of the site for better privacy.
 
 The Cloudflare project is configured with `xargs -r rm -rf < _ignores; rm -f _ignores` as the build command.
-`wp-content/uploads/2012/04/248493.mp4` had to be excluded from the mirror because Cloudflare's free tier
-rejects files larger than 25 MB.
+
+Files larger than 25MB need to be added to the _ignores file because Cloudflare Page's free tier rejects them.
 
 ### Run Locally
 
