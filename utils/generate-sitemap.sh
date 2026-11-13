@@ -11,7 +11,7 @@ HEADER
 
 find . -name 'index.html' -not -path './.git/*' -not -path './.tokensave/*' \
     -not -path '*/feed/*' -not -path '*/trackback/*' \
-    | sed 's|^\./||; s|/index\.html$|/|; s|^index\.html$|/|' \
+    | sed 's|^\./||; s|/index\.html$|/|; s|^index\.html$||' \
     | sort \
     | while IFS= read -r path; do
     echo "  <url><loc>${DOMAIN}/${path}</loc></url>"
