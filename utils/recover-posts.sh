@@ -81,6 +81,18 @@ else:
         -e "s|https\?://trilema\.com|/|g" \
         "$tmpfile"
 
+    # Rewrite dead external site URLs to local copies
+    local dead_dir="$REPO/dead_external_sites"
+    if [[ -d "$dead_dir" ]]; then
+        local sed_args=()
+        while IFS= read -r asset; do
+            local rel="${asset#$dead_dir/}"
+            local domain="${rel%%/*}"
+            sed_args+=(-e "s|http://${domain//./\\.}/${rel#*/}|/dead_external_sites/${rel}|g")
+        done < <(find "$dead_dir" -type f)
+        [[ ${#sed_args[@]} -gt 0 ]] && sed -i "${sed_args[@]}" "$tmpfile"
+    fi
+
     # Count asset references (not downloaded — use recover-month-assets.sh)
     local asset_count
     asset_count=$(grep -coP '(?:src|href)="(/wp-content/uploads/[^"]+)"' "$tmpfile" || true)
