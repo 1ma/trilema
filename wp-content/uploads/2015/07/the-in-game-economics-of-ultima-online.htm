@@ -1,0 +1,699 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft FrontPage 5.0">
+<TITLE>The In-game Economics of Ultima Online</TITLE>
+</HEAD>
+<BODY LINK="#0000ff">
+
+<center>
+<H1>The In-game Economics of <I>Ultima Online</i></H1>
+<H3>Zachary Booth Simpson, Origin Research Fellow<br>7 Apr 1999</H3>
+<h4>Originally presented at <i>Computer Game Developer's Conference</i>, San Jose, CA; Mar 2000</h4>
+<H4>(c)2002 ZBS. <a href="http://www.mine-control.com/zack">http://www.mine-control.com/zack</a><br>Please <a href="http://www.mine-control.com/cgi/gbook-mc.cgi">sign my guestbo0k</a> if you find this work useful.</H4>
+<h4>Thanks to <I>Ultima Online</I> team members: <br>Raph Koster, Richard Vogel, Starr Long, Damion Schubert</h4>
+<h4>Thanks also to: <br>Andrew E. Stivers, Timothy O'Neill Dang, Steve Beeman,<br> Jim Greer, and Prof. Jamie Galbraith</h4>
+</center>
+<p>
+
+<H1>Chapter 1.  Introduction</H1>
+<dir>
+
+<table align=right valign=top>
+<tr>
+	<td><IMG SRC="image1.jpg" HSPACE=12 VSPACE=6 ALIGN=RIGHT WIDTH=320 HEIGHT=241></td>
+	<td rowspan=2>&nbsp;</td>
+</tr>
+<tr>
+	<font size=-1>
+	<td align=center><b>Screen-shot from <i>Ultima Online</i>.<br>Four characters attacking a dragon.</b></td>
+	</font>
+</tr>
+</table>
+
+<P ALIGN="JUSTIFY">Ultima Online (<I>UO</I>) is a popular online computer role-playing game created and maintained by Origin Systems (<U>http://www.owo.com</U>).  Subscribers to <I>UO</I> gather online and interact with one another in a medieval fantasy world.  One very interesting aspect of this game is the inter-player economy which is analyzed in detail in this paper.</P>
+<P ALIGN="JUSTIFY">In many ways, the in-game economy is similar to a real world economy – goods and services are traded to mutual advantage and are mediated in currency or barter.  In other ways, the economy is very alien; for example, some commodity prices are determined by a robotic simulation of business profit motivation.  These quirky rules will be described in Chapters 3 to ensure that the reader appreciates the entire economic environment of the game.</P>
+<P ALIGN="JUSTIFY">The economy is highly planned by the game designers; this includes everything from the possible items which can be manufactuered to the rules which govern supply and demand.  However, the economy did not behave as expected in many ways.  It is these failures and the resulting redesigns which are most interesting and which we will examine in detail in Chapter 5.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">This paper begins with an introduction to the virtual universe for those that are unfamiliar.  We then turn to the economy and describe the micro and macro elements of it in detail.  This is followed by an analysis of the evolution of the economy – what went wrong, and how it was fixed.  Finally, the paper concludes with a proposal for several specific research topics.  The ultimate goal of this research is to provide information for the design of new virtual worlds as well as use the virtual world as a platform for investigating real world economic phenomena.  This is a particularly exciting research field as it will allow the researcher complete measurement and variable control while still operating in a non-trivial economy.</P>
+
+</dir>
+<H1>Chapter 2.  Description Of The World</H1>
+<H2>Characters</H2>
+<dir>
+
+<table align=right valign=top>
+<tr>
+	<td><IMG SRC="image3.gif" HSPACE=12 VSPACE=6 ALIGN=RIGHT width="226" height="276"></td>
+	<td rowspan=2>&nbsp;</td>
+</tr>
+<tr>
+	<font size=-1>
+	<td align=center><b>Example character in full armor.</b></td>
+	</font>
+</tr>
+</table>
+
+
+<P ALIGN="JUSTIFY">While playing in the virtual world of <I>Ultima Online</I>, a player takes on a persona or character sometimes referred to as an &quot;Avatar&quot; which they control by moving the mouse.  They can communicate with others by typing on the keyboard text which appears in cartoon-like thought bubbles.</P>
+<P ALIGN="JUSTIFY">Subscribers may play and maintain a variety of characters.  That is, for a single $10 per month fee, a subscriber may play more than one character within the virtual world.</P>
+<P ALIGN="JUSTIFY">Players often role-play their character as something totally different than their &quot;real&quot; selves; for example, they may switch genders or they may play with a devilish personality; this ability to fantasize is, of course, among the primary reasons why people play.</P>
+<P ALIGN="JUSTIFY">Characters are rated with certain attributes such as strength, health, and dexterity.  There are, additionally, a large number of skills which can be learned and mastered.  These allow the character to engage in specialized and interesting interactions. Table 1 summarizes a few of these; there are actually about 50 such skills. Mastering any particular skill involves either practicing it, watching a more advanced practitioner, or receiving instruction from special schools.  Becoming a master of one skill automatically creates weakness in others; therefore, no character can be a master of all skills simultaneously.</P>
+<P ALIGN="JUSTIFY"></P>
+
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=492>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<B><P ALIGHT="LEFT">Skill</B></TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<B><P ALIGHT="LEFT">What a player can do with the skill</B></TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<B><P ALIGHT="LEFT">Requirements</B></TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<P ALIGHT="LEFT">Alchemy</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P ALIGHT="LEFT">Create magical potions</TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<P ALIGHT="LEFT">Mortar, pestle, reagents</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<P ALIGHT="LEFT">Begging</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P ALIGHT="LEFT">Gain small amounts of gold from NPCs</TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<P ALIGHT="LEFT">Wealthy NPCs</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<P ALIGHT="LEFT">Blacksmithing</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P ALIGHT="LEFT">Create arms</TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<P ALIGHT="LEFT">Forge, tools, ingots</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<P ALIGHT="LEFT">Healing</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P ALIGHT="LEFT">Improve health of a character</TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<P ALIGHT="LEFT">Bandages</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<P ALIGHT="LEFT">Item Identification</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P ALIGHT="LEFT">Determine the quality of something</TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<P ALIGHT="LEFT">Objects with varying qualities</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<P ALIGHT="LEFT">Lumberjacking</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P ALIGHT="LEFT">Get wood from trees</TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<P ALIGHT="LEFT">Axe, trees</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<P ALIGHT="LEFT">Snooping</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P ALIGHT="LEFT">Covertly inspect what someone is carrying</TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<P ALIGHT="LEFT">Other players</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<P ALIGHT="LEFT">Stealing</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P ALIGHT="LEFT">Get items from PCs and NPCs</TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<P ALIGHT="LEFT">Other players with things worth stealing</TD>
+</TR>
+<TR><TD WIDTH="20%" VALIGN="TOP">
+<P ALIGHT="LEFT">Tailoring</TD>
+<TD WIDTH="50%" VALIGN="TOP">
+<P ALIGHT="LEFT">Make clothing, armor, bandages</TD>
+<TD WIDTH="39%" VALIGN="TOP">
+<P ALIGHT="LEFT">cotton, flax, hides, sewing tools</TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<P ALIGN="CENTER"><A NAME="_Ref447970024">Table 1</A>.  Example Skills</P>
+<P ALIGN="JUSTIFY">Characters can engage in combat with on another.  Not surprisingly, these contests are one of the primary online past-times.  Although characters can be &quot;killed&quot; as a result of combat, this fate is more akin to an annoyance than it is to true death.  When one’s character is killed, the character’s &quot;ghost&quot; can be resurrected and the game continues with a penalty of reduced skill and/or possessions.  The design motive for the impermanence of  death is, of course, highly utilitarian: if characters could actually &quot;die&quot;, subscribers would stop paying the $10/month fee!</P>
+</dir>
+
+<H2>Non-Player Characters</H2>
+<dir>
+
+<table align=right valign=top>
+<tr>
+	<td><IMG SRC="image4.jpg" HSPACE=12 VSPACE=6 ALIGN=RIGHT width="91" height="132"></td>
+	<td rowspan=2>&nbsp;</td>
+</tr>
+<tr>
+	<font size=-1>
+	<td align=center><b>A monster<br>on the prowl.</b></td>
+	</font>
+</tr>
+</table>
+
+
+<P ALIGN="JUSTIFY">The medieval fantasy world of Ultima is filled with a zoo of non-player controlled (&quot;NPC&quot;) animals and monsters.  Many of these are inherited from Ultima’s roots in <I>Dungeon and Dragons</I> and Tolkein novels: orcs, dragons, ogres, etc. Monsters exists for the players to kill; they are a renewable resource to be exploited for their treasure and hides.  This kind of &quot;adventuring&quot; is an important part of the game play and economy of <I>UO</I>.</P>
+<P ALIGN="JUSTIFY">In addition to creatures there are also non-player controlled human characters.  While the appearance of human NPCs is similar to player characters their interactions are, of course, very different.  NPCs are essentially robots which are programmed to do some action such as sell goods, &quot;train&quot; players in a skill, or provide services such as healing.  Some NPCs can be hired to guard a premise or act as a companion in warfare.</P>
+<P ALIGN="JUSTIFY">Human NPCs serve an extremely important role within the economy of <I>UO</I> because they are permanent.  That is, real players disconnect to go to bed or (heaven forbid) to go to work and are therefore not online the majority of the time.  NPCs provide stability – an NPC shopkeeper will tend his store 24/7 and thus ensure players of a constant source of critical goods and services.</P>
+</dir>
+<H2>Objects</H2>
+<dir>
+<P ALIGN="JUSTIFY">There are hundreds of types of objects within the world of <I>UO</I> ranging from the mundane (food &amp; clothing) to the exotic (magical weapons &amp; armor).  Each item is represented in the server database as a record which includes information such as weight, size, and quality.</P>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=553>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<B><P>Category</B></TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<B><P># of Types</B></TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<B><P>Examples</B></TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<B><P>Notes</B></TD>
+</TR>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<P>Armor</TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<P>50</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Bronze Shield, Leather Gloves, Orc Helm, Plate Mail Leggings, Studded leather Sleeves</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Includes separate pieces of a complete set.  For example, there are five components of plate mail (helmet, legs, etc).</TD>
+</TR>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<P>Weapons &amp; Ammo</TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<P>44</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Bow/Arrow, Battle Axe, Dagger, Halberd, Mace, Spear</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Weapons are among the most prized possessions.</TD>
+</TR>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<P>Clothing &amp; Apparel</TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<P>43</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Bonnet, Earrings, Fancy Shirt, Feathered Hat, Kilt, Skirt, Wizard’s Hat</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>There is a lot detail in clothing so that characters can be distinguished from one another.</TD>
+</TR>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<P>Food &amp; Drink</TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<P>69</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Bowl of Corn, Bowl of Peas, Bowl of Stew, Fish Steak Raw, Fish Steak Cooked, Pitcher of Ale, Pitcher of Wine, Small Fish, Wheel of Cheese</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Food is needed only for healing.  Many of these items are to create atmosphere.  There are many variations on a theme.</TD>
+</TR>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<P>Magical Reagents</TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<P>8</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Black Pearl, Garlic, Nightshade, Spider’s Silk, Sulphurous Ash</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Consumed to cast magical spells.</TD>
+</TR>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<P>Tools &amp; Crafts</TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<P>74</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Ball of Yarn, Cleaver, Dying Tub, Hammer, Iron Ingot, Lock-pick, Ore, Potion, Magical Scroll, Sextant, Tinker’s Tools, Wooden Box</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Tools used in trades as well as the components of production.</TD>
+</TR>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<P>Provisions</TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<P>49</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Backpack, Bedroll, Fishing Pole, Lantern, Map, Torch</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Items which are used for adventuring.</TD>
+</TR>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<P>Miscellaneous</TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<P>170</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Barrel, Basket, Book, Broken Chair, Cards, Chess Piece, Fork, Horse Dung, Kettle, Mushroom, Painting, Pillow, Rope, Statue, Tribal Mask, Wooden Tray</TD>
+<TD WIDTH="37%" VALIGN="TOP">
+<P>Items used for utility, decorations and atmosphere.  Many are oddities added for interest and may be quite rare.</TD>
+</TR>
+<TR><TD WIDTH="19%" VALIGN="TOP">
+<B><P>Total</B></TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<B><P>507</B></TD>
+<TD WIDTH="37%" VALIGN="TOP">&nbsp;</TD>
+<TD WIDTH="37%" VALIGN="TOP">&nbsp;</TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<B><P ALIGN="CENTER">Table 2.  Summary of Items</P>
+</B><P ALIGN="JUSTIFY">Items are created through three primary mechanisms.  1) Players skilled in manufacturing can create them.  2) They can be created by NPC shopkeepers out of thin air.  3) They are created as &quot;booty&quot; carried by the monsters and become available when the monster is killed.  This &quot;loot&quot; mechanic is the method by which the majority of items are created.</P>
+<P ALIGN="JUSTIFY">Items are also destroyed though various means.  For example, using a sword slowly causes irreparable wear and it will eventually break, disappearing from the world.  The most common way for an item to leave the world is through &quot;garbage collection&quot; – when an item is left on the ground, it is deleted automatically by the server within a few minutes to ensure that the world does not accumulate junk.</P>
+<P ALIGN="JUSTIFY">Players are not online constantly and therefore need store items while offline.  Several mechanism exist for this.  For example, each player is given a &quot;safety deposit box&quot; and bank account which can hold a limited amount of items and gold.  The goods placed in such banks are accessible from any banking outlet; this provides a sort of medieval version of an ATM machine.  Players who have built houses can store items in the relative safety of their abode.  Items on a player’s person are also stored securely when the player goes offline.</P>
+<P ALIGN="JUSTIFY">All items in the game are transferable from one player to another.  A few special items such as homes can only be transferred if the owner agrees to the transaction; however, the vast majority of items can be transferred through theft, a common form of exchange in <I>UO</I>.  There is also a great deal of player-to-player and NPC to player sales and bartering occurring which will be analyzed in detail in the following chapters.</P>
+</dir>
+<H2>Aspects Of The Virtual</H2>
+<dir>
+<P ALIGN="JUSTIFY">For those that have never played an online game it is difficult to imagine exactly how the world operates.  For the uninitiated there are quite a few rules which seem counterintuitive.  The reason for many of these idiosyncrasies is that while the virtual world of <I>UO</I> is superficially similar to the real world in many respects, it is also extremely different in many non-obvious ways.  The following is an attempt to summarize some of the most important aspects of the virtual world.</P><DIR>
+</dir>
+
+<H3>Fun</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">There is one overriding design criteria in all game design.  It is the cardinal rule: <I>players are there to have fun</I>.</P>
+<P ALIGN="JUSTIFY">Many rules which seem perfectly logical extensions of the real world will be rejected by players.  For example, if the game designers create a rule that states: &quot;you must eat to stay alive&quot;, the players will complain: &quot;I don’t want to worry about keeping my character fed!  If I wanted to worry about that, I would ‘play’ my real life!&quot; </P>
+<P ALIGN="JUSTIFY">Game designers are therefore frequently confronted with the following dilemma:</P>
+<OL>
+
+<LI>All elements of the game need to be fun.  </LI>
+<LI>Much of the real world is not fun.</LI>
+<LI>Elements which are unrealistic are often counterintuitive.</LI>
+<LI>Counterintuitive rules are difficult to learn and not fun, at least at first.</LI>
+</OL>
+
+<P ALIGN="JUSTIFY">Therefore, fun and realism are frequently at odds.  The game designer’s difficult job is to balance the two.</P><DIR>
+</dir>
+
+<H3>Transient Play</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">Players can obviously not be online 24 hours a day, yet the game is always active.  This presents a major challenge to the designers of &quot;persistent&quot; online worlds – what happens when a player is not online?  For example, can they be killed?  On the one hand it does not seem fair to get killed when you aren’t there to defend yourself.  On the other hand, if players are invulnerable when not online, what is to stop someone from just pulling the plug on their modem as soon as they start losing a battle?  Similar issues are posed by a player’s property.  Can my items be stolen when I’m not around?  If so, why don’t I pull the plug when I’m about to be mugged?  Players who leave the game permanently pose a related problem: what happens to their accumulated wealth and real estate?  Should these assets be taken away at some point?</P><DIR>
+</dir>
+
+<H3>Anonymity</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">It is extremely important to understand that &quot;players&quot; – the subscribers who pay to play the game – do not necessarily play just one character.  Each subscriber may own up to 5 characters per world (and there are about 14 worlds!).  However, players can not actually control more than one avatar simultaneously unless they purchase additional subscriptions.  In other words, there is a one-to-many relationship between subscribers and characters.  This leads to one of the most interesting and non-obvious aspects of the virtual world, a phenomena known as &quot;muling&quot;.</P>
+<P ALIGN="JUSTIFY">A &quot;mule&quot; is a character who is maintained for the sole economic gain of another character.  For example, imagine that there is a dungeon filled with traps and treasure.  Knowing that the cave holds unknown malice, a smart player will send his disposable mule character into the labyrinth first, thus revealing the traps and monsters at the cost of killing the disposal character several times.  Once the optimal solution is discovered the player replays the adventure with their real character, who can now make it through unharmed.</P>
+<P ALIGN="JUSTIFY">Mules present a major complication to both game design and economic research.  On the one hand it seems appropriate to consider all characters owned by a single subscriber to <I>be </I>that subscriber since they are all being controlled by and acting on behalf of that person.  On the other hand, many people role-play their various characters with little thought given to the benefits of their other characters.  This dichotomy is not easily resolved.  Simply imposing a one-character-per-player rule would be politically difficult due to similar features in other games.</P>
+<P ALIGN="JUSTIFY">The problems of anonymity should not be misunderstood.  The difficulty is not that a character can not be attached to a real-world person, but that the in-game reputation of a character may be absent as they may exist only for a brief time or may be acting on behalf of another character controlled by the same person.</P><DIR>
+</dir>
+
+<H3>Server Limits</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">The items and characters of the world are all stored in a large database which is modified according to the game rules by a central computer known as the &quot;server&quot;.  While the servers are very high-end computers they still have finite resources.   Each item in the world, each action that a player takes, and each decision that an NPC makes must be processed and stored on this machine with minimal delay.    This is an extremely challenging problem for a game with hundreds of thousands of players such as <I>UO</I> and practically every game design decision is impacted by these requirements.</P>
+<P ALIGN="JUSTIFY">For example, as will be discussed in Chapter 5, players tend to hoard items en masse.  A favorite anecdote among the designers is of a character who had over ten thousand identical shirts in his house!  This hoarding tendency leads to server failures when the database becomes too large and too slow.</P>
+<P ALIGN="JUSTIFY">These server limits create a requirement that the economic and social design of the game discourage hoarding.  This is an interesting problem – one which lacks precise real-world analogies.  Unfortunately, the existing solutions in <I>UO</I> have been less than successful as we will see.</P><DIR>
+</dir>
+
+<H3>Newbies</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">The turnover rate of subscribers in <I>UO</I> is fairly high.  At any given time a significant fraction of the online population is new and is therefore at a significant disadvantage.  &quot;Newbies&quot; don’t understand the complex rules and their characters are weak.  This presents another difficult design problem.  On the one hand, it is necessary to give some sort of special advantage to newbies to help them quickly advance.  On the other hand, special advantages given to an underdeveloped character are prone to abuse though muling.</P>
+<P ALIGN="JUSTIFY">Newbies have an especially difficult time integrating into the economy.  A new character is granted a small amount of gold to purchase basic goods; however, these funds are very limited.  More significantly, newbies have little to offer for trade.  In the real world, most people advance in the beginning of their lives through relatively unskilled work.  The institutions which provide this kind of work are highly developed in the real world and almost non-existent in <I>UO</I>.</P><DIR>
+</dir>
+
+<H3>Cheating</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">In any computer system as complex as the <I>UO</I> server, there are bound to be bugs.  Hundreds of thousands of subscribers beat on the system 24 hours a day which ensures that they will find bugs quickly and exploit them for personal gain.  For example, counterfeiting was rampant for the first several months due to an obscure bug which allowed gold to be cloned at will. The resulting inflationary effect was extremely damaging in the early months of <I>UO</I> and will be examined in detail in Chapter 5.</P>
+<P ALIGN="JUSTIFY">Cheating is, of course, a significant problem in any game be it football, poker, or Super Mario.  However, the effects are greatly amplified in online games because of the remarkable ability of players to organize their communications.  For example, an AltaVista search for &quot;Ultima Online&quot; finds almost 8000 web pages, most of them built by fans.  Many of these web pages document the inner workings of <I>UO</I> in great detail<sup>1</sup> (in fact, the developers sometimes refer to these user-created document because they are often more up-to-date than internal documents!).  Thus, when an exploitable bug such as gold counterfeiting is discovered it is just a matter of hours before every subscriber is aware of the cheat.  Unfortunately, the small team maintaining the server code is always out-manned – there’s 100,000 players and often only one programmer who understands the code well enough to fix it.  Therefore the server can never be fixed as fast as it can be exploited.  This is &quot;Hacker’s Law&quot; – exploits will always be found faster than fixes.</P>
+</dir>
+
+<H1>Chapter 3.  Introduction To The <I>UO</I> Economy</H1>
+<H2>Why Do People Play?</H2>
+<dir>
+
+<P ALIGN="JUSTIFY">To understand the economy of <I>Ultima Online</I>, one should first consider why people engage in this economy at all.  In other worlds, why do people play <I>Ultima Online</I>?  The answers to this are, of course, complicated.  Consider the disposition of at least four broad categories of players proposed by Bartle<sup>2</sup>.</P>
+
+<UL>
+<B><LI>Socializers </B>enjoy talking and role-playing with other players.  For them, the game is merely a setting; goods and services are just tools which help provide mood and context in role-playing.</LI>
+<B><LI>Killers </B>enjoy doing things to people.  The game provides a world where their actions are legitimized.  The goods and services available in the economy are tools used to increase their power and skill.</LI>
+<B><LI>Achievers</B> are interested in fame and glory.  They want to achieve the highest status or overcome the latest challenge.  The economy may not only provide needed goods and services to an achiever, but also provide goals such as becoming the richest character or owning the largest house.</LI>
+<B><LI>Explorers</B> want to discover the finer points of the game.  They will explore every profession, skill, and items.  To explorers, the economy is an impediment which prevents them from playing with all the toys.</LI>
+</UL>
+</dir>
+
+<H2>The Role of the Economy</H2>
+<dir>
+<P ALIGN="JUSTIFY">On the one hand, the economy in <I>Ultima Online </I>is spontaneous; that is, players are free to trade between one another as they see fit.  On the other hand, the economy is carefully designed.  For example, features such as the NPC shopkeepers, vendors, and other details are all painstakingly planned by the designers.  These and other features will be examined in the following chapters.</P>
+<P ALIGN="JUSTIFY">The following table examines some of the roles of the <I>UO</I> economy, both planned and spontaneous. It is important to keep in mind that the economy is just one part of the solution to these design requirements; in other words, the economy is not necessarily the decisive instrument in achieving these goals.</P>
+
+<UL>
+<B><LI>Ration power – </B>Newbies shouldn’t be weilding ultra-powerful armaments. A well functioning economy will limit access to powerful items.</LI>
+<B><LI>Support specialization </B>– An economy which limits what a player may possess though pricing will force players to choose their items carefully.  For example, it tools-of-trade are expensive, then players will need to specialize in only one trade.  This encourages individual players to find a niche.</LI>
+<B><LI>Encourage interaction </B>– A well functioning economy can motivate players to meet with each other for trade and work. </LI>
+<B><LI>Provide goals </B>– There are many possible goals in a complex game, just as in real life.  Acquiring wealth will generally help a player along the road towards any goal they select.  In fact, acquiring wealth can serve as a default goal when the game setting or the player’s imagination temporarily fails.</LI>
+<B><LI>Support economic role-playing</B> – some players will always enjoy taking on specific economic roles such as artisan, merchant, or trader.  A well functioning economy is crucial to supporting these natural roles.</LI>
+</UL>
+
+</dir>
+<H1>Chapter 4.  The Macroeconomic Design</H1>
+
+<P ALIGN="CENTER">
+<IMG SRC="image5.gif" width="582" height="659">
+<B><P ALIGN="CENTER">Figure 1. Original Economic Flow</b></p>
+<hr>
+<P ALIGN="CENTER">
+<IMG SRC="image6.gif" width="612" height="782" ></P>
+<B><P ALIGN="CENTER">Figure 2. Revised Economic Flow</b></p>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<H2>Virtual Resources (Box 1)</H2>
+<dir>
+<P ALIGN="JUSTIFY">Every object in <I>UO</I> is made from basic resources.  For example, a sword might consist of two units of metal; a rabbit might consist of two units of fur and one unit of meat, etc.</P>
+<P ALIGN="JUSTIFY">When an object such as a sword is created it consumes its constituent resources which are now tied up within the sword.  This association is two-way; when the sword is destroyed through decay or breakage the metal resources are liberated.  In this way, resources circulate from abstract (like a bookkeeper’s ledger) to concrete and back again.</P>
+<P ALIGN="JUSTIFY">Box 1 represents all of the resources within the game which are not tied up in items.  Think of it as a bank of resources ready to be distributed whenever necessary to create objects in the world.  The method by which this bank gets refilled is one of the primary changes that has occurred to the <I>UO</I> economy since its inception.  We will return to this in Chapter 5 once the remainder of the economy is more fully understood. </P>
+</dir>
+<H2>The Supply of Raw Materials</H2><DIR>
+<H3>Natural Resources: Creatures &amp; Mines</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">Path 1c represents the creation of items from natural resources.  For example, there are mines in <I>UO</I> which will occasionally produce chunks of ore when a player clicks in the right place while holding a pick.  The amount they can extract in a given time is proportional to the ore remaining in the mine as well as their mining skill.  A character can then take this ore and convert it to useful metal through smelting.  There are many variations on this theme, all of which can be broadly called &quot;mines&quot;.  For example trees can be gathered from the forest – and have their wood converted to lumber with the carpentry skill; rabbits can be hunted in the forest – and have their pelts turned into leather boots through tailoring.  Each of these is a &quot;production path.&quot;  It is important to understand that each of these production paths must be explicitly designed and implemented by the game creators; players can not make up new production paths on their own.</P>
+<P ALIGN="JUSTIFY">Probably the most important natural resources in terms of both quantity and fun are the monster NPCs which inhabit the forest and dungeons.  Players spend a great deal of time (and have a lot of fun) hunting these monsters and collecting the loot they carry.  These creatures can be very complicated resource collections.  For example, an orc contains not only the fur and meat of its body, but may also carry goods such as weapons, armor, gold, and magical reagents.</P><DIR>
+</dir>
+
+<H3>Raw Materials</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">Path 2a represents the gathering of raw materials such as pelts, wood, and meat.  Players accumulate these raw materials through hunting and mining expeditions and may store this loot for future conversion into more useful goods through manufacturing (path 4a).  Some raw materials are also available directly from certain shopkeepers (path 1b).</P>
+</dir>
+<H2>The Supply Of Finished Goods</H2><DIR>
+
+<H3>Player Manufacturing</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">There is great demand in the game for finished goods such as weapons and armor (box 5).  Many of these goods, as previously mentioned, are generated and distributed as booty belonging to monsters.  However, many types of goods are additionally or exclusively distributed through NPC or PC manufacturing.</P>
+<P ALIGN="JUSTIFY">Player characters become manufacturers by mastering a skill such as smithing, tailoring, or alchemy.  A manufacturing trade such as tailoring takes raw material inputs (box 4) such as wool and pelts and creates finished goods such as shirts, armor, and boots (box 5).  It is important to understand that not all goods can be manufactured.  The manufacturing paths require design and programming effort and are therefore bounded by development time constraints.</P>
+<P ALIGN="JUSTIFY">A character practicing a skill such as tailoring will improve that skill over time.  When first practicing the skill, they tend to create a lot of waste which consumes the inputs but does not produce an output.  This waste is carried away along path 4b.  However, despite this waste, a great deal of finished product is created by players learning to craft.  There is a major economic problem associated with player character manufacturing: players have a non-demand incentive to produce – they ‘improve by doing’.  In other words, a tailor may choose to produce clothing not because there is a demand for clothing, but because their abilities to produce clothing cheaply and efficiently tomorrow depends on producing extra shirts today.  The resulting overproduction is very important and will be examined in detail in Chapter 5.</P><DIR>
+</dir>
+
+<H3>Vendors</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">Players can sell the items they produce (or obtain through trades, etc.) via vendors.  Vendors are NPC salesmen who hock wares on behalf of players.  They are, in reality little more than automated vending machines.  Players &quot;own&quot; vendors and can stock them full of inventory (Path 6d on Figure 2) which the vendor will then sell to player characters only at the set price.  Vendors are a critical part of solving the &quot;transient play&quot; problem – a player can not be online 24 hours a day, but their vendor can.</P>
+<P ALIGN="JUSTIFY">Although vendors were an original part of the game design, they were not implemented until about six months after the game was released.  Their effect on the economy was drastic and will be examined in more detail in Chapter 5.</P>
+<P ALIGN="JUSTIFY">Vendors have several rules which are important to their usage:</P>
+<OL>
+<LI>They are secure containers.  Inventory can be added and removed from them at will, but only by the owner.</LI>
+<LI>They can not purchase goods, only sell.  (There are currently plans in the works to allow this.)</LI>
+<LI>They will not haggle; they sell only at the price assigned by the owner of the vendor.  (Smart players give volume discounts by packaging large quantities into a bag and then putting a price on the bag which reduces the per item charge.)</LI>
+<LI>They charge a fee for their service which they automatically extract from their receipts.</LI>
+<LI>If they are not paid (there isn’t enough cash in their receipts) they will quit, taking their inventory with them.</LI>
+<LI>They must be attached to a house to provide realistic context.  They can not move.</LI>
+</OL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">An interesting economic phenomenon occurred concerning the fee charged by vendors.  When they were first implemented, vendors charged a fee based on the resource price of their inventory regardless of their sales.  With this in mind, clever players realized that they could set the price for the goods to be extraordinarily high and thus prevent anyone from buying them.  This, it turned out, was a very effective way of creating a safety-deposit box since the vendors can not be robbed.  Players started buying vendors for the sole purpose of increasing their hoarding space.  This exacerbated hoarding problems and also resulted in a form of suburban sprawl where people built tents and attached vendors consuming valuable land.  The designers ultimately fixed these problems with an elegant economic solution: the vendors now charge a fee based on the value of the goods assigned by the player.  Thus, players can still set the values too high, but they will be charged rent proportionately thus deterring this practice dramatically.</P><DIR>
+</dir>
+
+<H3>NPC Manufacturing</H3></DIR>
+<dir>
+
+<I><P ALIGN="JUSTIFY">UO</I> towns are populated by many NPC shopkeepers.  These shopkeepers provide goods such as weapons, clothing, and supplies (path 1a) as well as some raw materials such as wool and leather (path 1b). There are a few important commodities which only NPCs can sell, chief among these is magical reagents – the ingredients which are needed for all magical spells, a very important part of the game.</P>
+<P ALIGN="JUSTIFY">The NPC shopkeepers help to provide continuity to the economy – providing goods at a fixed location 24 hours a day.  They also help create atmosphere, their shops and taverns form organized towns which give the newly formed worlds a lived-in feel.  However, the NPC shopkeepers’ importance has been diminished by the creation of vendors which have moved the economy towards a more player-oriented supply chain.</P>
+<P ALIGN="JUSTIFY">The NPC shopkeepers run a very complicated artificial intelligence (AI) algorithm to simulate supply and demand; in essence, they are robotic businessmen seeking to create a profit for themselves by evaluating the situation around them.  The NPCs can also create finished goods from thin air to sell.  When they do so, they must withdraw the necessary resource components from the supply of virtual resources (path 1a).  As before, if there are no resources available in box 1, the object can not be made.  They can also purchase items for resale and, if necessary, destroy the item, returning its constituent resources back into the bank (Path 6c).  </P>
+</dir>
+<H2>The Supply of Gold (Box 3)</H2>
+<dir>
+<P ALIGN="JUSTIFY">Gold coins are the primary form of money in <I>UO</I>.  NPC shopkeepers and vendors get paid in gold and big ticket items like houses can only be bought with it.  Gold enters the economy through two legitimate means: from creatures’ loot (path 2b) and by NPC shopkeepers making purchases (path 1c). Player-to-player transactions don’t add or remove gold from the economy, of course (path 3a).</P><DIR>
+</dir>
+
+<H3>Counterfeiting</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">In the early stages of <I>UO</I>, players discovered an obscure server fault which allowed them to clone certain kinds of items, primarily gold and reagents.  Although the programmers discovered this cheat quickly, it took them a long time to fix it (Hacker’s Law).  In the interim, the existing <I>UO</I> worlds became saturated with gold.  Estimates of the inflation value range from multiples of hundreds of thousands to millions.  The hyperinflation destroyed the gold economy and players resorted to bartering and just plain-old charity during this period.  The results of this inflation are explored in Chapter 5.</P><DIR>
+</dir>
+
+<H3>Alternate Currencies</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">As in the real world, players are free to barter between themselves and thus alternate player-to-player currencies are possible.  However, it did not occur en masse in <I>UO</I> once the counterfeiting cheats were corrected.  Presumably, this is because there are a number of important commodities such as real-estate and reagents which are only priced in gold and players find it cumbersome to convert between more than one currency. </P>
+</dir>
+<H2>Drains</H2><DIR>
+<H3>Item Drains</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">There are five primary ways in which items are removed from the economy.</P>
+<OL>
+
+<LI>Botched manufacturing is the result of inexperienced player manufacturing.  (Path 4b.)</LI>
+<LI>Degradation is simple wear and tear; for example, as a character uses a sword it wears and eventually breaks.  (Path 6d.)</LI>
+<LI>Decay is garbage collection – if items are left on the ground in an unprotected place (such as outside of a house), they will be reclaimed by the server within a few minutes to prevent the world becoming littered with junk.  This is very common after someone is &quot;killed&quot;.  (Path 5b.)</LI>
+<LI>Degradation (Path 6d again) also covers consumables such as reagents which are destroyed when used.</LI>
+<LI>Selling to NPC shopkeepers can remove items from the world if they choose to destroy the item.  (Path 6c.)</LI>
+</OL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Players genrally dislike the first three of these drains because they seem to be artificial rules which take away their goods.  But, without these rules, the game would become cluttered and pointless.</P>
+<P ALIGN="JUSTIFY">The forth drain – consumption – is very natural and players accept it.  Perhaps making more items consumable would alleviate some of the hoarding problems.  This will be examined in Chapter 5.</P>
+<P ALIGN="JUSTIFY">The firth drain – selling items to NPC shopkeepers – is very popular because it theoretically generates a profit for the players.  This item drain is not a true sink of goods because it involves printing gold to pay for the goods.  Thus, it is really a conversion from non-gold resources to gold. (See Chapter 5).</P><DIR>
+</dir>
+
+<H3>Gold Drains</H3></DIR>
+<dir>
+
+<P ALIGN="JUSTIFY">Gold leaves the economy in two principle ways:</P>
+<OL>
+
+<LI>NPC shopkeepers take gold when they sell goods to players.  The large sums paid for house deeds are a very significant component of this.  (Path 3b)</LI>
+<LI>Rent charged by vendors.  Note that this drain did not exist until vendors were added about six months after the initial release of the game.  (Path 3c)</LI>
+</OL>
+
+</dir>
+
+<table align=center valign=top>
+<tr>
+	<td><IMG SRC="image7.jpg" HSPACE=12 VSPACE=6 ALIGN=RIGHT width="400" height="400"></td>
+	<td rowspan=2>&nbsp;</td>
+</tr>
+<tr>
+	<font size=-1>
+	<td align=center><b>A humble miller's shop including oven and mill.</b></td>
+	</font>
+</tr>
+</table>
+
+<H2>Land and Housing</H2>
+
+<dir>
+<P ALIGN="JUSTIFY">Players may construct houses in <I>UO</I>.  Much like the real-world, obtaining housing is considered a major sign of achievement and advancement.  These houses range from humble abodes to grand castles. Some houses include tools utilities such as metal forges which make them more akin to small factories than houses.</P>
+<P ALIGN="JUSTIFY">The rules which govern land and housing are significantly different from real-world market economies.  The following summarizes these rules:</P>
+
+<UL>
+<LI>There is no trade in land.  Any land which is not crossed by a road and is level can be taken on a first-come, first-serve basis.</LI>
+<LI>A house is constructed by purchasing a deed in gold from an NPC shopkeeper.  This deed is then taken to the desired location where it is magically turned into a house.</LI>
+<LI>A character may own only one house.  (Keep in mind that a subscriber may have more than one character.)</LI>
+<LI>Houses can be shared among several players by duplicating keys.  For example, a mule character may be used to obtain more housing.</LI>
+<LI>While not guaranteed, houses are secure for all practical purposes.  Players tend to fill them with items to make them more glamorous or may just treat them as a place to store junk.  (See ‘Hoarding’ Chapter 5.)</LI>
+<LI>Houses can be neither stolen nor damaged.</LI>
+<LI>If not regularly visited by their owners, houses will decay and eventually disappear.</LI>
+<LI>Houses are required to run a player-controlled vendor and are thus crucial to the supply side of player commerce.</LI>
+</UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Several of these rules are designed explicitly to constrain the supply of housing.  Controlling the supply of housing is very important for several reasons.</P>
+
+<UL>
+<LI>Unimproved land is extremely limited.  Wilderness is required for adventuring – a crucially fun aspect of the game which must be maintained.</LI>
+<LI>Houses serve as storage vessels and therefore promote hoarding and server congestion.</LI>
+</UL>
+</dir>
+
+<H1>Chapter 5. The Economic Evolution of <I>UO</H1>
+<dir>
+</I><P ALIGN="JUSTIFY">Although the <I>Ultima Online</I> economy is only a year old, it has evolved radically over its brief life.  The preceding chapters described the economic elements of <I>UO</I>, but the most interesting aspects are how those elements were forced to change due to player reaction.</P>
+<P ALIGN="JUSTIFY">The original design focused heavily on macroeconomic rules: the closed resource flow, the mechanics of supply from NPCs, and the drain rules to name a few. With perfect hindsight, one can argue that these macro design elements came at the expense of microeconomic development.  For example, there was little investigation of alternative price determination mechanisms for NPC shopkeepers; their prices are based on simulation instead of real world mechanics such as auctions.  Also, vendors were not added until six months after release despite their pivotal significance to the micro-economy.</P>
+<P ALIGN="JUSTIFY">Early economic design decisions were further obscured by the effects of counterfeiting.  One designer said: &quot;We really have no idea how well the original simulation worked because counterfeiting destroyed the ‘experiment’.&quot;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The following sections examine specific problems within the economy, some of which are still major issues.  The microeconomic aspects are examined first.</P>
+</dir>
+<H2>Over-Production</H2>
+<dir>
+<P ALIGN="JUSTIFY">As explained earlier, skills improve through use. For a manufacturing profession such as tailoring or smithing, players are motivated to improve skills because it will allow them to make better items for themselves on-demand in the future.  Thus players, in the process of training, produce huge numbers of item regardless of whether there is a market for them.  This, combined with the effects of macroing and the fact that some players create items for the shear fun of it, conspire to shift the supply curve to the right.  This results overproduction and deflated prices of many basic goods.  (Figure 3)</P>
+<P ALIGN="CENTER"><IMG SRC="image8.gif" width="399" height="255" ></P>
+<B><P ALIGN="CENTER">Figure 3.  Shifted supply curve</P>
+</B><P ALIGN="JUSTIFY">Complicating this oversupply problem in <I>UO</I> is that the players expect to make a profit for their labor regardless of whether or not there is a market for it.  A tailor may create a large number of shirts and then take them to an NPC shopkeeper to sell.  The shopkeeper, already storing a pile of identical shirts which he can’t sell, refuses to buy more.  Many players will report this is a bug!  They will claim (with some justification) that the game encouraged them to produce but they didn’t make a profit!  In other words, players expect a free ride.</P>
+<P ALIGN="JUSTIFY">The psychology of this is interesting.  In the real world, these people would not expect a shopkeeper to buy goods which were in massive oversupply; and even if they did, who would they complain to?  There are several explanations for this profit expectation</P>
+<P ALIGN="JUSTIFY">First, most players on <I>Ultima Online</I> have played many hours of single-player games and in these single-player games player are at the center of the universe.  Because <I>UO</I> places a large emphasis on character development through production, players expect that this is a mechanism for the young character to develop and gain gold at the same time (which is, indeed, accurate).  These two design goal at are odds with each other.  On the one hand the game is trying to be a realistic economic environment, on the other hand it contrives economic elements such as character development which just don't fit within the simulation.</P>
+<P ALIGN="JUSTIFY">The second factor in the profit expectation is that in <I>UO</I> almost all characters are forced to be entrepreneurs of some type, a fact which doesn’t correspond well to these player’s real life.  In other words, most people in real life generate their incomes from employment contracts and thus they understand these arrangements.  Unfortunately, such employment contracts are not implemented in <I>UO</I>.  Therefore, there is naturally disappointment when players are forced into being entrepreneurs and find that this job is not effortless.</P>
+
+<P>Further exacerbating the over production problem is that many players use &quot;macros&quot; (a program which replays a series of mouse moves and clicks) to script the tedious functions of production.  This creates even more junk that can not be sold and even more demand for the NPC shopkeepers to buy the goods back.  Meanwhile, other players who don’t cheat complain bitterly that others are getting ahead through cheating and then justify their own cheating on these grounds.</P>
+<P ALIGN="JUSTIFY">Eventually, the designers were forced to partially give in to these demands.  They changed the shopkeeper code to buy goods such as shirts which were in massive oversupply regardless of the demand.  However, to prevent abuse, the shopkeepers will only buy in limited quantities, say 10 an hour, so that players will not be able to write a macro which produces endless shirts and sells them for endless gold.</P>
+<P ALIGN="JUSTIFY">In order to facilitate these shopkeeper changes, the AI which required the shopkeepers to keep a positive cash flow had to be abandoned.  Shopkeepers now effectively print gold in order to pay for the useless goods which are being created by the manufactures.  The result is that the improve-by-doing system is inflating the gold supply.  However, compared to the hyperinflation which occurred while counterfeiting was possible, the inflation is minimal and goes almost unnoticed.</P>
+</dir>
+<H2>Failure of NPC Shopkeeper Economy</H2>
+<dir>
+<P ALIGN="JUSTIFY">There are many miscellaneous items in the <I>UO</I> world which, for thematic reasons, are not available as loot on monsters.  For example, it doesn’t make sense for an orc to be carrying a chair.  As discussed above, many of these items are supplied by player manufacturing; however, not all items have player manufacturing paths.  The remaining items have to be produced by NPCs who can simply create them out of thin air.  The importance of NPCs was especially relevant during the early days of the game for three reasons: 1) characters were expected to be undeveloped and therefore unable to produce many goods efficiently 2) vendors didn’t exist to streamline player-to-player transactions 3) not all player manufacturing paths had been implemented.</P>
+<P ALIGN="JUSTIFY">A large amount of work went into making the NPC act like intelligent shopkeepers.  As described above, their AI involved a complicated set of values such as inventory, sell through, resource value, cash on hand, etc. to arrive at prices. In other words, they created a full-blown simulation of supply and demand.</P>
+<P ALIGN="JUSTIFY">As if this simulation wasn’t complicated enough, the problem of price determination was compounded by the oversupply of certain player-manufactured goods as well as by hyperinflation through counterfeiting.  With hindsight, a strong argument can be made that this complicated algorithm should have been abandoned in favor of some variation of an auction.</P>
+<P ALIGN="JUSTIFY">However, even creating an auction does not entirely solve the problem.  As described above, players who are encouraged to produce because they improve-by-doing expect to make a profit for their labor.  Obviously, no auction is going to provide such an external profit.  Thus, unless the improve-by-doing scheme is fundamentally revised or a mass change of players’ expectations occurs, the NPCs have to buy back useless goods and print the gold to do it.  Another problem with auctions is that it is hard to imagine that they could run efficiently without large marketplaces which are currently underdeveloped.  However, if properly implemented, large organized markets could not only help price determination, but also create fun socialization events as they do in the real world.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Despite the work that went into providing NPCs as suppliers the truth is that, especially in the early days of the game, there was little that the NPCs provided that players wanted.  Most of their demands were being fulfilled by loot on monsters or through the infantile (pre-vendors) player-manufacturing economy.  There were two important exceptions to this: magical reagents (discussed in detail below) and raw materials.</P>
+<P ALIGN="JUSTIFY">Raw materials such as cotton and wood were sold by NPCs in order to help characters more quickly advance their skills in the improve-by-doing system.  In other words, it is tedious enough repeat the skill over and over again without having to venture off into the potentially hostile woods to gather raw materials.  The prices of these raw materials were kept artificially low (i.e. subsidized) for these developing characters.  Due to the profit expectation, the shopkeepers would buy back the finished goods made out of these raw materials at a premium.  The result was simple: the shopkeepers went broke – they had piles of things no one wanted and no cash.  Before abandoning the idea that the shopkeepers should be running realistic profit simulations (i.e. that the shopkeepers should track cash on hand), the designers first tried to create things for the shopkeepers to sell which people actually wanted.  This, they thought, would attract cash and thus underwrite the oversupplied ‘market’ in player-manufactured goods such as clothing.  Furthermore, it was thought, this would help extract gold from the hyperinflating economy.</P>
+<P ALIGN="JUSTIFY">This scheme did not work.  First, it was very difficult to come up with things that players wanted for which they were willing to pay very high prices.  Second, the things they did think of generated player outcry as unfair competition by the NPCs.  For example, they created a special blue plate armor – pretty much the same thing as regular plate armor except it was blue!  The players who specialized in making armor were outraged.  &quot;That’s not fair, why can’t we make blue armor?  The NPCs have an unfair advantage over us player manufacturers!&quot;</P>
+<P ALIGN="JUSTIFY">An interesting analog can be drawn here between these virtual subsidization efforts and the efforts made in the real world to help developing nations.</P>
+<P ALIGN="JUSTIFY">Another major exception to the rule that NPCs did not supply things that players wanted is magical reagents.  Shopkeepers are the only source of reagents.  It was not long before a group of players realized that they could corner the market in this valuable commodity.  (In fact, some of the first people to try this were actually employees at a rival computer game company.)  This group became highly efficient at the process of buying up all the reagents available at every store.  They had to devise secure warehousing as well as a scheme for dividing up the inventory for redistribution.  On the one hand, this scheme created an very interesting player event, the kind of thing a game designer hopes will be possible within the rules.  On the other hand, while it amused a minority, it annoyed the majority who demanded that Origin stop the Mafia.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="CENTER"><IMG SRC="image9.gif" width="346" height="259" ></P>
+<B><P ALIGN="CENTER">Figure 4.  Simplified view of two parallel economies</P>
+</B><P ALIGN="JUSTIFY">In practice, there are really two economies within <I>UO</I> as diagramed in figure 4.  The NPC-to-player economy involves the flow of goods and services between NPCs, players, and resources.  The second economy is the exchange between players.  The NPC economy was intended only to augment the player-to-player economy – to supply those things which it didn’t make sense for the players to produce and to stimulate adventuring.  One thing is clear: managing the non-player economy is extremely difficult.  To put the matter in real world terms: <I>central planning doesn’t work</I>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The addition of vendors has significantly improved the player-to-player economy.  This allows players to effectively trade through a proxy while they are not online.  There is room for improvement, however.  For example, the vendors can not auction or haggle to find ideal prices, they will sell only at the prices assigned by their owner.  Vendors can not buy goods and thus players can not accumulate goods while offline.  There is no such thing as an enforceable contract so futures and other agreements are impossible.</P>
+<P ALIGN="JUSTIFY">Perhaps more importantly, player-controlled vendors are scattered throughout the world attached to player’s houses.  The search time and cost to find vendors is high (not to mention perilous).  One good step in improving this was allowing players to place signs which labeled their houses as a certain kind of shop.  The players also created advertising campaigns themselves.  For example, they posted messages on public boards and gave away &quot;recall runes&quot; which allowed customers to teleport instantly to their shops.</P>
+</dir>
+<H2>Hoarding and The Failure Of The Closed Economy</H2>
+<dir>
+<P ALIGN="JUSTIFY">Figure 1 illustrates the original design of the macro-economy.  Notice that all of the drain paths lead back up to the top, forming a closed loop.  The impetus for this design was to prevent resource inflation; the theory being that a fixed quantity of resources would simply circulate from abstract to concrete and back again thus preventing the inflation that had plagued many similar on-line worlds.  While this sounded good in theory, it was a failure in practice.</P>
+<P ALIGN="JUSTIFY">What the designers had not counted on was the deflationary effects of hoarding.  What actually happened was that many of the resources accumulated as inventory (box 6) with little flowing back to the top via the drains.  As the virtual resources in the &quot;bank&quot; (box 1) dried up, there were no longer resources available to spawn creatures and their loot.  The result: the world became boring and the players began to complain loudly.</P>
+<P ALIGN="JUSTIFY">At first, the designers attempted to solve the deflation problem by pumping more resources into the world – they simply increased the total quantity of resources in the bank.  But, no matter how much they added, the resources always flowed into inventory and just sat there.  The problem, they concluded, was the lack of drains – not enough stuff was flowing out.  However, players are (understandably) extremely resistant to rule changes which take things <I>away</I> from them.  Thus, significantly increasing the decay or degradation rates is politically unfeasible.  New drains were proposed: taxes, maintenance fees on housing, etc.  Unfortunately, many of these drains feel too much like real world &quot;work&quot; and are therefore politically unacceptable (see ‘Fun’ Chapter 2).</P>
+<P ALIGN="JUSTIFY">After a few changes to hoarding rules, such as limits on the number of objects which can be practically kept inside of a house, the designers were forced to give in.  It was clear that the drains were not going to be steady enough to count on so the answer was to disconnect the output from the input.  This is demonstrated in the drain difference in figure 2.  In this diagram, all outputs flow to the ultimate drain where they are simply destroyed.  At the top, new resources are created out of thin air (the &quot;faucet&quot;) and flow into the world at a more or less constant rate.  While this solves the deflationary problem, it does not solve the server congestion problem; the server backups are still growing and some sort of improvement in the drains will have to be created sooner or later.  This is a contentious topic because it is filled with politically sensitive solutions.</P>
+<P ALIGN="JUSTIFY">The first question that must be asked is, &quot;Why do players hoard?&quot;  It is a difficult question to answer.  Among the theories proposed are:</P>
+
+<UL>
+<B><LI>Decoration.  </B>People will line their houses with such things as helmets or cloth to make their space interesting and special.</LI>
+<B><LI>Laziness.  </B>Why bother throwing things out if there is plenty of space and it doesn’t cost anything to warehouse?</LI>
+<B><LI>Speculation.  </B>If players think that the price will go up on an item, they will hold it in hopes of selling it for more later.</LI>
+<B><LI>Pack-rat syndrome.  </B>&quot;I might need this someday.&quot;</LI>
+<B><LI>Mementos.  </B>Objects can serve as reminders of old adventures. &quot;Remember when I got that from the dragon during…&quot;</LI>
+<B><LI>Status symbols.  </B>Huge piles of wealth show how experienced the player is and can be used for bragging rights.</LI>
+<B><LI>Achievement.  </B>Many games are filled with arbitrary goals, some players will create them even when they don’t exist. &quot;I have a million gold, I win!&quot;</LI>
+</UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Regardless of the psychology, new drain mechanisms will ultimately have to be adopted to combat hoarding.  There are as many ideas of how to do this as there are theories of why people hoard.  Unfortunately, most of them suffer from the same political problem: player’s don’t want new rules which take things away.  Among the ideas:</P>
+
+<UL>
+<B><LI>Taxes.  </B>Charge fees for maintaining a character in proportion to their property, income, or purchases.  Although this would be fairly easy to implement, it is politically explosive.</LI>
+<UL>
+<LI>One corollary to this idea is to have imperfect tax enforcement.  If players are randomly taxed (like an IRS audit) in proportion to their wealth there might be an interesting wealth gamble which takes place which reduces the overbearing perception of a tax.</LI>
+</UL>
+<B><LI>Maintenance on real-estate.  </B>Make houses or other capital goods deteriorate in such a way that repairing them must be done by an NPC.  Adding a similar PC repair skill would only help the hoarding problem if it consumed some resource however what that resource would be is unclear.</LI>
+<B><LI>Natural Disasters.  </B>Clear out hoards with an occasional storm or quake.</LI>
+<B><LI>Lotteries.  </B>Like any real-world lottery, rig the numbers so that it collects considerably more than it pays out.</LI>
+<B><LI>Consumables.  </B>Currently, magical reagents are one of the few consumables.  It is just a matter of design to think of more items which provide a useful function but which consume a resource.  Increasing the consumables is by far the most politically feasible drain because the players feel they are getting something for their cost – i.e. it isn’t a tax.</LI>
+<B><LI>Indulgences.  </B>Services such as ‘red hair dye’ which players are willing to pay for but which don’t cost server resources.  Extreme examples might be titles; for example, 10,000 gold buys a character the title &quot;lord&quot;.</LI>
+<B><LI>Recycle bins.  </B>Provide places where players can dump old junk for cash.  This will inflate the gold economy but reduce server overhead (since gold requires fewer server resources then non-gold items).</LI>
+<B><LI>Capital good depreciation.  </B>Make items which are used to produce other items such as forges, houses, tools, etc. degrade more dramatically with use.  This is slightly more politically acceptable than other degradation rules because these items are producing profit while they are functional.</LI>
+<B><LI>Housing auctions.  </B>Sell houses though auctions instead of fixed prices.  This would be particularly helpful in reducing gold inflation.</LI>
+<B><LI>Market fees.  </B>Specialized taxes for places such as large marketplaces.</LI>
+</UL>
+
+<B><P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">In addition to these direct approaches, there are several indirect methods to combat hoarding.</P>
+<UL>
+<B><LI>Improve the inter-player micro-economy.  </B>It can be argued that if the player-to-player economy were more robust, players might feel more willing to part with some goods because they know they can get them easily later.  (Unfortunately, this only addresses the pack-rat syndrome.)</LI>
+<B><LI>Eliminate the improve-by-doing system; replace with pay-to-improve.  </B>A major change in mindset would also effectively combat over-supply – instead of improving skills through use, have at least some skills improve though training or magic which must be <I>paid for in gold</I>.  This gold would be obtainable through item sales to NPCs and recycle bins both of which are politically acceptable item drains.  This design has the added benefit of cycling more of the economy through gold, which makes the job of monitoring and regulating the economy easier and more realistic.  Figure 5 demonstrates this.</LI>
+</UL>
+
+<B><P ALIGN="CENTER"><IMG SRC="image10.gif" width="245" height="216"></P>
+<P ALIGN="CENTER">Figure 5.  Alternative macro-economy.<BR>
+Skills purchased with gold instead of improve-by-doing.</P>
+</dir>
+</B><H2>Counterfeiting</H2>
+<dir>
+<P ALIGN="JUSTIFY">As mentioned earlier, the counterfeiting of gold and reagents was possible through various loopholes which took some time to fix.  Because the bugs were found early, the resulting hyperinflation was limited to only the few worlds which existed at the time.  Looking at those worlds now, there appears to be a higher &quot;standard of living&quot; in the form of castles, houses, and other expensive items (although one should be cautions with this analysis since should it may be simply because these worlds are older).  An interesting observation is that players don’t seem more attracted to these wealthier worlds.  Most players seek challenges – when it gets to the point where they can buy whatever they need at the corner vendor, what’s the point?  Thus, many people simply stop playing these maps and move on to other, newer and fresher worlds.</P>
+<P ALIGN="JUSTIFY">In the real world, we associate hyperinflation with the almost total devastation of a country and its population.  In <I>UO</I> this really did not happen because there was little that players wanted that was purchasable with gold.  The one major exception was reagents which were also cloneable!  The hyperinflation, while annoying, did not preclude players from having fun and, in the end, this is all that matters.  This should perhaps introduce a bit of humility into the over-design of the economy – for all its complications, it is not required to make the game fun.</P>
+<P ALIGN="JUSTIFY">After the inflation bugs were fixed, the designers attempted to extract gold from the inflated economies.  While imposing a simple progressive tax might have sufficed, it was (as always) politically unfeasible.  The designers tried to create unique items such as special suits of magical armor which would command huge prices and thus deflate the economy a little.  They could not make a dent in it and ended up creating even more problems (see <I>Failure of NPC Shopkeeper Economy </I>above).  The game masters even tried to create special events to extract the gold.  For example, they auctioned off special red hair dye in a one-time-only special.  Players literally queued up for hours, partitions had to be built to stop them from cutting in line and guards had to stop fights from breaking out.  While the dye auction did fetch a lot of gold, it required too much effort on the part of the game masters to make it worthwhile.</P>
+</dir>
+<H1>Chapter 6.  Conclusion</H1>
+<H2>Lessons Learned</H2>
+<dir>
+
+<UL>
+
+<LI>Hoarding is rampant.  (Failure of closed economy.)</LI>
+<LI>The economy must maintain liquidity; tying the input flow rate directly to the output flow rate was a bad idea because hoarding froze the input making the game uninteresting.  (Failure of closed economy).</LI>
+<LI>Over emphasis on the macro-economy and under emphasis on the micro-economy made setting prices on NPC goods difficult and inefficient.  (Failure of NPC Shopkeeper economy).</LI>
+<LI>Institutions and opportunities for player-to-player trade need to be thought out and provided but not overly developed.  (Failure of the NPC Shopkeeper economy).</LI>
+<LI>Some design elements had unintended economic consequences (vendors used as storage).  Economic motivations and incentives need to be considered on all design elements.</LI>
+<LI>Incentives to overproduce result in oversupply and devalued prices (improve-by-doing system).</LI>
+<LI>Players expect to make a profit for their labor if that labor is encouraged through game mechanics (improve-by-doing system).  This profit expectation can cause significant disruption if the design does not allow for it.</LI>
+</UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Another way to look at this is to state what happens when a game economy fails.  In a poorly functioning game economy:</P>
+
+<UL>
+<LI>Advanced players give newbies high-powered items because the advanced players have more than they will ever need.</LI>
+<LI>Advanced players throw away items which a newbie would love to have because it is not worth the advanced player’s trouble to find a newbie to give it to.</LI>
+<LI>A newbie has nothing to offer a medium level player who in turn has nothing to offer an advanced player.</LI>
+<LI>Players continually hoard items increasing the size of the database.</LI>
+<LI>Players litter the world with old items which cannot be sold to free up space for new items.</LI>
+<LI>Players lose interest in the game because there is nothing left to acquire.</LI>
+<LI>Players resort to barter as the currency hyper-inflates or disappears.</LI>
+<LI>Prices fluctuate wildly due to inefficient microeconomic institutions.</LI>
+<LI>Players can find the items they want for sale and can’t find buyers for the goods they have been encouraged to produce.</LI>
+<LI>Tragedy of the commons rules the public resources.</LI></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">From these lessons, we propose several possible modifications to the economy.  (This is by no means a complete list nor are many of these ideas original.  Furthermore, some of these ideas may be mutually exclusive.)</P>
+
+<UL>
+<B><LI>Create enforceable contracts.   </B>For example, one could create a three-way contract where the third person acts as an arbitrator of the contract (perhaps earning a cut for his trouble).  The third party would have enforcement rights granted by the system such as the ability to transfer assets to the victim.  This would potentially allow for a more robust player-to-player economy with such elements as employment and futures agreements.</li>
+<B><LI>Create auctions.   </B>Auctions can be used to determine prices very efficiently, especially on identical commodities like many of the items <I>UO</I>.  Auctions have the added benefit of creating a fun social event.  One possible implementation would be to create an NPC auctioneer who presides over an auction at a specific time and place.  The players would announce their ask and bid prices by typing, for example: &quot;offer 100 pearls for 5 each&quot; or &quot;bid 10 on 50 shirts&quot;.  The NPC auctioneer would check the bank accounts of the bidder and only consider it valid if the character has enough to pay.  When the transaction is complete, the auctioneer transfers the items and money directly between accounts.  (An alternative implementation would be to allow players to buy &quot;seats&quot; in the exchange which serve the same function as the inter-account transfers.)  If the auctions work well, the prices derived from auction can be used to set NPC shopkeeper prices automatically.</li>
+<B><LI>Allow vendors to buy.</B>  Allow player who run vendors to set buy prices and quantities.  This would promote significantly greater exchange.  It is also fun as it creates the felling that &quot;I have something that someone else wants.&quot;</li>
+<B><LI>Deepen production paths.</B>  The production paths for many objects are quite shallow.  Add more intermediate steps to produce some common items and make the intermediate goods craftable via the same mechanism used to produce the final goods.  Make skill increase on these intermediate goods faster for less skilled workers and negligible for master craftsmen. This will promote an apprentice system where newbies have an immediate role to fulfill in manufacturing and gain skill at the same time.</li>
+<B><LI>Change from improve-by-doing to purchase-to-improve.</B>  See &quot;Eliminate the improve-by-doing system; replace with pay-to-improve&quot; on page <A HREF="#improvebydoing">*</A>.</li></UL>
+</dir>
+
+<H2>Immediate Research Goals</H2>
+<dir>
+<P ALIGN="JUSTIFY">Further research into the <I>UO</I> environment is certainly warranted.  Immediate research goals are to add code to the <I>UO</I> servers to track the flow of goods and resources.  This will help verify the theories presented in this paper and will help the designers of <I>UO</I> and future persistent online worlds to design, measure, and manipulate their virtual economies.</P>
+<P ALIGN="JUSTIFY">Specifically, we intend to measure:</P>
+
+<UL>
+<B><LI>Player-to-player, player-to-NPC, and player-to-vendor trades.  </B>For each transaction, record the quantity, quality, and type of item traded.</LI>
+<B><LI>Stock in vendors, stock in accounts.  </B>Track the total amount of goods stored in vendors, the number of vendors, and the goods stored in safety-deposit-boxes and bank accounts.</LI>
+<B><LI>Inflow, Outflow.  </B>Record all resources which flow into the economy and ultimately drain out.</LI>
+<B><LI>Backup size.  </B>Changes in the backup size should correlate with the differences observed between the outflow and the inflow.</LI>
+<B><LI>Player churn.   </B>Record the number of hours that players are online.</LI>
+<B><LI>Housing.</B>  Record the number of square feet of housing that is being built and destroyed.</LI>
+</UL>
+</dir>
+
+<H2>Long Term Research</H2>
+<dir>
+<P ALIGN="JUSTIFY">Economist have long lamented the difficulties that social scientists face compared with physical scientists.  Fifty years ago, Edward Chamberlain observed:</P>
+<DIR>
+
+<i>It is commonplace that, in its choice of method, economics is limited by the fact that resort cannot be had to the laboratory techniques of the natural sciences… The social scientist…cannot observe the actual operation of a <I>real </I>model under controlled conditions.<sup>3</sup></P></i>
+
+</DIR>
+
+<P ALIGN="JUSTIFY">Since then, experimental economists have worked to address this problem by creating methodologies of laboratory experimentation.  Many results have been achieved by paying subjects to induce preferences and controlling the institutions with which they interact.</P>
+<P ALIGN="JUSTIFY">There are, however, inherent limitations to laboratory economics as currently practiced.  Two in particular are striking.  First, one can only experiment with a small number of markets, in isolation from a whole economy.  Second, the very control which makes laboratory experiments beneficial largely limits research to those subjects which are fully formalized.</P>
+<I><P ALIGN="JUSTIFY">Ultima Online</I>, and online games similar to it, offer a unique research platform because, while the commodities traded are virtual, the resulting economies are not simulations.  This has several implications for research:</P>
+
+<UL>
+<LI>Experimental subjects have real preferences, not just the ones they are paid to have.</LI>
+<LI>Subjects make their decisions in a long-term social environment.  Notions like tragedy of the commons have real context and meaning.</LI>
+<LI>Experimenters can engage in experiments which would be too costly or unethical in the real world.</LI>
+</UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Because it is implemented on a computer and is so different from the real world, many may argue that this economy is not real; that it is merely a simulation.  However, this misses the point.  UO players are engaging in this commerce voluntarily; in fact, they are paying real money for the privilege!  Proof of the reality of the economy can be obtained by observing the real-world prices fetched by players who auction off existing UO characters and property on the electronic auction house ebay.com.  As of this writing, one character sold for $2000!  It is this economic reality which makes <I>UO </I>a potentially very interesting research platform.</P>
+</dir>
+<H1>Notes</H1>
+<dir>
+<ol>
+<li>Among the best of these web pages is: <a href="http://uo.stratics.com">http://uo.stratics.com</a>
+<li>Bartle, Richard.  Hearts, Clubs, Diamonds, Spades: Players Who Suit MUDS.  <a href="http://journal.tinymush.org/v1n1/bartle.html">http://journal.tinymush.org/v1n1/bartle.html</a>
+<li>Chamberlin, Edward H., 1948. An Experimental Imperfect Market. Journal of Political Economy 56(2):95-108
+</ol>
+</dir>
+<H1>Acknowledgements</H1>
+<dir>
+Thanks to the entire <I>Ultima Online</I> team, especially: Raph Koster, Richard Vogel, Starr Long, Damion Schubert.<br>
+Thanks also to: Andrew E. Stivers, Timothy O'Neill Dang, Steve Beeman, Jim Greer, and Prof. Jamie Galbraith.
+</dir>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-6496418-1");
+pageTracker._trackPageview();
+</script>
+
+</BODY>
+</HTML>
