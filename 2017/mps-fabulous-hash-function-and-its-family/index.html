@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_apr2019d.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>MP's fabulous hash function, and its family on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Aici este pragul cel de sus,<br />unde v-o zis tati ca'ti da cu capul.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-70955"><div class="post" id="post-70955">                    <h1><a href="/2017/mps-fabulous-hash-function-and-its-family/" rel="bookmark" title="Permanent Link to MP&#039;s fabulous hash function, and its family">MP's fabulous hash function, and its family</a></h1>                        <div class="date">                                     Thursday, 05 January, Year 9 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>This proposal stems from <a href="/forum-logs-for-04-jan-2017#2222304">a recent discussion</a> in the forum of The Most Serene Republic, and consists of a readaptation of <a href="/forum-logs-for-23-dec-2016#2215823">an older idea</a> of <a href="http://loper-os.org/">Stan</a>'s to the task at hand<sup><a href="#footnote_0_70955" id="identifier_0_70955" class="footnote-link footnote-identifier-link" title="Which is, exactly as he states it, to resolve the major weakness that the hash function can be written as an equation.
+The fundamental, intrinsic and so far nor escaped weakness of all currently known hash functions is that a system of equations equal to the count of their possible outputs could be written ; and resolved. No, the usual obscurantism passing for `analysis` in the field does not resolve this problem anymore than sprinkling some truly strong holy water cures lesbianism.">i</a></sup>.</p>
+<p>The item here contemplated is then an algorithmic, rather than algebraic, hash function. It consists of three elements and four operations, which we proceed to define :</p>
+<p><strong>Elements</strong> of the fabulous hash function :</p>
+<ul>
+<li>One element is the message to be hashed, M, which is a field of bits of unspecified length.</li>
+<li>Another element is the so called state machine, S, which starts as one null bit and grows to an unspecified length.</li>
+<li>The last element is the result of the hashing, R, which is a field of bits of user-specified length.
+</ul>
+<p><strong>Operations</strong> of the fabulous hash function :</p>
+<ul>
+<li>One operation is the bit flip, let it be called <strong>flip</strong>. This operation consists of toggling one specified bit of either S or R.</li>
+<li>Another operation is the inversion, let it be called <strong>invert</strong>. This operation consists of toggling all the bits of either S or R.</li>
+<li>A third operation is the flipping of a number of bits in either S or R, let it be called the <strong>screw</strong>. This operation consists of taking the bit count of either S or R, iterating over that value, at each step multiplying the iterator with the current position in M, calculating the remainder of that product against the bit count of R or S respectively, and flipping the remainder-th bit in R or S respectively. A <strong>half-screw</strong> will take half (floor) the bit count of S or R instead. </li>
+<li>The fourth operation is a shift of the state machine, call it <strong>expand</strong>. This operation consists of adding one null bit at the end of S.</li>
+<li>The last operation is a position rewind, call it a <strong>rewind</strong>. This operation consists of decreasing our position in the message M by one, except in the case our position is already 0.</li>
+</ul>
+<p>On this basis we can now proceed to define our function :</p>
+<p><strong>I. The function starts</strong> by allocating memory : one bit for S, and the size specified by the user for R. All allocated bits are zero.</p>
+<p><strong>II. The function starts</strong> at position 0 in M and iterates over each bit in M. These iterations are called steps. During each step, the function considers whether the position-th bit in M is 0 or 1, and executes a defined set of operations in either case. Once the operations have been executed, the position is incremented by one. Once the position is larger than the size of M, the function returns R as the hashed value of M.</p>
+<p>So far we have defined a whole <em>class</em> of hash functions : the Fabulous Hash Function family. Numerous kinds and types could be devised on the basis described, and any willing operator of a numeric machine is certainly encouraged to do so for his own needs and uses. </p>
+<p>Let us now consider the canonical example of a FHF : MP's own FHF. It goes like so :</p>
+<ul>
+<li>if the bit in M is 0, <strong>expand</strong> and <strong>screw</strong> S in R. If the bit in R found at the position equal to the remainder of the division of our position in M by the size of R is 0
+<ul>
+<li>That bit in R is <strong>flipped</strong> and we <strong>rewind</strong>.</li>
+<li>else, that bit in R is <strong>flipped</strong> and S is <strong>inverted</strong>.</li>
+</ul>
+</li>
+<p></p>
+<li>if the bit in M is 1, <strong>half-screw</strong> S in R. If the bit in R found at the position equal to the remainder of the division of our position in M by the size of R is equal to the bit in S found at the position equal to the remainder of the division of our position in M by the size of S
+<ul>
+<li>We <strong>expand</strong> and then <strong>screw</strong> R in S.</li>
+<li>else, that bit in R is <strong>flipped</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>There are a number of important properties</strong> to be underlined.</p>
+<ol>
+	
+<li>The very last bit of M can produce significant change in R, potentially touching all its bits.</li>
+<p>
+<li>The fabulous hash-function is message-size indifferent, being operable of messages of any size within the limitations of the hardware only.</li>
+<p>
+<li>The fabulous hash-function outputs hashes of any arbitrary length equally well.</li>
+<p>
+<li>It is not possible to say, on the basis of a hash, how much memory, or how much CPU was consumed to process the message.</li>
+<p>
+<li>The cheapest way to calculate how much memory, or how much CPU will be needed to process a message is to process the message.</li>
+<p>
+<li>Because the fabulous hash function does not use blocks, it does not require any kind of padding.</li>
+</ol>
+<p>Diligent work by ben_vulpes and sina allows us no less than three canonical implementations to choose from : <a href=http://cascadianhacker.com/an-implementation-of-mircea-popescus-fabulous-hash-function>lisp</a>, <a href=http://github.com/sinner-/mpfhf-golang>go</a>, <a href=http://github.com/sinner-/mpfhf-python>python</a>.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_70955" class="footnote">Which is, exactly as he states it, to resolve the major weakness that the hash function <a href="/forum-logs-for-23-dec-2016#2215932">can be written as an equation</a>.</p>
+<p>The fundamental, intrinsic and so far nor escaped weakness of all currently known hash functions is that a system of equations equal to the count of their possible outputs could be written ; and resolved. No, the usual obscurantism passing for "analysis" in the field does not resolve this problem anymore than sprinkling some truly strong <a href="/2017/dupa-dealuri/">holy water cures lesbianism</a>. [<a href="#identifier_0_70955" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2017/minigame-smg-december-2016-statement/">MiniGame (S.MG), December 2016 Statement</a></div>
+                <div class="alignright"><a href="/2017/making-the-pussygrab-great-again/">Making the pussygrab great again ?</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/gandesc-deci-gandesc/" title="View all posts in Gandesc, deci gandesc" rel="category tag">Gandesc, deci gandesc</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2017/mps-fabulous-hash-function-and-its-family/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2017/mps-fabulous-hash-function-and-its-family/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>28 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-120966" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-120966" title="">Friday, 6 January 2017</a>
+							</div>
+						<p>&gt; Once the position is larger than the size of M, the function returns R as the hashed value of M.</p>
+<p>Why not waltz full-circle (modularly) around the underflow ?<br />
+i.e.   nextpos</p>
+						</li>
+
+										<li id="comment-120967" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-120967" title="">Friday, 6 January 2017</a>
+							</div>
+						<p>Because you gotta stop sometime.</p>
+						</li>
+
+										<li id="comment-121046" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121046" title="">Friday, 13 January 2017</a>
+							</div>
+						<p>Since alf decided to vaguely open the discussion in the log, </p>
+<blockquote><p>asciilifeform: !~later tell mircea_popescu while sleeping i had a thought re <a href="/2017/towards-a-better-hash-function">/2017/towards-a-better-hash-function</a> and my earlier attempt thereof likewise : that the thing may not in fact be ~collision-resistant~ (it may not be so difficult to take an arbitrary desired output and find a tape that hashes to it.)</p></blockquote>
+<p>let me point out that I won't entertain discussions pertaining to this hash outside of comments here ; or else articles on blogs which have the capacity to pingback or something. Finding discussions in #trilema logs is already a hard enough problem ; no need to make it even harder for absolutely no reason through lazily misplacing there discussions that do have a natural genesis otherwise.</p>
+<p>As to the subject of collision resistance : every hash function has collisions as a matter of definition : if the message M is 65 bits long and the hash result R is set to 64 bits, then there will be on average 2<sup>64</sup> = 18`446`744`073`709`551`616 collisions over the entire space, or about every other M will collide <em>with something</em>. This results from elementary properties of numbers, you can't shove four apples in two boxes so that there's one apple per box. </p>
+<p>So : if R is not shorter than (most) M then the function is not a hashing function (I suspect USGtards would call it a "PRNG") ; if R is shorter than (some) M then there's going to be (some) collision going on. These are the definitions of our terms.</p>
+<p>The problem of <em>finding</em> collisions is an entirely different kettle of fish. </p>
+<p>Should the length of R be set to one bit, then in a list of arbitrarily chosen Ms every other one would collide, on average, and irrespective of length. Finding collisions would require calculating slightly more than one hash (by a formula produced by l'Hospital, not going to go into detail here).</p>
+<p>Should the length of R be set to something reasonable (which, for this hash, as opposed to any other, is very easy to do), and should the length of the message M not be known by the attacker, then the problem he faces consists of finding a message M' so that MPfhf(M) = MPfhf(M'). The brute force method to do this is to take as final S all numeric values from 0 to an arbitrary number T, and work backwards to a legal state. It is to be expected that some of these final values for S the attacker chooses will produce a legal final state (ie, with S = "0") after a finite number of steps. It is however also to be expected that some won't, and as far as I know there isn't currently a way known to establish whether the brute force hash inversor stops after a finite number of steps. (Then again this problem may in fact be mitigated by limiting the hash reverser to a number of steps chosen on the basis of assumptions wrt to the length of the message, as suggested by the examples given in the article).</p>
+<p>In particular, should the length of M be known to the attacker as an upper bound (M is no longer than 64 bytes, say, or about 2% of this comment) then this method reduces to taking all values from 0 to 2<sup>1024</sup> and working backwards, for a total of 2<sup>1025</sup>-1 tries. If the attacker knows the exact length of M, then the values to be taken are from 2<sup>2lM-1</sup> to 2<sup>2lM</sup> -1, or roughly speaking 2<sup>2lM</sup>.</p>
+<p>The variance seen in practice, where a short 63 bit (8 characters) message required from a minimum of 231 to a maximum of 264 steps and ended with a S from a minimum size of 194 to a maximum size of 228 bits would suggest that assumptions to be made in reversing the hash can't be very narrow. That 228 to 194 bit differential in final S accounts for an immense numeric space, longer certainly than the entire strength of any and all hashing schemes currently in use.</p>
+<p>It should also be pointed out that with each successive step, the possible message space doubles, so if the attacker is expecting to find a collision for a hash of a message that is precisely 64 bytes long then he is looking at 2<sup>1024</sup> distinct messages to be processed against the 2<sup>1025</sup> machine states (because at every successive step, the message bit corresponding could be either 0 or 1). A nontrivial task as such.</p>
+<p>It would be very interesting to see a better-than-bruteforce attack described for this hashing scheme, and I strongly urge all cryptographers, of the actual as opposed to the commonly seen pretend kind, to set to work and make a name for themselves through presenting such an attack.</p>
+<p>It would also be very interesting to see efficient hash and reverse-hash processes implemented, so actual timing (in both terms of microseconds and cycles) can be calculated. So far there's been a remarkable resistence to any sort of useful work doing on this front, notwithstanding that unlike most other activities, this is both approachable and </p>
+<p>That is all.</p>
+						</li>
+
+										<li id="comment-121047" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121047" title="">Friday, 13 January 2017</a>
+							</div>
+						<p>This is a very good likbez re subj of hash collisions.</p>
+<p>However, my own research has not turned up anything encouraging that would differentiate the current state of the art re: collision-resistance of any known hash algo, from the quite similarly pseudoscientifically alleged attack-resistance of any block ciphers. Exactly same arguments from "I find it confusing, therefore the enemy must be similarly confused", "let's mix it up! and again! and again!" and other claptrap in the same vein.</p>
+<p>In so far as is known to me, no known hash algo has any (publicly known, various USG algos may well have nonpublic proofs of weakness...) actual scientific basis whatsoever. Nor are any statements that have been uttered regarding their collision resistance, supported by actual logic of whatever kind. (Wishful thinking, and "not broken yet!" are not logic.) The only thing that is easily turned up is the record of hash algos known to be broken (collisions known to have been found on demand at reasonable expense.) Which is not particularly useful.</p>
+						</li>
+
+										<li id="comment-121048" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121048" title="">Friday, 13 January 2017</a>
+							</div>
+						<p>This is fair, and I readily admit that I have no further basis to suspect the scheme described may be workable than "it feels this way to me". I know of no proper approach to the matter, which is why I've yet to do anymore than that myself.</p>
+<p>It would be not at all an easy task to undertake defending the proposition that sha-512 say is any stronger than the above.</p>
+						</li>
+
+										<li id="comment-121049" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121049" title="">Friday, 13 January 2017</a>
+							</div>
+						<p>The only thing that I was able to establish with certainty is that if ~anyone~ knows of a basis to logically support the strength of even one yet-unbroken hash algo -- they aren't telling. And that discussing the subj with so-called "professional" cryptographers is an activity of strictly entomological interest.</p>
+						</li>
+
+										<li id="comment-121050" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121050" title="">Friday, 13 January 2017</a>
+							</div>
+						<p>Myeah. I don't see much path forward other than actually doing the basic work of implementation.</p>
+						</li>
+
+										<li id="comment-121460" class="commentbody"><div class="commenthead"><img alt='Ben Vulpes`s avatar' src='http://cascadianhacker.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink"><a href='http://cascadianhacker.com' class='url'>Ben Vulpes</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121460" title="">Wednesday, 1 March 2017</a>
+							</div>
+						<p>Should not flipping 2nd (0th, 1st, 2nd) bit of 010 result in 011, and is not remainder of 15 against 4 3?</p>
+						</li>
+
+										<li id="comment-121464" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121464" title="">Wednesday, 1 March 2017</a>
+							</div>
+						<p>Do you actually mean that </p>
+<blockquote><p>The second step, we multiply 2 with our position in M, to obtain the value 10, and then remainder it against the bit count of S, obtaining 1.</p></blockquote>
+<p>should in fact read</p>
+<blockquote><p>The second step, we multiply 2 with our position in M, to obtain the value 10, and then remainder it against the bit count of S, obtaining 2.</p></blockquote>
+<p>and that the rest of the operations are incorrect from there on ?</p>
+<p>I'd say this is not the case, the bitcount of S is 3, and 10 % 3 = 1.</p>
+<p>If you actually mean something else please give explicit difs, it's rather impossible to guess-follow otherwise.</p>
+						</li>
+
+										<li id="comment-121470" class="commentbody"><div class="commenthead"><img alt='Ben Vulpes`s avatar' src='http://cascadianhacker.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink"><a href='http://cascadianhacker.com' class='url'>Ben Vulpes</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121470" title="">Wednesday, 1 March 2017</a>
+							</div>
+						<p>Sorry, I'll try again.</p>
+<blockquote><p>
+The last step, we multiply 4 with our position in M, to obtain the value 20, and then remainder it against the bit count of S, obtaining 2. We thereby flip the 2nd bit in S, thus S becomes "000".
+</p></blockquote>
+<p>Should read:</p>
+<blockquote><p>
+The last step, we multiply 4 with our position in M, to obtain the value 20, and then remainder it against the bit count of S, obtaining 2. We thereby flip the 2nd bit in S, thus S becomes "011".
+</p></blockquote>
+<p>"2nd bit" being in the last position, as we zero-index (0th, 1st, 2nd).</p>
+<p>And...</p>
+<blockquote><p>
+The last step, we multiply 3 with our position in M, to obtain the value 15, and then remainder it against the bit count of R, obtaining 1. We thereby flip the 1st bit in R, thus R becomes "1001".
+</p></blockquote>
+<p>Should read:</p>
+<blockquote><p>
+The last step, we multiply 3 with our position in M, to obtain the value 15, and then remainder it against the bit count of R, obtaining 3. We thereby flip the 3rd bit in R, thus R becomes "1100".
+</p></blockquote>
+<p>As the bit-count of R is four; 15 mod 4 returns 3.</p>
+						</li>
+
+										<li id="comment-121471" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121471" title="">Wednesday, 1 March 2017</a>
+							</div>
+						<p>Ah right you are, seems I fucked it up.</p>
+						</li>
+
+										<li id="comment-122211" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122211" title="">Saturday, 10 June 2017</a>
+							</div>
+						<p>The spec was updated as per discussion in the <a href=http://btcbase.org/log/2017-06-10#1667968 >logz</a>.</p>
+						</li>
+
+										<li id="comment-122213" class="commentbody"><div class="commenthead"><img alt='Sina`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">Sina</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122213" title="">Saturday, 10 June 2017</a>
+							</div>
+						<pre>#!/usr/bin/env python
+from sys import argv
+
+def stringify(field):
+    return ''.join(map(str, field))
+
+def flip(field, index):
+    field[index] = 0 if field[index] == 1 else 1
+
+def invert(field):
+    for i in range(0, len(field)):
+        flip(field, i)
+
+def screw(a, b, half):
+    count = len(a)/2 if half else len(a)
+    for i in range(0, count):
+        flip(b, ((i * M_pos) % len(b)))
+
+def expand():
+    S.append(0)
+
+message = argv[1]
+R_len = int(argv[2])
+
+M = list(map(int, ''.join(map(lambda p: format(p, 'b'), map(ord, message)))))
+S = [0]
+R = [0] * R_len
+M_pos = 0
+step = 0
+
+while M_pos &lt; len(M):
+    if M[M_pos] == 0:
+        expand()
+        screw(S, R, False)
+        if R[M_pos%R_len] == 0:
+            flip(R, M_pos%R_len)
+            if M_pos != 0: M_pos -= 1
+        else:
+            flip(R, M_pos%R_len)
+            invert(S)
+    else:
+        screw(S, R, True)
+        if R[M_pos%R_len] == S[M_pos%len(S)]:
+            expand()
+            screw(R, S, False)
+        else:
+            flip(R, M_pos%R_len)
+    M_pos += 1
+    step += 1
+
+print(stringify(R))</pre>
+						</li>
+
+										<li id="comment-122214" class="commentbody"><div class="commenthead"><img alt='Sina`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Sina</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122214" title="">Saturday, 10 June 2017</a>
+							</div>
+						<pre>package main
+
+import (
+    "flag"
+    "fmt"
+    "strings"
+    "strconv"
+    "runtime"
+)
+
+func toBinArray(message string) []int {
+    binString := ""
+    var binArray []int
+
+    for _, c := range message {
+        binString = fmt.Sprintf("%s%b", binString, c)
+    }
+
+    for _, i := range strings.Split(binString, "") {
+        j, err := strconv.Atoi(i)
+        if err != nil {
+            panic(err)
+        }
+        binArray = append(binArray, j)
+    }
+
+    return binArray
+}
+
+func flip(field []int, index int) {
+    if field[index] == 0 {
+        field[index] = 1
+    } else {
+        field[index] = 0
+    }
+}
+
+func invert(field []int) {
+    for i, _ := range field {
+        flip(field, i)
+    }
+}
+
+func screw(a []int, b []int, M_pos int, half bool) {
+    count := 0
+    if half {
+        count = len(a)/2
+    } else {
+        count = len(a)
+    }
+
+    for i := 0; i</pre>
+						</li>
+
+										<li id="comment-122215" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122215" title="">Saturday, 10 June 2017</a>
+							</div>
+						<p>Thanx for posting!</p>
+						</li>
+
+										<li id="comment-122216" class="commentbody"><div class="commenthead"><img alt='Sina`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink">Sina</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122216" title="">Saturday, 10 June 2017</a>
+							</div>
+						<p>single threaded mpfhf-golang can provide a 32-bit mpfhf hash of GPLv2 in ~7m</p>
+<p><a href="http://wotpaste.cascadianhacker.com/pastes/nfTbm/?raw=true">http://wotpaste.cascadianhacker.com/pastes/nfTbm/?raw=true</a></p>
+						</li>
+
+										<li id="comment-122218" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122218" title="">Saturday, 10 June 2017</a>
+							</div>
+						<p>Sounds just about as it should be.</p>
+						</li>
+
+										<li id="comment-122220" class="commentbody"><div class="commenthead"><img alt='peterL`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink">peterL</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122220" title="">Saturday, 10 June 2017</a>
+							</div>
+						<p>In the article, footnote 2, it describes the screw going from 1 to the number of bits, but Sina's python implementation posted goes from 0 to number of bits - 1. Should one of these be corrected?</p>
+						</li>
+
+										<li id="comment-122221" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122221" title="">Saturday, 10 June 2017</a>
+							</div>
+						<p>Yes, <a href=http://btcbase.org/log/2017-06-10#1668148 >the footnote</a>. Basically we encountered some strange in terms of counterintuitive behaviour, which frankly is still being investigated because wtf.</p>
+						</li>
+
+										<li id="comment-122299" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122299" title="">Friday, 30 June 2017</a>
+							</div>
+						<p>The article was substantially edited today. I expect we have a mature item now, for which reason the title changed also.</p>
+						</li>
+
+										<li id="comment-122341" class="commentbody"><div class="commenthead"><img alt='PeterL`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink">PeterL</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122341" title="">Wednesday, 5 July 2017</a>
+							</div>
+						<p>The wording for the screw operation is slightly ambiguous. When you say "screw R in S", do you mean you are flipping bits of R or flipping bits of S?</p>
+						</li>
+
+										<li id="comment-122344" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122344" title="">Thursday, 6 July 2017</a>
+							</div>
+						<p>In S -- the first variable of the screw function provides indexing and the second gets operated on. (That's why they're ordered S, R and then R, S. Also that's why the word respectively is in there, this being the convention to avoid ordering ambiguities with a minimum of effort.)</p>
+						</li>
+
+										<li id="comment-122631" class="commentbody"><div class="commenthead"><img alt='PeterL`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">PeterL</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122631" title="">Tuesday, 15 August 2017</a>
+							</div>
+						<p>A python implementation of the mpfhf and a reverse hash function to go with it.</p>
+<p><a href="http://archive.is/jmFMO">http://archive.is/jmFMO</a></p>
+						</li>
+
+										<li id="comment-122637" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122637" title="">Tuesday, 15 August 2017</a>
+							</div>
+						<p>To quote his lordship vulpes, noice!</p>
+						</li>
+
+										<li id="comment-122671" class="commentbody"><div class="commenthead"><img alt='PeterL`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">25</div>
+								<span class="authorlink">PeterL</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122671" title="">Thursday, 17 August 2017</a>
+							</div>
+						<p>An updated version of the reverse hash with a couple bug fixes:</p>
+<p><a href="http://archive.is/Wl893">http://archive.is/Wl893</a></p>
+<p>The bugs:<br />
+1: the "show" function in the Register class was missing the comparison with the "_inverted" variable, so it would be wrong in any case where there was an odd number of inversions. I think I left that out when I originally wrote the mpfhf function because the R never gets inverted, and originally the function only returned the R value instead of this version which returns both the R and S values.</p>
+<p>2: I added a check on the branches that involve expanding to make sure S would never be shrunk below a length of 0.</p>
+<p>3: There is a special case where the rewind does not happen if we are on step 0, I added that to the "check" recursive function.</p>
+<p>Further testing is welcome.</p>
+						</li>
+
+										<li id="comment-122676" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">26</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122676" title="">Thursday, 17 August 2017</a>
+							</div>
+						<p>Cool deal.</p>
+						</li>
+
+										<li id="comment-122686" class="commentbody"><div class="commenthead"><img alt='PeterL`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">27</div>
+								<span class="authorlink">PeterL</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122686" title="">Friday, 18 August 2017</a>
+							</div>
+						<p><a href="http://archive.is/cJNp3">http://archive.is/cJNp3</a></p>
+<p>Updated again, this time it should work!</p>
+<p>Line 126 had the wrong logic after line:</p>
+<p>def cyclecheck(m, oldbits, R, S, L):</p>
+<p>-     if R.val(m) == 1 and S.length() &gt; 1 and S.val(-1) == 1:<br />
++    if R.val(m) == 1 and S.length() &gt; 1 and S.val(-1) == 0:</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-122205">
+					<div class='trackhead'>
+						<div class="commentcount">28</div>
+						<span class="authorlink"><a href='http://cascadianhacker.com/an-implementation-of-mircea-popescus-fabulous-hash-function' class='url'>An implementation of Mircea Popescu's Fabulous Hash Function &laquo; CH</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-122205" title="">Thursday, 8 June 2017</a>
+					</div>
+					<p>[...] stuck believing me, I keep detailed logs of this sort of thing), I wrote an implementation of Mircea Popescu's Fabulous Hash Function, in the process finding a few mistakes in his [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author6a8bf73" id="author6a8bf73" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email6a8bf73" id="email6a8bf73" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url6a8bf73" id="url6a8bf73" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="70955" /></p>
+				<input type="hidden" name="comment_post_time" value="1772706641-18.97.9.168" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-70955")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-70955");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-70955");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>
