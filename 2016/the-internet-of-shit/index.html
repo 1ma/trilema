@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_jun2014-2.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>The Internet of Shit on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Evil broadly consists of people who<br />aren't very good and don't want to get any better.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-67024"><div class="post" id="post-67024">                    <h1><a href="/2016/the-internet-of-shit/" rel="bookmark" title="Permanent Link to The Internet of Shit">The Internet of Shit</a></h1>                        <div class="date">                                     Friday, 24 June, Year 8 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>The access log for trilema.com in June (ie, 24 days so far) is 1.8 GB. Yeah, you read that right, larger than <a href="http://idlewords.com/talks/website_obesity.htm">the entire corpus of classical literature</a>. Daily. Here : </p>
+<blockquote><p>wc -l 'trilema.com-Jun-2016'<br />
+11860336 trilema.com-Jun-2016</p></blockquote>
+<p>What, pray tell, is in those almost twelve million lines ? Well...</p>
+<blockquote><p>cat 'trilema.com-Jun-2016'   | grep -c "POST /xmlrpc.php"<br />
+7007245</p></blockquote>
+<p>7 out of 11 hits are attempts to POST on xmlrpc.php, which, if you've been following <a href="/2014/o-hai-let-me-wanna-be/">the story of Automattic deliberately poisoning the Internet</a> will readily recognise as the entry point for blog spam, as well as Automattic-enabled DDoS attacks<sup><a href="#footnote_0_67024" id="identifier_0_67024" class="footnote-link footnote-identifier-link" title="By the way - they've still not fixed the hole ; in spite of the code being published, and the change minimal. It's been two years.
+`Responsible` disclosure ? Not even once. Rape the USG tools.">i</a></sup>. A tiny fraction (under 100) are legitimate pingbacks received (and published) by Trilema. The rest...</p>
+<p>The rest are like so : </p>
+<blockquote><p>sort spam.txt |uniq -c | awk '{print $2": "$1}' | wc -l<br />
+1962</p></blockquote>
+<p>Talk about inequality, right ? Less than 2% of hosts generated 7 in 11 hits and are responsible for about 30 GB<sup><a href="#footnote_1_67024" id="identifier_1_67024" class="footnote-link footnote-identifier-link" title="AWS charges 10 cents each plus ~3 cents per GB in Load Balancers. So this whole pile of nonsense would have cost about two quarters, had I been using the (very expensive) AWS.">ii</a></sup>  of traffic this month. Except, here's the list of hosts that made <em>more than <strong>4</strong></em> requests : </p>
+<blockquote><p>157.122.147.189<sup><a href="#footnote_2_67024" id="identifier_2_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+157.122.147.189 - - [02/Jun/2016:12:58:00 -0400] `GET /2012/voluntary-contracts-after-a-while/ HTTP/1.1` 200 88186 `/` `Mozilla/5.0 (iPad; CPU OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B440 Safari/600.1.4`
+157.122.147.189 - - [02/Jun/2016:12:58:03 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54 `/` `PHP/5.2.91`
+157.122.147.189 - - [02/Jun/2016:12:58:06 -0400] `GET /2012/voluntary-contracts-after-a-while/ HTTP/1.1` 200 88285 `-` `PHP/5.2.91`
+
+This is a run of the mill spambot, as discussed in more detail back in April. We'll call it type A because it does check after spamming.">iii</a></sup>: 5<br />
+198.204.247.202<sup><a href="#footnote_3_67024" id="identifier_3_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour :
+198.204.247.202 - - [06/Jun/2016:02:54:15 -0400] `POST /xmlrpc.php HTTP/1.1` 200 124423 `-` `-`
+198.204.247.202 - - [07/Jun/2016:08:53:01 -0400] `POST /xmlrpc.php HTTP/1.1` 200 124423 `-` `-`
+198.204.247.202 - - [11/Jun/2016:03:10:40 -0400] `POST /xmlrpc.php HTTP/1.1` 200 124423 `-` `-`
+
+Just another dumb spammer, call it type DS.">iv</a></sup>: 5<br />
+93.115.192.115<sup><a href="#footnote_4_67024" id="identifier_4_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour :
+93.115.192.115 - - [16/Jun/2016:02:07:16 -0400] `GET /2010/continut-platit/ HTTP/1.0` 200 277994 `/` `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.2.5 (KHTML, like Gecko) Version/8.0.2 Safari/600.2.5`
+93.115.192.115 - - [16/Jun/2016:02:07:17 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54 `/` `PHP/5.2.93`
+
+Also run of the mill spambot. We'll call it type B because it doesn't check after spamming.
+">v</a></sup>: 5<br />
+209.222.105.212<sup><a href="#footnote_5_67024" id="identifier_5_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+209.222.105.212 - - [14/Jun/2016:19:22:12 -0400] `GET /2013/the-sanity-dogma/ HTTP/1.0` 200 68035 `/` `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.2.5 (KHTML, like Gecko) Version/8.0.2 Safari/600.2.5`
+209.222.105.212 - - [14/Jun/2016:19:23:15 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54 `/` `PHP/5.2.90`
+209.222.105.212 - - [14/Jun/2016:19:23:32 -0400] `GET /2013/the-sanity-dogma/ HTTP/1.0` 200 68192 `-` `PHP/5.2.90`
+
+We'll call this one type A.1 because it spams after waiting a minute.">vi</a></sup>: 6<br />
+212.56.214.129<sup><a href="#footnote_6_67024" id="identifier_6_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+212.56.214.129 - - [21/Jun/2016:17:53:46 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+212.56.214.129 - - [21/Jun/2016:17:53:53 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+
+We'll call this type of dumb spammer DS.G because of its agent string.">vii</a></sup>: 6<br />
+93.127.147.32<sup><a href="#footnote_7_67024" id="identifier_7_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+93.127.147.32 - - [01/Jun/2016:02:06:55 -0400] `GET /2011/o-vaca-cu-cabina/ HTTP
+/1.0` 200 42972 `/` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34
+.0) Gecko/20100101 Firefox/34.0`
+93.127.147.32 - - [01/Jun/2016:02:06:56 -0400] `POST /xmlrpc.php HTTP/1.1` 200 5
+4 `/` `PHP/5.3.12`
+93.127.147.32 - - [01/Jun/2016:02:06:57 -0400] `GET /2011/o-vaca-cu-cabina/ HTTP
+/1.0` 200 42976 `-` `PHP/5.3.12`
+93.127.147.32 - - [01/Jun/2016:02:09:29 -0400] `GET /2011/o-vaca-cu-cabina/ HTTP
+/1.0` 200 43104 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101
+ Firefox/34.0`
+We'll call it type A.A because it checks, then changes agent and checks again.">viii</a></sup>: 6<br />
+107.150.74.65<sup><a href="#footnote_8_67024" id="identifier_8_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+107.150.74.65 - - [17/Jun/2016:04:44:20 -0400] `GET /2010/afacerile-externe-ca-s
+tiinta-exacta/ HTTP/1.0` 200 39257 `/` `Mozilla/5.0 (Windows N
+T 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36`
+107.150.74.65 - - [17/Jun/2016:04:44:24 -0400] `POST /xmlrpc.php HTTP/1.1` 200 5
+4 `/` `PHP/5.3.46`
+107.150.74.65 - - [17/Jun/2016:04:44:38 -0400] `GET /2010/afacerile-externe-ca-s
+tiinta-exacta/ HTTP/1.0` 200 39385 `-` `PHP/5.3.46`
+107.150.74.65 - - [17/Jun/2016:04:54:52 -0400] `GET /2010/afacerile-externe-ca-s
+tiinta-exacta/ HTTP/1.0` 200 39232 `-` `Mozilla/5.0 (Windows NT 5.1) AppleWebKit
+/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36`
+
+Type A.A">ix</a></sup>: 7<br />
+107.151.152.218<sup><a href="#footnote_9_67024" id="identifier_9_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+107.151.152.218 - - [03/Jun/2016:19:32:23 -0400] `POST /2014/the-sins-of-the-gro
+up-of-posers-behind-the-so-called-bitcoin-foundation/trackback/ HTTP/1.0` 200 11
+3 `/2014/the-sins-of-the-group-of-posers-behind-the-so-called-
+bitcoin-foundation/` `Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Ge
+cko`
+107.151.152.218 - - [05/Jun/2016:05:10:30 -0400] `POST /2014/the-scum/trackback/
+ HTTP/1.0` 200 113 `/2014/the-scum/` `Mozilla/5.0 (Windows NT
+6.1; Trident/7.0; rv:11.0) like Gecko`
+107.151.152.218 - - [05/Jun/2016:16:33:00 -0400] `GET / HTTP/1.0` 200 32036 `htt
+p://trilema.com` `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, lik
+e Gecko) Chrome/39.0.2171.99 Safari/537.36`
+107.151.152.218 - - [05/Jun/2016:16:33:01 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 473 `/` `PHP/5.2.20`
+107.151.152.218 - - [05/Jun/2016:17:14:14 -0400] `GET / HTTP/1.0` 200 58305 `htt
+p://trilema.com` `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, lik
+e Gecko) Chrome/39.0.2171.99 Safari/537.36`
+107.151.152.218 - - [05/Jun/2016:17:14:19 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 473 `/` `PHP/5.3.04`
+107.151.152.218 - - [06/Jun/2016:02:17:38 -0400] `POST /2014/hair-the-musical/tr
+ackback/ HTTP/1.0` 200 113 `/2014/hair-the-musical/` `Mozilla/
+5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko`
+107.151.152.218 - - [06/Jun/2016:04:59:47 -0400] `POST /2014/on-essences/trackba
+ck/ HTTP/1.0` 200 113 `/2014/on-essences/` `Mozilla/5.0 (Windo
+ws NT 6.1; Trident/7.0; rv:11.0) like Gecko`
+We'll call this M, because it's a mixed type trying to leave both spam comments and spam trackbacks.">x</a></sup>: 7<br />
+112.149.137.248<sup><a href="#footnote_10_67024" id="identifier_10_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+112.149.137.248 - - [04/Jun/2016:07:00:40 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 74872 `-` `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck
+o) Chrome/43.0.2357.130 Safari/537.36`
+112.149.137.248 - - [04/Jun/2016:07:00:44 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 74872 `-` `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck
+o) Chrome/43.0.2357.130 Safari/537.36`
+112.149.137.248 - - [04/Jun/2016:07:00:48 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 74872 `-` `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck
+o) Chrome/43.0.2357.130 Safari/537.36`
+
+Type DS.">xi</a></sup>: 7<br />
+45.45.157.224<sup><a href="#footnote_11_67024" id="identifier_11_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+45.45.157.224 - - [31/May/2016:21:43:50 -0400] `GET /2010/ce-bea-blogerul/ HTTP/
+1.0` 200 43755 `/` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.
+0) Gecko/20100101 Firefox/34.0`
+45.45.157.224 - - [31/May/2016:21:43:53 -0400] `POST /xmlrpc.php HTTP/1.1` 200 5
+4 `/` `PHP/5.3.31`
+45.45.157.224 - - [31/May/2016:21:43:55 -0400] `GET /2010/ce-bea-blogerul/ HTTP/
+1.0` 200 43924 `-` `PHP/5.3.31`
+45.45.157.224 - - [31/May/2016:21:46:58 -0400] `GET /2010/ce-bea-blogerul/ HTTP/
+1.0` 200 44074 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101
+Firefox/34.0`
+
+Type A.A">xii</a></sup>: 7<br />
+46.17.97.74<sup><a href="#footnote_12_67024" id="identifier_12_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+46.17.97.74 - - [01/Jun/2016:02:12:03 -0400] `POST /xmlrpc.php HTTP/1.1` 200 224
+272 `-` `wp-iphone`
+46.17.97.74 - - [01/Jun/2016:02:26:38 -0400] `POST /xmlrpc.php HTTP/1.1` 200 224
+272 `-` `Windows Live Writer`
+46.17.97.74 - - [01/Jun/2016:02:38:35 -0400] `POST /xmlrpc.php HTTP/1.1` 200 224
+272 `-` `wp-windowsphone`
+
+Run of the mill DS.
+">xiii</a></sup>: 7<br />
+93.127.147.115<sup><a href="#footnote_13_67024" id="identifier_13_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+93.127.147.115 - - [12/Jun/2016:19:35:23 -0400] `GET /2013/the-sanity-dogma/ HTT
+P/1.1` 200 67742 `/` `Mozilla/5.0 (Macintosh; Intel Mac OS X 1
+0_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36
+`
+93.127.147.115 - - [12/Jun/2016:19:35:24 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+54 `/` `PHP/5.2.84`
+93.127.147.115 - - [12/Jun/2016:19:35:25 -0400] `GET /2013/the-sanity-dogma/ HTT
+P/1.1` 200 67811 `-` `PHP/5.2.84`
+93.127.147.115 - - [12/Jun/2016:19:36:29 -0400] `GET /2013/the-sanity-dogma/ HTT
+P/1.1` 200 67819 `-` `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKi
+t/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36`
+
+Type A.A">xiv</a></sup>: 7<br />
+107.150.74.100<sup><a href="#footnote_14_67024" id="identifier_14_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+107.150.74.100 - - [16/Jun/2016:01:35:40 -0400] `GET /2013/the-sanity-dogma/ HTT
+P/1.0` 200 68042 `/` `Mozilla/5.0 (Macintosh; Intel Mac OS X 1
+0_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36`
+107.150.74.100 - - [16/Jun/2016:01:35:41 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+54 `/` `PHP/5.2.82`
+107.150.74.100 - - [16/Jun/2016:01:35:46 -0400] `GET /2013/the-sanity-dogma/ HTT
+P/1.0` 200 68384 `-` `PHP/5.2.82`
+107.150.74.100 - - [16/Jun/2016:16:10:29 -0400] `GET /2013/the-sanity-dogma/ HTT
+P/1.0` 200 68048 `/` `Mozilla/5.0 (Macintosh; Intel Mac OS X 1
+0_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36`
+
+Type A.A, clearly same botnet as 93.127.147.115.
+">xv</a></sup>: 8<br />
+183.91.33.42<sup><a href="#footnote_15_67024" id="identifier_15_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+183.91.33.42 - - [08/Jun/2016:02:50:34 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48678 `-` `Mozilla/5.0 (X11; U
+buntu; Linux i686; rv:34.0) Gecko/20100101 Firefox/34.0`
+183.91.33.42 - - [08/Jun/2016:18:37:36 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48514 `/` `O
+pera/9.80 (Windows NT 6.2; Win64; x64) Presto/2.12.388 Version/12.17`
+183.91.33.42 - - [08/Jun/2016:18:40:47 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `/` `PHP/5.3.12`
+183.91.33.42 - - [08/Jun/2016:18:45:57 -0400] `-` 408 - `-` `-`
+183.91.33.42 - - [10/Jun/2016:01:59:26 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48344 `/` `M
+ozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:34.0) Gecko/20100101 Firefox/34.
+0`
+183.91.33.42 - - [10/Jun/2016:07:52:47 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48367 `/` `M
+ozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:34.0) Gecko/20100101 Firefox/34.0
+`
+183.91.33.42 - - [10/Jun/2016:07:52:49 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `/` `PHP/5.2.86`
+183.91.33.42 - - [10/Jun/2016:07:52:51 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48497 `-` `PHP/5.2.86`
+
+Seems to be same A.A with a twist. Different botnet running same codebase with slight modifications.">xvi</a></sup>: 8<br />
+103.231.101.57<sup><a href="#footnote_16_67024" id="identifier_16_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+103.231.101.57 - - [15/Jun/2016:09:51:35 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+146584 `-` `Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0
+`
+103.231.101.57 - - [15/Jun/2016:09:51:43 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+146584 `-` `Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0
+`
+103.231.101.57 - - [15/Jun/2016:09:51:49 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+146584 `-` `Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0
+`
+
+Type DS.">xvii</a></sup>: 9<br />
+104.247.7.50<sup><a href="#footnote_17_67024" id="identifier_17_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+104.247.7.50 - - [31/May/2016:20:12:46 -0400] `GET /2009/bucatarie-interna/ HTTP
+/1.0` 200 37690 `/` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34
+.0) Gecko/20100101 Firefox/34.0`
+104.247.7.50 - - [31/May/2016:20:12:47 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `/` `PHP/5.3.55`
+104.247.7.50 - - [31/May/2016:20:12:50 -0400] `GET /2009/bucatarie-interna/ HTTP
+/1.0` 200 37684 `-` `PHP/5.3.55`
+104.247.7.50 - - [31/May/2016:20:15:03 -0400] `GET /2009/bucatarie-interna/ HTTP
+/1.0` 200 37689 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101
+ Firefox/34.0`
+
+Type A.A">xviii</a></sup>: 9<br />
+89.36.65.48<sup><a href="#footnote_18_67024" id="identifier_18_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+89.36.65.48 - - [01/Jun/2016:02:38:22 -0400] `GET /2009/bucatarie-interna/ HTTP/
+1.0` 200 37613 `/` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.
+0) Gecko/20100101 Firefox/34.0`
+89.36.65.48 - - [01/Jun/2016:02:38:23 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+`/` `PHP/5.2.20`
+89.36.65.48 - - [01/Jun/2016:02:38:25 -0400] `GET /2009/bucatarie-interna/ HTTP/
+1.0` 200 37890 `-` `PHP/5.2.20`
+89.36.65.48 - - [01/Jun/2016:02:38:33 -0400] `GET /2011/o-vaca-cu-cabina/ HTTP/1
+.0` 200 42946 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101 F
+irefox/34.0`
+
+Type A.A">xix</a></sup>: 9</p>
+<p>104.160.31.77<sup><a href="#footnote_19_67024" id="identifier_19_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+104.160.31.77 - - [13/Jun/2016:11:18:40 -0400] `GET /2013/the-sanity-dogma/ HTTP
+/1.0` 200 67680 `/` `Mozilla/5.0 (Macintosh; Intel Mac OS X 10
+_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36`
+104.160.31.77 - - [13/Jun/2016:11:18:41 -0400] `POST /xmlrpc.php HTTP/1.1` 200 5
+4 `/` `PHP/5.2.02`
+104.160.31.77 - - [13/Jun/2016:11:18:43 -0400] `GET /2013/the-sanity-dogma/ HTTP
+/1.0` 200 67832 `-` `PHP/5.2.02`
+104.160.31.77 - - [13/Jun/2016:11:21:23 -0400] `GET /2013/the-sanity-dogma/ HTTP
+/1.0` 200 67818 `-` `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit
+/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36`
+
+Type A.A">xx</a></sup>: 10<br />
+183.91.33.44<sup><a href="#footnote_20_67024" id="identifier_20_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+183.91.33.44 - - [10/Jun/2016:12:06:45 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48462 `/` `M
+ozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:34.0) Gecko/20100101 Firefox/34.0
+`
+183.91.33.44 - - [10/Jun/2016:12:06:47 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `/` `PHP/5.2.50`
+183.91.33.44 - - [10/Jun/2016:12:06:51 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48508 `-` `PHP/5.2.50`
+183.91.33.44 - - [10/Jun/2016:12:07:25 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48536 `-` `Mozilla/5.0 (Macint
+osh; Intel Mac OS X 10.7; rv:34.0) Gecko/20100101 Firefox/34.0`
+
+Type A.A">xxi</a></sup>: 10<br />
+223.72.251.254<sup><a href="#footnote_21_67024" id="identifier_21_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+223.72.251.254 - - [01/Jun/2016:01:27:56 -0400] `GET /2011/mai-exista-windows-3x
+x/ HTTP/1.1` 200 59540 `/` `Mozilla/5.0 (Android; Mobile; rv:3
+4.0) Gecko/34.0 Firefox/34.0`
+223.72.251.254 - - [01/Jun/2016:01:27:58 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+54 `/` `PHP/5.3.12`
+223.72.251.254 - - [01/Jun/2016:01:28:00 -0400] `GET /2011/mai-exista-windows-3x
+x/ HTTP/1.1` 200 59623 `-` `PHP/5.3.12`
+223.72.251.254 - - [01/Jun/2016:01:52:50 -0400] `GET /2012/voluntary-contracts-a
+fter-a-while/ HTTP/1.1` 200 87915 `-` `Mozilla/5.0 (Android; Mobile; rv:34.0) Ge
+cko/34.0 Firefox/34.0`
+
+Type A.A">xxii</a></sup>: 10<br />
+37.59.232.134<sup><a href="#footnote_22_67024" id="identifier_22_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+37.59.232.134 - - [01/Jun/2016:14:42:45 -0400] `GET /2010/continut-platit/ HTTP/
+1.1` 200 277926 `/` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34
+.0) Gecko/20100101 Firefox/34.0`
+37.59.232.134 - - [01/Jun/2016:14:42:49 -0400] `POST /xmlrpc.php HTTP/1.1` 200 5
+4 `/` `PHP/5.3.44`
+37.59.232.134 - - [01/Jun/2016:14:42:53 -0400] `GET /2010/continut-platit/ HTTP/
+1.1` 200 278152 `-` `PHP/5.3.44`
+37.59.232.134 - - [01/Jun/2016:14:43:59 -0400] `GET /2010/continut-platit/ HTTP/
+1.1` 200 277996 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101
+ Firefox/34.0`
+
+Type A.A">xxiii</a></sup>: 10<br />
+89.36.65.224<sup><a href="#footnote_23_67024" id="identifier_23_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+89.36.65.224 - - [31/May/2016:19:29:25 -0400] `GET /2009/bucatarie-interna/ HTTP
+/1.0` 200 37559 `/` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34
+.0) Gecko/20100101 Firefox/34.0`
+89.36.65.224 - - [31/May/2016:19:29:26 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `/` `PHP/5.2.42`
+89.36.65.224 - - [31/May/2016:19:29:27 -0400] `GET /2009/bucatarie-interna/ HTTP
+/1.0` 200 37818 `-` `PHP/5.2.42`
+89.36.65.224 - - [31/May/2016:19:30:48 -0400] `GET /2009/bucatarie-interna/ HTTP
+/1.0` 200 37907 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101
+ Firefox/34.0`
+
+Type A.A">xxiv</a></sup>: 11<br />
+178.162.211.212<sup><a href="#footnote_24_67024" id="identifier_24_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+178.162.211.212 - - [02/Jun/2016:16:40:54 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 62422 `-` `Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0
+`
+178.162.211.212 - - [02/Jun/2016:16:40:55 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 62422 `-` `Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0
+`
+178.162.211.212 - - [02/Jun/2016:16:40:56 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 62422 `-` `Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0
+`
+178.162.211.212 - - [02/Jun/2016:16:40:56 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 62422 `-` `Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0
+`
+
+Type DS.">xxv</a></sup>: 12<br />
+183.91.33.76<sup><a href="#footnote_25_67024" id="identifier_25_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+183.91.33.76 - - [08/Jun/2016:01:59:48 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48514 `/` `M
+ozilla/5.0 (X11; Ubuntu; Linux i686; rv:34.0) Gecko/20100101 Firefox/34.0`
+183.91.33.76 - - [08/Jun/2016:01:59:51 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `/` `PHP/5.3.77`
+183.91.33.76 - - [08/Jun/2016:01:59:53 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48675 `-` `PHP/5.3.77`
+183.91.33.76 - - [08/Jun/2016:02:03:55 -0400] `GET /2012/o-hai-i-was-justing-doi
+ng-a-penetration-test-of-your-site/ HTTP/1.1` 200 48748 `-` `Mozilla/5.0 (X11; U
+buntu; Linux i686; rv:34.0) Gecko/20100101 Firefox/34.0`
+
+Type A.A">xxvi</a></sup>: 12<br />
+104.254.212.100<sup><a href="#footnote_26_67024" id="identifier_26_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+104.254.212.100 - - [03/Jun/2016:18:48:40 -0400] `GET /2009/flaubert-suntem-noi/
+ HTTP/1.1` 200 127125 `/` `Mozilla/5.0 (Windows NT 6.3; WOW64;
+ Trident/7.0; rv:11.0) like Gecko`
+104.254.212.100 - - [03/Jun/2016:18:48:42 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 54 `/` `PHP/5.3.13`
+104.254.212.100 - - [03/Jun/2016:18:48:43 -0400] `GET /2009/flaubert-suntem-noi/
+ HTTP/1.1` 200 127241 `-` `PHP/5.3.13`
+104.254.212.100 - - [03/Jun/2016:18:54:07 -0400] `GET /2009/flaubert-suntem-noi/
+ HTTP/1.1` 200 127294 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:1
+1.0) like Gecko`
+
+Type A.A">xxvii</a></sup>: 14<br />
+113.176.7.136<sup><a href="#footnote_27_67024" id="identifier_27_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+113.176.7.136 - - [01/Jun/2016:01:23:52 -0400] `GET /2010/continut-platit/ HTTP/
+1.1` 200 277928 `/` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34
+.0) Gecko/20100101 Firefox/34.0`
+113.176.7.136 - - [01/Jun/2016:01:24:00 -0400] `POST /xmlrpc.php HTTP/1.1` 200 5
+4 `/` `PHP/5.3.52`
+113.176.7.136 - - [01/Jun/2016:01:24:09 -0400] `GET /2010/continut-platit/ HTTP/
+1.1` 200 278042 `-` `PHP/5.3.52`
+113.176.7.136 - - [01/Jun/2016:01:25:14 -0400] `GET /2010/continut-platit/ HTTP/
+1.1` 200 278019 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101
+ Firefox/34.0`
+
+Type A.A">xxviii</a></sup>: 14<br />
+51.254.153.201<sup><a href="#footnote_28_67024" id="identifier_28_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+51.254.153.201 - - [02/Jun/2016:12:33:28 -0400] `GET /2010/continut-platit/ HTTP
+/1.1` 200 278423 `/` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:3
+5.0) Gecko/20100101 Firefox/35.0`
+51.254.153.201 - - [02/Jun/2016:12:33:34 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+54 `/` `PHP/5.2.23`
+51.254.153.201 - - [02/Jun/2016:12:33:36 -0400] `GET /2010/continut-platit/ HTTP
+/1.1` 200 278386 `-` `PHP/5.2.23`
+51.254.153.201 - - [02/Jun/2016:12:33:44 -0400] `GET /2010/continut-platit/ HTTP
+/1.1` 200 278434 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:35.0) Gecko/2010010
+1 Firefox/35.0`
+
+Type A.A">xxix</a></sup>: 15<br />
+91.200.12.73<sup><a href="#footnote_29_67024" id="identifier_29_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+91.200.12.73 - - [04/Jun/2016:08:16:23 -0400] `GET /2013/ripple-the-definitive-d
+iscussion/ HTTP/1.1` 200 72172 `/` `Mozilla/5.0 (Windows NT 6.
+1; WOW64; rv:34.0) Gecko/20100101 Firefox/34.0`
+91.200.12.73 - - [04/Jun/2016:08:16:23 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `/` `PHP/5.2.79`
+91.200.12.73 - - [04/Jun/2016:08:16:25 -0400] `GET /2013/ripple-the-definitive-d
+iscussion/ HTTP/1.1` 200 72433 `-` `PHP/5.2.79`
+91.200.12.73 - - [04/Jun/2016:08:20:41 -0400] `GET /2013/ripple-the-definitive-d
+iscussion/ HTTP/1.1` 200 72339 `-` `Mozilla/5.0 (Windows NT 6.1; WOW64; rv:34.0)
+ Gecko/20100101 Firefox/34.0`
+
+Type A.A">xxx</a></sup>: 16<br />
+75.75.237.162<sup><a href="#footnote_30_67024" id="identifier_30_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+75.75.237.162 - - [01/Jun/2016:05:57:30 -0400] `GET /2012/lets-have-fun-with-pau
+l-graham/ HTTP/1.1` 200 56820 `/` `Mozilla/5.0 (Windows NT 6.3
+; WOW64; rv:34.0) Gecko/20100101 Firefox/34.0`
+75.75.237.162 - - [01/Jun/2016:05:57:34 -0400] `POST /xmlrpc.php HTTP/1.1` 200 5
+4 `/` `PHP/5.3.54`
+75.75.237.162 - - [01/Jun/2016:05:57:39 -0400] `GET /2012/lets-have-fun-with-pau
+l-graham/ HTTP/1.1` 200 56950 `-` `PHP/5.3.54`
+75.75.237.162 - - [01/Jun/2016:05:58:43 -0400] `GET /2012/lets-have-fun-with-pau
+l-graham/ HTTP/1.1` 200 56936 `-` `Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0)
+Gecko/20100101 Firefox/34.0`
+
+Type A.A">xxxi</a></sup>: 18<br />
+37.97.183.36<sup><a href="#footnote_31_67024" id="identifier_31_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+37.97.183.36 - - [12/Jun/2016:08:55:10 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+37.97.183.36 - - [12/Jun/2016:08:55:11 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+37.97.183.36 - - [12/Jun/2016:08:55:11 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+37.97.183.36 - - [12/Jun/2016:08:55:12 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+
+Type DS.G">xxxii</a></sup>: 21<br />
+23.227.196.116<sup><a href="#footnote_32_67024" id="identifier_32_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+23.227.196.116 - - [09/Jun/2016:04:26:05 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+23.227.196.116 - - [09/Jun/2016:04:26:06 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+23.227.196.116 - - [09/Jun/2016:04:26:08 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+
+Type DS.G">xxxiii</a></sup>: 22<br />
+193.201.225.85<sup><a href="#footnote_33_67024" id="identifier_33_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+193.201.225.85 - - [15/Jun/2016:11:58:18 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+35596 `/xmlrpc.php` `Mozilla/5.0 (Windows; U; WinNT4.0; en-US;
+ rv:1.2b) Gecko/20021016 K-Meleon 0.7`
+193.201.225.85 - - [16/Jun/2016:03:33:51 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+71020 `/xmlrpc.php` `Mozilla/5.0 (X11; U; Linux i686; en; rv:1
+.8.1.11) Gecko/20071216 Firefox/2.0.0.11`
+193.201.225.85 - - [16/Jun/2016:10:56:59 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+69544 `/xmlrpc.php` `iCCrawler (http://www.iccenter.net/bot.ht
+m)`
+193.201.225.85 - - [16/Jun/2016:18:19:55 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+67330 `/xmlrpc.php` `Mozilla/5.0 (X11; U; Linux i686; nb-NO; r
+v:1.9.1.16) Gecko/20110420 SeaMonkey/2.0.14`
+193.201.225.85 - - [17/Jun/2016:01:43:12 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+71758 `/xmlrpc.php` `Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+ rv:1.9.2.6) Gecko/20100628 Ubuntu/10.04 (lucid) Firefox/3.6.6`
+193.201.225.85 - - [17/Jun/2016:09:04:49 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+71758 `/xmlrpc.php` `Mozilla/5.0 (compatible; Konqueror/3.5; L
+inux; X11) KHTML/3.5.3 (like Gecko) Kubuntu 6.06 Dapper`
+
+We'll call this type DS.MA because of the multiple agent strings.
+">xxxiv</a></sup>: 24<br />
+212.56.214.182<sup><a href="#footnote_34_67024" id="identifier_34_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+212.56.214.182 - - [23/Jun/2016:09:05:45 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+212.56.214.182 - - [23/Jun/2016:09:05:46 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+212.56.214.182 - - [23/Jun/2016:09:05:47 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+212.56.214.182 - - [23/Jun/2016:09:05:49 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+
+Basic DS type.">xxxv</a></sup>: 33<br />
+185.109.144.236<sup><a href="#footnote_35_67024" id="identifier_35_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+185.109.144.236 - - [02/Jun/2016:05:24:38 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 24772 `/xmlrpc.php` `Java/1.4.1_01`
+185.109.144.236 - - [02/Jun/2016:14:27:06 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 24772 `/xmlrpc.php` `Mozilla/5.0 (Windows; U; Windows NT 5.1;
+ en-US) AppleWebKit/532.0 (KHTML, like Gecko) Chrome/4.0.211.7 Safari/532.0`
+185.109.144.236 - - [02/Jun/2016:23:36:11 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 24772 `/xmlrpc.php` `Mozilla/5.0 (X11; U; Linux x86_64; sv-SE
+; rv:1.9.0.7) Gecko/2009030423 Ubuntu/8.10 (intrepid) Firefox/3.0.7`
+185.109.144.236 - - [03/Jun/2016:08:27:56 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 24772 `/xmlrpc.php` `Mozilla/5.0 (X11; U; Linux i686 (x86_64)
+; en-US; rv:1.9.0.16) Gecko/2009122206 Firefox/3.0.16 Flock/2.5.6`
+185.109.144.236 - - [03/Jun/2016:17:02:44 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 24772 `/xmlrpc.php` `Mozilla/4.0 (compatible; MSIE 5.01; Wind
+ows NT; .NET CLR 1.0.3705)`
+185.109.144.236 - - [04/Jun/2016:01:36:33 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 24772 `/xmlrpc.php` `Mozilla/4.0 (compatible; MSIE 7.0; Windo
+ws NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; InfoPath
+.2; .NET CLR 3.5.30729; .NET CLR 3.0.30618; Lunascape 5.1.3.4)`
+185.109.144.236 - - [04/Jun/2016:10:11:01 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 24772 `/xmlrpc.php` `iCab/2.9.1 (Macintosh; U; PPC)`
+
+Another DS.MS type.">xxxvi</a></sup>: 42<br />
+112.90.150.136<sup><a href="#footnote_36_67024" id="identifier_36_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+112.90.150.136 - - [06/Jun/2016:07:26:35 -0400] `GET /2012/extraordinarul-act-de
+-supunere-estivala-al-elvirei/ HTTP/1.1` 200 43840 `/` `Mozill
+a/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, li
+ke Gecko) Version/8.0 Mobile/12B440 Safari/600.1.4`
+112.90.150.136 - - [06/Jun/2016:07:27:18 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+54 `/` `PHP/5.3.42`
+112.90.150.136 - - [06/Jun/2016:07:27:28 -0400] `GET /2012/extraordinarul-act-de
+-supunere-estivala-al-elvirei/ HTTP/1.1` 200 43962 `-` `PHP/5.3.42`
+112.90.150.136 - - [06/Jun/2016:07:52:34 -0400] `GET /2012/extraordinarul-act-de
+-supunere-estivala-al-elvirei/ HTTP/1.1` 200 44154 `-` `Mozilla/5.0 (iPhone; CPU
+ iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/
+8.0 Mobile/12B440 Safari/600.1.4`
+
+Run of the mill A.A type.">xxxvii</a></sup>: 49<br />
+191.96.249.20<sup><a href="#footnote_37_67024" id="identifier_37_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+191.96.249.20 - - [02/Jun/2016:23:22:42 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+191.96.249.20 - - [02/Jun/2016:23:22:42 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+191.96.249.20 - - [02/Jun/2016:23:24:15 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+191.96.249.20 - - [02/Jun/2016:23:24:26 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+
+DS type.">xxxviii</a></sup>: 158<br />
+91.193.74.8<sup><a href="#footnote_38_67024" id="identifier_38_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+91.193.74.8 - - [11/Jun/2016:15:00:09 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+`-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+91.193.74.8 - - [11/Jun/2016:15:05:39 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+`-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+91.193.74.8 - - [11/Jun/2016:15:24:28 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+`-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+91.193.74.8 - - [11/Jun/2016:15:30:07 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+`-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+
+DS type.">xxxix</a></sup>: 234<br />
+191.96.249.54<sup><a href="#footnote_39_67024" id="identifier_39_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+191.96.249.54 - - [06/Jun/2016:10:57:49 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+191.96.249.54 - - [06/Jun/2016:10:57:50 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+191.96.249.54 - - [06/Jun/2016:10:57:50 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+191.96.249.54 - - [06/Jun/2016:10:57:50 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+
+Another run of the mill DS type.">xl</a></sup>: 1459<br />
+93.115.97.162<sup><a href="#footnote_40_67024" id="identifier_40_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+93.115.97.162 - - [01/Jun/2016:16:38:21 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+93.115.97.162 - - [01/Jun/2016:18:25:37 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+93.115.97.162 - - [01/Jun/2016:18:25:39 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+93.115.97.162 - - [01/Jun/2016:18:25:40 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+
+Yet another run of the mill DS type.">xli</a></sup>): 1954<br />
+185.112.249.127<sup><a href="#footnote_41_67024" id="identifier_41_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+185.112.249.127 - - [20/Jun/2016:20:32:14 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.112.249.127 - - [20/Jun/2016:20:32:15 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.112.249.127 - - [20/Jun/2016:20:32:16 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.112.249.127 - - [20/Jun/2016:20:32:17 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+
+DS.G type.">xlii</a></sup>: 2984<br />
+23.227.199.105<sup><a href="#footnote_42_67024" id="identifier_42_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+23.227.199.105 - - [09/Jun/2016:04:26:04 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+23.227.199.105 - - [09/Jun/2016:04:26:04 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+23.227.199.105 - - [09/Jun/2016:04:26:05 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+23.227.199.105 - - [09/Jun/2016:04:26:16 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+
+Another DS.G type.">xliii</a></sup>: 4322<br />
+91.229.20.98<sup><a href="#footnote_43_67024" id="identifier_43_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+91.229.20.98 - - [01/Jun/2016:12:12:15 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+91.229.20.98 - - [01/Jun/2016:12:12:15 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+91.229.20.98 - - [01/Jun/2016:12:12:16 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+91.229.20.98 - - [01/Jun/2016:12:12:17 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+
+DS type.">xliv</a></sup>: 4654<br />
+63.141.227.243<sup><a href="#footnote_44_67024" id="identifier_44_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+63.141.227.243 - - [03/Jun/2016:18:41:16 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+63.141.227.243 - - [03/Jun/2016:18:41:19 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+63.141.227.243 - - [03/Jun/2016:18:41:22 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+63.141.227.243 - - [03/Jun/2016:18:41:25 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+
+Another DS type.">xlv</a></sup>: 4825<br />
+76.74.170.219<sup><a href="#footnote_45_67024" id="identifier_45_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+76.74.170.219 - - [09/Jun/2016:12:54:04 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+76.74.170.219 - - [09/Jun/2016:12:54:14 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+76.74.170.219 - - [09/Jun/2016:12:54:15 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+76.74.170.219 - - [09/Jun/2016:12:54:16 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+Another DS.G type.">xlvi</a></sup>: 4977<br />
+76.74.170.65<sup><a href="#footnote_46_67024" id="identifier_46_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+76.74.170.65 - - [09/Jun/2016:09:57:40 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+76.74.170.65 - - [09/Jun/2016:09:57:41 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+76.74.170.65 - - [09/Jun/2016:09:57:43 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+76.74.170.65 - - [09/Jun/2016:09:57:44 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+Yet another DS.G type.">xlvii</a></sup>: 7100<br />
+146.185.251.210<sup><a href="#footnote_47_67024" id="identifier_47_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+146.185.251.210 - - [12/Jun/2016:17:05:40 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+146.185.251.210 - - [12/Jun/2016:17:06:24 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+146.185.251.210 - - [12/Jun/2016:17:08:26 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+146.185.251.210 - - [12/Jun/2016:17:08:42 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+
+Another DS type.">xlviii</a></sup>: 7487<br />
+146.185.251.48<sup><a href="#footnote_48_67024" id="identifier_48_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+146.185.251.48 - - [11/Jun/2016:16:00:15 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+146.185.251.48 - - [11/Jun/2016:16:00:45 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+146.185.251.48 - - [11/Jun/2016:16:01:30 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+146.185.251.48 - - [11/Jun/2016:16:02:23 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)`
+
+Yet another DS type.">xlix</a></sup>: 8828</p>
+<p>195.154.250.118<sup><a href="#footnote_49_67024" id="identifier_49_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+195.154.250.118 - - [10/Jun/2016:04:13:56 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 421 `-` `Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)`
+195.154.250.118 - - [10/Jun/2016:04:13:56 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 421 `-` `Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)`
+195.154.250.118 - - [10/Jun/2016:04:13:56 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 421 `-` `Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)`
+195.154.250.118 - - [10/Jun/2016:04:13:57 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 421 `-` `Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)`
+
+Also DS type.">l</a></sup>: 20204<br />
+91.188.125.194<sup><a href="#footnote_50_67024" id="identifier_50_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+91.188.125.194 - - [23/Jun/2016:22:18:25 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+91.188.125.194 - - [23/Jun/2016:22:18:26 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+91.188.125.194 - - [23/Jun/2016:22:18:26 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+91.188.125.194 - - [23/Jun/2016:22:18:27 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)
+`
+
+More of the DS.G type.">li</a></sup>: 38345<br />
+188.120.41.9<sup><a href="#footnote_51_67024" id="identifier_51_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+188.120.41.9 - - [31/May/2016:08:13:04 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+188.120.41.9 - - [31/May/2016:08:13:18 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+188.120.41.9 - - [31/May/2016:08:13:18 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+188.120.41.9 - - [31/May/2016:08:20:27 -0400] `POST /xmlrpc.php HTTP/1.1` 200 54
+ `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+
+Another DS.G type.">lii</a></sup>: 88705</p>
+<p>185.142.236.197<sup><a href="#footnote_52_67024" id="identifier_52_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+185.142.236.197 - - [12/Jun/2016:12:53:52 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.142.236.197 - - [12/Jun/2016:12:53:52 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.142.236.197 - - [12/Jun/2016:12:53:53 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.142.236.197 - - [12/Jun/2016:12:53:53 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+
+Yet another DS.G type.">liii</a></sup>: 149555<br />
+91.134.169.81<sup><a href="#footnote_53_67024" id="identifier_53_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+91.134.169.81 - - [02/Jun/2016:19:34:19 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+91.134.169.81 - - [02/Jun/2016:19:34:34 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+91.134.169.81 - - [02/Jun/2016:19:34:55 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+91.134.169.81 - - [02/Jun/2016:19:35:24 -0400] `POST /xmlrpc.php HTTP/1.0` 200 5
+4 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+Another DS.G type.">liv</a></sup>: 160016<br />
+185.142.236.219<sup><a href="#footnote_54_67024" id="identifier_54_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+185.142.236.219 - - [11/Jun/2016:03:56:28 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.142.236.219 - - [11/Jun/2016:03:56:28 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.142.236.219 - - [11/Jun/2016:03:56:29 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.142.236.219 - - [11/Jun/2016:03:56:29 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+Yet another DS.G type.">lv</a></sup>: 162624<br />
+5.135.17.28<sup><a href="#footnote_55_67024" id="identifier_55_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+5.135.17.28 - - [02/Jun/2016:19:31:56 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+`-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+5.135.17.28 - - [02/Jun/2016:19:32:00 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+`-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+5.135.17.28 - - [02/Jun/2016:19:32:03 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+`-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+5.135.17.28 - - [02/Jun/2016:19:32:07 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+`-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+Yet another DS.G type.">lvi</a></sup>: 195002</p>
+<p>151.80.82.32<sup><a href="#footnote_56_67024" id="identifier_56_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+151.80.82.32 - - [02/Jun/2016:19:36:07 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+151.80.82.32 - - [02/Jun/2016:19:36:38 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+151.80.82.32 - - [02/Jun/2016:19:37:09 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+151.80.82.32 - - [02/Jun/2016:19:37:40 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+There's no end to these, is there. DS.G again.">lvii</a></sup>: 256270<br />
+151.80.82.34<sup><a href="#footnote_57_67024" id="identifier_57_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+151.80.82.34 - - [02/Jun/2016:19:36:08 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+151.80.82.34 - - [02/Jun/2016:19:36:39 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+151.80.82.34 - - [02/Jun/2016:19:37:10 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+151.80.82.34 - - [02/Jun/2016:19:37:41 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+DS.G type again.">lviii</a></sup>: 254606</p>
+<p>185.130.6.52<sup><a href="#footnote_58_67024" id="identifier_58_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+185.130.6.52 - - [12/Jun/2016:12:53:51 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+185.130.6.52 - - [12/Jun/2016:12:53:52 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+185.130.6.52 - - [12/Jun/2016:12:53:52 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+185.130.6.52 - - [12/Jun/2016:12:53:53 -0400] `POST /xmlrpc.php HTTP/1.0` 200 54
+ `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)`
+Yes, your intuition is correct : DS.G type!">lix</a></sup>: 1325408<br />
+185.103.109.139<sup><a href="#footnote_59_67024" id="identifier_59_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 54 `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 54 `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 54 `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 54 `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+
+Another DS.G spambot.">lx</a></sup>: 1391617<br />
+185.103.109.246<sup><a href="#footnote_60_67024" id="identifier_60_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+185.103.109.246 - - [07/Jun/2016:00:30:51 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.103.109.246 - - [07/Jun/2016:00:30:52 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.103.109.246 - - [07/Jun/2016:00:30:52 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+185.103.109.246 - - [07/Jun/2016:00:30:53 -0400] `POST /xmlrpc.php HTTP/1.0` 200
+ 54 `-` `Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html
+)`
+
+Yet another DS.G type spambot. I'm curious : have you seen an increase in indexing activity from Google in the past months ?">lxi</a></sup>: 1473624<br />
+185.103.109.248<sup><a href="#footnote_61_67024" id="identifier_61_67024" class="footnote-link footnote-identifier-link" title="Typical behaviour : 
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 54 `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 54 `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 54 `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] `POST /xmlrpc.php HTTP/1.1` 200
+ 54 `-` `Googlebot/2.1 (+http://www.google.com/bot.html)`
+
+And another DS.G spambot.">lxii</a></sup>: 1439165
+</p></blockquote>
+<p>That's right : 60 out of the total 1`962 spammers sent out 99.9% of all the (attempted, unsuccessful) spam. </p>
+<p>To be perfectly clear : no-one on this list is innocent. Not a single one. It's just a matter of "spambots that spam and check" vs "spambots that just spam", and for that matter, the vast majority of the 1`962 aren't innocent either - there weren't that many Wordpress blogs linking to Trilema articles so far in June, not by an order of magnitude if not two.</p>
+<p>What must be going through one's head to buy a server and a C block (like 185.103.109.x) and then send 4.3 mn requests, that's <em>over two per second</em> for three weeks<sup><a href="#footnote_62_67024" id="identifier_62_67024" class="footnote-link footnote-identifier-link" title="Last month is no different, for the record, it's not like this started on the 1st of June by any means. Nor was April. Or April of last year.">lxiii</a></sup> straight ? If you ever wondered how <a href="/2016/to-the-dao-and-the-ethereum-community-fuck-you/#comment-117684">"normal people" / Ethereum "investors"</a> are created, I submit that this is the exact blueprint : "<a href="/2016/republican-thesaurus-with-vocabulary-and-dictionary/#selection-65.0-65.3">they just wanted to</a>" and "<a href="/forum-logs-for-23-jun-2016#2114390">maybe it works</a>".</p>
+<p>This is the Internet of Shit. It costs ~nothing to send a billion pointless requests, to write a billion <a href="/2016/the-life-and-times-of-one-phil-daian-aspiring-nigger-apprentice-cocksucker/">pieces of pointless nonsense</a>, to create yet another <a href="/2016/gawker-media-group-gmg-vs-arbeitsgemeinschaft-versuchsreaktor-avr/">toxic "property"</a>, and so they're sent, and written, and created. In extremis it costs nothing to produce another billion <a href="/2013/the-story-of-pointless-and-witless/">of these shitheads</a> - "the government" will provide for them, jobs and healthcare and food and mates and social media + television. God help us.</p>
+<p>If I notify the hosts<sup><a href="#footnote_63_67024" id="identifier_63_67024" class="footnote-link footnote-identifier-link" title="Here's what I learned trying : 	
+
+Takes a while to find 107.150.74.65 belongs to zenlayer, because it's not properly listed. Once you do, zenlayer simply rejects email to abuse@zenlayer.com. Because why not amirite ? Yes, I reported them to ARIN, and I'm ever-so-sure they'll lose the block. 
+	
+abuse@ipffm.de (IPFFM Internet Provider Frankfurt GmbH) simply drops emails. Had to notify Accelerated, their provider.
+	
+Apparently `nobody` owns 104.160.31.77. Yet it routes fine, through cyber-wurx-llc.10gigabitethernet1-1-2.switch1.atl2.he.net (216.66.41.118) ; 69.61.24.218 (69.61.24.218) ;  104.160.31.77.dynamic.nationinternet.net (104.160.31.77). Wonder of wonders, this. Reported to CachedNet LLC, the upstream provider (and a major provider for the entire list).
+	
+hostmaster@chinamobile.com rejects abuse email (not that it has a proper abuse inbox anyway). Reported to APNIC, for all the good that'll do.
+	
+The VietNam Post and Telecom Corporation does not feel the need to list an abuse contact email. Or an email whatsoever, actually. Not via whois, not on website, not anywhere! abuse@vnnic.net.vn also fails, and all this is perfectly fine, apparently.
+	
+abuse@hostslim.nl (a front for abuse@rakar.nl) simply drops emails. Reported to RIPE.
+	
+abuse@cogentco.com drops emails. Reported to ARIN.
+	
+info@detchile.com (the only abuse contact for `Digital Energy Technologies Chile SpA` drops emails. Reported to LACNIC.
+	
+Swiftway (abuse@swiftway.co.uk) sent me mails claiming neither 23.227.199.105 nor 23.227.196.116 is their customer, which is amusing considering the whois doesn't lie.
+
+ ">lxiv</a></sup>, I help build <a href="/forum-logs-for-23-may-2016#2097234">this idiocy</a>. If I don't, then what do I do ? You tell me, how to go about it, so that we can have nice things without idiots involved in them - and if you say anything like "inclusive" or "democracy" or "human rights" or anything whatsoever along those lines - you lose. </p>
+<p>You lose, like <a href="http://qntra.net/2016/06/leave-wins-uk-ballot/">you've lost already</a>, every single time you tried. The key to a livable society is repression, the key to well educated, well behaved youth <a href="/2014/patriarchy-is-a-thing-because-nobody-likes-living-in-a-world-populated-by-little-girls/">is rape</a> - merciless, painful, inescapable, violent and continuous rape. The key to happiness of the worthy is the subjection of the others, of the unworthy, of the lesser, of the insufficient, of the ambitious, of the subhuman. It's what it is, like it or not.</p>
+<p>Frankly - I don't care what you'd prefer, or what you'd rather think you'd prefer. I'm sick and tired of living in the world of shit. Time for the world of rape.</p>
+<p><b>Update.</b> <em>One day</em><sup><a href="#footnote_64_67024" id="identifier_64_67024" class="footnote-link footnote-identifier-link" title="Less, really. About 16 hours.">lxv</a></sup> after notifying the hosts, the situation has changed significantly<sup><a href="#footnote_65_67024" id="identifier_65_67024" class="footnote-link footnote-identifier-link" title="Data based of the first 8 hours of June 25th.">lxvi</a></sup> : </p>
+<blockquote><p><del>103.231.101.57</del>, <del>104.160.31.77</del>, <del>104.247.7.50</del>, <del>104.254.212.100</del>, <del>107.150.74.100</del>, <del>107.150.74.65</del>, <del>107.151.152.218</del>, <del>112.149.137.248</del>, <del>112.90.150.136</del>, <del>113.176.7.136</del>, <b>146.185.251.210<sup><a href="#footnote_66_67024" id="identifier_66_67024" class="footnote-link footnote-identifier-link" title="spservers.org, aka
+role:           Super Professional Servers Network Operation Centre
+address:        ************************************************************
+address:        1st Magistralny blind alley, 30,
+address:        BC `The Yard`,
+admin-c:        KL2587-RIPE
+tech-c:         KL2587-RIPE
+address:        Moskow
+address:        Russian Federation
+remarks:        24/7 NOC&#038;SUPPORT: support@spservers.org
+remarks:        Abuse issues: abuse@spservers.org will be handled ASAP
+remarks:        Network&#038;peering Issues: support@spservers.org
+phone:          +74957082672
+address:        ************************************************************
+">lxvii</a></sup></b>, <b>146.185.251.48</b>, <del>151.80.82.32</del>, <del>151.80.82.34</del>, <del>157.122.147.189</del>, <del>178.162.211.212</del>, <del>183.91.33.42</del>, <del>183.91.33.44</del>, <del>183.91.33.76</del>, <del>185.103.109.139</del>, <del>185.103.109.246</del>, <del>185.103.109.248</del>, <del>185.109.144.236</del>, <del>185.112.249.127</del>, <b>185.130.6.52<sup><a href="#footnote_67_67024" id="identifier_67_67024" class="footnote-link footnote-identifier-link" title="`Sindicate group` using AS200039 as HYDRA-MNT. Notified sindicategrourp@gmail.com - yeah, that's what they list, misspelled like that - and noc@zare.co.uk ; no answer and honestly the arrangement looks rather dubious.">lxviii</a></sup></b>, <b>185.142.236.197<sup><a href="#footnote_68_67024" id="identifier_68_67024" class="footnote-link footnote-identifier-link" title="Blackhost Ltd. Notified me that they've opened tickets 200096 and 772569.">lxix</a></sup></b>, <b>185.142.236.219</b>, <del>188.120.41.9</del>, <del>191.96.249.20</del>, <del>191.96.249.54</del>, <del>193.201.225.85</del>, <del>195.154.250.118</del>, <del>198.204.247.202</del>, <del>209.222.105.212</del>, <del>212.56.214.129</del>, <del>212.56.214.182</del>, <del>223.72.251.254</del>, <del>23.227.196.116</del>, <del>23.227.199.105</del>, <del>37.59.232.134</del>, <del>37.97.183.36</del>, <del>45.45.157.224</del>, <del>46.17.97.74</del>, <del>51.254.153.201</del>, <del>5.135.17.28</del>, <del>63.141.227.243</del>, <del>75.75.237.162</del>, <del>76.74.170.219</del>, <del>76.74.170.65</del>, <del>89.36.65.224</del>, <del>89.36.65.48</del>, <del>91.134.169.81</del>, <b>91.188.125.194<sup><a href="#footnote_69_67024" id="identifier_69_67024" class="footnote-link footnote-identifier-link" title="Notified abuse@sitel.net.pl ; received no response. They're running AS59491 mnt-by sitelnetpl-mnt. Judging by the fact that they not only failed to block the listed IP but even allowed the spammer a new one, the whole thing seems altogether dubious.">lxx</a></sup></b>, <del>91.193.74.8</del>, <del>91.200.12.73</del>, <del>91.229.20.98</del>, <del>93.115.192.115</del>, <del>93.115.97.162</del>, <del>93.127.147.115</del>, <del>93.127.147.32</del>.</p></blockquote>
+<p>There's only one addition, 91.188.125.195, revving to catch up with 91.188.125.194. It is perhaps also worth pointing out that perhaps contrary to expectation, exactly none of these are Windows chump desktops, but all reside in datacenters, and the response to abuse complaints is <em>swift</em>. Do consider doing the same I describe doing if you run in the same problem I describe running into. It certainly works, spurious requests are down all the way to 11`376 in the interval considered, from ~2.3mn which'd be a linear projection based on the historical account. That's a 99.5% drop.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_67024" class="footnote">By the way - they've still not fixed the hole ; in spite of the code being published, and the change minimal. It's been two years.</p>
+<p>"Responsible" disclosure ? Not even once. Rape the USG tools. [<a href="#identifier_0_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_67024" class="footnote">AWS charges 10 cents each plus ~3 cents per GB in Load Balancers. So this whole pile of nonsense would have cost about two quarters, had I been using the (very expensive) AWS. [<a href="#identifier_1_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>157.122.147.189 - - [02/Jun/2016:12:58:00 -0400] "GET /2012/voluntary-contracts-after-a-while/ HTTP/1.1" 200 88186 "/" "Mozilla/5.0 (iPad; CPU OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B440 Safari/600.1.4"<br />
+157.122.147.189 - - [02/Jun/2016:12:58:03 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54 "/" "PHP/5.2.91"<br />
+157.122.147.189 - - [02/Jun/2016:12:58:06 -0400] "GET /2012/voluntary-contracts-after-a-while/ HTTP/1.1" 200 88285 "-" "PHP/5.2.91"
+</p></blockquote>
+<p>This is a run of the mill spambot, as discussed in more detail <a href="/2016/912001273-an-ode-to-a-tireless-bot/">back in April</a>. We'll call it type A because it does check after spamming. [<a href="#identifier_2_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_67024" class="footnote">Typical behaviour :</p>
+<blockquote><p>198.204.247.202 - - [06/Jun/2016:02:54:15 -0400] "POST /xmlrpc.php HTTP/1.1" 200 124423 "-" "-"<br />
+198.204.247.202 - - [07/Jun/2016:08:53:01 -0400] "POST /xmlrpc.php HTTP/1.1" 200 124423 "-" "-"<br />
+198.204.247.202 - - [11/Jun/2016:03:10:40 -0400] "POST /xmlrpc.php HTTP/1.1" 200 124423 "-" "-"
+</p></blockquote>
+<p>Just another dumb spammer, call it type DS. [<a href="#identifier_3_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_67024" class="footnote">Typical behaviour :</p>
+<blockquote><p>93.115.192.115 - - [16/Jun/2016:02:07:16 -0400] "GET /2010/continut-platit/ HTTP/1.0" 200 277994 "/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.2.5 (KHTML, like Gecko) Version/8.0.2 Safari/600.2.5"<br />
+93.115.192.115 - - [16/Jun/2016:02:07:17 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54 "/" "PHP/5.2.93"
+</p></blockquote>
+<p>Also run of the mill spambot. We'll call it type B because it doesn't check after spamming.<br />
+ [<a href="#identifier_4_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>209.222.105.212 - - [14/Jun/2016:19:22:12 -0400] "GET /2013/the-sanity-dogma/ HTTP/1.0" 200 68035 "/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.2.5 (KHTML, like Gecko) Version/8.0.2 Safari/600.2.5"<br />
+209.222.105.212 - - [14/Jun/2016:19:23:15 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54 "/" "PHP/5.2.90"<br />
+209.222.105.212 - - [14/Jun/2016:19:23:32 -0400] "GET /2013/the-sanity-dogma/ HTTP/1.0" 200 68192 "-" "PHP/5.2.90"
+</p></blockquote>
+<p>We'll call this one type A.1 because it spams after waiting a minute. [<a href="#identifier_5_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>212.56.214.129 - - [21/Jun/2016:17:53:46 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+212.56.214.129 - - [21/Jun/2016:17:53:53 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"
+</p></blockquote>
+<p>We'll call this type of dumb spammer DS.G because of its agent string. [<a href="#identifier_6_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>93.127.147.32 - - [01/Jun/2016:02:06:55 -0400] "GET /2011/o-vaca-cu-cabina/ HTTP<br />
+/1.0" 200 42972 "/" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34<br />
+.0) Gecko/20100101 Firefox/34.0"<br />
+93.127.147.32 - - [01/Jun/2016:02:06:56 -0400] "POST /xmlrpc.php HTTP/1.1" 200 5<br />
+4 "/" "PHP/5.3.12"<br />
+93.127.147.32 - - [01/Jun/2016:02:06:57 -0400] "GET /2011/o-vaca-cu-cabina/ HTTP<br />
+/1.0" 200 42976 "-" "PHP/5.3.12"<br />
+93.127.147.32 - - [01/Jun/2016:02:09:29 -0400] "GET /2011/o-vaca-cu-cabina/ HTTP<br />
+/1.0" 200 43104 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101<br />
+ Firefox/34.0"</p></blockquote>
+<p>We'll call it type A.A because it checks, then changes agent and checks again. [<a href="#identifier_7_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>107.150.74.65 - - [17/Jun/2016:04:44:20 -0400] "GET /2010/afacerile-externe-ca-s<br />
+tiinta-exacta/ HTTP/1.0" 200 39257 "/" "Mozilla/5.0 (Windows N<br />
+T 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"<br />
+107.150.74.65 - - [17/Jun/2016:04:44:24 -0400] "POST /xmlrpc.php HTTP/1.1" 200 5<br />
+4 "/" "PHP/5.3.46"<br />
+107.150.74.65 - - [17/Jun/2016:04:44:38 -0400] "GET /2010/afacerile-externe-ca-s<br />
+tiinta-exacta/ HTTP/1.0" 200 39385 "-" "PHP/5.3.46"<br />
+107.150.74.65 - - [17/Jun/2016:04:54:52 -0400] "GET /2010/afacerile-externe-ca-s<br />
+tiinta-exacta/ HTTP/1.0" 200 39232 "-" "Mozilla/5.0 (Windows NT 5.1) AppleWebKit<br />
+/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_8_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_9_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>107.151.152.218 - - [03/Jun/2016:19:32:23 -0400] "POST /2014/the-sins-of-the-gro<br />
+up-of-posers-behind-the-so-called-bitcoin-foundation/trackback/ HTTP/1.0" 200 11<br />
+3 "/2014/the-sins-of-the-group-of-posers-behind-the-so-called-<br />
+bitcoin-foundation/" "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Ge<br />
+cko"<br />
+107.151.152.218 - - [05/Jun/2016:05:10:30 -0400] "POST /2014/the-scum/trackback/<br />
+ HTTP/1.0" 200 113 "/2014/the-scum/" "Mozilla/5.0 (Windows NT<br />
+6.1; Trident/7.0; rv:11.0) like Gecko"<br />
+107.151.152.218 - - [05/Jun/2016:16:33:00 -0400] "GET / HTTP/1.0" 200 32036 "htt<br />
+p://trilema.com" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, lik<br />
+e Gecko) Chrome/39.0.2171.99 Safari/537.36"<br />
+107.151.152.218 - - [05/Jun/2016:16:33:01 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 473 "/" "PHP/5.2.20"<br />
+107.151.152.218 - - [05/Jun/2016:17:14:14 -0400] "GET / HTTP/1.0" 200 58305 "htt<br />
+p://trilema.com" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, lik<br />
+e Gecko) Chrome/39.0.2171.99 Safari/537.36"<br />
+107.151.152.218 - - [05/Jun/2016:17:14:19 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 473 "/" "PHP/5.3.04"<br />
+107.151.152.218 - - [06/Jun/2016:02:17:38 -0400] "POST /2014/hair-the-musical/tr<br />
+ackback/ HTTP/1.0" 200 113 "/2014/hair-the-musical/" "Mozilla/<br />
+5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko"<br />
+107.151.152.218 - - [06/Jun/2016:04:59:47 -0400] "POST /2014/on-essences/trackba<br />
+ck/ HTTP/1.0" 200 113 "/2014/on-essences/" "Mozilla/5.0 (Windo<br />
+ws NT 6.1; Trident/7.0; rv:11.0) like Gecko"</p></blockquote>
+<p>We'll call this M, because it's a mixed type trying to leave both spam comments and spam trackbacks. [<a href="#identifier_9_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_10_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>112.149.137.248 - - [04/Jun/2016:07:00:40 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 74872 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck<br />
+o) Chrome/43.0.2357.130 Safari/537.36"<br />
+112.149.137.248 - - [04/Jun/2016:07:00:44 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 74872 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck<br />
+o) Chrome/43.0.2357.130 Safari/537.36"<br />
+112.149.137.248 - - [04/Jun/2016:07:00:48 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 74872 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck<br />
+o) Chrome/43.0.2357.130 Safari/537.36"
+</p></blockquote>
+<p>Type DS. [<a href="#identifier_10_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_11_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>45.45.157.224 - - [31/May/2016:21:43:50 -0400] "GET /2010/ce-bea-blogerul/ HTTP/<br />
+1.0" 200 43755 "/" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.<br />
+0) Gecko/20100101 Firefox/34.0"<br />
+45.45.157.224 - - [31/May/2016:21:43:53 -0400] "POST /xmlrpc.php HTTP/1.1" 200 5<br />
+4 "/" "PHP/5.3.31"<br />
+45.45.157.224 - - [31/May/2016:21:43:55 -0400] "GET /2010/ce-bea-blogerul/ HTTP/<br />
+1.0" 200 43924 "-" "PHP/5.3.31"<br />
+45.45.157.224 - - [31/May/2016:21:46:58 -0400] "GET /2010/ce-bea-blogerul/ HTTP/<br />
+1.0" 200 44074 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101<br />
+Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_11_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_12_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>46.17.97.74 - - [01/Jun/2016:02:12:03 -0400] "POST /xmlrpc.php HTTP/1.1" 200 224<br />
+272 "-" "wp-iphone"<br />
+46.17.97.74 - - [01/Jun/2016:02:26:38 -0400] "POST /xmlrpc.php HTTP/1.1" 200 224<br />
+272 "-" "Windows Live Writer"<br />
+46.17.97.74 - - [01/Jun/2016:02:38:35 -0400] "POST /xmlrpc.php HTTP/1.1" 200 224<br />
+272 "-" "wp-windowsphone"
+</p></blockquote>
+<p>Run of the mill DS.<br />
+ [<a href="#identifier_12_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_13_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>93.127.147.115 - - [12/Jun/2016:19:35:23 -0400] "GET /2013/the-sanity-dogma/ HTT<br />
+P/1.1" 200 67742 "/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 1<br />
+0_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36<br />
+"<br />
+93.127.147.115 - - [12/Jun/2016:19:35:24 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+54 "/" "PHP/5.2.84"<br />
+93.127.147.115 - - [12/Jun/2016:19:35:25 -0400] "GET /2013/the-sanity-dogma/ HTT<br />
+P/1.1" 200 67811 "-" "PHP/5.2.84"<br />
+93.127.147.115 - - [12/Jun/2016:19:36:29 -0400] "GET /2013/the-sanity-dogma/ HTT<br />
+P/1.1" 200 67819 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKi<br />
+t/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_13_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_14_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>107.150.74.100 - - [16/Jun/2016:01:35:40 -0400] "GET /2013/the-sanity-dogma/ HTT<br />
+P/1.0" 200 68042 "/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 1<br />
+0_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"<br />
+107.150.74.100 - - [16/Jun/2016:01:35:41 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+54 "/" "PHP/5.2.82"<br />
+107.150.74.100 - - [16/Jun/2016:01:35:46 -0400] "GET /2013/the-sanity-dogma/ HTT<br />
+P/1.0" 200 68384 "-" "PHP/5.2.82"<br />
+107.150.74.100 - - [16/Jun/2016:16:10:29 -0400] "GET /2013/the-sanity-dogma/ HTT<br />
+P/1.0" 200 68048 "/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 1<br />
+0_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"
+</p></blockquote>
+<p>Type A.A, clearly same botnet as 93.127.147.115.<br />
+ [<a href="#identifier_14_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_15_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>183.91.33.42 - - [08/Jun/2016:02:50:34 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48678 "-" "Mozilla/5.0 (X11; U<br />
+buntu; Linux i686; rv:34.0) Gecko/20100101 Firefox/34.0"<br />
+183.91.33.42 - - [08/Jun/2016:18:37:36 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48514 "/" "O<br />
+pera/9.80 (Windows NT 6.2; Win64; x64) Presto/2.12.388 Version/12.17"<br />
+183.91.33.42 - - [08/Jun/2016:18:40:47 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "/" "PHP/5.3.12"<br />
+183.91.33.42 - - [08/Jun/2016:18:45:57 -0400] "-" 408 - "-" "-"<br />
+183.91.33.42 - - [10/Jun/2016:01:59:26 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48344 "/" "M<br />
+ozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:34.0) Gecko/20100101 Firefox/34.<br />
+0"<br />
+183.91.33.42 - - [10/Jun/2016:07:52:47 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48367 "/" "M<br />
+ozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:34.0) Gecko/20100101 Firefox/34.0<br />
+"<br />
+183.91.33.42 - - [10/Jun/2016:07:52:49 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "/" "PHP/5.2.86"<br />
+183.91.33.42 - - [10/Jun/2016:07:52:51 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48497 "-" "PHP/5.2.86"
+</p></blockquote>
+<p>Seems to be same A.A with a twist. Different botnet running same codebase with slight modifications. [<a href="#identifier_15_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_16_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>103.231.101.57 - - [15/Jun/2016:09:51:35 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+146584 "-" "Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0<br />
+"<br />
+103.231.101.57 - - [15/Jun/2016:09:51:43 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+146584 "-" "Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0<br />
+"<br />
+103.231.101.57 - - [15/Jun/2016:09:51:49 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+146584 "-" "Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0<br />
+"
+</p></blockquote>
+<p>Type DS. [<a href="#identifier_16_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_17_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>104.247.7.50 - - [31/May/2016:20:12:46 -0400] "GET /2009/bucatarie-interna/ HTTP<br />
+/1.0" 200 37690 "/" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34<br />
+.0) Gecko/20100101 Firefox/34.0"<br />
+104.247.7.50 - - [31/May/2016:20:12:47 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "/" "PHP/5.3.55"<br />
+104.247.7.50 - - [31/May/2016:20:12:50 -0400] "GET /2009/bucatarie-interna/ HTTP<br />
+/1.0" 200 37684 "-" "PHP/5.3.55"<br />
+104.247.7.50 - - [31/May/2016:20:15:03 -0400] "GET /2009/bucatarie-interna/ HTTP<br />
+/1.0" 200 37689 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101<br />
+ Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_17_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_18_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>89.36.65.48 - - [01/Jun/2016:02:38:22 -0400] "GET /2009/bucatarie-interna/ HTTP/<br />
+1.0" 200 37613 "/" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.<br />
+0) Gecko/20100101 Firefox/34.0"<br />
+89.36.65.48 - - [01/Jun/2016:02:38:23 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+"/" "PHP/5.2.20"<br />
+89.36.65.48 - - [01/Jun/2016:02:38:25 -0400] "GET /2009/bucatarie-interna/ HTTP/<br />
+1.0" 200 37890 "-" "PHP/5.2.20"<br />
+89.36.65.48 - - [01/Jun/2016:02:38:33 -0400] "GET /2011/o-vaca-cu-cabina/ HTTP/1<br />
+.0" 200 42946 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101 F<br />
+irefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_18_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_19_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>104.160.31.77 - - [13/Jun/2016:11:18:40 -0400] "GET /2013/the-sanity-dogma/ HTTP<br />
+/1.0" 200 67680 "/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10<br />
+_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"<br />
+104.160.31.77 - - [13/Jun/2016:11:18:41 -0400] "POST /xmlrpc.php HTTP/1.1" 200 5<br />
+4 "/" "PHP/5.2.02"<br />
+104.160.31.77 - - [13/Jun/2016:11:18:43 -0400] "GET /2013/the-sanity-dogma/ HTTP<br />
+/1.0" 200 67832 "-" "PHP/5.2.02"<br />
+104.160.31.77 - - [13/Jun/2016:11:21:23 -0400] "GET /2013/the-sanity-dogma/ HTTP<br />
+/1.0" 200 67818 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit<br />
+/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_19_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_20_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>183.91.33.44 - - [10/Jun/2016:12:06:45 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48462 "/" "M<br />
+ozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:34.0) Gecko/20100101 Firefox/34.0<br />
+"<br />
+183.91.33.44 - - [10/Jun/2016:12:06:47 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "/" "PHP/5.2.50"<br />
+183.91.33.44 - - [10/Jun/2016:12:06:51 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48508 "-" "PHP/5.2.50"<br />
+183.91.33.44 - - [10/Jun/2016:12:07:25 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48536 "-" "Mozilla/5.0 (Macint<br />
+osh; Intel Mac OS X 10.7; rv:34.0) Gecko/20100101 Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_20_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_21_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>223.72.251.254 - - [01/Jun/2016:01:27:56 -0400] "GET /2011/mai-exista-windows-3x<br />
+x/ HTTP/1.1" 200 59540 "/" "Mozilla/5.0 (Android; Mobile; rv:3<br />
+4.0) Gecko/34.0 Firefox/34.0"<br />
+223.72.251.254 - - [01/Jun/2016:01:27:58 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+54 "/" "PHP/5.3.12"<br />
+223.72.251.254 - - [01/Jun/2016:01:28:00 -0400] "GET /2011/mai-exista-windows-3x<br />
+x/ HTTP/1.1" 200 59623 "-" "PHP/5.3.12"<br />
+223.72.251.254 - - [01/Jun/2016:01:52:50 -0400] "GET /2012/voluntary-contracts-a<br />
+fter-a-while/ HTTP/1.1" 200 87915 "-" "Mozilla/5.0 (Android; Mobile; rv:34.0) Ge<br />
+cko/34.0 Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_21_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_22_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>37.59.232.134 - - [01/Jun/2016:14:42:45 -0400] "GET /2010/continut-platit/ HTTP/<br />
+1.1" 200 277926 "/" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34<br />
+.0) Gecko/20100101 Firefox/34.0"<br />
+37.59.232.134 - - [01/Jun/2016:14:42:49 -0400] "POST /xmlrpc.php HTTP/1.1" 200 5<br />
+4 "/" "PHP/5.3.44"<br />
+37.59.232.134 - - [01/Jun/2016:14:42:53 -0400] "GET /2010/continut-platit/ HTTP/<br />
+1.1" 200 278152 "-" "PHP/5.3.44"<br />
+37.59.232.134 - - [01/Jun/2016:14:43:59 -0400] "GET /2010/continut-platit/ HTTP/<br />
+1.1" 200 277996 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101<br />
+ Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_22_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_23_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>89.36.65.224 - - [31/May/2016:19:29:25 -0400] "GET /2009/bucatarie-interna/ HTTP<br />
+/1.0" 200 37559 "/" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34<br />
+.0) Gecko/20100101 Firefox/34.0"<br />
+89.36.65.224 - - [31/May/2016:19:29:26 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "/" "PHP/5.2.42"<br />
+89.36.65.224 - - [31/May/2016:19:29:27 -0400] "GET /2009/bucatarie-interna/ HTTP<br />
+/1.0" 200 37818 "-" "PHP/5.2.42"<br />
+89.36.65.224 - - [31/May/2016:19:30:48 -0400] "GET /2009/bucatarie-interna/ HTTP<br />
+/1.0" 200 37907 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101<br />
+ Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_23_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_24_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>178.162.211.212 - - [02/Jun/2016:16:40:54 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 62422 "-" "Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0<br />
+"<br />
+178.162.211.212 - - [02/Jun/2016:16:40:55 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 62422 "-" "Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0<br />
+"<br />
+178.162.211.212 - - [02/Jun/2016:16:40:56 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 62422 "-" "Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0<br />
+"<br />
+178.162.211.212 - - [02/Jun/2016:16:40:56 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 62422 "-" "Mozilla/5.0 (Windows 10; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0<br />
+"
+</p></blockquote>
+<p>Type DS. [<a href="#identifier_24_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_25_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>183.91.33.76 - - [08/Jun/2016:01:59:48 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48514 "/" "M<br />
+ozilla/5.0 (X11; Ubuntu; Linux i686; rv:34.0) Gecko/20100101 Firefox/34.0"<br />
+183.91.33.76 - - [08/Jun/2016:01:59:51 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "/" "PHP/5.3.77"<br />
+183.91.33.76 - - [08/Jun/2016:01:59:53 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48675 "-" "PHP/5.3.77"<br />
+183.91.33.76 - - [08/Jun/2016:02:03:55 -0400] "GET /2012/o-hai-i-was-justing-doi<br />
+ng-a-penetration-test-of-your-site/ HTTP/1.1" 200 48748 "-" "Mozilla/5.0 (X11; U<br />
+buntu; Linux i686; rv:34.0) Gecko/20100101 Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_25_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_26_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>104.254.212.100 - - [03/Jun/2016:18:48:40 -0400] "GET /2009/flaubert-suntem-noi/<br />
+ HTTP/1.1" 200 127125 "/" "Mozilla/5.0 (Windows NT 6.3; WOW64;<br />
+ Trident/7.0; rv:11.0) like Gecko"<br />
+104.254.212.100 - - [03/Jun/2016:18:48:42 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 54 "/" "PHP/5.3.13"<br />
+104.254.212.100 - - [03/Jun/2016:18:48:43 -0400] "GET /2009/flaubert-suntem-noi/<br />
+ HTTP/1.1" 200 127241 "-" "PHP/5.3.13"<br />
+104.254.212.100 - - [03/Jun/2016:18:54:07 -0400] "GET /2009/flaubert-suntem-noi/<br />
+ HTTP/1.1" 200 127294 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:1<br />
+1.0) like Gecko"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_26_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_27_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>113.176.7.136 - - [01/Jun/2016:01:23:52 -0400] "GET /2010/continut-platit/ HTTP/<br />
+1.1" 200 277928 "/" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34<br />
+.0) Gecko/20100101 Firefox/34.0"<br />
+113.176.7.136 - - [01/Jun/2016:01:24:00 -0400] "POST /xmlrpc.php HTTP/1.1" 200 5<br />
+4 "/" "PHP/5.3.52"<br />
+113.176.7.136 - - [01/Jun/2016:01:24:09 -0400] "GET /2010/continut-platit/ HTTP/<br />
+1.1" 200 278042 "-" "PHP/5.3.52"<br />
+113.176.7.136 - - [01/Jun/2016:01:25:14 -0400] "GET /2010/continut-platit/ HTTP/<br />
+1.1" 200 278019 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101<br />
+ Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_27_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_28_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>51.254.153.201 - - [02/Jun/2016:12:33:28 -0400] "GET /2010/continut-platit/ HTTP<br />
+/1.1" 200 278423 "/" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:3<br />
+5.0) Gecko/20100101 Firefox/35.0"<br />
+51.254.153.201 - - [02/Jun/2016:12:33:34 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+54 "/" "PHP/5.2.23"<br />
+51.254.153.201 - - [02/Jun/2016:12:33:36 -0400] "GET /2010/continut-platit/ HTTP<br />
+/1.1" 200 278386 "-" "PHP/5.2.23"<br />
+51.254.153.201 - - [02/Jun/2016:12:33:44 -0400] "GET /2010/continut-platit/ HTTP<br />
+/1.1" 200 278434 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:35.0) Gecko/2010010<br />
+1 Firefox/35.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_28_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_29_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>91.200.12.73 - - [04/Jun/2016:08:16:23 -0400] "GET /2013/ripple-the-definitive-d<br />
+iscussion/ HTTP/1.1" 200 72172 "/" "Mozilla/5.0 (Windows NT 6.<br />
+1; WOW64; rv:34.0) Gecko/20100101 Firefox/34.0"<br />
+91.200.12.73 - - [04/Jun/2016:08:16:23 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "/" "PHP/5.2.79"<br />
+91.200.12.73 - - [04/Jun/2016:08:16:25 -0400] "GET /2013/ripple-the-definitive-d<br />
+iscussion/ HTTP/1.1" 200 72433 "-" "PHP/5.2.79"<br />
+91.200.12.73 - - [04/Jun/2016:08:20:41 -0400] "GET /2013/ripple-the-definitive-d<br />
+iscussion/ HTTP/1.1" 200 72339 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:34.0)<br />
+ Gecko/20100101 Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_29_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_30_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>75.75.237.162 - - [01/Jun/2016:05:57:30 -0400] "GET /2012/lets-have-fun-with-pau<br />
+l-graham/ HTTP/1.1" 200 56820 "/" "Mozilla/5.0 (Windows NT 6.3<br />
+; WOW64; rv:34.0) Gecko/20100101 Firefox/34.0"<br />
+75.75.237.162 - - [01/Jun/2016:05:57:34 -0400] "POST /xmlrpc.php HTTP/1.1" 200 5<br />
+4 "/" "PHP/5.3.54"<br />
+75.75.237.162 - - [01/Jun/2016:05:57:39 -0400] "GET /2012/lets-have-fun-with-pau<br />
+l-graham/ HTTP/1.1" 200 56950 "-" "PHP/5.3.54"<br />
+75.75.237.162 - - [01/Jun/2016:05:58:43 -0400] "GET /2012/lets-have-fun-with-pau<br />
+l-graham/ HTTP/1.1" 200 56936 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0)<br />
+Gecko/20100101 Firefox/34.0"
+</p></blockquote>
+<p>Type A.A [<a href="#identifier_30_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_31_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>37.97.183.36 - - [12/Jun/2016:08:55:10 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+37.97.183.36 - - [12/Jun/2016:08:55:11 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+37.97.183.36 - - [12/Jun/2016:08:55:11 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+37.97.183.36 - - [12/Jun/2016:08:55:12 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"
+</p></blockquote>
+<p>Type DS.G [<a href="#identifier_31_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_32_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>23.227.196.116 - - [09/Jun/2016:04:26:05 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+23.227.196.116 - - [09/Jun/2016:04:26:06 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+23.227.196.116 - - [09/Jun/2016:04:26:08 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"
+</p></blockquote>
+<p>Type DS.G [<a href="#identifier_32_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_33_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>193.201.225.85 - - [15/Jun/2016:11:58:18 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+35596 "/xmlrpc.php" "Mozilla/5.0 (Windows; U; WinNT4.0; en-US;<br />
+ rv:1.2b) Gecko/20021016 K-Meleon 0.7"<br />
+193.201.225.85 - - [16/Jun/2016:03:33:51 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+71020 "/xmlrpc.php" "Mozilla/5.0 (X11; U; Linux i686; en; rv:1<br />
+.8.1.11) Gecko/20071216 Firefox/2.0.0.11"<br />
+193.201.225.85 - - [16/Jun/2016:10:56:59 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+69544 "/xmlrpc.php" "iCCrawler (http://www.iccenter.net/bot.ht<br />
+m)"<br />
+193.201.225.85 - - [16/Jun/2016:18:19:55 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+67330 "/xmlrpc.php" "Mozilla/5.0 (X11; U; Linux i686; nb-NO; r<br />
+v:1.9.1.16) Gecko/20110420 SeaMonkey/2.0.14"<br />
+193.201.225.85 - - [17/Jun/2016:01:43:12 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+71758 "/xmlrpc.php" "Mozilla/5.0 (X11; U; Linux x86_64; en-US;<br />
+ rv:1.9.2.6) Gecko/20100628 Ubuntu/10.04 (lucid) Firefox/3.6.6"<br />
+193.201.225.85 - - [17/Jun/2016:09:04:49 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+71758 "/xmlrpc.php" "Mozilla/5.0 (compatible; Konqueror/3.5; L<br />
+inux; X11) KHTML/3.5.3 (like Gecko) Kubuntu 6.06 Dapper"
+</p></blockquote>
+<p>We'll call this type DS.MA because of the multiple agent strings.<br />
+ [<a href="#identifier_33_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_34_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>212.56.214.182 - - [23/Jun/2016:09:05:45 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+212.56.214.182 - - [23/Jun/2016:09:05:46 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+212.56.214.182 - - [23/Jun/2016:09:05:47 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+212.56.214.182 - - [23/Jun/2016:09:05:49 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"
+</p></blockquote>
+<p>Basic DS type. [<a href="#identifier_34_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_35_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>185.109.144.236 - - [02/Jun/2016:05:24:38 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 24772 "/xmlrpc.php" "Java/1.4.1_01"<br />
+185.109.144.236 - - [02/Jun/2016:14:27:06 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 24772 "/xmlrpc.php" "Mozilla/5.0 (Windows; U; Windows NT 5.1;<br />
+ en-US) AppleWebKit/532.0 (KHTML, like Gecko) Chrome/4.0.211.7 Safari/532.0"<br />
+185.109.144.236 - - [02/Jun/2016:23:36:11 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 24772 "/xmlrpc.php" "Mozilla/5.0 (X11; U; Linux x86_64; sv-SE<br />
+; rv:1.9.0.7) Gecko/2009030423 Ubuntu/8.10 (intrepid) Firefox/3.0.7"<br />
+185.109.144.236 - - [03/Jun/2016:08:27:56 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 24772 "/xmlrpc.php" "Mozilla/5.0 (X11; U; Linux i686 (x86_64)<br />
+; en-US; rv:1.9.0.16) Gecko/2009122206 Firefox/3.0.16 Flock/2.5.6"<br />
+185.109.144.236 - - [03/Jun/2016:17:02:44 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 24772 "/xmlrpc.php" "Mozilla/4.0 (compatible; MSIE 5.01; Wind<br />
+ows NT; .NET CLR 1.0.3705)"<br />
+185.109.144.236 - - [04/Jun/2016:01:36:33 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 24772 "/xmlrpc.php" "Mozilla/4.0 (compatible; MSIE 7.0; Windo<br />
+ws NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; InfoPath<br />
+.2; .NET CLR 3.5.30729; .NET CLR 3.0.30618; Lunascape 5.1.3.4)"<br />
+185.109.144.236 - - [04/Jun/2016:10:11:01 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 24772 "/xmlrpc.php" "iCab/2.9.1 (Macintosh; U; PPC)"
+</p></blockquote>
+<p>Another DS.MS type. [<a href="#identifier_35_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_36_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>112.90.150.136 - - [06/Jun/2016:07:26:35 -0400] "GET /2012/extraordinarul-act-de<br />
+-supunere-estivala-al-elvirei/ HTTP/1.1" 200 43840 "/" "Mozill<br />
+a/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, li<br />
+ke Gecko) Version/8.0 Mobile/12B440 Safari/600.1.4"<br />
+112.90.150.136 - - [06/Jun/2016:07:27:18 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+54 "/" "PHP/5.3.42"<br />
+112.90.150.136 - - [06/Jun/2016:07:27:28 -0400] "GET /2012/extraordinarul-act-de<br />
+-supunere-estivala-al-elvirei/ HTTP/1.1" 200 43962 "-" "PHP/5.3.42"<br />
+112.90.150.136 - - [06/Jun/2016:07:52:34 -0400] "GET /2012/extraordinarul-act-de<br />
+-supunere-estivala-al-elvirei/ HTTP/1.1" 200 44154 "-" "Mozilla/5.0 (iPhone; CPU<br />
+ iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/<br />
+8.0 Mobile/12B440 Safari/600.1.4"
+</p></blockquote>
+<p>Run of the mill A.A type. [<a href="#identifier_36_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_37_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>191.96.249.20 - - [02/Jun/2016:23:22:42 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+191.96.249.20 - - [02/Jun/2016:23:22:42 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+191.96.249.20 - - [02/Jun/2016:23:24:15 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+191.96.249.20 - - [02/Jun/2016:23:24:26 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"
+</p></blockquote>
+<p>DS type. [<a href="#identifier_37_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_38_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>91.193.74.8 - - [11/Jun/2016:15:00:09 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+"-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+91.193.74.8 - - [11/Jun/2016:15:05:39 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+"-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+91.193.74.8 - - [11/Jun/2016:15:24:28 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+"-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+91.193.74.8 - - [11/Jun/2016:15:30:07 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+"-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"
+</p></blockquote>
+<p>DS type. [<a href="#identifier_38_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_39_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>191.96.249.54 - - [06/Jun/2016:10:57:49 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+191.96.249.54 - - [06/Jun/2016:10:57:50 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+191.96.249.54 - - [06/Jun/2016:10:57:50 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+191.96.249.54 - - [06/Jun/2016:10:57:50 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"
+</p></blockquote>
+<p>Another run of the mill DS type. [<a href="#identifier_39_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_40_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>93.115.97.162 - - [01/Jun/2016:16:38:21 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+93.115.97.162 - - [01/Jun/2016:18:25:37 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+93.115.97.162 - - [01/Jun/2016:18:25:39 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+93.115.97.162 - - [01/Jun/2016:18:25:40 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"
+</p></blockquote>
+<p>Yet another run of the mill DS type. [<a href="#identifier_40_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_41_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>185.112.249.127 - - [20/Jun/2016:20:32:14 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.112.249.127 - - [20/Jun/2016:20:32:15 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.112.249.127 - - [20/Jun/2016:20:32:16 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.112.249.127 - - [20/Jun/2016:20:32:17 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"
+</p></blockquote>
+<p>DS.G type. [<a href="#identifier_41_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_42_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>23.227.199.105 - - [09/Jun/2016:04:26:04 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+23.227.199.105 - - [09/Jun/2016:04:26:04 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+23.227.199.105 - - [09/Jun/2016:04:26:05 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+23.227.199.105 - - [09/Jun/2016:04:26:16 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"
+</p></blockquote>
+<p>Another DS.G type. [<a href="#identifier_42_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_43_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>91.229.20.98 - - [01/Jun/2016:12:12:15 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+91.229.20.98 - - [01/Jun/2016:12:12:15 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+91.229.20.98 - - [01/Jun/2016:12:12:16 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+91.229.20.98 - - [01/Jun/2016:12:12:17 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"
+</p></blockquote>
+<p>DS type. [<a href="#identifier_43_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_44_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>63.141.227.243 - - [03/Jun/2016:18:41:16 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+63.141.227.243 - - [03/Jun/2016:18:41:19 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+63.141.227.243 - - [03/Jun/2016:18:41:22 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+63.141.227.243 - - [03/Jun/2016:18:41:25 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"
+</p></blockquote>
+<p>Another DS type. [<a href="#identifier_44_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_45_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>76.74.170.219 - - [09/Jun/2016:12:54:04 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+76.74.170.219 - - [09/Jun/2016:12:54:14 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+76.74.170.219 - - [09/Jun/2016:12:54:15 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+76.74.170.219 - - [09/Jun/2016:12:54:16 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"</p></blockquote>
+<p>Another DS.G type. [<a href="#identifier_45_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_46_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>76.74.170.65 - - [09/Jun/2016:09:57:40 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+76.74.170.65 - - [09/Jun/2016:09:57:41 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+76.74.170.65 - - [09/Jun/2016:09:57:43 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+76.74.170.65 - - [09/Jun/2016:09:57:44 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"</p></blockquote>
+<p>Yet another DS.G type. [<a href="#identifier_46_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_47_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>146.185.251.210 - - [12/Jun/2016:17:05:40 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+146.185.251.210 - - [12/Jun/2016:17:06:24 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+146.185.251.210 - - [12/Jun/2016:17:08:26 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+146.185.251.210 - - [12/Jun/2016:17:08:42 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"
+</p></blockquote>
+<p>Another DS type. [<a href="#identifier_47_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_48_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>146.185.251.48 - - [11/Jun/2016:16:00:15 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+146.185.251.48 - - [11/Jun/2016:16:00:45 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+146.185.251.48 - - [11/Jun/2016:16:01:30 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"<br />
+146.185.251.48 - - [11/Jun/2016:16:02:23 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/4.0 (compatible: MSIE 7.0; Windows NT 6.0)"
+</p></blockquote>
+<p>Yet another DS type. [<a href="#identifier_48_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_49_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>195.154.250.118 - - [10/Jun/2016:04:13:56 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 421 "-" "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)"<br />
+195.154.250.118 - - [10/Jun/2016:04:13:56 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 421 "-" "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)"<br />
+195.154.250.118 - - [10/Jun/2016:04:13:56 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 421 "-" "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)"<br />
+195.154.250.118 - - [10/Jun/2016:04:13:57 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 421 "-" "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)"
+</p></blockquote>
+<p>Also DS type. [<a href="#identifier_49_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_50_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>91.188.125.194 - - [23/Jun/2016:22:18:25 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+91.188.125.194 - - [23/Jun/2016:22:18:26 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+91.188.125.194 - - [23/Jun/2016:22:18:26 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"<br />
+91.188.125.194 - - [23/Jun/2016:22:18:27 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)<br />
+"
+</p></blockquote>
+<p>More of the DS.G type. [<a href="#identifier_50_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_51_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>188.120.41.9 - - [31/May/2016:08:13:04 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+188.120.41.9 - - [31/May/2016:08:13:18 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+188.120.41.9 - - [31/May/2016:08:13:18 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+188.120.41.9 - - [31/May/2016:08:20:27 -0400] "POST /xmlrpc.php HTTP/1.1" 200 54<br />
+ "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"
+</p></blockquote>
+<p>Another DS.G type. [<a href="#identifier_51_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_52_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>185.142.236.197 - - [12/Jun/2016:12:53:52 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.142.236.197 - - [12/Jun/2016:12:53:52 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.142.236.197 - - [12/Jun/2016:12:53:53 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.142.236.197 - - [12/Jun/2016:12:53:53 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"
+</p></blockquote>
+<p>Yet another DS.G type. [<a href="#identifier_52_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_53_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>91.134.169.81 - - [02/Jun/2016:19:34:19 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+91.134.169.81 - - [02/Jun/2016:19:34:34 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+91.134.169.81 - - [02/Jun/2016:19:34:55 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+91.134.169.81 - - [02/Jun/2016:19:35:24 -0400] "POST /xmlrpc.php HTTP/1.0" 200 5<br />
+4 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"</p></blockquote>
+<p>Another DS.G type. [<a href="#identifier_53_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_54_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>185.142.236.219 - - [11/Jun/2016:03:56:28 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.142.236.219 - - [11/Jun/2016:03:56:28 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.142.236.219 - - [11/Jun/2016:03:56:29 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.142.236.219 - - [11/Jun/2016:03:56:29 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"</p></blockquote>
+<p>Yet another DS.G type. [<a href="#identifier_54_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_55_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>5.135.17.28 - - [02/Jun/2016:19:31:56 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+"-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+5.135.17.28 - - [02/Jun/2016:19:32:00 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+"-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+5.135.17.28 - - [02/Jun/2016:19:32:03 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+"-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+5.135.17.28 - - [02/Jun/2016:19:32:07 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+"-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"</p></blockquote>
+<p>Yet another DS.G type. [<a href="#identifier_55_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_56_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>151.80.82.32 - - [02/Jun/2016:19:36:07 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+151.80.82.32 - - [02/Jun/2016:19:36:38 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+151.80.82.32 - - [02/Jun/2016:19:37:09 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+151.80.82.32 - - [02/Jun/2016:19:37:40 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"</p></blockquote>
+<p>There's no end to these, is there. DS.G again. [<a href="#identifier_56_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_57_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>151.80.82.34 - - [02/Jun/2016:19:36:08 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+151.80.82.34 - - [02/Jun/2016:19:36:39 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+151.80.82.34 - - [02/Jun/2016:19:37:10 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+151.80.82.34 - - [02/Jun/2016:19:37:41 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"</p></blockquote>
+<p>DS.G type again. [<a href="#identifier_57_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_58_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>185.130.6.52 - - [12/Jun/2016:12:53:51 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+185.130.6.52 - - [12/Jun/2016:12:53:52 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+185.130.6.52 - - [12/Jun/2016:12:53:52 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"<br />
+185.130.6.52 - - [12/Jun/2016:12:53:53 -0400] "POST /xmlrpc.php HTTP/1.0" 200 54<br />
+ "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)"</p></blockquote>
+<p>Yes, your intuition is correct : DS.G type! [<a href="#identifier_58_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_59_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>185.103.109.139 - - [31/May/2016:08:08:32 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 54 "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 54 "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 54 "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 54 "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"
+</p></blockquote>
+<p>Another DS.G spambot. [<a href="#identifier_59_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_60_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>185.103.109.246 - - [07/Jun/2016:00:30:51 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.103.109.246 - - [07/Jun/2016:00:30:52 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.103.109.246 - - [07/Jun/2016:00:30:52 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"<br />
+185.103.109.246 - - [07/Jun/2016:00:30:53 -0400] "POST /xmlrpc.php HTTP/1.0" 200<br />
+ 54 "-" "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html<br />
+)"
+</p></blockquote>
+<p>Yet another DS.G type spambot. I'm curious : have you seen an increase in indexing activity from Google in the past months ? [<a href="#identifier_60_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_61_67024" class="footnote">Typical behaviour : </p>
+<blockquote><p>185.103.109.139 - - [31/May/2016:08:08:32 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 54 "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 54 "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 54 "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"<br />
+185.103.109.139 - - [31/May/2016:08:08:32 -0400] "POST /xmlrpc.php HTTP/1.1" 200<br />
+ 54 "-" "Googlebot/2.1 (+http://www.google.com/bot.html)"
+</p></blockquote>
+<p>And another DS.G spambot. [<a href="#identifier_61_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_62_67024" class="footnote">Last month is no different, for the record, it's not like this started on the 1st of June by any means. Nor was April. Or April of last year. [<a href="#identifier_62_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_63_67024" class="footnote">Here's what I learned trying : 	</p>
+<ul>
+<li>Takes a while to find 107.150.74.65 belongs to zenlayer, because it's not properly listed. Once you do, zenlayer simply rejects email to abuse@zenlayer.com. Because why not amirite ? Yes, I reported them to ARIN, and I'm ever-so-sure they'll lose the block. </li>
+<p>	
+<li>abuse@ipffm.de (IPFFM Internet Provider Frankfurt GmbH) simply drops emails. Had to notify Accelerated, their provider.</li>
+<p>	
+<li>Apparently "nobody" owns 104.160.31.77. Yet it routes fine, through cyber-wurx-llc.10gigabitethernet1-1-2.switch1.atl2.he.net (216.66.41.118) ; 69.61.24.218 (69.61.24.218) ;  104.160.31.77.dynamic.nationinternet.net (104.160.31.77). Wonder of wonders, this. Reported to CachedNet LLC, the upstream provider (and a major provider for the entire list).</li>
+<p>	
+<li>hostmaster@chinamobile.com rejects abuse email (not that it has a proper abuse inbox anyway). Reported to APNIC, for all the good that'll do.</li>
+<p>	
+<li>The VietNam Post and Telecom Corporation does not feel the need to list an abuse contact email. Or an email whatsoever, actually. Not via whois, not on website, not anywhere! abuse@vnnic.net.vn also fails, and all this is perfectly fine, apparently.</li>
+<p>	
+<li>abuse@hostslim.nl (a front for abuse@rakar.nl) simply drops emails. Reported to RIPE.</li>
+<p>	
+<li>abuse@cogentco.com drops emails. Reported to ARIN.</li>
+<p>	
+<li>info@detchile.com (the only abuse contact for "Digital Energy Technologies Chile SpA" drops emails. Reported to LACNIC.</li>
+<p>	
+<li>Swiftway (abuse@swiftway.co.uk) sent me mails claiming neither 23.227.199.105 nor 23.227.196.116 is their customer, which is amusing considering the whois doesn't lie.</li>
+</ul>
+<p>  [<a href="#identifier_63_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_64_67024" class="footnote">Less, really. About 16 hours. [<a href="#identifier_64_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_65_67024" class="footnote">Data based of the first 8 hours of June 25th. [<a href="#identifier_65_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_66_67024" class="footnote">spservers.org, aka</p>
+<blockquote><p>role:           Super Professional Servers Network Operation Centre<br />
+address:        ************************************************************<br />
+address:        1st Magistralny blind alley, 30,<br />
+address:        BC "The Yard",<br />
+admin-c:        KL2587-RIPE<br />
+tech-c:         KL2587-RIPE<br />
+address:        Moskow<br />
+address:        Russian Federation<br />
+remarks:        24/7 NOC&#038;SUPPORT: support@spservers.org<br />
+remarks:        Abuse issues: abuse@spservers.org will be handled ASAP<br />
+remarks:        Network&#038;peering Issues: support@spservers.org<br />
+phone:          +74957082672<br />
+address:        ************************************************************</p></blockquote>
+<p> [<a href="#identifier_66_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_67_67024" class="footnote">"Sindicate group" using AS200039 as HYDRA-MNT. Notified sindicategrourp@gmail.com - yeah, that's what they list, misspelled like that - and noc@zare.co.uk ; no answer and honestly the arrangement looks rather dubious. [<a href="#identifier_67_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_68_67024" class="footnote">Blackhost Ltd. Notified me that they've opened tickets 200096 and 772569. [<a href="#identifier_68_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_69_67024" class="footnote">Notified abuse@sitel.net.pl ; received no response. They're running AS59491 mnt-by sitelnetpl-mnt. Judging by the fact that they not only failed to block the listed IP but even allowed the spammer a new one, the whole thing seems altogether dubious. [<a href="#identifier_69_67024" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2016/tales-of-manhattan/">Tales of Manhattan</a></div>
+                <div class="alignright"><a href="/2016/brexit-grexit-departugal-italeave-czechout-finish-oustria-latervia-byegium/">Brexit, Grexit, Departugal, Italeave, Czechout, Finish, Oustria, Latervia, Byegium...</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/meta-psihoza/" title="View all posts in Meta psihoza" rel="category tag">Meta psihoza</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2016/the-internet-of-shit/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2016/the-internet-of-shit/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>28 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-117774" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117774" title="">Friday, 24 June 2016</a>
+							</div>
+						<p>Updated, mostly for footnote 64.</p>
+						</li>
+
+										<li id="comment-117782" class="commentbody"><div class="commenthead"><img alt='lothrop.s`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">lothrop.s</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117782" title="">Friday, 24 June 2016</a>
+							</div>
+						<p>see<br />
+<a href="https://www.webiron.com/bot_feed/d80d40b13ccf07a2c523e3c6625d101d">https://www.webiron.com/bot_feed/d80d40b13ccf07a2c523e3c6625d101d</a><br />
+[185.109.144.236]</p>
+						</li>
+
+										<li id="comment-117783" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117783" title="">Friday, 24 June 2016</a>
+							</div>
+						<p>Interesting!</p>
+<p>How is the "bot ID" derived ?</p>
+						</li>
+
+										<li id="comment-117964" class="commentbody"><div class="commenthead"><img alt='Mari`s avatar' src='http://fuckyouverymuch.dk/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink"><a href='http://fuckyouverymuch.dk/' class='url'>Mari</a><img src="/wp-content/themes/trilema/images/insigna-criptograf.png" class="insigna" alt="insigna de criptograf" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117964" title="">Wednesday, 6 July 2016</a>
+							</div>
+						<p>tldr</p>
+						</li>
+
+										<li id="comment-117965" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-117965" title="">Wednesday, 6 July 2016</a>
+							</div>
+						<p>Nuca nu e de fete.</p>
+						</li>
+
+										<li id="comment-121639" class="commentbody"><div class="commenthead"><img alt='Ines`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Ines</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121639" title="">Saturday, 25 March 2017</a>
+							</div>
+						<p>Howdy! I'm at work surfing around your blog from my new iphone 3gs!<br />
+Just wanted to say I love reading your blog and look forward to all<br />
+your posts! Carry on the outstanding work!</p>
+						</li>
+
+										<li id="comment-121657" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121657" title="">Tuesday, 28 March 2017</a>
+							</div>
+						<p>Aok.</p>
+						</li>
+
+										<li id="comment-121687" class="commentbody"><div class="commenthead"><img alt='Ernie`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Ernie</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121687" title="">Thursday, 30 March 2017</a>
+							</div>
+						<p>I know this if off topic but I'm looking into starting my own blog and was wondering what all is needed to get set up?<br />
+I'm assuming having a blog like yours would cost a pretty penny?<br />
+I'm not very web savvy so I'm not 100% certain. Any suggestions or advice would be greatly appreciated.<br />
+Kudos</p>
+						</li>
+
+										<li id="comment-121688" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121688" title="">Thursday, 30 March 2017</a>
+							</div>
+						<p>That's cute.</p>
+						</li>
+
+										<li id="comment-121803" class="commentbody"><div class="commenthead"><img alt='Grazyna`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">Grazyna</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121803" title="">Wednesday, 12 April 2017</a>
+							</div>
+						<p>I’m not that much of a online reader to be honest but your blogs really nice, keep it up! I'll go ahead and bookmark your website to come back later on. All the best.</p>
+						</li>
+
+										<li id="comment-121804" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121804" title="">Wednesday, 12 April 2017</a>
+							</div>
+						<p>Cool.</p>
+						</li>
+
+										<li id="comment-122949" class="commentbody"><div class="commenthead"><img alt='Antonietta`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">Antonietta</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122949" title="">Saturday, 16 September 2017</a>
+							</div>
+						<p>Hi, I think your blog might be having browser compatibility issues.<br />
+When I look at your website in Opera, it looks<br />
+fine but when opening in Internet Explorer, it has some overlapping.<br />
+I just wanted to give you a quick heads up! Other then<br />
+that, great blog!</p>
+						</li>
+
+										<li id="comment-122950" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122950" title="">Saturday, 16 September 2017</a>
+							</div>
+						<p>Thanks. </p>
+<p>Can't say I've been tracking IE much really.</p>
+						</li>
+
+										<li id="comment-122959" class="commentbody"><div class="commenthead"><img alt='Flossie`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Flossie</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122959" title="">Sunday, 17 September 2017</a>
+							</div>
+						<p>Wow, amazing blog layout! How long have you been blogging for? you make blogging look easy. The full glance of your website is great, let alone the content!</p>
+						</li>
+
+										<li id="comment-122960" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122960" title="">Sunday, 17 September 2017</a>
+							</div>
+						<p>Lol. Nice picks, this and that <a href=/2015/facebook-sends-traffic11eleven/ >facebook</a> spamsite.</p>
+						</li>
+
+										<li id="comment-148668" class="commentbody"><div class="commenthead"><img alt='Virgil Makutz`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink">Virgil Makutz</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148668" title="">Saturday, 11 April 2020</a>
+							</div>
+						<p>Howdy, I think your web site could be having web browser compatibility problems. Whenever I take a look at your website in Safari, it looks fine but when opening in Internet Explorer, it has some overlapping issues.</p>
+<p>I merely wanted to give you a quick heads up! Aside from that, fantastic blog!</p>
+						</li>
+
+										<li id="comment-148670" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148670" title="">Saturday, 11 April 2020</a>
+							</div>
+						<p>The problem with your idea is that out of the ~34mn pages Trilema served this month, 88.8% had been requested by a Chrome / Chromium / USG.NSA.Alphabet product (52% of which Chrome 80.0.3987.162 specificaly, ie the latest version). Safari and Internet Exploder each enjoy a thoroughly negligible 1.5% market share. In other words, I couldn't give less of a shit as to how they misrender my blog. </p>
+<p>Go tell <em>them</em> their shit is broken instead, because really : since I'm larger and they're smaller, they're the ones that should be working on fixing their shit to allign with mine, not the other way around. Makes sense, dunnit ?</p>
+						</li>
+
+										<li id="comment-148712" class="commentbody"><div class="commenthead"><img alt='JaniceLeong`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink">JaniceLeong</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148712" title="">Sunday, 12 April 2020</a>
+							</div>
+						<p>Hi! Would you mind if I share your blog with my twitter group? There's a lot of people that I think would really enjoy your content. Please let me know. Cheers.</p>
+						</li>
+
+										<li id="comment-148729" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148729" title="">Sunday, 12 April 2020</a>
+							</div>
+						<p>Nope, go ahead.</p>
+						</li>
+
+										<li id="comment-148963" class="commentbody"><div class="commenthead"><img alt='Rings`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink">Rings</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148963" title="">Thursday, 16 April 2020</a>
+							</div>
+						<p>Why viewers still use to read news papers when in this technological globe everything is presented on net?</p>
+						</li>
+
+										<li id="comment-148967" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-148967" title="">Thursday, 16 April 2020</a>
+							</div>
+						<p>Because the net sucks ? NFI...</p>
+						</li>
+
+										<li id="comment-149074" class="commentbody"><div class="commenthead"><img alt='chappell`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink">chappell</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-149074" title="">Saturday, 18 April 2020</a>
+							</div>
+						<p>Hi, I do think this is an excellent web site. I stumbledupon it ;) I will come back yet again since I book marked it.<br />
+Money and freedom is the greatest way to change, may you be rich and continue to help other people.</p>
+						</li>
+
+										<li id="comment-149561" class="commentbody"><div class="commenthead"><img alt='judionline`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">judionline</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-149561" title="">Sunday, 26 April 2020</a>
+							</div>
+						<p>Heya are using Wordpress for your blog platform?</p>
+						</li>
+
+										<li id="comment-149562" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-149562" title="">Sunday, 26 April 2020</a>
+							</div>
+						<p>It's a private fork. <a href=billymg.com/>Billymg maintains it.</p>
+						</li>
+
+										<li id="comment-149868" class="commentbody"><div class="commenthead"><img alt='neva`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">25</div>
+								<span class="authorlink">neva</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-149868" title="">Friday, 1 May 2020</a>
+							</div>
+						<p>Great article I'm facing a few of these issues as well..</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-142264">
+					<div class='trackhead'>
+						<div class="commentcount">26</div>
+						<span class="authorlink"><a href='/2016/no-se-fia?b=mircea_popes&amp;e=z0rz#select' class='url'>No Se Fia on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142264" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] mircea_popescu Hey asciilifeform check out the update to The Internet of Shit . Most of them got shut down within 16 hours or somesuch. asciilifeform Srsly? Then again sp4mz0rz [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-145474">
+					<div class='trackhead'>
+						<div class="commentcount">27</div>
+						<span class="authorlink"><a href='/2019/things-you-didnt-know-about-awstats?b=that%20works%2C%20&amp;e=e%20to#select' class='url'>Things you didn't know about Awstats on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-145474" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] that works, and it takes out exactly the sorta thing you don't care to [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-149353">
+					<div class='trackhead'>
+						<div class="commentcount">28</div>
+						<span class="authorlink"><a href='/2020/the-peaks-of-the-day/?b=occurs%20to%20me&amp;e=ough#select' class='url'>The peaks of the day on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-149353" title="">Wednesday, 22 April 2020</a>
+					</div>
+					<p>[...] occurs to me I naturally know things nobody else is in a position to know, things such as "what operating systems / browser versions do people use" and so on, for the very simple reason that while there might be technical chokepoints through [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authord73b6bc" id="authord73b6bc" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emaild73b6bc" id="emaild73b6bc" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urld73b6bc" id="urld73b6bc" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="67024" /></p>
+				<input type="hidden" name="comment_post_time" value="1780774376-18.97.14.89" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-67024")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-67024");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-67024");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

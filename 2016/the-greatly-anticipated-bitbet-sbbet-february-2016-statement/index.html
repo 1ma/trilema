@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_oct2018.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>The greatly anticipated BitBet (S.BBET) February 2016 Statement on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Mentula cum doleat imperio, tibi, lector, culus.<br />Non sum diuinus, sed scio quid facias.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-65290"><div class="post" id="post-65290">                    <h1><a href="/2016/the-greatly-anticipated-bitbet-sbbet-february-2016-statement/" rel="bookmark" title="Permanent Link to The greatly anticipated BitBet (S.BBET) February 2016 Statement">The greatly anticipated BitBet (S.BBET) February 2016 Statement</a></h1>                        <div class="date">                                     Monday, 07 March, Year 8 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<hr />
+<center><strong>Operational results</strong></center></p>
+<hr />
+Received 15 new propositions, of which accepted 5, rejected 10. </p>
+<p>Total bets in: 306, worth 290.50653964 BTC.</p>
+<p>Revenue : <strong>1.0513254<sup><a href="#footnote_0_65290" id="identifier_0_65290" class="footnote-link footnote-identifier-link" title="Only 90% drop from last month heh.">i</a></sup> BTC</strong>, of which :</p>
+<ul>
+<li>bets resolved : 0.56355630<sup><a href="#footnote_1_65290" id="identifier_1_65290" class="footnote-link footnote-identifier-link" title="56.35563019 BTC total pool resolved this month.">ii</a></sup> BTC</li>
+<li>fees from refunds : 0.00010000 BTC</li>
+<li>advertising : 0.1 BTC</li>
+<li>house bets won : 0.38766910<sup><a href="#footnote_2_65290" id="identifier_2_65290" class="footnote-link footnote-identifier-link" title="0.60000000 BTC worth of house bets were resolved during the current month.">iii</a></sup></li>
+<li>gracious donations to shareholders : 0.0 BTC</li>
+</ul>
+<p>Expenditure : <strong>18.59779756</strong>, of which :</p>
+<ul>
+<li>referrals paid : 0.01377244 BTC </li>
+<li>house bets made : 0.50000000 BTC</li>
+<li>Hosting : 0.13636363 BTC</li>
+<li>Cost of doing business in Bitcoin<sup><a href="#footnote_3_65290" id="identifier_3_65290" class="footnote-link footnote-identifier-link" title="We suffered at the hands of the mining cartel, as announced in the logs and detailed on Qntra.
+
+Here's a transcript of the last board meeting on this matter, a few hours earlier : 
+mircea_popescu http://dpaste.com/25YHD1C.txt
+kakobrekla i think that publishing raw tx so people can rebroadcast solves this in a much better way, it also keeps all the transparency and is not over-engineered to inconsistency
+mircea_popescu how'd that go ?
+kakobrekla upon payment of the bet the signed tx is published on bitbet - actually this should ideally be done even if there is no issues with tx broadcasting as formal evidence of payout
+mircea_popescu so basically you add a box on the site for this, and i add the `get raw tx back to bitbet` in admin workflow ?
+kakobrekla correct, i would add a box in the admin to enter raw txes that would get published for the users to see. then no one can go around claiming `why has this not been paid` etc
+mircea_popescu does this come with an absolute guarantee that i am not responsible for anything past raw tx, and if it never gets included, bettor is out the money, because i will not under any circumstances repay it ?
+kakobrekla as long as you dont spend those inputs for another payout - in case it doesnt get included
+mircea_popescu and how the fuck will i guarantee this ? as long as i don't spend those inputs in a ~reasonable timeframe~, which must be given explicitly.
+kakobrekla that would probably work
+mircea_popescu (and even with all this - prepare yourself for the `i was scammed by bitbet because miners suck` threads all over reddit. all this does is practically sink bitbet, imo.). i grant you, much easier to implement.
+kakobrekla reddit sink bitbet ? is this mp im speaking to?
+mircea_popescu not fucking reddit. think about it for a minute. all they actually need to do is just keep delaying us. then competitor pops up, not being delayed. we just lost betting. for the sake of `hey, needs not much coding` we're basically giving the betting market to miners. best outcome as far as they're concerned. not enough they get to pick and choose who transacts bitcoin, now we're empowering them to decide who's gonna be bitbet ?
+kakobrekla not only needs not much coding, its the right thing to do. else i just hide all inputs and address until bet paid out. same thing basically.
+mircea_popescu can you explain that past simple pronouncements. `right thing to do`, `overengineered into inconsistency`, this dun on its own mean much. needs the whole chain of reasoning.
+kakobrekla the right thing to do is to prove your payment in an explicit way.
+mircea_popescu except `prove your payment` means different things to different people. we're so far `proving check is in the mail`. ok. so ? i wouldn't accept it as proof of payment for mpex. for that matter, we don't accept that for bitbet. why should bettor have to accept `here is raw tx`. bitch, i gave you btc not `raw tx`
+kakobrekla way better than what we have now. which is nothing.
+mircea_popescu `better than shit` is how we ended up with `core`.
+kakobrekla rawtx is the ultimate proof of payment which is also usable in a sense it can be rebroadcast. anyway lunch time.
+mircea_popescu afaik the only proof of payment is block inclusion.
+kakobrekla say you use sepa and send someone some euros via that and his bank goes under - your proof of payment is to his bank, not that he has withdrawn. bbl
+mircea_popescu fiat is insured. completely orthogonal discussion.
+kakobrekla tell that to the bank customers that get diddly squat
+mircea_popescu really, bolting on a discussion of fiat banking in here is nonsense. we'll never be through with it, and besides it's asymmetrical - i've sued more banks than you.
+kakobrekla anyway as far as i can see bbet survived delayed payouts for weeks without longterm consequences
+mircea_popescu hence the 6 to 60 in there.
+kakobrekla mircea_popescu> afaik the only proof of payment is block inclusion. < we already established you cant guarantee that unless you have a pool. so the next best thing will do for practical purpose.
+mircea_popescu we haven't established such. the options are `1. guarantee inclusion for public txn - needs pool` OR `2. keep txn secret - needs nothing`. i notice you don't even wish to discuss 2, but this does not make it go away. the qntra commenter does have a point - bitcoin is designed to work with secret txn, not with public txn.
+kakobrekla i discussed it, [15:16:41] kakobrekla else i just hide all inputs and address until bet paid out
+mircea_popescu so basically take out 1.1-1.3 and just keep the sha ?
+kakobrekla but then we lose 'what made bbet bbet'
+mircea_popescu motherfucker.
+kakobrekla we become fairlay.
+mircea_popescu this is perhaps the most unpleasant thing i encountered since bitcoin. anyway, here's the thing : doing your thing is easy and can be done fast. mine, not. doing your thing does not prevent us from doing mine later, or whatever. so, logically - let's do your thing and see how it plays out. who knows, maybe the past few days put the fear of god in them.
+kakobrekla correct
+mircea_popescu i wll need something like 2-3 days to update the payment process. i think it's something like that.
+kakobrekla no rush.
+Bear in mind that Bitcoin always was and to this day remains not ready for prime time, which specifically means that it is not a mature or even reliably usable (or even extant, because no, code is not protocol - admitting for the sake of argument that the miserable rat's nest of crap spread on hairballs currently run by ~everyone can even be called `code` in any meaningful sense) payment protocol, that the cost of doing business in Bitcoin can not be evaluated prospectively but only measured retrospectively and that in general you should have no hopes and form no expectations of anything Bitcoin related working in any particular manner, within any specific interval or within any definite budget. It's how it is.">iv</a></sup> : 17.94766149 BTC</li>
+<li>Tax<sup><a href="#footnote_4_65290" id="identifier_4_65290" class="footnote-link footnote-identifier-link" title="Owed to Bitcoin's Sovereign.">v</a></sup>, 0.0 BTC</li>
+</ul>
+<p>Profit : <font color=red><strong>17.54647216 BTC<sup><a href="#footnote_5_65290" id="identifier_5_65290" class="footnote-link footnote-identifier-link" title="Bitbet, of course, holds no assets and consequently should in principle be dissolved on the first loss month. Nevertheless, I am floating its negative cash balance free of charge, with a view of being defrayed from future profits. This line of credit carries seniority above that of shareholders and below that of bettors.">vi</a></sup></strong></font>.</p>
+<hr />
+<center><strong>Miscellaneous</strong></center></p>
+<hr />
+<p>One of Bitbet's worst months.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_65290" class="footnote">Only 90% drop from last month heh. [<a href="#identifier_0_65290" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_65290" class="footnote">56.35563019 BTC total pool resolved this month. [<a href="#identifier_1_65290" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_65290" class="footnote">0.60000000 BTC worth of house bets were resolved during the current month. [<a href="#identifier_2_65290" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_65290" class="footnote">We suffered at the hands of the mining cartel, as announced in the logs and detailed on <a href="http://qntra.net/2016/03/a-miner-problem/">Qntra</a>.<br />
+<br />
+Here's a transcript of the last board meeting on this matter, a few hours earlier : </p>
+<blockquote><p><strong>mircea_popescu</strong> http://dpaste.com/25YHD1C.txt<br />
+<strong>kakobrekla</strong> i think that publishing raw tx so people can rebroadcast solves this in a much better way, it also keeps all the transparency and is not over-engineered to inconsistency</p>
+<p><strong>mircea_popescu</strong> how'd that go ?<br />
+<strong>kakobrekla</strong> upon payment of the bet the signed tx is published on bitbet - actually this should ideally be done even if there is no issues with tx broadcasting as formal evidence of payout</p>
+<p><strong>mircea_popescu</strong> so basically you add a box on the site for this, and i add the "get raw tx back to bitbet" in admin workflow ?<br />
+<strong>kakobrekla</strong> correct, i would add a box in the admin to enter raw txes that would get published for the users to see. then no one can go around claiming "why has this not been paid" etc</p>
+<p><strong>mircea_popescu</strong> does this come with an absolute guarantee that i am not responsible for anything past raw tx, and if it never gets included, bettor is out the money, because i will not under any circumstances repay it ?<br />
+<strong>kakobrekla</strong> as long as you dont spend those inputs for another payout - in case it doesnt get included</p>
+<p><strong>mircea_popescu</strong> and how the fuck will i guarantee this ? as long as i don't spend those inputs in a ~reasonable timeframe~, which must be given explicitly.<br />
+<strong>kakobrekla</strong> that would probably work</p>
+<p><strong>mircea_popescu</strong> (and even with all this - prepare yourself for the "i was scammed by bitbet because miners suck" threads all over reddit. all this does is practically sink bitbet, imo.). i grant you, much easier to implement.<br />
+<strong>kakobrekla</strong> reddit sink bitbet ? is this mp im speaking to?</p>
+<p><strong>mircea_popescu</strong> not fucking reddit. think about it for a minute. all they actually need to do is just keep delaying us. then competitor pops up, not being delayed. we just lost betting. for the sake of "hey, needs not much coding" we're basically giving the betting market to miners. best outcome as far as they're concerned. not enough they get to pick and choose who transacts bitcoin, now we're empowering them to decide who's gonna be bitbet ?<br />
+<strong>kakobrekla</strong> not only needs not much coding, its the right thing to do. else i just hide all inputs and address until bet paid out. same thing basically.</p>
+<p><strong>mircea_popescu</strong> can you explain that past simple pronouncements. "right thing to do", "overengineered into inconsistency", this dun on its own mean much. needs the whole chain of reasoning.<br />
+<strong>kakobrekla</strong> the right thing to do is to prove your payment in an explicit way.</p>
+<p><strong>mircea_popescu</strong> except "prove your payment" means different things to different people. we're so far "proving check is in the mail". ok. so ? i wouldn't accept it as proof of payment for mpex. for that matter, we don't accept that for bitbet. why should bettor have to accept "here is raw tx". bitch, i gave you btc not "raw tx"<br />
+<strong>kakobrekla</strong> way better than what we have now. which is nothing.</p>
+<p><strong>mircea_popescu</strong> "better than shit" is how we ended up with "core".<br />
+<strong>kakobrekla</strong> rawtx is the ultimate proof of payment which is also usable in a sense it can be rebroadcast. anyway lunch time.</p>
+<p><strong>mircea_popescu</strong> afaik the only proof of payment is block inclusion.<br />
+<strong>kakobrekla</strong> say you use sepa and send someone some euros via that and his bank goes under - your proof of payment is to his bank, not that he has withdrawn. bbl</p>
+<p><strong>mircea_popescu</strong> fiat is insured. completely orthogonal discussion.<br />
+<strong>kakobrekla</strong> tell that to the bank customers that get diddly squat</p>
+<p><strong>mircea_popescu</strong> really, bolting on a discussion of fiat banking in here is nonsense. we'll never be through with it, and besides it's asymmetrical - i've sued more banks than you.<br />
+<strong>kakobrekla</strong> anyway as far as i can see bbet survived delayed payouts for weeks without longterm consequences</p>
+<p><strong>mircea_popescu</strong> hence the 6 to 60 in there.<br />
+<strong>kakobrekla</strong> mircea_popescu> afaik the only proof of payment is block inclusion. < we already established you cant guarantee that unless you have a pool. so the next best thing will do for practical purpose.</p>
+<p><strong>mircea_popescu</strong> we haven't established such. the options are "1. guarantee inclusion for public txn - needs pool" OR "2. keep txn secret - needs nothing". i notice you don't even wish to discuss 2, but this does not make it go away. the qntra commenter does have a point - bitcoin is designed to work with secret txn, not with public txn.<br />
+<strong>kakobrekla</strong> i discussed it, [15:16:41] <strong>kakobrekla</strong> else i just hide all inputs and address until bet paid out</p>
+<p><strong>mircea_popescu</strong> so basically take out 1.1-1.3 and just keep the sha ?<br />
+<strong>kakobrekla</strong> but then we lose 'what made bbet bbet'</p>
+<p><strong>mircea_popescu</strong> motherfucker.<br />
+<strong>kakobrekla</strong> we become fairlay.</p>
+<p><strong>mircea_popescu</strong> this is perhaps the most unpleasant thing i encountered since bitcoin. anyway, here's the thing : doing your thing is easy and can be done fast. mine, not. doing your thing does not prevent us from doing mine later, or whatever. so, logically - let's do your thing and see how it plays out. who knows, maybe the past few days put the fear of god in them.<br />
+<strong>kakobrekla</strong> correct</p>
+<p><strong>mircea_popescu</strong> i wll need something like 2-3 days to update the payment process. i think it's something like that.<br />
+<strong>kakobrekla</strong> no rush.</p></blockquote>
+<p>Bear in mind that Bitcoin always was <em>and to this day remains</em> <a href="/2013/bitcoind-not-quite-ready-for-prime-time/">not ready for prime time</a>, which specifically means that it is not a mature or even reliably usable (or even extant, because no, code is not protocol - admitting for the sake of argument that the miserable rat's nest of crap spread on hairballs currently run by <a href="http://qntra.net/2016/02/google-unveils-glibc-dns-client-vulnerability-many-bitcoin-implementations-affected/">~everyone</a> can even be called "code" in any meaningful sense) payment protocol, that the cost of doing business in Bitcoin can not be evaluated prospectively but only measured retrospectively and that in general you should have no hopes and form no expectations of anything Bitcoin related working in any particular manner, within any specific interval or within any definite budget. It's how it is. [<a href="#identifier_3_65290" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_65290" class="footnote">Owed to <a href="http://therealbitcoin.org/declaration.asc">Bitcoin's Sovereign</a>. [<a href="#identifier_4_65290" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_65290" class="footnote">Bitbet, of course, holds no assets and consequently should in principle be dissolved on the first loss month. Nevertheless, I am floating its negative cash balance free of charge, with a view of being defrayed from future profits. This line of credit carries seniority above that of shareholders and below that of bettors. [<a href="#identifier_5_65290" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2016/no-such-labs-snsa-january-february-2016-joint-statement/">No Such lAbs (S.NSA), January - February 2016 Joint Statement</a></div>
+                <div class="alignright"><a href="/2016/eulora-auction-march-13th/">Eulora auction, March 13th</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/sbbet/" title="View all posts in S.BBET" rel="category tag">S.BBET</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2016/the-greatly-anticipated-bitbet-sbbet-february-2016-statement/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2016/the-greatly-anticipated-bitbet-sbbet-february-2016-statement/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>22 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-116722" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='/dead_external_sites/www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116722" title="">Monday, 7 March 2016</a>
+							</div>
+						<p>Earlier today I learned Fairlay has <a href="http://qntra.net/2016/03/a-miner-problem/#comment-47975" >a variation on the same miner problem</a> so becoming Fairlay is no solution.</p>
+						</li>
+
+										<li id="comment-116723" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116723" title="">Monday, 7 March 2016</a>
+							</div>
+						<p>Either that or a severe case of metooism.</p>
+						</li>
+
+										<li id="comment-116724" class="commentbody"><div class="commenthead"><img alt='BingoBoingo`s avatar' src='/dead_external_sites/www.thedrinkingrecord.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink"><a href='http://www.thedrinkingrecord.com' class='url'>BingoBoingo</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116724" title="">Monday, 7 March 2016</a>
+							</div>
+						<p>Of course this possible. Might as well flip a coin.</p>
+						</li>
+
+										<li id="comment-116734" class="commentbody"><div class="commenthead"><img alt='Nassim Taleb`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Nassim Taleb</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116734" title="">Tuesday, 8 March 2016</a>
+							</div>
+						<p>Aren't these statements usually PGP signed ?</p>
+<p>Why is the Cost of doing business in Bitcoin=17.94766149 BTC but the Tax=0 BTC ?</p>
+<p>From reading the logs and reviewing the Qntra article, it looks like this financial statement is incorrect.</p>
+						</li>
+
+										<li id="comment-116735" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116735" title="">Tuesday, 8 March 2016</a>
+							</div>
+						<p>No, these statements aren't usually pgp signed.</p>
+<p>So far kakobrekla had been contributing a (signed) copy of the report, conveying his acceptance, on the basis of which shareholders were paid.</p>
+						</li>
+
+										<li id="comment-116738" class="commentbody"><div class="commenthead"><img alt='Nassim Taleb`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Nassim Taleb</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116738" title="">Wednesday, 9 March 2016</a>
+							</div>
+						<p>I'm sure he'll contribute a signed copy any day now.</p>
+						</li>
+
+										<li id="comment-116739" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116739" title="">Wednesday, 9 March 2016</a>
+							</div>
+						<p>Hey, if Nassim Taleb can comment on Trilema, everything may happen.</p>
+						</li>
+
+										<li id="comment-116766" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116766" title="">Sunday, 13 March 2016</a>
+							</div>
+						<p>Kakobrekla notified me yesterday that he won't be signing the report above. Discussion hence has clearly delineated irreconcilable differences, but in any case - I won't be signing anything else. The truth being but one I have relatively little choice.</p>
+<p>This means Bitbet will fail to uphold its contractual obligations with MPEx, and in due time be delisted by that exchange, and lose its status as a Bitcoin registered company. More pressingly, Bitbet is also currently bankrupt, by either "liabilities in excess of assets" or "standing claims it can't dispose of", whichever standard you prefer to employ. This means it is headed into receivership.</p>
+<p>Bitbet's assets are currently comprised of its domain name and its codebase held by kakobrekla ; whatever goodwill with the public may survive the departure of its founders ; as well as a sum of Bitcoin entrusted to it by bettors, held by me. Bitbet's liabilities are currently comprised of various bills (such as the 17.94766149 BTC it owes as per this report, such as whatever fee it may owe the receiver for his trouble, and others as may arise), which are the most senior ; with the remainder to go to payouts to the bet winners ; with the remainder to go to shareholders, which are the least senior.</p>
+<p>The job of Bitbet's receiver will be to </p>
+<ol>
+<li>Receive the domain name ; complete codebase &#038; database ; and Bitcoin held for bettors ;</li>
+<li>Construct, on the basis of data in that database, the list of wagers that were sent to bets not yet closed and paid out ;</li>
+<li>Verify, on the basis of confronting that data with the list of Bitcoin addresses found therein and signed by me that all inputs are accounted for correctly. This will involve walking the list of bets and verifying they were indeed paid to an address on that list at the time specified ; and walking the list of addresses and verifying that all payments were indeed credited correcty to open bets.</li>
+<li>Certify or reject any and all claims against Bitbet, including the 17.94766149 BTC here in contention as well as any open bets.</li>
+<li>Sell any disposable assets, preferably through open auction held in #b-a.</li>
+<li>On the basis of the funds collected thus, adjudicate a pro-rata sum to be paid for bills ; or if the funds suffice to satisfy certified bills adjudicate a pro-rata sum to be paid to the adjudicated bet winners ; or if the funds suffice to satisfy bet winners adjudicate a pro-rata sum to be paid to shareholders and effect these payments.</li>
+</ol>
+<p>Interested parties are invited to apply for the job publicly in #bitcoin-assets, stating their fee. Note that while I intend to abide by this instrument, nothing herein contained gives rise to a time-illimited liability on my part. If a receiver is not agreed upon in a reasonable interval, I will simply consider the matter moot.</p>
+						</li>
+
+										<li id="comment-116768" class="commentbody"><div class="commenthead"><img alt='PeterL`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">PeterL</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116768" title="">Monday, 14 March 2016</a>
+							</div>
+						<p>In footnote iv you specifically stated the 17 btc loan is lower priority than the bettors money, but now in your latest comment you are claiming the loan is higher priority than the bettors, why the discrepancy?</p>
+						</li>
+
+										<li id="comment-116770" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116770" title="">Monday, 14 March 2016</a>
+							</div>
+						<p>Bitbet owes some money it can't repay. I did extended it an offer for a liquidty loan to meet that shortfall, as part of this report, under very generous terms as you well point out. </p>
+<p>Bitbet refused that offer. What loan ?</p>
+						</li>
+
+										<li id="comment-116772" class="commentbody"><div class="commenthead"><img alt='Chinese Mining Cabal`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Chinese Mining Cabal</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116772" title="">Monday, 14 March 2016</a>
+							</div>
+						<p>RECEIVER BEWARE: Who knows how the 'miner cabal' may place unforeseen liabilities into your own lap if you do business with Mr. Popescu!</p>
+<p>Can S.NSA be next? </p>
+<p>Only a few more of these incidents left before mircea_popescu finds himself in an empty chat room arguing with himself over what's wrong with everyone else.</p>
+						</li>
+
+										<li id="comment-116774" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116774" title="">Monday, 14 March 2016</a>
+							</div>
+						<p>Herp.</p>
+						</li>
+
+										<li id="comment-116797" class="commentbody"><div class="commenthead"><img alt='Gojko`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">Gojko</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116797" title="">Thursday, 17 March 2016</a>
+							</div>
+						<p>honestly,<br />
+I have some pending bets on your site. About 70 BTC. It is a great sum.</p>
+<p>What are the chances I see my BTC again now?</p>
+<p>... ... that's a really hard blow to the community ... a very hard one...</p>
+						</li>
+
+										<li id="comment-116798" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116798" title="">Thursday, 17 March 2016</a>
+							</div>
+						<p>Doesn't look too bad, currently, a coupla people came forward to serve as receivers... have you been following #b-a logs ?</p>
+						</li>
+
+										<li id="comment-116799" class="commentbody"><div class="commenthead"><img alt='Gojko`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">Gojko</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116799" title="">Friday, 18 March 2016</a>
+							</div>
+						<p>Thanks for very fast answer. That's deeply appreciated. I will read the logs right now!</p>
+						</li>
+
+										<li id="comment-116812" class="commentbody"><div class="commenthead"><img alt='Hmm`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink">Hmm</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116812" title="">Saturday, 19 March 2016</a>
+							</div>
+						<p>"whatever goodwill with the public may s̶u̶r̶v̶i̶v̶e̶ the departure of its founders generate"</p>
+<p>ftfy.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-116800">
+					<div class='trackhead'>
+						<div class="commentcount">17</div>
+						<span class="authorlink"><a href='http://fr.anco.is/2016/bitbet-receivership-formal-application-and-letter-of-intent/' class='url'>BitBet receivership formal application and letter of intent | fr.anco.is</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-116800" title="">Friday, 18 March 2016</a>
+					</div>
+					<p>[...] The actual implementation of the liquidation would consist of the following steps, as per Mircea Popescu&#8217;s description: [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-116877">
+					<div class='trackhead'>
+						<div class="commentcount">18</div>
+						<span class="authorlink"><a href='http://www.dianacoman.com/2016/03/28/when-the-messenger-shoots-back/' class='url'>When the Messenger Shoots Back in Ossasepia</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-116877" title="">Tuesday, 29 March 2016</a>
+					</div>
+					<p>[...] on his interpretation of the result as evidence of a miner cartel. After he published the BitBet statement, the discussion focused almost exclusively on the 17BTC lost as a result of the incident and [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-132300">
+					<div class='trackhead'>
+						<div class="commentcount">19</div>
+						<span class="authorlink"><a href='http://thewhet.net/2016/04/line-betting-on-bitbet-february-and-march-2016/?b=In%20light%2&amp;e=In%20light%20of%20BitBet%27s%20turmoil%20over%20the%20past%20month%2C%20it%20looks%20unlikely%20that%20P' class='url'>Line betting on BitBet, February and March 2016 &laquo; The Whet</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-132300" title="">Friday, 15 November 2019</a>
+					</div>
+					<p>[...] In light of BitBet's turmoil over the past month, it looks unlikely that PC4 will be able to keep operating, and as such no new [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-141967">
+					<div class='trackhead'>
+						<div class="commentcount">20</div>
+						<span class="authorlink"><a href='/2016/bitbet-sbbet-march-2016-statement?b=from%20Kakobre&amp;e=this#select' class='url'>BitBet (S.BBET) March 2016 Statement on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-141967" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] from Kakobrekla's rejection of last month's statement and as amply discussed within and without the forum, BitBet entered into receivership this [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-142024">
+					<div class='trackhead'>
+						<div class="commentcount">21</div>
+						<span class="authorlink"><a href='/2016/bitbet-final-settlement?b=might%20recall&amp;e=%20has#select' class='url'>BitBet final settlement on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142024" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] might recall that BitBet, a MPEx registered corporation trading as S.BBET, failed spectacularly on March 16th : Kakobrekla notified me yesterday that he won't be signing the report above. Discussion hence has [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-156151">
+					<div class='trackhead'>
+						<div class="commentcount">22</div>
+						<span class="authorlink"><a href='/2020/the-only-thing-worse-than-the-atrocities-the-average-educated-moron-chooses-to-read-are-the-tepid-miseries-therein-contained/?b=It%27s%20your%20fa&amp;e=ting#select' class='url'>The only thing worse than the atrocities the average educated moron chooses to read are the tepid miseries therein contained. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-156151" title="">Friday, 20 November 2020</a>
+					</div>
+					<p>[...] It's your fault, MP, it is your problem and should be your lot to rectify (at your own expense!!!) the entrenched ineptitude of such morons as'd present "past 7 days" as a statistical reporting [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authorbfee2c8" id="authorbfee2c8" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emailbfee2c8" id="emailbfee2c8" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urlbfee2c8" id="urlbfee2c8" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="65290" /></p>
+				<input type="hidden" name="comment_post_time" value="1762663867-18.97.9.170" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2025 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-65290")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-65290");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-65290");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

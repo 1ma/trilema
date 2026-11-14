@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_jun2014-2.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>How to cut the wallet ? on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">The scandalous blog of a sexual predator.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-69751"><div class="post" id="post-69751">                    <h1><a href="/2016/how-to-cut-the-wallet/" rel="bookmark" title="Permanent Link to How to cut the wallet ?">How to cut the wallet ?</a></h1>                        <div class="date">                                     Wednesday, 02 November, Year 8 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>The direct lead to this article was discussion <a href="/forum-logs-for-01-nov-2016#2188353">continued since yesterday</a>. The fundamental basis for it is the observation that the job of the wallet sits in tension with the rest of TRB's use and function, and this tension must be resolved.</p>
+<p>The two identifiable ends of the dubious chimera in question are the node and the wallet. The job of the node is to connect to others via the Internet, and to exchange information with them.<sup><a href="#footnote_0_69751" id="identifier_0_69751" class="footnote-link footnote-identifier-link" title="The current implementation of this job, to serve all comers equally well and trust their words to the same degree periodically comes under fire in the log, and has in time become somewhat of a cause celebre to illustrate various generalized statements of the larger conceptual problems of socialism.">i</a></sup> The job of the wallet is to prevent others from connecting via the Internet<sup><a href="#footnote_1_69751" id="identifier_1_69751" class="footnote-link footnote-identifier-link" title="In its most recent formulation, 
+asciilifeform: it really depends on what you expect out of 'wallet'
+mircea_popescu: EXACT same as the derps doing nuke security explained they expect in yest linked article. `that the authorised people can launch easily and no one else can period.` bitcoin wallet is very literally superset of nuclear briefcase.
+">ii</a></sup>, which makes the tension quite evident. Getting in the way of a clean cut is the unfortunate circumstance that the wallet actually needs some knowledge of the state of the world.<sup><a href="#footnote_2_69751" id="identifier_2_69751" class="footnote-link footnote-identifier-link" title="Unlike say PGP, which is why it works so well on airgapped machines and also how it ended up the fundament of the Republic, and which also should explain why USGtronic innovations intended to undermine this quality (such as `expiring` keys) are so dimly regarded by the discerning lord.">iii</a></sup></p>
+<p>There were to date three approaches proposed, as follows : </p>
+<p><strong>I. That the wallet become strictly a signature mechanism</strong>, as exactly homomorphic to PGP as possible ; the operator will create the transactions he wishes signed elsewhere (practically speaking, on the node), will convey them over through <a href="http://btcbase.org/log/2016-11-02#1561869">the method of his choice</a>, the wallet will sign them and the resulting bytepile will be ferried over and be injected into the node.</p>
+<p>This option then requires that most of the work involved in transaction creation (importantly - <a href="/2013/bitcoind-not-quite-ready-for-prime-time/#selection-111.0-111.215">the coinbase selection</a>!) will be done by the node, which is definitionally a low security environment<sup><a href="#footnote_3_69751" id="identifier_3_69751" class="footnote-link footnote-identifier-link" title="And the introduction of value promises to induce the growth of warts and kludges on it. For instance, if the node only does noding, the value for an attacker of getting you confused as to the balance of an address is V. If the node does noding and walleting, the value of the same is V'. Because V' > V, it then follows some extra security measures will have to be taken. Except the node is not prepared to be secure, conceptually, and so basically we've just lied to ourselves here : we pretend to have solved a problem through resolving it nominally, while the thing that the name used to name before we `resolved` things continues to lurk and cause mischief.">iv</a></sup>. What's worse, the logical implementation would then have wallet function maintain continuity with the present nonsense, with "more secure" functionality being available as an optional (ie, disused<sup><a href="#footnote_4_69751" id="identifier_4_69751" class="footnote-link footnote-identifier-link" title="`Ah man, I dunno about bothering with an airgapped machine, seems overkill. Isn't this 2FA Yubikey good enough ?`
+Insecurity by design is too close to USG practice for my taste.">v</a></sup>) add-on. We might stubbornly insist to call it "the true wallet", but what's in a name ?</p>
+<p><strong>II. That the wallet become a solipsistic node</strong>. As per <a href="/2016/the-ideal-bitcoin-wallet/">previous discussion</a>, fixing the horrible format of the inherited Bitcoin will allow the operator to inject coinbases he owns into his own wallet at leisure (a node can safely track addresses and produce a digest - this is no loss of security). The wallet will then proceed to optimally<sup><a href="#footnote_5_69751" id="identifier_5_69751" class="footnote-link footnote-identifier-link" title="The exact criteria for the optimization should be exposed to the operator. Criteria, plural, the space of possibilities should be well covered. If I want to send only from addresses containing a `W` on Wednesdays, I should be able to!">vi</a></sup> select coinbases for an arbitrary payment, sign it, and spit out the resulting transaction ready to be conveyed to a node.</p>
+<p>This wallet will not "automatically" discover new payments incoming ; but it is my considered opinion that the conflation of the wallet and of <em>that</em> functionality is dumb<sup><a href="#footnote_6_69751" id="identifier_6_69751" class="footnote-link footnote-identifier-link" title="If the misfortunes of a fat kid with delusions of technological leadership and his Magic The Gathering Exchange didn't convince you, there's little I can say.">vii</a></sup>.</p>
+<p><strong>III. That the wallet become separated from the node</strong>. To <a href="http://btcbase.org/log/2016-11-02#1561838">quote</a> the author, </p>
+<blockquote><p><strong>a111</strong> Logged on 2016-11-02 03:16 ben_vulpes: <a href="http://btcbase.org/log/2016-11-01#1561232">log/2016-11-01</a> << merely that wallet might reasonably be muntzed out of bitcoind proper into block-muncher-and-tx-indexer. topologically very similar to "reindex" and friends, but could eschew "wallet" idiocies involving change addresses and sensible address reuse.<br />
+<strong>phf</strong> i got prototype for that. there's only one method called from entire wallet codebase that injects the prepped up transaction into the general pool. i replaced it (or rather, right now it's augmented) with a shiva foreign call that takes a list of bytes, deserailizes it into transaction, and does the injection</p>
+<p><strong>asciilifeform</strong> consider posting this<br />
+<strong>mircea_popescu</strong> yeh<br />
+<strong>phf</strong> yeah, it needs some more work. i think that wallet needs to be augmented do operations via shiva, but then instead of injecting it should do a call out into shiva of a byte list of transaction. once i get there, i'll do a post</p></blockquote>
+<p>This has the advantage that it's so much easier to do. It does resolve most of the primary driver of everyone's work polishing the turd - in that it drains some of the insane swamp that Satoshi left us. Nevertheless it does not actually address the fundamental problem, which is the security profile tension between the two identified ends of the cojoined item.</p>
+<p>A possible mix between II and III could be realised in practice, with minimal expense and tools already available - by running two TRB nodes, of which the 2nd is the only one operating a wallet and only connects to the first, the operator realises most of the OpSec benefits of II while also realising most of the savings offered by III. </p>
+<p>Comments welcome.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_69751" class="footnote">The current implementation of this job, to serve all comers equally well and trust their words to the same degree periodically comes under fire in the log, and has in time become somewhat of a <em>cause celebre</em> to illustrate various generalized statements of the larger conceptual problems of socialism. [<a href="#identifier_0_69751" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_69751" class="footnote">In its most recent formulation, </p>
+<blockquote><p><strong><a href="/forum-logs-for-02-nov-2016#2188394">asciilifeform</a></strong>: it really depends on what you expect out of 'wallet'<br />
+<strong>mircea_popescu</strong>: EXACT same as the derps doing nuke security explained they expect in yest linked article. "that the authorised people can launch easily and no one else can period." bitcoin wallet is very literally superset of nuclear briefcase.</p></blockquote>
+<p> [<a href="#identifier_1_69751" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_69751" class="footnote">Unlike say PGP, which is why it works so well on airgapped machines and also how it ended up the fundament of the Republic, and which also should explain why USGtronic innovations intended to undermine this quality (such as "expiring" keys) are <a href="/2016/gossipd-design-document/#comment-118993">so dimly regarded</a> by the discerning lord. [<a href="#identifier_2_69751" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_69751" class="footnote">And the introduction of value promises to induce the growth of warts and kludges on it. For instance, if the node only does noding, the value for an attacker of getting you confused as to the balance of an address is V. If the node does noding and walleting, the value of the same is V'. Because V' > V, it then follows some extra security measures will have to be taken. Except the node is not prepared to be secure, conceptually, and so basically we've just lied to ourselves here : we pretend to have solved a problem through resolving it nominally, while the thing that the name used to name before we "resolved" things continues to lurk and cause mischief. [<a href="#identifier_3_69751" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_69751" class="footnote">"Ah man, I dunno about bothering with an airgapped machine, seems overkill. Isn't this 2FA Yubikey good enough ?"</p>
+<p>Insecurity by design is too close to USG practice for my taste. [<a href="#identifier_4_69751" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_69751" class="footnote">The exact criteria for the optimization should be exposed to the operator. Criteria, plural, the space of possibilities should be well covered. If I want to send only from addresses containing a "W" on Wednesdays, I should be able to! [<a href="#identifier_5_69751" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_69751" class="footnote">If the misfortunes of a fat kid with delusions of technological leadership and his Magic The Gathering Exchange didn't convince you, there's little I can say. [<a href="#identifier_6_69751" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2016/qntra-sqntr-october-2016-statement/">Qntra (S.QNTR) October 2016 Statement</a></div>
+                <div class="alignright"><a href="/2016/minigame-smg-october-2016-statement/">MiniGame (S.MG), October 2016 Statement</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/bitcoin/" title="View all posts in Bitcoin" rel="category tag">Bitcoin</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2016/how-to-cut-the-wallet/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2016/how-to-cut-the-wallet/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>7 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-119725" class="commentbody"><div class="commenthead"><img alt='anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">anon</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119725" title="">Monday, 14 November 2016</a>
+							</div>
+						<p>&gt; If I want to send only from addresses containing a "W" on Wednesdays, I should be able to!</p>
+<p>OMG you guys you can't send from an address. Don'tcha know there's no such thing as a from address?</p>
+<p><a href="https://en.bitcoin.it/wiki/From_address">https://en.bitcoin.it/wiki/From_address</a></p>
+<p>But seriously I'd be interested to hear your take on that article. It rustles my jimmies each time LukeJr tells a noob that you can't send from an address.</p>
+						</li>
+
+										<li id="comment-119726" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119726" title="">Monday, 14 November 2016</a>
+							</div>
+						<p>Entirely besides the point, here.</p>
+						</li>
+
+										<li id="comment-152149" class="commentbody"><div class="commenthead"><img alt='pokcix.btc@gmail.com`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">pokcix.btc@gmail.com</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-152149" title="">Sunday, 7 June 2020</a>
+							</div>
+						<p>I now zero no more btc after covid , can help me teach me , for this opportunity and after this successful I will be help people and community</p>
+						</li>
+
+										<li id="comment-152157" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-152157" title="">Sunday, 7 June 2020</a>
+							</div>
+						<p>Get lost.</p>
+						</li>
+
+										<li id="comment-152375" class="commentbody"><div class="commenthead"><img alt='Abenzer`s avatar' src='http://FASEBOOK/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink"><a href='http://FASEBOOK' class='url'>Abenzer</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-152375" title="">Friday, 19 June 2020</a>
+							</div>
+						<p>i can get it</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-120837">
+					<div class='trackhead'>
+						<div class="commentcount">6</div>
+						<span class="authorlink"><a href='http://fr.anco.is/2017/removing-the-wallet-from-trb-first-thoughts' class='url'>Removing the wallet from TRB, first thoughts | fr.anco.is</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-120837" title="">Tuesday, 3 January 2017</a>
+					</div>
+					<p>[...] for a variety of reasons, the most fundamental one has been exposed by Mircea Popescu in &#8220;How to cut the wallet&#8220;. The job of the node is to connect to others via the Internet, and to exchange information [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-131893">
+					<div class='trackhead'>
+						<div class="commentcount">7</div>
+						<span class="authorlink"><a href='http://fixpoint.welshcomputing.com/2019/planned-articles-as-of-october-2019/?b=Bitco&amp;e=#select' class='url'>Planned articles as of October 2019 &laquo; Fixpoint</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-131893" title="">Monday, 21 October 2019</a>
+					</div>
+					<p>[...] Bitcoin Wallet, an as-yet incomplete attempt at the old wallet air-gapping problem. Progress to date and remaining challenges will be addressed. I'm presently on the hook for getting [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authord73b6bc" id="authord73b6bc" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emaild73b6bc" id="emaild73b6bc" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urld73b6bc" id="urld73b6bc" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="69751" /></p>
+				<input type="hidden" name="comment_post_time" value="1780776068-18.97.14.89" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-69751")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-69751");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-69751");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

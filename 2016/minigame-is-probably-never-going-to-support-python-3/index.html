@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_apr2020.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Minigame is probably never going to support Python 3. on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">It mildly annoys me, as a capable sheep,<br />that people like you exist.<br />~ <a href=/2016/the-story-of-elliot-rodger-by-elliot-rodger-adnotated-part-one/#comment-118639>nicknaem</a>
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-70179"><div class="post" id="post-70179">                    <h1><a href="/2016/minigame-is-probably-never-going-to-support-python-3/" rel="bookmark" title="Permanent Link to Minigame is probably never going to support Python 3.">Minigame is probably never going to support Python 3.</a></h1>                        <div class="date">                                     Monday, 28 November, Year 8 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>Here's the relevant bit of <a href="http://logs.minigame.biz/latest.log.html#t14:02:19">the devlog</a> :</p>
+<blockquote><p><strong>diana_coman</strong> I would have to look into 2.78a to see what they claim to do there and whether any of it might help with the cal3d export part; basically from a strictly Blender point of view I worked with a whole set of versions from 2.4 to 2.7 and I would say 2.67 is fine in there; what you might want to test first however before choosing one version is how the different exporters behave if you want to try use/adapt an existing exporter. Basically different exporters work to different degrees with different versions - making it all a huge headache; cutting this short I would rather just stick to 2.71 and develop an exporter for that (it has a baking API which I'm not sure is in 2.67 as well). For fuck's sake they list "Python APIs changes" as FEATURE, arrgh.<br />
+<strong>mircea_popescu</strong> Heh. Are they on 3.x yet ?</p>
+<p><strong>diana_coman</strong> I think latest Blender shouts for Python 3 ONLY, yeah.<br />
+<strong>mircea_popescu</strong> Heh. I'm not terribly sure Python 3 has any sort of future. It seems altogether unable to muster specific support in TMSR, and the <a href="http://btcbase.org/log-search?q=open+sores">Open Sores</a> movement is running out of steam.</p>
+<p><strong>shinohai</strong> I still prefer 2.7 to be honest.<br />
+<strong>mircea_popescu</strong> actually <a href="https://archive.is/4EIWE#selection-349.0-369.173">their statement</a> is so lulzy it's worth quoting.</p>
+<ul>Short version: Python 2.x is legacy, Python 3.x is the present and future of the language</p>
+<p>Python 3.0 was released in 2008. The final 2.x version 2.7 release came out in mid-2010, with a statement of extended support for this end-of-life release. The 2.x branch will see no new major releases after that. 3.x is under active development and has already seen over five years of stable releases, including version 3.3 in 2012, 3.4 in 2014, and 3.5 in 2015. This means that all recent standard library improvements, for example, are only available by default in Python 3.x.</p>
+<p>Guido van Rossum (the original creator of the Python language) decided to clean up Python 2.x properly, with less regard for backwards compatibility than is the case for new releases in the 2.x range. The most drastic improvement is the better Unicode support (with all text strings being Unicode by default) as well as saner bytes/Unicode separation.</p>
+<p>Besides, several aspects of the core language (such as print and exec being statements, integers using floor division) have been adjusted to be easier for newcomers to learn</ul>
+<p>So basically, "it is the present (delusionally) and future (hopefully) of the language because it has more Unicode crap<sup><a href="#footnote_0_70179" id="identifier_0_70179" class="footnote-link footnote-identifier-link" title="It should probably be noted that Unicode support is not seriously entertained by the Republic, which means that it isn't the future of anything.">i</a></sup> and it's easier for noobies." Good luck have fun, if your focus is new people that means you're an altcoin and get lost<sup><a href="#footnote_1_70179" id="identifier_1_70179" class="footnote-link footnote-identifier-link" title="Elitism means something.">ii</a></sup>. Meanwhile 2 branch is FINALLY stable. I have no fucking idea what they must be drinking to imagine "more releases" is a selling point, but whatever it is, they're guzzling it down.</p>
+<p><strong>diana_coman</strong> Several aspects of the core language (such as print and exec being statements, integers using floor division) have been adjusted to be easier for newcomers to learn " &lt;- eurgh, so now core aspects are decided based on what is "easy" for newcomers, way to go. Guess that might be a cutting point re Blender versions then. Basically whatever Blender version is the last to work on Python 2.x and we'll make it work with that - it's anyway more reasonable than to import whatever new python mess.<br />
+<strong>mircea_popescu</strong> Pretty much. I can't imagine better news than "we finally took the <em>creative</em> gnats away, branch is finally stable". Hallelujah.</p></blockquote>
+<p>This discussion covers in-house software, yes, but not legacy software. On the contrary, it's the development plan <em>for the future</em>, a future which very pointedly leaves no space for Python 3. Discuss.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_70179" class="footnote">It should probably be noted that Unicode support is <a href="/forum-logs-for-24-sep-2016#2174738">not seriously entertained</a> by the Republic, which means that it isn't the future of anything. [<a href="#identifier_0_70179" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_70179" class="footnote">Elitism <em>means something</em>. [<a href="#identifier_1_70179" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2016/the-conundrums-of-the-contemporaneous-financier/">The conundrums of the contemporaneous financier</a></div>
+                <div class="alignright"><a href="/2016/unicode-is-fucking-stupid-the-definitive-article/">Unicode is fucking stupid - the definitive article.</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/meta-psihoza/" title="View all posts in Meta psihoza" rel="category tag">Meta psihoza</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2016/minigame-is-probably-never-going-to-support-python-3/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2016/minigame-is-probably-never-going-to-support-python-3/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>17 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-119924" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119924" title="">Monday, 28 November 2016</a>
+							</div>
+						<p>2.7 is not even plug-compatible with 2.6...  Python per se is a crock of shit and has no permanent future in any sane scenario.</p>
+<p>It is exactly Perl -- a "duct tape" which is made use of simply because it makes the act of writing a sane and reusable program seem exorbitantly expensive, and the planning work involved -- seem "unnecessary". (For a complete exposition of "Perlism", refer to Naggum.)</p>
+						</li>
+
+										<li id="comment-119925" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119925" title="">Monday, 28 November 2016</a>
+							</div>
+						<p>The problem remains that you have no proper compiler of art files into C binary objects ; and the gap has to be filled with something.</p>
+<p>This is python, the compiler of the gaps, play on linux relies on it to get wine to interact with gnome (ie, a bunch of bash-esque confstring manipulation), minigame relies on it to get blender exports to work in crystal space (ie... very much the same, hacking chunks of data from files into a single blob) and so on and so forth.</p>
+<p>Until someone makes a general compiler, there will be something <em>like</em> python. That the various molds &#038; assorted scum caught in the grating (ever seen Nick Coghlan's twitter stream for instance ?) imagine it relevant or important is ... well, basically what they do.</p>
+						</li>
+
+										<li id="comment-119926" class="commentbody"><div class="commenthead"><img alt='Entitled Nancy`s avatar' src='http://www.jaslkdjfaslf.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink"><a href='http://www.jaslkdjfaslf.com' class='url'>Entitled Nancy</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119926" title="">Tuesday, 29 November 2016</a>
+							</div>
+						<p>Down with Python 3.x! </p>
+<p>I'm an entitled whiner that can't handle the world changing around me! Fuck all these Johnny Come-lately's! They should keep doing things the way I'M most comfortable with!</p>
+<p>Because I wrapped my head around the warts of Python 2.x, I'm special! If I get hit by a bus, the world will truly lose out on that nothing valuable because millions of others also learned the warts and many of them moved on!</p>
+<p>Never mind I'm too much of a nancy to use a real language to begin with! I need something with a bunch of guardrails built into it! I need "features" like inheritance, cause I can't reason about problems without abstract wankery to hold my hand! I love my hand-wavey type system! I love guessing if it's one type or another I'll get and writing extra code to handle the edge cases that arise!</p>
+<p>-- Staticly Typed Hipster</p>
+						</li>
+
+										<li id="comment-119927" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119927" title="">Tuesday, 29 November 2016</a>
+							</div>
+						<p>If only things were so simple, you'd be adequate for the calls of the world.</p>
+						</li>
+
+										<li id="comment-119928" class="commentbody"><div class="commenthead"><img alt='Nick Coghladick`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Nick Coghladick</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119928" title="">Tuesday, 29 November 2016</a>
+							</div>
+						<blockquote><p>the same design changes that improve Python 3’s Windows integration by changing several OS interfaces to operate on text rather than binary data also make it more sensitive to locale misconfiguration issues on POSIX operating systems other than Mac OS X. </p></blockquote>
+<p>You totally got your priorities straight, dickfaces.</p>
+						</li>
+
+										<li id="comment-119929" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119929" title="">Tuesday, 29 November 2016</a>
+							</div>
+						<p>That's not the best part. The best part is when the dickface conclave admits that the whole steaming pile of crap was rushed to production before even cursory design work : </p>
+<blockquote><p>During the pre-release design period, the lack of an immutable binary data type was identified as a problem, and the (then mutable) bytes type was renamed to bytearray and a new immutable bytes type added. The now familiar “bytes literal” syntax was introduced (prepending a “b” prefix to the string literal syntax) and the representations of the two types were also adjusted to be based on the new bytes literal syntax. With the benefit of hindsight, it has become clear another change should have been made at the same time: with so many affordances switched back to matching those of the Python 2 str type (including the use of the new bytes literal syntax to refer to that type in Python 2.6 and 2.7), bytes and bytearray should have been been switched away from behaving like a tuple of integers and list of integers (respectively) and instead modified to be containers of length 1 bytes objects, just as the str type is a container of length 1 str objects. Unfortunately, that change was not made at the time, and now backwards compatibility constraints within the Python 3 series itself makes it highly unlikely the behaviour will be changed in the future either. </p></blockquote>
+<p>But hey, Python 4, amirite ?</p>
+<p>The part where Unicode is an entirely spurious piece of shit, whose <a href=http://btcbase.org/log/2016-11-28#1574186 >mere presence</a> literally dumbs down entire organisations <em>whether used or not</em> has yet to be addressed.</p>
+<p><em>Why</em> the fuck should sandniggers &#038; assorted orcs feed their God-forsaken chicken scribblings into a computer rather than become literate ? <b>Computers are not for everyone.</b></p>
+						</li>
+
+										<li id="comment-119932" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119932" title="">Tuesday, 29 November 2016</a>
+							</div>
+						<p>Related: <a href="https://learnpythonthehardway.org/book/nopython3.html">https://learnpythonthehardway.org/book/nopython3.html</a></p>
+						</li>
+
+										<li id="comment-119939" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119939" title="">Tuesday, 29 November 2016</a>
+							</div>
+						<blockquote><p>The strings in Python 3 are very difficult to use for beginners. In an attempt to make their strings more "international" they turned them into difficult to use types with poor error messages. Every time you attempt to deal with characters in your programs you'll have to understand the difference between byte sequences and Unicode strings. Don't know what that is? Exactly. The Python project took a language that is very forgiving to beginners and mostly "just works" and implemented strings that require you to constantly know what type of string they are. Worst of all, when you get an error with strings (which is very often) you get an error message that doesn't tell you what variable names you need to fix.</p></blockquote>
+<p>Imagine if you will, I'm supposed to have <em>artists</em> delve into haskellian arcana ? Jaysus.</p>
+						</li>
+
+										<li id="comment-119991" class="commentbody"><div class="commenthead"><img alt='walter`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">walter</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-119991" title="">Monday, 5 December 2016</a>
+							</div>
+						<p>I found <a href="http://lucumr.pocoo.org/2014/5/12/everything-about-unicode/">http://lucumr.pocoo.org/2014/5/12/everything-about-unicode/</a> much better than the 'learnpythonthehardway' link. It talks technical facts and shows with code how bad the situation is.</p>
+						</li>
+
+										<li id="comment-120001" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-120001" title="">Tuesday, 6 December 2016</a>
+							</div>
+						<p>Not a bad read.</p>
+						</li>
+
+										<li id="comment-122884" class="commentbody"><div class="commenthead"><img alt='Cristian`s avatar' src='http://ciupicri.github.io/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink"><a href='http://ciupicri.github.io/' class='url'>Cristian</a><img src="/wp-content/themes/trilema/images/insigna-trol.png" class="insigna" alt="insigna de trol" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-1k.png" class="insigna" alt="insigna pentru 1000 de comentarii" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122884" title="">Tuesday, 5 September 2017</a>
+							</div>
+						<p>The devlog link is basically broken.</p>
+						</li>
+
+										<li id="comment-122889" class="commentbody"><div class="commenthead"><img alt='Cristian`s avatar' src='http://ciupicri.github.io/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink"><a href='http://ciupicri.github.io/' class='url'>Cristian</a><img src="/wp-content/themes/trilema/images/insigna-trol.png" class="insigna" alt="insigna de trol" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /><img src="/wp-content/themes/trilema/images/insigna-1k.png" class="insigna" alt="insigna pentru 1000 de comentarii" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-122889" title="">Wednesday, 6 September 2017</a>
+							</div>
+						<p>Python was designed for noobs from the start, so it's not a bug, it's a feature.</p>
+<p>That being said, Java, C#, JavaScript and TCL have Unicode strings. Even Go and Rust have some built-in support.</p>
+<p>Are old polimedia.us/trilema URLs still working? Talkin' about API breakage...</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-132830">
+					<div class='trackhead'>
+						<div class="commentcount">13</div>
+						<span class="authorlink"><a href='http://ossasepia.com/2020/01/04/notes-on-computer-graphics-transfer-vs-display/?b=ways%20in%20&amp;e=ways%20in%20which%20people%20are%20morons%2C%20from%20the%20pure%20bobeckistan%20of%20blender%20%28' class='url'>Notes on Computer Graphics - Transfer vs. Display &laquo; Ossa Sepia</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-132830" title="">Saturday, 4 January 2020</a>
+					</div>
+					<p>[...] ways in which people are morons, from the pure bobeckistan of blender (and let's not forget how python got indexed in the first place) to a very thick stripperweb-style tarabostes idiocy. mircea_popescu: do you [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-142890">
+					<div class='trackhead'>
+						<div class="commentcount">14</div>
+						<span class="authorlink"><a href='/2016/romanias-a-dumb-slut-long-live-pharmacy-my-fuckstick?b=deploys%20with&amp;e=ife%2C#select' class='url'>Romania's a dumb slut! Long live Pharmacy! My fuckstick! on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142890" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] deploys with a master's hand the Romanian tradition of мат, partly because English is a sort of Python 3 these days (in the sense of having entirely lost any sort of contact with any kind of lived life, [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-147089">
+					<div class='trackhead'>
+						<div class="commentcount">15</div>
+						<span class="authorlink"><a href='/2019/the-tmsr-os-implicit-clients?b=python%20fucki&amp;e=t%20is#select' class='url'>The TMSR-OS implicit clients on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-147089" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] python fucking sucks in and of itself, on its own merits ; but also because its community is toxically idiotic beyond any known measure, perhaps outside of wikipedia). This is a large hunk, granted, but it is [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-157345">
+					<div class='trackhead'>
+						<div class="commentcount">16</div>
+						<span class="authorlink"><a href='http://ossasepia.com/2020/01/14/notes-on-computer-graphics-formats-exporters-and-blendering/?b=where%20one%20ca&amp;e=%20any#select' class='url'>Notes on Computer Graphics: Formats, Exporters and Blendering &laquo; Ossa Sepia</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-157345" title="">Friday, 18 December 2020</a>
+					</div>
+					<p>[...] where one cares to look, from a weird sort of anti-management at the top to a full embrace of Python's own wrong choices, ant-like overspecialisation and overfitting of artists and the resulting impossibility of any [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-158000">
+					<div class='trackhead'>
+						<div class="commentcount">17</div>
+						<span class="authorlink"><a href='http://dorion-mode.com/2020/12/a-gentoo-install-on-jwrd-desktop/?b=is%20married%20t&amp;e=%20set#select' class='url'>A Gentoo install on JWRD desktop &laquo; Dorion Mode</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-158000" title="">Friday, 25 December 2020</a>
+					</div>
+					<p>[...] is married to Python, which is a clear mark against. Nevertheless, if we're stuck with Python, Python2 it'll be.  eselect python list eslect python set [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authorf523607" id="authorf523607" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emailf523607" id="emailf523607" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urlf523607" id="urlf523607" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="70179" /></p>
+				<input type="hidden" name="comment_post_time" value="1786292982-18.97.14.84" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-70179")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-70179");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-70179");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

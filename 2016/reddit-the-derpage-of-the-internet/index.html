@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_apr2020.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>Reddit, the derpage of the Internet on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Moving targets for a fast crowd.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-67146"><div class="post" id="post-67146">                    <h1><a href="/2016/reddit-the-derpage-of-the-internet/" rel="bookmark" title="Permanent Link to Reddit, the derpage of the Internet">Reddit, the derpage of the Internet</a></h1>                        <div class="date">                                     Friday, 01 July, Year 8 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>To brush up on the <a href="/2014/spamming-reddit-an-experiment/">previous discussion</a> of the topic : </p>
+<p><a href="/wp-content/uploads/2016/07/reddit-the-derpage-of-the-internet.png"><img src="/wp-content/uploads/2016/07/reddit-the-derpage-of-the-internet-560x420.png" alt="reddit-the-derpage-of-the-internet" title="reddit-the-derpage-of-the-internet" width="560" height="420" class="aligncenter size-large wp-image-67148" /></a></p>
+<p><a href="/2014/this-is-just-about-everyone-on-the-internet/">Reddit</a> remains two years later just as vulnerable as it always was ; and just as vulnerable as <a href="/xenforo-no-better-than-vbulletin-certainly-not-all-that-different">every</a> other "<a href="/files-from-the-war-on-the-web-today-pbnation">social</a> media" / <a href="/files-from-the-war-on-the-web-today-literotica">forum</a> website <a href="/the-bitlove-llc-spin-on-their-recent-implosion-as-presented-to-their-captive-audience">out</a> there <a href="/askfm-laid-bare-or-whats-half-a-million-uniques-to-you">today</a>. Them's the breaks.</p>
+<p><center>~ And now for the practical part of our article ~</center></p>
+<p><strong>I. Enumerating Reddit posts.</strong> Reddit, the derpage of the Internet, invented the cleverest scheme ever to prevent enumeration of its posts : you don't pass along an index parameter like with every other god forsaken web-social-media shithole, oh no! The much more secure and defense-y proactive in the global blabla method is to require an index and a token from the previous page! So you can only serialize, rather than... hey, what did enumeration mean again ? Oh, right, <a href="/forum-logs-for-29-jun-2016#2119215">background and experience in security experience spawns many years</a>. That's right.</p>
+<p>Anyway, to cut to the chase, there's this little script :</p>
+<blockquote><p>#!/bin/bash<br />
+for value in {25..1000000..25}<br />
+do</p>
+<p>variable=$(tail -n 1 retarddit-all.txt | awk -v FS="(count=$value&amp;after=|\"rel=\"nofollow next)" '{print $2}';)<br />
+echo $variable<br />
+echo $value</p>
+<p>curl -A "Nigger-Cunts/2.0 (UrMom Forever Linux rv:177.20.11) Dicko/555-328-3425<sup><a href="#footnote_0_67146" id="identifier_0_67146" class="footnote-link footnote-identifier-link" title="Eat-dicks, if you must know. It's a vanity thing.">i</a></sup> CALL NOW/DTFP" "https://www.reddit.com/r/all/?count=$value&#038;after=$variable" >> retarddit-all.txt</p>
+<p>sleep 3s</p>
+<p>done</p></blockquote>
+<p>To use it : download the first page of reddit.com/r/all/ and save it as retarddit-all.txt ; then run the script. It will slowly balloon that file with the entire contents of the "all subreddits", which may not be interesting at all but is nevertheless chock full of... you've guessed it! Comments! Because that's ~what they do all day, other than huffing butter and not throwing out the cat litter. Which takes us to the next part of our show,</p>
+<p><strong>II. Enumerating redditards.</strong> Once you have a decently padded retarddit-all.txt worth a few GB or so, it's time to </p>
+<blockquote><p>cat retarddit-links.txt | grep -o '.\{0,32\}/comments/.\{0,128\}'<sup><a href="#footnote_1_67146" id="identifier_1_67146" class="footnote-link footnote-identifier-link" title="Dirty, I'll grant, but then again we're dealing with the web here, and not just any web, but a web property you understand. Heck, they even issued notes! It's practically a bank, you read me ?
+What ever came of those, by the way ?">ii</a></sup> > retarddit-link-mess.txt</p>
+<p>cat retarddit-link-mess.txt | sed 'g%/r/%\n%' | sed 'g%/ "%/\n%' | grep "/comments/" > retarddit-links.txt</p>
+<p>cat retarddit-links.txt | while read line; do curl -A "Nigger-Cunts/2.0 (UrMom Forever Linux rv:177.20.11) Dicko/555-328-3425 CALL NOW/DTFP" "$line?limit=500" | awk -v FS="(data-author=|data-author-fullname=)" '{print $2}' > rtards.txt ; sleep 3<sup><a href="#footnote_2_67146" id="identifier_2_67146" class="footnote-link footnote-identifier-link" title="In case you're wondering, they have a 2 second API threshold.">iii</a></sup> ; done</p></blockquote>
+<p>You can probably guess what this does - but if you can't : loads all the crap you previously downloaded, string-matches the sort of link we want, cuts the crap off on either side (hey btw - look up teleomers while at it, this is an educational programme after all!) and feeds it into a loop, which then proceeds to download the stuff into rtards.txt. </p>
+<p>Here's <a href="/wp-content/uploads/2016/07/rtards.txt">a sample</a><sup><a href="#footnote_3_67146" id="identifier_3_67146" class="footnote-link footnote-identifier-link" title="~1.3MB, ~100k names on there. Only took all of half an hour to pile together, I'm sure you can do much better (though I'm unsure it'd matter, 100`000 redditards are too many for any purpose anyway).
+By the way, do you suppose any of these use weak passwords by any chance ?">iv</a></sup>, if you're lazy - and that takes us to the next part of our show, </p>
+<p><strong>III. Spamming reddit.</strong> Oh, you were wondering how the image above was generated ? Well, first we gotta login :</p>
+<blockquote><p>curl --cookie-jar - -A "Nigger-Cunts/2.0 (UrMom Forever Linux rv:177.20.11) Dicko/555-328-3425 CALL NOW/DTFP" --data<br />
+"op=login&#038;dest=https%3A%2F%2Fwww.reddit.com%2Fmessage%2Fcompose%2F%3Fto%HilaryClinton&#038;user=HilaryClinton&#038;passwd=BillSucks&#038;api_type=json"<br />
+https://www.reddit.com/api/login/HilaryClinton >> securitits.txt</p></blockquote>
+<p>You'll get some cookies, which you serialize ; and a "modhash" variable, which is the uh parameter. Thus informed, you can proceed to talk to people (from a safe distance) : </p>
+<blockquote><p>cat rtards.txt | while read line; do curl -A "Nigger-Cunts/2.0 (UrMom Forever Linux rv:177.20.11) Dicko/555-328-3425 CALL NOW/DTFP" --cookie<br />
+"<strong>__cfduid=d494d20a9cb1414f863b992823ebffcae1467378194;<br />
+loid=SsqCmIX20eiP8uhz9n;loidcreated=2016-07-01T13%3A03%3A14.348Z;<br />
+secure_session=1;reddit_session=59061742%2C2016-07-01T06%3A03%<br />
+3A14%2C2dcafd20966c1244720501a259e346df4695d62c</strong>"<br />
+--data<br />
+"uh=<strong>0vmwmaq1hn0f43858babf83785c5ef77ad5347cdeecd678941</strong>&#038;to=$line&#038;undefined=&#038;subject=Check+this+out\!&#038;thing_id=&#038;text=%5B%2Fu%2F$line%5D(https%3A%2F%2Fbitly.com%2F297qOu4)+private+data+leaked\!&#038;source=compose&#038;id=%23compose-message&#038;renderstyle=html"<br />
+"https://www.reddit.com/api/compose/" >> rtards-r.txt ; echo "\n$line\n"<br />
+>>rtards-r.txt ; sleep 3 ; done</p></blockquote>
+<p>Three to however many hours later, your account will get suspended. You don't particularly care, rtards-r.txt contains a lengthy lists of "success": true} followed by the name in question. Just resume from the last name, on another account.<sup><a href="#footnote_4_67146" id="identifier_4_67146" class="footnote-link footnote-identifier-link" title="If you stick to the same IP they'll hit you with google captchas at some point. They're as weak as we know them to be ; moreover using compromised user accounts or simply moving on to a new IP give you another few thousand shots at the retards' inboxes. ">v</a></sup></p>
+<p>Enjoy. </p>
+<p><strong>PS.</strong> Oh, almost forgot,<br />
+<a href="/forum-logs-for-30-jun-2016#2119824">Signature</a>: 0x5f91152a2382b4acfdbfe8ad3c6c8cde45f73f6147d39b072c81637fe810060616039<br />
+08f692dc15a1b6ead217785cf5e07fb496708d129645f3370a28922136a32</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_67146" class="footnote">Eat-dicks, if you must know. It's a vanity thing. [<a href="#identifier_0_67146" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_67146" class="footnote">Dirty, I'll grant, but then again we're dealing with the web here, and not just <em>any</em> web, but a web <em>property</em> you understand. Heck, they even <a href="http://qntra.net/2014/12/reddit-goes-full-redditard-with-reddit-notes/">issued notes</a>! It's practically a bank, you read me ?</p>
+<p>What ever came of those, by the way ? [<a href="#identifier_1_67146" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_67146" class="footnote">In case you're wondering, they have a 2 second API threshold. [<a href="#identifier_2_67146" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_67146" class="footnote">~1.3MB, ~100k names on there. Only took all of half an hour to pile together, I'm sure you can do much better (though I'm unsure it'd matter, 100`000 redditards are too many for any purpose anyway).</p>
+<p>By the way, do you suppose any of these use weak passwords by any chance ? [<a href="#identifier_3_67146" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_67146" class="footnote">If you stick to the same IP they'll hit you with google captchas at some point. They're as weak as we know them to be ; moreover using compromised user accounts or simply moving on to a new IP give you another few thousand shots at the retards' inboxes.  [<a href="#identifier_4_67146" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2016/qntra-sqntr-june-2016-statement/">Qntra (S.QNTR) June 2016 Statement</a></div>
+                <div class="alignright"><a href="/2016/atti-impuri-allitaliana/">Atti impuri all'italiana</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/meta-psihoza/" title="View all posts in Meta psihoza" rel="category tag">Meta psihoza</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2016/reddit-the-derpage-of-the-internet/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2016/reddit-the-derpage-of-the-internet/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+
+
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author5107c12" id="author5107c12" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email5107c12" id="email5107c12" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url5107c12" id="url5107c12" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="67146" /></p>
+				<input type="hidden" name="comment_post_time" value="1786335709-3.41.188.35" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-67146")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-67146");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-67146");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

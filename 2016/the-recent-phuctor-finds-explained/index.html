@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_nov2020.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>The recent Phuctor finds, explained. on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">The fates are cruel an' the chances are slim<br />so grab a good sieve and dig in.<br />~<a href=/2020/nannare/#comment-147503>my elder slavegirl</a>
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-66004"><div class="post" id="post-66004">                    <h1><a href="/2016/the-recent-phuctor-finds-explained/" rel="bookmark" title="Permanent Link to The recent Phuctor finds, explained.">The recent Phuctor finds, explained.</a></h1>                        <div class="date">                                     Saturday, 23 April, Year 8 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<h1><center>~ Introductory Part ~</center></h1>
+<p>In which we explain the concepts involved in such a manner that anyone interested in computers forms a correct and hopefully complete understanding of the matters discussed.</p>
+<p><strong>I. What is RSA ?</strong><br />
+RSA is a method for creating asymmetric keys<sup><a href="#footnote_0_66004" id="identifier_0_66004" class="footnote-link footnote-identifier-link" title="Asymmetric key systems are the only practicable way for people to exchange secrets on the cheap. The alternative, absent these, is using OTPs (One Time Pads) which require sharing a secret in the past, and keeping it secret in the present, to be able to share a secret in the future.">i</a></sup> that relies on some properties of numbers<sup><a href="#footnote_1_66004" id="identifier_1_66004" class="footnote-link footnote-identifier-link" title="Specifically, that it is a lot easier for you to compute the product of 11, 13 and 17 than for you to find the factors that compose the number 2`431.">ii</a></sup>. </p>
+<p>Various larger entities (such as government agencies), jealous of the fact that private persons can, with minimal expenditure, exchange secrets safely have been working hard and for many decades to weaken this cryptographic system as much as possible, and destroy it as soon as possible. Part of their efforts is the push towards Elliptic Curve Cryptography (ECC) to replace RSA, in spite of obvious mathematical weaknesses in this proposition. Part of the same efforts have been numerous and diverse <em>implementation flaws</em>, so that the promise of mathematics is not realised by the capabilities of the software. </p>
+<p><strong>II. Why should the exponent e be prime ?</strong><br />
+There's no requirement per se, mathematically, for e to be prime. However, e must be coprime<sup><a href="#footnote_2_66004" id="identifier_2_66004" class="footnote-link footnote-identifier-link" title="This means, have no shared divisors. For instance, 16 and 25 are coprime, even if neither is prime (16 is divisible with 2, 4 and 8 ; whereas 25 with 5). Meanwhile, 11 and 77 are not coprime, even if 11 is itself prime.">iii</a></sup> with phi(N), because otherwise messages encrypted can no longer be singularily decrypted (ie, the decryption process allows multiple ambiguous solutions).</p>
+<p>In practice, however, it is a lot cheaper to pick a prime exponent, than to check and make sure the exponent shares no factors with N or phi(N), much like in practice it is a lot cheaper to not drive through the swamp than to clean your car after you have. For this reason, nonprime e is generally an indication of subversion of the cryptosystem implementation on other levels, and should be seriously investigated (much like a person who prefers to drive through the swamp has probably other issues as well).</p>
+<p><strong>III. What is Phuctor ?</strong></p>
+<p>Phuctor is a free service of No Such lAbs<sup><a href="#footnote_3_66004" id="identifier_3_66004" class="footnote-link footnote-identifier-link" title="MPEx:S.NSA">iv</a></sup> that checks RSA keys for various weaknesses and vulnerabilities. It is slightly infamous among non-governmental and anti-governmental communities for the various shenanigans <a href="/2015/on-how-the-factored-4096-rsa-keys-story-was-handled-and-what-it-means-to-you/">government-aligned websites</a> have engaged in to try and suppress it.</p>
+<h1><center>~ The Actual Finds ~</center></h1>
+<p>There are three major items Phuctor has found.</p>
+<p><strong>I. The  <a href="http://qntra.net/2016/04/phuctor-the-rsa-super-collider-discovers-vulnerability-in-northrop-grumman-pgp-root-ca/">Northrop Grumman key</a>.</strong></p>
+<p>As a factual matter, a key<sup><a href="#footnote_4_66004" id="identifier_4_66004" class="footnote-link footnote-identifier-link" title="80F007FBD8F9950E492F6A2C720FF5C3136DFE1DEC5CE4125B546ADF837AD4A2">v</a></sup> describing itself as </p>
+<blockquote><p>Security; Northrop Grumman PGP Root-CA; TRW-Root-CA - TRW/SEG/ITS/IS &lt;trw-root-ca@trw.com>;</p></blockquote>
+<p>uses exponent (e) 16385, which is not a prime number<sup><a href="#footnote_5_66004" id="identifier_5_66004" class="footnote-link footnote-identifier-link" title="Also seen, for instance, in the signature of one John M. N. McInerney from Encyclopaedia Britannica, or Joe Bradley from ait.nrl.navy.mil.">vi</a></sup>. Why and wherefore is not clear, nor are there any apparent hits for such a wonder <a href="/forum-logs-for-22-apr-2016#2082737">on the public Internet</a>. It should be interesting to hear what happened here, although it is somewhat improbable we'll get to the bottom of this story before complete-victory-against-USG day.</p>
+<p><strong>II. The 35<sup><a href="#footnote_6_66004" id="identifier_6_66004" class="footnote-link footnote-identifier-link" title="And other such remarkably low non prime values, such as 21, or, mind-bendingly, one.">vii</a></sup> exponent.</strong></p>
+<p>A large number of keys with exponent 35 have been identified, both for ssh<sup><a href="#footnote_7_66004" id="identifier_7_66004" class="footnote-link footnote-identifier-link" title="Secure SHell, a protocol for securely communicating with remote servers.">viii</a></sup> and pgp<sup><a href="#footnote_8_66004" id="identifier_8_66004" class="footnote-link footnote-identifier-link" title="Pretty Good Privacy, a protocol for exchanging arbitrary encrypted data.">ix</a></sup>. This would seem to indicate an implementation flaw in a package used by many people<sup><a href="#footnote_9_66004" id="identifier_9_66004" class="footnote-link footnote-identifier-link" title="Including ssh://hook.piratpartiet.se; ssh://lab-1.mit.edu; ssh://www.gulp.linux.it; ssh://kg-dev.vlsci.unimelb.edu.au; ssh://dev.cjadvertising.com;">x</a></sup>. Whether this flaw is intentional or accidental is not obvious (bearing in mind that in cryptography, "accidental flaws" are about as rare as accidental copulation is in the bedroom), but it appears that some organisations<sup><a href="#footnote_10_66004" id="identifier_10_66004" class="footnote-link footnote-identifier-link" title="Such as, for instance, something called mayfirst.org, or for that matter numerous people from FSFE.">xi</a></sup> have been thoroughly infected.</p>
+<p><strong>III. Strange, large, nonprime exponents.</strong><br />
+A variety of these have been identified : 3765668207 ; 4202608123 ;  2307795757 ; 2205267067<sup><a href="#footnote_11_66004" id="identifier_11_66004" class="footnote-link footnote-identifier-link" title="This and the previous belong to one Soren Hansen &lt;tsh@warma.dk>; Soren Hansen &lt;tsh@linux2go.dk>; Soren Hansen &lt;tsoren@ubuntu.com>; Soren Hansen &lt;tshawarma@ubuntu.com>; Soren Hansen &lt;tsoren@canonical.com>; Soren Hansen &lt;tsoren.hansen@canonical.com>;">xii</a></sup> all the way to something as large as</p>
+<blockquote><p><code>807925151782775182517871917216748799011102566742887100803258635688<br />
+116378471697272329930035288072836592217949023047450487352988978762<br />
+273027377203809661207078015771934182524902293754943759741302669901<br />
+440959601689206919805466065493904045952358461904261764541146300907<br />
+626072189397288526645215188809978098259638047858334741708560517124<br />
+369664114237371404400883158051451945141483275654817711507853756464<br />
+821604427918148590092961546433939958778807541147610092440330832180<br />
+780678142117770505243128927543173283086741963564516417448376149931<br />
+708824965955388129159735933388590053385830740116132961965123803704<br />
+8388963402764899057665 </code></p></blockquote>
+<p>The usual exponent is 65537. This number is used because it is actually a prime number, and because it simplifies calculations significantly<sup><a href="#footnote_12_66004" id="identifier_12_66004" class="footnote-link footnote-identifier-link" title="65537 being a 10000000000000001 in binary, multiplications by it are much much faster than otherwise. Intuitively this is obvious, if you must multiply 11111 with 10000000000000001 the result will be 1111110000000000011111, a result you can obtain and verify without even thinking that 111111 in binary is 63 in decimal notation.
+This, of course, is not without its own pitfalls.">xiii</a></sup>. While there may exist good reasons someone used nonprime, large, strange exponents - such as for instance playing around to learn the ropes - nevertheless if unintentional they may be very notable as indicators of other serious problems<sup><a href="#footnote_13_66004" id="identifier_13_66004" class="footnote-link footnote-identifier-link" title="Such as perhaps an overflow of some kind, as the most obvious, banal example.">xiv</a></sup> with a given implementation of RSA.</p>
+<h1><center>~ What to do ~</center></h1>
+<p>You can follow along, either here, on #<a href="/forum-logs-for-22-apr-2016">trilema</a> or on Phuctor's <a href="http://nosuchlabs.com/stats">stats page</a>. We are in possession of pretty much every RSA key ever made, and will be going through all of them.</p>
+<p>If you are the inquisitive type you might also investigate, either the problems here discussed or other related, derived or entirely novel problems of your own devising.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_66004" class="footnote">Asymmetric key systems are the only practicable way for people to exchange secrets on the cheap. The alternative, absent these, is using OTPs (One Time Pads) which require sharing a secret in the past, and keeping it secret in the present, to be able to share a secret in the future. [<a href="#identifier_0_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_66004" class="footnote">Specifically, that it is a lot easier for you to compute the product of 11, 13 and 17 than for you to find the factors that compose the number 2`431. [<a href="#identifier_1_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_66004" class="footnote">This means, have no shared divisors. For instance, 16 and 25 are coprime, even if neither is prime (16 is divisible with 2, 4 and 8 ; whereas 25 with 5). Meanwhile, 11 and 77 are not coprime, even if 11 is itself prime. [<a href="#identifier_2_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_66004" class="footnote">MPEx:S.<a href="http://mpex.co/?mpsic=S.NSA">NSA</a> [<a href="#identifier_3_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_66004" class="footnote"><a href=http://nosuchlabs.com/gpgkey/80F007FBD8F9950E492F6A2C720FF5C3136DFE1DEC5CE4125B546ADF837AD4A2>80F007FBD8F9950E492F6A2C720FF5C3136DFE1DEC5CE4125B546ADF837AD4A2</a> [<a href="#identifier_4_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_66004" class="footnote">Also seen, for instance, in the signature of one <a href=http://nosuchlabs.com/gpgkey/FD2F9CF14496DFC67DF8CCDB6578069C2399209970F75830805BE7BF41161216>John M. N. McInerney</a> from Encyclopaedia Britannica, or <a href="http://nosuchlabs.com/gpgkey/259144D1C21112E5E42E82D6BA9DADED5760F44C6012EB99FA4C311210D7C7DD">Joe Bradley</a> from ait.nrl.navy.mil. [<a href="#identifier_5_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_66004" class="footnote">And other such remarkably low non prime values, such as 21, or, mind-bendingly, <a href="http://nosuchlabs.com/gpgkey/F9E5715A35D36CFAD74E5D259A294DFEF977991D0BEA58C729179642DD9C308E">one</a>. [<a href="#identifier_6_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_66004" class="footnote">Secure SHell, a protocol for securely communicating with remote servers. [<a href="#identifier_7_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_8_66004" class="footnote">Pretty Good Privacy, a protocol for exchanging arbitrary encrypted data. [<a href="#identifier_8_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_9_66004" class="footnote">Including <a href="http://nosuchlabs.com/gpgkey/E903965D533C1888973E04E4FE11726E1E402CC2AD8CF8432D1E62E3A757E5A5">ssh://hook.piratpartiet.se</a>; <a href="http://nosuchlabs.com/gpgkey/F1B216188FB8CEFC0E6894E3918A5EC3DF2E5E789CF621724291B711F883F103">ssh://lab-1.mit.edu</a>; ssh://<a href="http://nosuchlabs.com/gpgkey/F222EB112222350D145D88284931574B33E6828A453108FDDA0418BA6A2D1CAA">www.gulp.linux.it</a>; <a href="http://nosuchlabs.com/gpgkey/F42EFDA31BC1F5FB2F42931C05DCA3AA4E0E86067324B0E5E99D30BE5D7055B7">ssh://kg-dev.vlsci.unimelb.edu.au</a>; <a href="http://nosuchlabs.com/gpgkey/0094D6B2F42098E2EC28D6342D71E7C997973B0E7B3AB137727D07F5E08D3AD5">ssh://dev.cjadvertising.com</a>; [<a href="#identifier_9_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_10_66004" class="footnote">Such as, for instance, something called <a href="/forum-logs-for-22-apr-2016#2082745">mayfirst.org</a>, or for that matter <a href="http://nosuchlabs.com/gpgkey/A5B5F7244B904C2177EA60591FD0E179B8986D2BB3A1E420707B7A297093DB04">n</a>u<a href="http://nosuchlabs.com/gpgkey/A67B0B6B68A3556AA98DF965DA3B7C6CD48DA809420095DAF7A6ADB1CB665C30">m</a>e<a href="http://nosuchlabs.com/gpgkey/A6EF86CFBEA38139F78883877DD3EF6D6353B43611506768BE55A3AED3D1B450">r</a>o<a href="http://nosuchlabs.com/gpgkey/AD94E00906D5B8792D3E2EEA939904CE071B1723B8DCF63908EBAA5C47709BEC">u</a>s <a href="http://nosuchlabs.com/gpgkey/ADF5A7555BA6F20C8B4D078CEBE8F8EA089DCDD3C4DF1865DBE2E9812B5A634D">p</a>e<a href="http://nosuchlabs.com/gpgkey/B84D4761800BCDD9FCB7B26F40B2FA859B18627A28FB6F20F8788097D90E8235">o</a>p<a href="http://nosuchlabs.com/gpgkey/BF51387BEC0D4C3ADD69FB9A5DC7E1E40E4253C120E5AFAA76A09A0FFA34F9CD">l</a>e <a href="http://nosuchlabs.com/gpgkey/C808CCC0FA5797520E2769317007533FB4B5174AE0FE2B0487622B74040BF2BC">f</a>r<a href="http://nosuchlabs.com/gpgkey/C821EF05936F1BF1419C36B262971B1CD9CD7A4608D9C0EE7F888F4A16691926">o</a>m <a href="http://nosuchlabs.com/gpgkey/C86C02C1C152F02A27A06334D5AA693D7CEDA91A43EC5211E14CC8201FC8F5DE">F</a>S<a href="http://nosuchlabs.com/gpgkey/CF70E76263F3D9789762846352440CD9126BBD0F6C501B8620B9A5949F5A673A">F</a>E<a href="http://nosuchlabs.com/gpgkey/E0FF921254F09ED1A06040A44FCEE82C024128F18D5BB403A60C1D14E8EC17E5">.</a> [<a href="#identifier_10_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_11_66004" class="footnote">This and the previous belong to one Soren Hansen &lt;tsh@warma.dk>; Soren Hansen &lt;tsh@linux2go.dk>; Soren Hansen &lt;tsoren@ubuntu.com>; Soren Hansen &lt;tshawarma@ubuntu.com>; Soren Hansen &lt;tsoren@canonical.com>; Soren Hansen &lt;tsoren.hansen@canonical.com>; [<a href="#identifier_11_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_12_66004" class="footnote">65537 being a 10000000000000001 in binary, multiplications by it are much much faster than otherwise. Intuitively this is obvious, if you must multiply 11111 with 10000000000000001 the result will be 1111110000000000011111, a result you can obtain and verify without even thinking that 111111 in binary is 63 in decimal notation.</p>
+<p>This, of course, is <a href="/2015/more-factored-rsa-keys-and-assorted-other-considerations/">not without its own pitfalls</a>. [<a href="#identifier_12_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_13_66004" class="footnote">Such as perhaps an overflow of some kind, as the most obvious, banal example. [<a href="#identifier_13_66004" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2016/the-next-generation/">The Next Generation</a></div>
+                <div class="alignright"><a href="/2016/the-darkening/">The Darkening</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/breaking-news/" title="View all posts in Breaking News" rel="category tag">Breaking News</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2016/the-recent-phuctor-finds-explained/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2016/the-recent-phuctor-finds-explained/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+
+
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author0fe33d4" id="author0fe33d4" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email0fe33d4" id="email0fe33d4" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url0fe33d4" id="url0fe33d4" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="66004" /></p>
+				<input type="hidden" name="comment_post_time" value="1768566956-18.97.14.88" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-66004")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-66004");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-66004");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

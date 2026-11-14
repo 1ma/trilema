@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_sep2018.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>The necessary prerequisite for any change to the Bitcoin protocol on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">If "waifu" is "wife"<br />should "kung-fu" be "knife" ?
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-64828"><div class="post" id="post-64828">                    <h1><a href="/2016/the-necessary-prerequisite-for-any-change-to-the-bitcoin-protocol/" rel="bookmark" title="Permanent Link to The necessary prerequisite for any change to the Bitcoin protocol">The necessary prerequisite for any change to the Bitcoin protocol</a></h1>                        <div class="date">                                     Monday, 01 February, Year 8 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p><strong>Summary :</strong></p>
+<p style="text-align: left; padding-left: 30px;">All blocks must include a SHA3<sup><a href="#footnote_0_64828" id="identifier_0_64828" class="footnote-link footnote-identifier-link" title="The principal consideration is that unlike the rest of the SHA `family`, the keccak function takes unlimited input. Bitcoin is forever after all.
+The political importance of not using NSA/NIST crapolade is a secondary concern, even if it makes a very valid, muchly needed statement, namely that the United States has no future in technology just like it has no future in political geography.">i</a></sup>-512 digest calculated over a bitfield composed out of the nonce-th byte out of every preceding block, wrapped.<sup><a href="#footnote_1_64828" id="identifier_1_64828" class="footnote-link footnote-identifier-link" title="Exempli gratia :  if the fourth block is added to a blockchain consisting of
+
+60 bd e7 67 77 70 20 b2 e6 7c 46 c3 (12 bytes)
+75 80 d2 b0 6e 6c 6d a9 5d 12 98 fe bf (13 bytes)
+df fc 22 5f 2a 4d 50 d6 f3 fc c3 (11 bytes)
+
+Then should that block use a nonce of 17, it must include a field equal to sha3-512(70 6e 50), whereas should that block use a nonce of 11, it must include a field equal to sha3-512(c3 fe df).
+ ">ii</a></sup></p>
+<p><strong>Rationale :</strong></p>
+<p style="text-align: left; padding-left: 30px;">The issues being resolved have been discussed at length in #bitcoin-assets, whose <a href="/category/logs/">logs</a> you are invited to read - right now, and <em>in integrum</em>.<sup><a href="#footnote_2_64828" id="identifier_2_64828" class="footnote-link footnote-identifier-link" title="The notion that you might be participating in Bitcoin in any capacity or to any degree without keeping up with the logs is not unlike the notion that you're participating in the political process through `reading newspapers` or whatever it is you do.">iii</a></sup> </p>
+<p style="text-align: left; padding-left: 30px;">This notwithstanding, an unbinding summary is that the miner-node division<sup><a href="#footnote_3_64828" id="identifier_3_64828" class="footnote-link footnote-identifier-link" title="There's multiple aspects to the issue. 
+One aspect is that while nodes - no, not `full` nodes, simply nodes ; everything else is not a node at all - do provide useful service, they have no way to extract payment in exchange. This takes us to the present, sad situation where the network barely consists of a few hundred nodes, and on the strength of that alone could be toppled by a fart. (Yes, supposedly significant reserve capacity exists. Let's just hope nobody actually gives this a run for its money.) 
+Another aspect is that new blocks are mined by one group (miners) but have to be stored in perpetuity by another group (nodes). This creates a situation where X (users) pay Y (miners) to inconvenience Z (nodes), which is unsustainable not to mention sheer nonsense. 
+It is true that so called `solutions` to this fundamental problem have been pluriously presented by Bitcoin's enemies in sheep's clothing. Nevertheless, they all reduce to attempts, more or less blatant, to leverage this weakness of the protocol into further damage - not a single one of them is to any degree an actual solution or even vaguely addresses the problem at all.">iv</a></sup> is both an unintended consequence of the poor design and inept implementation of Bitcoin by its original author as well as the single known <em>possible</em> threat to its continued survival. This measure heals that rift, by making it impossible for miners to mine without nodes<sup><a href="#footnote_4_64828" id="identifier_4_64828" class="footnote-link footnote-identifier-link" title="For reasons that I think obvious, mining will continue on ASICs, even if this change will require new ASICs be baked. Nevertheless, for technological reasons it will be impossible to include the generation of this bitfield in the ASICS in question - instead, they will have to depend on importing it from outside. 
+Whether miners will run their own nodes or allow a decentralized market of `subscription information services` to spawn up will remain to be seen, but if you do believe in the economic superiority of decentralization then you're stuck believing this will happen necessarily.
+In any case, a word to the wise : if you are designing ASIC chips, and you are not including the possibility of feeding a bitfield like this in blocks, you are deliberately ensuring failure not just for yourself, but for your customers as well. This change WILL eventually come in, start planning accordingly, today.">v</a></sup>) ; and by giving nodes a directly valuable piece of information they can sell.<sup><a href="#footnote_5_64828" id="identifier_5_64828" class="footnote-link footnote-identifier-link" title="Logically what you'd do as a node operator is create KNBs (known nonce blocks) every time a new block is found. Depending how fast your machine goes, you should be able to output thousands of these per second. A miner that has to feed its rigs something will then buy these blocks from you and proceed to use them (and possibly announce them afterwards too, to protect other miners from being scammed with the same nonce block). 
+This forces a minimum population of nodes to exist in order for mining to even be possible - what use is more hashing if there's nothing to hash ?">vi</a></sup>
+</ul>
+<p><strong>The Vatican's Armored Divisions<sup><a href="#footnote_6_64828" id="identifier_6_64828" class="footnote-link footnote-identifier-link" title="Is there any сталин in the house ?">vii</a></sup> :</strong></p>
+<p style="text-align: left; padding-left: 30px;">I won't bother with parading for your benefit, nor will I recount the sad story of "what happens when you don't do what MP says". If you've done any reading worth the mention you should know all that by now ; if you need any explanation as to why my pronouncements are binding, you necessarily have no clue about Bitcoin-anything. See <a href="/2016/thats-right-time-to-move-on-please-do-bitcoin-is-really-not-for-you/">here</a> instead. </p>
+<p style="text-align: left; padding-left: 30px;">I will however say that details<sup><a href="#footnote_7_64828" id="identifier_7_64828" class="footnote-link footnote-identifier-link" title="Probably the most important of which, shifting the nonce before taking the nonce-th element. Taking the nonce as-is requires strict parity between each hash and the calculated digest, which would require 64 MB of information be available to the miner for each Mhash. This is perhaps not practical - although it does have the marked advantage of making ASICs altogether impractical for mining, and returning that process to more traditional computers. A rather generous eight bit shift would mean the miner needs 64 bytes every Mhash, meaning that each Phash chip must have 64 GB/s worth of data to work its magic.">viii</a></sup> are negotiable, on one hand, and that I am open to considering other changes be bundled with this change, possibly including an increase of the blocksize. I will however, attack <em>and sink</em> any other change whatsoever, without regard to who proposes it, who supports it, or what it contains. The <em>only</em> way to make <em>any</em> alteration whatsoever is to make an alteration that includes this one.</p>
+<p>And now that we understand each other, back to your regularly scheduled program.</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_64828" class="footnote">The principal consideration is that unlike the rest of the SHA "family", the keccak function takes unlimited input. Bitcoin is forever after all.</p>
+<p>The political importance of not using NSA/NIST crapolade is a secondary concern, even if it makes a very valid, muchly needed statement, namely that the United States has no future in technology just like it has no future in political geography. [<a href="#identifier_0_64828" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_64828" class="footnote"><em>Exempli gratia : </em> if the fourth block is added to a blockchain consisting of</p>
+<ol>
+<li>60 bd e7 67 77 70 20 b2 e6 7c 46 c3 (12 bytes)</li>
+<li>75 80 d2 b0 6e 6c 6d a9 5d 12 98 fe bf (13 bytes)</li>
+<li>df fc 22 5f 2a 4d 50 d6 f3 fc c3 (11 bytes)</li>
+</ol>
+<p>Then should that block use a nonce of 17, it must include a field equal to sha3-512(70 6e 50), whereas should that block use a nonce of 11, it must include a field equal to sha3-512(c3 fe df).<br />
+  [<a href="#identifier_1_64828" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_64828" class="footnote">The notion that you might be participating in Bitcoin in any capacity or to any degree without keeping up with the logs is not unlike the notion that you're participating in the political process through "reading newspapers" or whatever it is you do. [<a href="#identifier_2_64828" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_64828" class="footnote">There's multiple aspects to the issue. </p>
+<p>One aspect is that while nodes - no, not "full" nodes, simply nodes ; everything else is not a node <em>at all</em> - do provide useful service, they have no way to extract payment in exchange. This takes us to the present, sad situation where the network barely consists of <a href="/category/logs//?date=03-02-2015#1004252">a few hundred nodes</a>, and on the strength of that alone could be toppled by a fart. (Yes, supposedly significant reserve capacity exists. Let's just hope nobody actually gives this a run for its money.) </p>
+<p>Another aspect is that new blocks are mined by one group (miners) but have to be stored in perpetuity by <em>another</em> group (nodes). This creates a situation where <a href="/category/logs/?date=31-01-2016#1391174">X (users) pay Y (miners) to inconvenience Z (nodes)</a>, which is unsustainable not to mention sheer nonsense. </p>
+<p>It is true that so called "solutions" to this fundamental problem have been pluriously presented by Bitcoin's enemies in sheep's clothing. Nevertheless, they all reduce to attempts, more or less blatant, to leverage this weakness of the protocol into further damage - not a single one of them is to any degree an actual solution or even vaguely addresses the problem at all. [<a href="#identifier_3_64828" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_64828" class="footnote">For reasons that I think obvious, mining will continue on ASICs, even if this change will require new ASICs be baked. Nevertheless, for technological reasons it will be impossible to include the generation of this bitfield in the ASICS in question - instead, they will have to depend on importing it from outside. </p>
+<p>Whether miners will run their own nodes or allow a decentralized market of "subscription information services" to spawn up will remain to be seen, but if you do believe in the economic superiority of decentralization then you're stuck believing this will happen necessarily.</p>
+<p>In any case, a word to the wise : if you are designing ASIC chips, and you are not including the possibility of feeding a bitfield like this in blocks, you are deliberately ensuring failure not just for yourself, but for your customers as well. This change WILL eventually come in, start planning accordingly, <em>today</em>. [<a href="#identifier_4_64828" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_64828" class="footnote">Logically what you'd do as a node operator is create KNBs (known nonce blocks) every time a new block is found. Depending how fast your machine goes, you should be able to output thousands of these per second. A miner that has to feed its rigs something will then buy these blocks from you and proceed to use them (and possibly announce them afterwards too, to protect other miners from being scammed with the same nonce block). </p>
+<p>This forces a minimum population of nodes to exist in order for mining to even be possible - what use is more hashing if there's nothing to hash ? [<a href="#identifier_5_64828" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_64828" class="footnote">Is there any <em>сталин</em> in the house ? [<a href="#identifier_6_64828" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_64828" class="footnote">Probably the most important of which, shifting the nonce before taking the nonce-th element. Taking the nonce as-is requires strict parity between each hash and the calculated digest, which would require 64 MB of information be available to the miner for each Mhash. This is perhaps not practical - although it does have the marked advantage of making ASICs altogether impractical for mining, and returning that process to more traditional computers. A rather generous eight bit shift would mean the miner needs 64 bytes every Mhash, meaning that each Phash chip must have 64 GB/s worth of data to work its magic. [<a href="#identifier_7_64828" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2016/what-is-the-leyla-black/">What is the Leyla Black ?</a></div>
+                <div class="alignright"><a href="/2016/minigame-smg-january-2016-statement/">MiniGame (S.MG), January 2016 Statement</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/bitcoin/" title="View all posts in Bitcoin" rel="category tag">Bitcoin</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2016/the-necessary-prerequisite-for-any-change-to-the-bitcoin-protocol/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2016/the-necessary-prerequisite-for-any-change-to-the-bitcoin-protocol/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>42 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-116383" class="commentbody"><div class="commenthead"><img alt='wachtwoord`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink">wachtwoord</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116383" title="">Monday, 1 February 2016</a>
+							</div>
+						<p>Very creative approach. Don't you think mining pools will run one full-node and make the current SHA3-512 digest available freely to support pooled mining (their bread and butter)? Running a full-node is not that expensive (for a mining pool).</p>
+						</li>
+
+										<li id="comment-116384" class="commentbody"><div class="commenthead"><img alt='PeterL`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">PeterL</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116384" title="">Monday, 1 February 2016</a>
+							</div>
+						<p>This is an ingenious way to ensure that miners are storing the block chain.</p>
+<p>Would this be a soft fork or a hard fork?</p>
+						</li>
+
+										<li id="comment-116386" class="commentbody"><div class="commenthead"><img alt='Duke-jr`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Duke-jr</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116386" title="">Monday, 1 February 2016</a>
+							</div>
+						<p>Christianity answers both insofar as most people care.<br />
+You're responding to a block size increases are either hardforks or extension blocks (ugh).<br />
+Illegitimate transactions are meant to transfer bitcoins (or at least some discussion on the spammer end, as new spammers have popped up trying to violate the rules in one way or another Everyone cannot know everything.</p>
+						</li>
+
+										<li id="comment-116387" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116387" title="">Monday, 1 February 2016</a>
+							</div>
+						<p>@<b>wachtwoord</b> This depends very much on the exact degree of shifting for the nonce that ends up implemented. If the digests are too scarce, the miners will probably compete for them and so they won't be shared anymore than say the passwords to the letter-level dns servers are shared. On the other hand if there's some slack and digests aren't THAT hard to come by, they might share them. </p>
+<p>Understand that every single digest has a cost, which can be actually calculated on the basis of say AWS prices. This cost is significantly above the cost of one hash in terms of capital goods, energy, actual money, what have you.</p>
+<p>There's a different game-theoretic application for whether they'll burn digests (ie, publish the digests they've already tried). </p>
+<p>@<b>PeterL</b> Necessarily a hard fork.</p>
+<p>@<b>Duke-jr</b> Sorry, what ?</p>
+						</li>
+
+										<li id="comment-116389" class="commentbody"><div class="commenthead"><img alt='Wachtwoord`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Wachtwoord</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116389" title="">Monday, 1 February 2016</a>
+							</div>
+						<p>Thanks for the explanation. Does the difficulty/scarcity need to be static and chosen at the time of the hard fork or can it scale based on computational power like the difficulty for the hashing function itself?</p>
+						</li>
+
+										<li id="comment-116390" class="commentbody"><div class="commenthead"><img alt='Paul Sztorc`s avatar' src='http://www.truthcoin.info/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink"><a href='http://www.truthcoin.info/' class='url'>Paul Sztorc</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116390" title="">Monday, 1 February 2016</a>
+							</div>
+						<p>This is one of the most interesting Bitcoin proposals I've ever read.</p>
+<p>However, I'm not sure that the miners will actually need to buy KNBs from full nodes. Won't miners just create "ASICs" (of some kind) which can efficiently calculate KNBs?</p>
+<p>ASIC design is not my area of expertise (I would guess that Bitcoin ASICs are built to only accept data of a fixed size/format and double-SHA it), but won't there be some investment that miners (dedicated specialists) can make, which improves their productivity to a degree which is superior to "buying from nodes" (however cheap "buying from nodes" may be)?</p>
+						</li>
+
+										<li id="comment-116391" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116391" title="">Monday, 1 February 2016</a>
+							</div>
+						<p>@<b>Wachtwoord</b> In a very theoretical way it could scale, but due to the complexities involved and the bugs they promise to induce, I very much doubt a practical implementation could be anything other than fixed.</p>
+<p>Then again, were "we" the "community" give up this sad, famous power rangerism and instead spend the time to seriously review code and so forth, it could perhaps be broached. Hard to say off the cuff.</p>
+<p>@<b>Paul Sztorc</b> It is notoriously difficult to predict this sort of thing correctly, however as far as the simulations I've seen go, that asic meaningfully reduces to "CPU + HDD controller". It is not feasible to reimplement these just to feel special - so they won't be ASICs. </p>
+<p>Obviously a miner can buy a server just as well as the next bloke, so <em>in general</em> miners could run fully integrated operations, having their own digesters and their own miners talk to each other. Nevertheless, the fact that they integrare these distinct operations doesn't make them not be distinct anymore, just like Chiquita integrating retail and sea transport doesn't make retail and sea transport the same activity.</p>
+<p>There's liable to be significant drift between the two, which will likely tear them apart, not only for the usual economic reasons as seen in all companies (what vertically integrated corps can you name ? Apple doesn't manufacture retina screens for instance) but for a very specific reason too : mining fluctuates whereas digesting is fixed. Should you find blocks in quick succession you'll need more digesting work done than should you find them further apart (in fact if you draw the demand curve for digestion, it's infinity just after a block is found and drops from there to the stable rate of mining). </p>
+<p>But given all this, the only honest answer remains nevertheless "who knows".</p>
+						</li>
+
+										<li id="comment-116392" class="commentbody"><div class="commenthead"><img alt='Riccardo Casatta`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Riccardo Casatta</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116392" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>Using sha3 because of input limitations of sha2 is pointless. One byte for every 10 minutes blocks times 2^64 is approximately 26k times the age of universe.</p>
+<p>Creation of Proof of Storage should be fast enough to prevent orphans. I think taking nonce-th byte from a fixed number random blocks (deterministically derived from the nonce) should be faster while achieving the same point.</p>
+						</li>
+
+										<li id="comment-116393" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116393" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<blockquote><p>Using sha3 because of input limitations of sha2 is pointless. </p></blockquote>
+<p>There's no because in the original. Please don't mistake amusement for causation.</p>
+<blockquote><p>Creation of Proof of Storage should be fast enough to prevent orphans.</p></blockquote>
+<p>This actually merits a lot more discussion. For instance : how would orphans result, everyone's stuck doing the same digestion work.</p>
+<blockquote><p>I think taking nonce-th byte from a fixed number random blocks (deterministically derived from the nonce) should be faster while achieving the same point.</p></blockquote>
+<p>There may be merit to this idea, especially if tweaked to read not "(deterministically derived from the nonce)" but instead "determined through doing modulo-blockheight on the block's hash, then shifting the blockhash and repeating the process". If you want a total of 64 blocks be selected randomly, you shift by ones. If you just want 32, you shift by twos.</p>
+						</li>
+
+										<li id="comment-116395" class="commentbody"><div class="commenthead"><img alt='an-on`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">an-on</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116395" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>Could you explain in more detail how the random blocks idea works?</p>
+<p>Also from the article it is not clear if this change would work so that the block hash includes just the previous block headers and the nonce, so that the digest is only needed after the nonce is found, or if the block hash includes the previous block headers, the nonce and the digest.</p>
+						</li>
+
+										<li id="comment-116396" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116396" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<blockquote><p>Could you explain in more detail how the random blocks idea works?</p></blockquote>
+<p>Suppose you are building on a block with hash ab cd ef which is at height 10. ab cd ef happens to be a number, equal to 11259375 in decimal notation. Modulo 10 that comes to 5, so the 1st byte of the digest is to be taken from block #5. Shifting by 4, the hash becomes a bc de, which is also a number, equal to 703710 in decimal notation. Modulo 10 that comes to 0, so the 2nd byte of the digest is to be taken from block #0. Shifting by 4 again you're left with ab cd, which 43981, so 3rd byte from block #1. And so following, 4th byte from block #8, 5th byte from block #1 and 6th byte from block #0 again. </p>
+<p>This way you didn't have to go through all 11 blocks in order, but merely looked at 6 of them. Obviously how much the hash is shifted can be altered to suit.</p>
+<blockquote><p>Also from the article it is not clear if this change would work so that the block hash includes just the previous block headers and the nonce, so that the digest is only needed after the nonce is found, or if the block hash includes the previous block headers, the nonce and the digest.</p></blockquote>
+<p>I'd have thought it's clear, but just in case it isn't : currently mining works as sha(sha(headers+nonce)) ; by this proposal mining would work as sha(sha(heqaders+nonce+digest)).</p>
+						</li>
+
+										<li id="comment-116397" class="commentbody"><div class="commenthead"><img alt='jurov`s avatar' src='http://www.explo.yt/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink"><a href='http://www.explo.yt/' class='url'>jurov</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116397" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>Nonce is cycled in the miner because it's the easiest thing to do. If it becomes the hardest thing to do, miners will simply keep one value of a nonce and generate a different transaction in every cycle instead.</p>
+						</li>
+
+										<li id="comment-116398" class="commentbody"><div class="commenthead"><img alt='Adlai`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">Adlai</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116398" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>This is doable as a soft-fork, which subsequently "hardens" as economically relevant nodes learn of the new rule and enforce it. An initial deployment only requires miner upgrades (with the added benefit of yet another opportunity to uncloak those who use badly-implemented SPV mining hacks).</p>
+<p>Overall though the real "false dichotomy" isn't XT vs Blockstream, or Core vs Classic, or... it's hard/soft forking. The proposed change is less effective if miners implement it "softly" (a situation unlikely to happen, as the change is undeniably against miners' naive self-interest), and only has teeth once all nodes verify to harden the fork.</p>
+						</li>
+
+										<li id="comment-116399" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116399" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>@<b>jurov</b> That was discussed a little <a href=http://btcbase.org/log/?date=01-02-2016#1392779 >in the log</a> (but didn't really get a fair shake because of random derp getting in the way etc) :</p>
+<blockquote><p>punkman: mircea_popescu: re:sha3-digest, here's one idea, asic miners can get around recalculating the digest on every hash by changing the merkle-root/timestamp instead of the nonce<br />
+mircea_popescu: punkman quite, yes. this is deliberate. won't be too easy tho, asic needs EVEN MORE ram that way. (miners currently use this incidentally, to some degree)</p>
+<p>punkman: why even more ram?<br />
+[...]<br />
+punkman: mutating the merkle root just needs some sha256 hashing though<br />
+mircea_popescu: sure. but is also finite.</p>
+<p>punkman: is not<br />
+mircea_popescu: how do you mean ?</p>
+<p>punkman: you just put the nonce in coinbase, isn't it equivalent to mutating the actual nonce?<br />
+mircea_popescu: punkman yes, up until people start rejecting nonstandard blocks.</p>
+<p>punkman: you can encode that nonce in standard coinbase outputs<br />
+mircea_popescu: yes, but costs money and takes time.</p>
+<p>punkman: orders of magnitude cheaper than recalculating nonce+digest<br />
+mircea_popescu: not really. for one thing, now it's finite.</p></blockquote>
+<p>Sure, to some degree miners can fiddle the block they mine to escape from under this. That is their reserve power, to protect them from the blight that'd be 0 shift digests. Nevertheless - it is not free nor easy to do, especially given the very limited medium of the asics they can make.</p>
+						</li>
+
+										<li id="comment-116400" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116400" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>@<b>Adlai</b><br />
+<blockquote>The proposed change is less effective if miners implement it "softly" </p></blockquote>
+<p>Carried by political passions of the moment, people tend to interpret this as well as anything else in terms of "it's to punish X" etc. Leaving aside that political expediency makes for horrible design principles - there's a patent reason I announced this years in advance, and that reason isn't to surprise miners.</p>
+<p>The effect of stranding miners is not contemplated. The cause for this very banal and otherwise absolutely necessary move is to heal a well documented, generally accepted, actually present gap in the protocol, not to hit anyone over the head by name. </p>
+<p>So no - it will be perfectly effective if the [more intelligent] miners implement it slowly and with minimal pain. </p>
+<p>More generally - I don't believe in the "soft fork" pretense, just like I don't believe in helping people whether they want to be helped or not and all that USG-like claptrap. The correct approach to mankind's problem is to make the truth plain and measurement tools cheap and effective.</p>
+						</li>
+
+										<li id="comment-116401" class="commentbody"><div class="commenthead"><img alt='jurov`s avatar' src='http://www.explo.yt/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink"><a href='http://www.explo.yt/' class='url'>jurov</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116401" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>Overall, smells to me like exactly such artificial limitation that can be avoided with some clever hack. Like, sacrificing 1 satoshi to unspendable address allows quickly churning merkle roots.</p>
+						</li>
+
+										<li id="comment-116402" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116402" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>Can you off the cuff guess the degree of magnitude difference between the value of one satoshi and the value of one hash today ?</p>
+						</li>
+
+										<li id="comment-116403" class="commentbody"><div class="commenthead"><img alt='an-on`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink">an-on</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116403" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>Finally a question I know the answer to! </p>
+<p>;;genrate 1000000000<br />
+gribble The expected generation output, at 1000000000.0 Mhps, given difficulty of 1.20033340651e+11, is 4.18972356932 BTC per day and 0.174571815388 BTC per hour.</p>
+<p>If 1000000000 Mhps = 0.174571815388 BTC per hour then 1 satoshi = 1000000000000000*3600/17457181 = 206218862025 hashes.</p>
+						</li>
+
+										<li id="comment-116404" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116404" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>What's a coupla hundred billion when you've got passion!</p>
+						</li>
+
+										<li id="comment-116405" class="commentbody"><div class="commenthead"><img alt='ButterFarts`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink">ButterFarts</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116405" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>Paying one satoshi each hash is not what he's saying. Miner only pays the satoshi if the block is mined. Miner doesn't even have to pay anything could just put 10BTC in one address and send one satoshi more each try to himself. Each 10BTC is good for 1gigahash this way no cost to the miner at all.</p>
+						</li>
+
+										<li id="comment-116406" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116406" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>Well, not other than the cost of keeping 10 BTC around for each Gh - or I suppose more properly for each Gh he expects to mine in between finding two blocks. Seems prohibitively expensive.</p>
+<p>The other approach (introduce satoshi payments to random address) may get caught in multiple places. For one thing, there's no reason for blocks to validate that pay out to invalid addresses. The cost of validating each address on ASIC hardware seems to exceed the cost of simply importing a bitfield. The dust spam trap, for another, may raise the cost significantly enough. What would you prefer, paying 10000 satoshi for a block's worth of digests, or paying 10001 satoshi to a dead address sort of dilemma. Note that the requirement here isn't for nodes to make A LOT for their services (not anymore than the point here is to "destroy mining", for that matter). Just as long as they make something as opposed to nothing.</p>
+						</li>
+
+										<li id="comment-116407" class="commentbody"><div class="commenthead"><img alt='an-on`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink">an-on</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116407" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>If the cost to run one node is 1 Bitcoin/month and there are 4320 blocks mined in a month then 25k satoshi/block would be enough to pay for the node.</p>
+						</li>
+
+										<li id="comment-116408" class="commentbody"><div class="commenthead"><img alt='Satoshi's Sisteroshi`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">Satoshi's Sisteroshi</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116408" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>All this talk about jiggling the Merkle tree is childish. MP said the pow would be sha(sha(header+nonce+digest)). He could have just as well said the pow would be that both sha(header+nonce) and sha(digest) come under difficulty, in which case there's no Merkle tree jiggling to be had whatsoever. The method as proposed in principle is workable alright, wisely leaving implementation details tba.</p>
+						</li>
+
+										<li id="comment-116409" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116409" title="">Tuesday, 2 February 2016</a>
+							</div>
+						<p>@<b>an-on</b> Note that those 4320 blocks mined in a month are all the blocks mined by all miners, they wouldn't necessarily be mined by the customer of your particular node.</p>
+<p>@<b>Satoshi's Sisteroshi</b> Sometghing like that. </p>
+<p>Nice name btw.</p>
+						</li>
+
+										<li id="comment-116420" class="commentbody"><div class="commenthead"><img alt='anon`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">25</div>
+								<span class="authorlink">anon</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116420" title="">Wednesday, 3 February 2016</a>
+							</div>
+						<p>The link in comment 14 is broken.</p>
+<p>It should be <a href="http://btcbase.org/log/?date=01-02-2016#1392779">http://btcbase.org/log/?date=01-02-2016#1392779</a></p>
+						</li>
+
+										<li id="comment-116430" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">26</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116430" title="">Thursday, 4 February 2016</a>
+							</div>
+						<p>A right thanks.</p>
+						</li>
+
+										<li id="comment-116503" class="commentbody"><div class="commenthead"><img alt='Breztan`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">27</div>
+								<span class="authorlink">Breztan</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116503" title="">Saturday, 13 February 2016</a>
+							</div>
+						<p>If you are so sure the 2MB hardfork can't happen, bet on it: <a href="https://www.betmoose.com/bet/will-the-bitcoin-classic-2mb-hard-fork-happen-in-2016-1593">https://www.betmoose.com/bet/will-the-bitcoin-classic-2mb-hard-fork-happen-in-2016-1593</a></p>
+						</li>
+
+										<li id="comment-116511" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">28</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116511" title="">Monday, 15 February 2016</a>
+							</div>
+						<p>I can't even be sufficiently derrogatory.</p>
+<p>Get lost, and take that <a href=http://btcbase.org/log/?date=13-02-2016#1404995 >transparent scam / low effort idiocy</a> with you.</p>
+						</li>
+
+										<li id="comment-116712" class="commentbody"><div class="commenthead"><img alt='Ben Vulpes`s avatar' src='http://cascadianhacker.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">29</div>
+								<span class="authorlink"><a href='http://cascadianhacker.com' class='url'>Ben Vulpes</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116712" title="">Sunday, 6 March 2016</a>
+							</div>
+						<p>Perhaps alleviating Merkle-root twiddling and breaking pooled mining:</p>
+<p>SHA256(SHA256(header+nonce+digest+addr+sig))</p>
+<p>Where:<br />
+- coinbase transaction always pays out in its entirety to the contents of the new `addr`field<br />
+- `sig` is a signature of the digest by the private key corresponding to the new  `addr` field</p>
+<p>Sources:<br />
+- <a href="http://bitcoinstats.com/irc/bitcoin-dev/logs/2011/11/21#l1321905670.0">http://bitcoinstats.com/irc/bitcoin-dev/logs/2011/11/21#l1321905670.0</a><br />
+- <a href="https://bitcointalk.org/index.php?topic=652443.20">https://bitcointalk.org/index.php?topic=652443.20</a><br />
+- <a href="http://hackingdistributed.com/2014/06/13/time-for-a-hard-bitcoin-fork/">http://hackingdistributed.com/2014/06/13/time-for-a-hard-bitcoin-fork/</a></p>
+						</li>
+
+										<li id="comment-116715" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">30</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116715" title="">Sunday, 6 March 2016</a>
+							</div>
+						<p>To begin with : why are you chaining sha256 (as opposed to, say, the 512 we're discussing in the article ? yes this difference matters - a lot!). Why are you chaining twice (as opposed to, say, three times) ?</p>
+<p>This proposal is a miserable USG-enabler. There needs not be any form of acceptance in Bitcoin ; the notion of including signed acceptance of transactions by the receiver in Bitcoin transactions is pure USG.</p>
+						</li>
+
+										<li id="comment-116718" class="commentbody"><div class="commenthead"><img alt='Ben Vulpes`s avatar' src='http://cascadianhacker.com/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">31</div>
+								<span class="authorlink"><a href='http://cascadianhacker.com' class='url'>Ben Vulpes</a></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116718" title="">Sunday, 6 March 2016</a>
+							</div>
+						<p>512! 512! 256 was simply muscle memory.</p>
+<p>&gt; the notion of including signed acceptance of transactions by the receiver in Bitcoin transactions is pure USG.</p>
+<p>I don't quite understand how the above is 'signed acceptance of transactions by the receiver': the bitfield to be signed is the nonce-th digest, not anything transaction related.</p>
+						</li>
+
+										<li id="comment-116719" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">32</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116719" title="">Sunday, 6 March 2016</a>
+							</div>
+						<p>>`sig` is a signature of the digest by the private key corresponding to the new `addr` field </p>
+<p>How am I to interpret this ?</p>
+						</li>
+
+										<li id="comment-116750" class="commentbody"><div class="commenthead"><img alt='Daniel`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">33</div>
+								<span class="authorlink">Daniel</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116750" title="">Wednesday, 9 March 2016</a>
+							</div>
+						<p>So I read the post, then I read *all* the comments and now I feel uber dumb. And i'm a coder. I was expecting to understand something from this discussion but my brain hurts.</p>
+						</li>
+
+										<li id="comment-116752" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">34</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116752" title="">Wednesday, 9 March 2016</a>
+							</div>
+						<p>Welcome to Trilema.</p>
+						</li>
+
+										<li id="comment-121472" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">35</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-121472" title="">Wednesday, 1 March 2017</a>
+							</div>
+						<p>Exciting update: further discussion in the forum culminated with <a href=http://btcbase.org/log/2017-03-01#1620661 >a very interesting proposal</a> to use Luby codes (on the basis of the fixed-width transaction model that recently emerged).</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-117790">
+					<div class='trackhead'>
+						<div class="commentcount">36</div>
+						<span class="authorlink"><a href='http://thestringpuller.com/2016/06/bitcoin-wont-hardfork-any-time-soon/' class='url'>Bitcoin Won&#8217;t Hardfork Any Time Soon | Pull Your Own Strings</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-117790" title="">Saturday, 25 June 2016</a>
+					</div>
+					<p>[...] this year, a proposal was made to reduce miner centralization through a hard fork. The specifics of the design are not fully flushed out but the essence of this [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-117896">
+					<div class='trackhead'>
+						<div class="commentcount">37</div>
+						<span class="authorlink"><a href='http://thestringpuller.com/2016/07/consumers-revolt/' class='url'>Consumers Revolt | Pull Your Own Strings</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-117896" title="">Sunday, 3 July 2016</a>
+					</div>
+					<p>[...] the hard fork missile crisis has yet to be fully resolved with a treaty, the block size ceiling remains at 1 megabyte, which has begun to price lower value transaction out [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-125811">
+					<div class='trackhead'>
+						<div class="commentcount">38</div>
+						<span class="authorlink"><a href='http://danielpbarron.com/2017/how-are-people-using-bitcoin/' class='url'>How are people using Bitcoin &laquo; Daniel P. Barron</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-125811" title="">Monday, 28 May 2018</a>
+					</div>
+					<p>[...] displaced by buzzwords. &#8617;Really. There has not been nor will there likely ever be a bitcoin node at PorcFest. &#8617;Again really. Most of the actual commerce taking place is at the food vendors [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-127127">
+					<div class='trackhead'>
+						<div class="commentcount">39</div>
+						<span class="authorlink"><a href='http://danielpbarron.com/2016/the-new-bitcoin/' class='url'>The New Bitcoin &laquo; Daniel P. Barron</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-127127" title="">Wednesday, 28 November 2018</a>
+					</div>
+					<p>[...] is another twistable knob. can be 1, can be whatever. see footnote 2, example Exempli gratia : if the fourth block is added to a blockchain consisting [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-132530">
+					<div class='trackhead'>
+						<div class="commentcount">40</div>
+						<span class="authorlink"><a href='http://fixpoint.welshcomputing.com/2019/keccak-background/?b=%5B%5E%5DThe&amp;e=%5B%5E%5DThe%20necessary%20prerequisite%20for%20any%20change%20to%20the%20Bitcoin%20protocol%20%5B%5E%5D%20mircea_popesc' class='url'>Keccak background &laquo; Fixpoint</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-132530" title="">Tuesday, 3 December 2019</a>
+					</div>
+					<p>[...] [^]The necessary prerequisite for any change to the Bitcoin protocol [^] mircea_popescu: <a href="http://log.bitcoin-assets.com/?date=01-02-2016#1393026">http://log.bitcoin-assets.com/?date=01-02-2016#1393026</a> &lt;&lt; at least it wasn;t fucking developed by teh nsa. assbot: Logged on 01-02-2016 19:29:18; ascii_butugychag: ;;later tell mircea_popescu in what sense is adoptinc keccak a rejection of usg standards? it was actually adopted as sha3... mircea_popescu: as far as we know. whatevs. minor point. ascii_butugychag: btw between that thread and now i went and read the keccak spec ascii_butugychag: it is mighty spiffy. ascii_butugychag: accordionizes to size. mircea_popescu: :) mircea_popescu: i don't need to explain what i meant by not finite then ? ascii_butugychag: aha. ascii_butugychag: other hashes also accept infinite bits but they eat where they shit. mircea_popescu: quite. mircea_popescu: and mind that while in no means do i propose this is "Asic resistant", from a designer perspective you must appreciate i'm giving you a fun job to do. mircea_popescu: at least therer's that. mircea_popescu: always make sure everyone's having fun. ascii_butugychag: quite! nobody will be plagiarizing old verilog from fpga docs to bake this one. ascii_butugychag: very asian-resistant. ascii_butugychag: which is a mega-plus. [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-142220">
+					<div class='trackhead'>
+						<div class="commentcount">41</div>
+						<span class="authorlink"><a href='/2016/to-the-dao-and-the-ethereum-community-fuck-you?b=Hash%20%28Keccak&amp;e=ure%3A#select' class='url'>To the DAO and the Ethereum community : Fuck you. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142220" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] Hash (Keccak): 0xaf9e302a664122389d17ee0fa4394d0c24c33236143c1f26faed97ebb d017d0e Signature: [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-147672">
+					<div class='trackhead'>
+						<div class="commentcount">42</div>
+						<span class="authorlink"><a href='http://fixpoint.welshcomputing.com/2020/bitcoin-transactions-and-their-signing-2-attachment/?b=that%20the%20Bit&amp;e=pt%20a#select' class='url'>Bitcoin transactions and their signing, 2: attachment &laquo; Fixpoint</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-147672" title="">Wednesday, 4 March 2020</a>
+					</div>
+					<p>[...] that the Bitcoin protocol externalizes much of the cost of transacting onto all node operators, and unless a satisfactory solution to that tough problem is deployed, transaction throughput must be kept a [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="author5e321d9" id="author5e321d9" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email5e321d9" id="email5e321d9" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="url5e321d9" id="url5e321d9" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="64828" /></p>
+				<input type="hidden" name="comment_post_time" value="1763120008-18.97.9.175" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2025 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-64828")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-64828");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-64828");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>

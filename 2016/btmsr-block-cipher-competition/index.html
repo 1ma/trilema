@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="private,max-age:9800">
+	<meta name="description" content="Planet Earth's most widely read blog." /> 
+	<meta name="robots" content="index,follow,noarchive" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" href="/wp-content/themes/trilema/style.css" type="text/css" media="screen" />
+
+<style type="text/css">  body {      	background: #fff url('/wp-content/themes/trilema/images/bg_jun2014-2.jpg') no-repeat center top; }  </style>
+
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="/feed/atom/" />
+	<link rel="alternate" type="application/rss+xml" title="Trilema RSS Feed" href="/feed/" />
+	<link rel="pingback" href="/xmlrpc.php" />
+		<title>B,TMSR~ Block Cipher Competition on Trilema - A blog by Mircea Popescu.</title>
+	<style type="text/css">
+						ol.footnotes li {list-style-type:lower-roman;}
+						ol.footnotes{font-size:0.8em; color:#000000;}		</style>
+<script language="JavaScript" type="text/javascript">
+if (top.location != self.location) top.location = self.location;
+</script>
+
+	
+</head>
+<body>
+
+
+<div id="base">
+	<div id="mask_head_ie"></div>
+	<div id="base2">
+		<div id="header">
+			<div id="blogtitle"><a href="/">Trilema</a></div>
+			<div id="subtitle">Mediocrity is not a lack of intelligence.<br />Mediocrity is intelligence entirely dedicated to self-preservation.
+</div>
+
+
+
+			
+
+		</div>
+		<div id="mask_foot"></div>
+		<div id="container">
+<div id="content">        <div class="spacer"></div>             <span id="shash-64884"><div class="post" id="post-64884">                    <h1><a href="/2016/btmsr-block-cipher-competition/" rel="bookmark" title="Permanent Link to B,TMSR~ Block Cipher Competition">B,TMSR~ Block Cipher Competition</a></h1>                        <div class="date">                                     Thursday, 04 February, Year 8 d.Tr.&nbsp;|&nbsp;Author: <a href="/author/admin/" title="Posts by Mircea Popescu">Mircea Popescu</a>                                                        </div>
+
+                        <div class="entry">
+<p>The Most<sup><a href="#footnote_0_64884" id="identifier_0_64884" class="footnote-link footnote-identifier-link" title="Moreso than anything else.">i</a></sup> Serene<sup><a href="#footnote_1_64884" id="identifier_1_64884" class="footnote-link footnote-identifier-link" title="This denotes that it is sovereign.">ii</a></sup> Republic, reunited in congress, decided :</p>
+<ol type="A">
+<li>That <a href="/forum-logs-for-02-feb-2016#2014358">all presently known block ciphers suck</a> ; </li>
+<li>That an actually useful block cipher is required for our own purposes<sup><a href="#footnote_2_64884" id="identifier_2_64884" class="footnote-link footnote-identifier-link" title="Which are, quite transparently, the destruction of any other pretend-sovereign and the enslavement of its supporters.">iii</a></sup>;</li>
+<li>That <a href="/forum-logs-for-04-feb-2016#2016199">we will consider</a> proposals from barbarians as well as citizens<sup><a href="#footnote_3_64884" id="identifier_3_64884" class="footnote-link footnote-identifier-link" title="Citizenship revolves around presence in the WoT.">iv</a></sup>. </li>
+</ol>
+<p>Consequently, you are cordially invited to submit a proposal for a block cipher that : </p>
+<ol>
+<li>Works<sup><a href="#footnote_4_64884" id="identifier_4_64884" class="footnote-link footnote-identifier-link" title="The difference between works and `works` is best illustrated by the discussion of keccak.">v</a></sup> on block sizes of 1 kbytes, 4 kbytes, 16 kbytes and 64 kbytes. Bonus points for ciphers that work on an arbitrary block size.</li>
+<li>Use a 64 kbyte key.</li>
+<li>Fits In Head<sup><a href="#footnote_5_64884" id="identifier_5_64884" class="footnote-link footnote-identifier-link" title="This means that the intelligent reader can hold the entire item in his mind at the same time. In this sense Fermat's theorem is an example of FIH, even if the proof hardly qualifies ; whereas Maxwell's original equations are not an example of FIH, even if Heaviside's restatement is.">vi</a></sup></li>
+<li>Items which come with a proof of hardness, as well as items that eschew basic arithmetic operations<sup><a href="#footnote_6_64884" id="identifier_6_64884" class="footnote-link footnote-identifier-link" title="To understand this point, the relevant discussion :
+mircea_popescu asciilifeform if you feel like entertaining some crackpottery, suppose a hash function defined as follows : a) calculate PM ; pM ; P!M ; p!M where P and p are the perimeters of polygons of M sides circumscribing and inscribed respectively in the same circle and !M is the bitwise negation of M ; b) calculate V1 = 2pMPM/(PM+pM) ; V2 = sqrt(pMPM) ; V3 = 2p!MP!M/(P!M+p!M) ; V4 = sqrt(p!MP!M) ; c) calculate H = (V1 - V2) * (V3 - V4) and finally d) return blocksize digits from the key-th position in H. how'd you go about attacking this ?
+asciilifeform I would have to think about it. But Gauss could prolly tell you right now! Wake'im up.
+mircea_popescu lol. (basically - they're the classical (Archimedan!) approximations of Pi, for the text and reversed text, to an arbitrary precision. Makes for an eminently tunable hashfunction).
+asciilifeform Terrible hash function. Bailey, Borwein, &#038; Plouffe.
+mircea_popescu Do you see what I did here ?
+asciilifeform (IIRC Plouffe was the worker bee and the other 2 were parasites).
+mircea_popescu It is apparently a lot easier to follow math in words than in symbols, EVEN FOR YOU.
+asciilifeform Actually I am writing it out in symbols!111111 Why the bitwise negation ?
+mircea_popescu HA! You took a second to answer after my 2nd line, minutes after the first produced nothing! Timing attack on your brain!
+asciilifeform Clearly!1
+mircea_popescu Anyway - being able to calculate Pi itself does not actually help here, because we're specifically collecting the noise of the formula against the text and its mirror, rather than Pi itself. Hence the substractions.
+asciilifeform The root ops go poorly with bit arithmetic.
+mircea_popescu So they do. GOOD. Fuck the fucking computing-centric paradigm in crypotography. It's your tool not your fucking master.
+asciilifeform Then let's have the candle.
+mircea_popescu No. It's your tool, it must be used.
+asciilifeform Then you're stuck with wandering decimal crud. And titanic lookup tables, etc.
+mircea_popescu Sure. Anyway bignum operations is a solved problem. Even in Lisp.
+asciilifeform 'even' l0l
+mircea_popescu :)
+asciilifeform But decimal soup is still ick
+mircea_popescu Good.
+asciilifeform You won't have repeatable output.
+mircea_popescu So ?
+asciilifeform No repeat, no decrypt.
+mircea_popescu Hash function not cipher
+asciilifeform Then works.
+* mircea_popescu is still curious to hear how people'd attack, if anyone cares. Esp re preimage.
+asciilifeform I will prolly care. on the train, some time soon.
+mircea_popescu The reason I give it is mostly didactic. It plainly shows what I mean re proper use of math and treating your computer like a tool to do a job rather than treating your job as something to be adjusted to fit the computer - without having to delve into complexities and subtleties of number theory etc. Something as commonplace as `use the intervals of confidence of a polynomial method to estimate a transcendent` is really good enough. And it exhibits all those important properties : such as, you can ~actually~ use infinite message, and you can also use any arbitrary padding you like, up to infinity - the hash function won't complain. And you can want it to shit out any block size you want it to shit out - also won't complain, but give EQUALLY MEANINGFUL results. Whether you ask for 3 or 13 or 294 digits.
+asciilifeform I am quite certain that you knew this, but pretty much all published block ciphers date to the dark ages, when transistor was painfully expensive
+mircea_popescu I do. Still, some points have to be made. REPEATEDLY. Also, this is NOT a block cipher, but anyway.
+asciilifeform Age of cheap transistor had a faux-renaissance where folks used the cheap transistors for elaborate self-delusion - 'this is sooo complicated, nobody!1111 could crack', which led to a pile of corpses and a reaction.
+mircea_popescu Quite. Whereas the correct solution is to stick to the math. computers are fucking tractors not farm designers.
+asciilifeform Which enemy, naturally, took full advantage of. And here we are, somewhere after this.
+
+">vii</a></sup> as implemented by computers will be particularly favoured. </li>
+<li>While we will consider purely theoretical proposals, items which come with sample implementation and assorted tests will be preferred.<sup><a href="#footnote_7_64884" id="identifier_7_64884" class="footnote-link footnote-identifier-link" title="If you are unsure as to how this sort of submission should ideally look, djb's excellent salsa20 page should provide some good pointers.">viii</a></sup></li>
+</ol>
+<p>The rewards will be a 10 BTC payment from me, as well as a <em>honoris causa</em> position in the very <a href="/2015/a-new-lordship-list/">Lordship</a>. Let the party begin!</p>
+&mdash;&mdash;&mdash;<ol class="footnotes"><li id="footnote_0_64884" class="footnote">Moreso than anything else. [<a href="#identifier_0_64884" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_1_64884" class="footnote">This denotes that it is sovereign. [<a href="#identifier_1_64884" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_2_64884" class="footnote">Which are, quite transparently, the destruction of any other pretend-sovereign and the enslavement of its supporters. [<a href="#identifier_2_64884" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_3_64884" class="footnote">Citizenship revolves around <a href="http://www.btcalpha.com/wot/">presence</a> in the <a href="/2014/what-the-wot-is-for-how-it-works-and-how-to-use-it/">WoT</a>. [<a href="#identifier_3_64884" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_4_64884" class="footnote">The difference between works and "works" is best illustrated by <a href="/forum-logs-for-01-feb-2016#2012475">the discussion of keccak</a>. [<a href="#identifier_4_64884" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_5_64884" class="footnote">This means that the intelligent reader can hold the entire item in his mind at the same time. In this sense Fermat's theorem is an example of FIH, even if the proof hardly qualifies ; whereas Maxwell's original equations are not an example of FIH, even if Heaviside's restatement is. [<a href="#identifier_5_64884" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_6_64884" class="footnote">To understand this point, the relevant discussion :<br />
+<blockquote><p><b>mircea_popescu</b> asciilifeform if you feel like entertaining some crackpottery, suppose a hash function defined as follows : a) calculate PM ; pM ; P!M ; p!M where P and p are the perimeters of polygons of M sides circumscribing and inscribed respectively in the same circle and !M is the bitwise negation of M ; b) calculate V1 = 2pMPM/(PM+pM) ; V2 = sqrt(pMPM) ; V3 = 2p!MP!M/(P!M+p!M) ; V4 = sqrt(p!MP!M) ; c) calculate H = (V1 - V2) * (V3 - V4) and finally d) return blocksize digits from the key-th position in H. how'd you go about attacking this ?</p>
+<p><b>asciilifeform</b> I would have to think about it. But Gauss could prolly tell you right now! Wake'im up.<br />
+<b>mircea_popescu</b> lol. (basically - they're the classical (Archimedan!) approximations of Pi, for the text and reversed text, to an arbitrary precision. Makes for an eminently tunable hashfunction).</p>
+<p><b>asciilifeform</b> Terrible hash function. Bailey, Borwein, &#038; Plouffe.<br />
+<b>mircea_popescu</b> Do you see what I did here ?</p>
+<p><b>asciilifeform</b> (IIRC Plouffe was the worker bee and the other 2 were parasites).<br />
+<b>mircea_popescu</b> It is apparently a lot easier to follow math in words than in symbols, EVEN FOR YOU.</p>
+<p><b>asciilifeform</b> Actually I am writing it out in symbols!111111 Why the bitwise negation ?<br />
+<b>mircea_popescu</b> HA! You took a second to answer after my 2nd line, minutes after the first produced nothing! Timing attack on your brain!</p>
+<p><b>asciilifeform</b> Clearly!1<br />
+<b>mircea_popescu</b> Anyway - being able to calculate Pi itself does not actually help here, because we're specifically collecting the noise of the formula against the text and its mirror, rather than Pi itself. Hence the substractions.</p>
+<p><b>asciilifeform</b> The root ops go poorly with bit arithmetic.<br />
+<b>mircea_popescu</b> So they do. GOOD. Fuck the fucking computing-centric paradigm in crypotography. It's your tool not your fucking master.</p>
+<p><b>asciilifeform</b> Then let's have the candle.<br />
+<b>mircea_popescu</b> No. It's your tool, it must be used.</p>
+<p><b>asciilifeform</b> Then you're stuck with wandering decimal crud. And titanic lookup tables, etc.<br />
+<b>mircea_popescu</b> Sure. Anyway bignum operations is a solved problem. Even in Lisp.</p>
+<p><b>asciilifeform</b> 'even' l0l<br />
+<b>mircea_popescu</b> :)</p>
+<p><b>asciilifeform</b> But decimal soup is still ick<br />
+<b>mircea_popescu</b> Good.</p>
+<p><b>asciilifeform</b> You won't have repeatable output.<br />
+<b>mircea_popescu</b> So ?</p>
+<p><b>asciilifeform</b> No repeat, no decrypt.<br />
+<b>mircea_popescu</b> Hash function not cipher</p>
+<p><b>asciilifeform</b> Then works.<br />
+* mircea_popescu is still curious to hear how people'd attack, if anyone cares. Esp re preimage.</p>
+<p><b>asciilifeform</b> I will prolly care. on the train, some time soon.<br />
+<b>mircea_popescu</b> The reason I give it is mostly didactic. It plainly shows what I mean re proper use of math and treating your computer like a tool to do a job rather than treating your job as something to be adjusted to fit the computer - without having to delve into complexities and subtleties of <a href=/forum-logs-for-02-feb-2016#2014101>number theory etc</a>. Something as commonplace as "use the intervals of confidence of a polynomial method to estimate a transcendent" is really good enough. And it exhibits all those important properties : such as, you can ~actually~ use infinite message, and you can also use any arbitrary padding you like, up to infinity - the hash function won't complain. And you can want it to shit out any block size you want it to shit out - also won't complain, but give EQUALLY MEANINGFUL results. Whether you ask for 3 or 13 or 294 digits.</p>
+<p><b>asciilifeform</b> I am quite certain that you knew this, but pretty much all published block ciphers date to the dark ages, when transistor was painfully expensive<br />
+<b>mircea_popescu</b> I do. Still, some points have to be made. REPEATEDLY. Also, this is NOT a block cipher, but anyway.</p>
+<p><b>asciilifeform</b> Age of cheap transistor had a faux-renaissance where folks used the cheap transistors for elaborate self-delusion - 'this is sooo complicated, nobody!1111 could crack', which led to a pile of corpses and a reaction.</p>
+<p><b>mircea_popescu</b> Quite. Whereas the correct solution is to stick to the math. computers are fucking tractors not farm designers.</p>
+<p><b>asciilifeform</b> Which enemy, naturally, took full advantage of. And here we are, somewhere after this.
+</p></blockquote>
+<p> [<a href="#identifier_6_64884" class="footnote-link footnote-back-link">&#8617;</a>]</li><li id="footnote_7_64884" class="footnote">If you are unsure as to how this sort of submission should ideally look, djb's excellent <a href="http://cr.yp.to/snuffle.html">salsa20</a> page should provide some good pointers. [<a href="#identifier_7_64884" class="footnote-link footnote-back-link">&#8617;</a>]</li></ol>
+              <div>
+                <div class="alignleft">&laquo; <a href="/2016/bitbet-sbbet-january-2016-statement/">BitBet (S.BBET) January 2016 Statement</a></div>
+                <div class="alignright"><a href="/2016/mpif-fmpif-january-2016-statement/">MPIF (F.MPIF) January 2016 Statement</a> &raquo;</div>
+              </div>
+
+<div class="clear"></div>
+                                                    </div>
+                  <div class="info">
+                             </span><span class="category">Category: <a href="/category/bitcoin/" title="View all posts in Bitcoin" rel="category tag">Bitcoin</a></span>
+   </div>
+                   <div class="info_bot"></div>
+            </div>
+          <div id="postmetadata">
+                        Comments feed : <a href='/2016/btmsr-block-cipher-competition/feed/'>RSS 2.0</a>.                                             Leave your own <a href="#respond">comment</a> below, or send a <a href="/2016/btmsr-block-cipher-competition/trackback/" rel="trackback">trackback</a>.                                   </div>
+  
+<!-- You can start editing here. -->
+		<p class="commenttitle"><a name="comments"></a>26 Responses</p>
+		
+		<ol class="commentlist">
+									<li id="comment-116434" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">1</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116434" title="">Thursday, 4 February 2016</a>
+							</div>
+						<p>I propose abused-RSA (or Cramer-Shoup!) as block cipher!</p>
+<p>Can haz 10btc ??</p>
+						</li>
+
+										<li id="comment-116435" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">2</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116435" title="">Friday, 5 February 2016</a>
+							</div>
+						<p>If it ends up accepted, yeah.</p>
+						</li>
+
+										<li id="comment-116438" class="commentbody"><div class="commenthead"><img alt='Jonathan Wilson`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">3</div>
+								<span class="authorlink">Jonathan Wilson</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116438" title="">Friday, 5 February 2016</a>
+							</div>
+						<p>This is NOT the right way to design a block cipher. The AES contest that gave us the current AES block cipher is a far better way to design a block cipher.</p>
+<p>Every candidate for AES was thoroughly scrutinized by a bunch of cryptography gurus to make sure it was secure. And unless some major cryptographic breakthrough has been made that I didn't hear of (or someone has built a working Quantum Computer and managed to keep it secret from the whole world) AES still cant be cracked in any meaningful length of time.</p>
+						</li>
+
+										<li id="comment-116439" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">4</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116439" title="">Friday, 5 February 2016</a>
+							</div>
+						<p>Here's the list of imbecilities you commited in five lines : </p>
+<p>1. "This is NOT right!11", reasons omitted.<br />
+2. "My favourite team (that I don't play on) beats your team (that you play on), notwitstanding the 0-9000 score so far because fantasy sports league in my head."<br />
+3. "Guru-isms matter in crypto, because this is a sort of yoga."<br />
+4. "I can't even name the fucking gurus, but that's ok - if you can put up with my inability to list reasons, why should an inability to list authorities matter."<br />
+5. "Everything is fine as it is, because I'm not a cow living in a carefully designed pen, but Jonathan Wilson himself!"</p>
+<p>What are you, some sort of an idiot ?</p>
+						</li>
+
+										<li id="comment-116441" class="commentbody"><div class="commenthead"><img alt='Chris Dodd`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">5</div>
+								<span class="authorlink">Chris Dodd</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116441" title="">Saturday, 6 February 2016</a>
+							</div>
+						<p>Requirements 2 and 3 seem impossible to meet simultaneously -- I certainly can't keep a 64K key in my head.  Why the requirement for such a huge key?</p>
+						</li>
+
+										<li id="comment-116443" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">6</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116443" title="">Saturday, 6 February 2016</a>
+							</div>
+						<p>You're certainly not supposed to keep <em>the key</em> in your head, good grief.</p>
+						</li>
+
+										<li id="comment-116447" class="commentbody"><div class="commenthead"><img alt='Anne Williams`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">7</div>
+								<span class="authorlink">Anne Williams</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116447" title="">Saturday, 6 February 2016</a>
+							</div>
+						<p>Could you be clearer on the key size, please?  You cannot be asking for an *effective* key size that large, because humans are unable to reason reliably about computations larger than about the square of anything attempted.  So even 256-security guarantees are suspect.  Larger claims are purely wishful thinking.</p>
+<p>On the other hand, it's easy to create a key derivation function that takes arbitrary sized input.  But we need to know the desired *effective* key size.</p>
+<p>Except for the desire for a block cipher, Keccak comes close.</p>
+						</li>
+
+										<li id="comment-116449" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">8</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116449" title="">Saturday, 6 February 2016</a>
+							</div>
+						<p>Yes, I can, and I am in fact asking for an *effective* key size that large.</p>
+<p>What humans can or can't do is a topic for another time, but generally speaking the list includes flight, as well as flight with devices heavier than air, as well as flight with devices heavier than air at speeds that exceed the speed of sound, as well as flight with devices heavier than air at speeds that exceed the speed of sound taking place outside of Earth's atmosphere. </p>
+<p>For the sake of conversation let me point out that you may find the discussions around keccak as preserved in the logs interesting.</p>
+						</li>
+
+										<li id="comment-116451" class="commentbody"><div class="commenthead"><img alt='Sandy Harris`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">9</div>
+								<span class="authorlink">Sandy Harris</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116451" title="">Saturday, 6 February 2016</a>
+							</div>
+						<p>I designed a cipher called Enchilada for the CAESAR competition. It did not make it into the second round.<br />
+<a href="https://aezoo.compute.dtu.dk/doku.php?id=enchilada">https://aezoo.compute.dtu.dk/doku.php?id=enchilada</a></p>
+<p>A cipher in that class seems to meet many of your requirements. It does have a rather nice proof of hardness, and depending why you think "all presently known block ciphers suck", this might be one that doesn't.</p>
+<p>Provided your mental diagram facility allows black boxes for things like an existing block cipher or stream cipher -- I used ChaCha and Rijndael, but any ciphers could be used -- the rest of the Enchilada construction will fit nicely in your head; it is really pretty simple. </p>
+<p>I defined Enchilada for 128- or 256-bit blocks. Extending it to 512 or 1024 is trivial; just use the 512-bit cipher from the Whirlpool hash or large-block versions of Threefish. Going beyond that, which I am not convinced is necessary, would need a block cipher with big enough block size. The only off-the-shelf ones I know of are Xtea (there are published attacks) and Hasty Pudding (which by itself meets many of your requirements):<br />
+<a href="https://en.wikipedia.org/wiki/Hasty_Pudding_cipher">https://en.wikipedia.org/wiki/Hasty_Pudding_cipher</a></p>
+						</li>
+
+										<li id="comment-116452" class="commentbody"><div class="commenthead"><img alt='Mark Ramirez`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">10</div>
+								<span class="authorlink">Mark Ramirez</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116452" title="">Saturday, 6 February 2016</a>
+							</div>
+						<p>The "we accept barbarians" got my attention ;-)</p>
+<p>Anyway cryptography is NOT one of my strong programming skills,<br />
+yet, precissely, that's why I got some independent, out of the box,<br />
+think different ides, abot cyphering ....</p>
+						</li>
+
+										<li id="comment-116454" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">11</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116454" title="">Saturday, 6 February 2016</a>
+							</div>
+						<p>You will notice that cryptography isn't a programming skill anymore than marketing is.</p>
+						</li>
+
+										<li id="comment-116467" class="commentbody"><div class="commenthead"><img alt='William Jones`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">12</div>
+								<span class="authorlink">William Jones</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116467" title="">Sunday, 7 February 2016</a>
+							</div>
+						<p><a href="http://journals.aps.org/prx/pdf/10.1103/PhysRevX.4.011026">http://journals.aps.org/prx/pdf/10.1103/PhysRevX.4.011026</a></p>
+<p>I haven't done the footwork but it seems to me that this model could be converted to provide a hash instead of encrypt.  At first blush it seems like it would be nearly impossible to modify the data and still maintain the coupling in a way the receiver would accept.</p>
+						</li>
+
+										<li id="comment-116471" class="commentbody"><div class="commenthead"><img alt='Iodilitiodo`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">13</div>
+								<span class="authorlink">Iodilitiodo</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116471" title="">Sunday, 7 February 2016</a>
+							</div>
+						<p>Ever heard of Turtle cipher?</p>
+						</li>
+
+										<li id="comment-116472" class="commentbody"><div class="commenthead"><img alt='Eddie`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">14</div>
+								<span class="authorlink">Eddie</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116472" title="">Monday, 8 February 2016</a>
+							</div>
+						<p>Do you have an explanation in English for your rather bold claim that "all presently known block ciphers suck"?  (And by "known" do you mean "the ones that you've heard of", or are you claiming some kind of encyclopaedic knowledge of this domain?)</p>
+<p>I mean, SHA-2 has only been around a decade and a half, and has never been cracked past a few dozen bits, but sure, it SUCKS, whereas some bullshit you came up with when you were stoned OBVIOUSLY has to be better, because so many decades of research have been done on that type of approach.</p>
+<p>Look, some high-school kid comes up in the newspaper every few years.  "They invented a new super cool form of cyptography using something they learned in high school."  Sure, all these methods kind of basically work, sure, they scramble bits and shit, but they never get used because nobody trusts them, because the high-school student can't do the cryptography legwork required to demonstrate that they're even slightly secure.  Are you really expecting SOMEONE ELSE to do this legwork for you, based on your own stupid ideas, for a measly 10BTC?  HA!!!!</p>
+						</li>
+
+										<li id="comment-116474" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">15</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116474" title="">Monday, 8 February 2016</a>
+							</div>
+						<p>> Do you have an explanation in English for your rather bold claim </p>
+<p>It's not a claim, it's a statement. A claim is what a powerless entity makes before another in a position to judge. A statement is what a powerful entity makes before another not in a position to judge. Your situation here is not that you are in a position to judge and enjoy a differential of power, but exactly the reverse. As such your impudent pretension to the contrary is not going to make you any friends. Please make an effort to learn to behave in polite society before you word in its direction.</p>
+<p>Uncharacteristically, I did look through the rest of your message. There's nothing else there. Your father should be very ashamed of himself.</p>
+						</li>
+
+										<li id="comment-116476" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">16</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116476" title="">Monday, 8 February 2016</a>
+							</div>
+						<p>Eddie and the other Eddies:</p>
+<p>In the 'so many decades of research', point us to an example of something that actually distinguishes, e.g., AES, from '... high-school kid comes up in the newspaper every few years. "They invented a new super cool form of cyptography [sic] using something they learned in high school."'</p>
+<p>In terms of mathematical proof of hardness.</p>
+<p>And skip the appeals to authority, and other cognitive stop-signs for pliant idiots.</p>
+						</li>
+
+										<li id="comment-116484" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">17</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116484" title="">Tuesday, 9 February 2016</a>
+							</div>
+						<p>Turns out two comments were eaten by the spam filter, I've fished them out.</p>
+<p>@<b>Sandy Harris</b> This sounds like a composition scheme, is it ?</p>
+<p>Certainly a block cipher with large blocks would require a block cipher with large blocks. That's exactly the idea here.</p>
+<p>@<b>William Jones</b> Meh pdfs.</p>
+						</li>
+
+										<li id="comment-116499" class="commentbody"><div class="commenthead"><img alt='Sandy Harris`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">18</div>
+								<span class="authorlink">Sandy Harris</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116499" title="">Saturday, 13 February 2016</a>
+							</div>
+						<p>Mircea: Enchilada uses a form of composition; Use the stream cipher to generate whitening for the block cipher.</p>
+<p>It is not vulnerable to most of the usual attacks on stream ciphers. They start by using known plaintext &amp; matching ciphertext to get a keystream sample. That won't work here unless the block cipher is horrendously weak.</p>
+<p>It is  not vulnerable to most of the usual attacks on block ciphers. They require multiple blocks encrypted the same way &amp; here the whitening changes for every block.</p>
+<p>The security proof is based on the Even-Mansour analysis of the XOR-permutation-XOR structure. I claim that with fairly mild assumptions -- the block cipher is a non-linear permutation and the stream cipher is not appallingly bad -- this construction has a provable lower bound on its security level: 2^b where b is the block size of the block cipher.</p>
+<p>That claim needs analysis &amp; I'd love to see some.</p>
+						</li>
+
+										<li id="comment-116500" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">19</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-116500" title="">Saturday, 13 February 2016</a>
+							</div>
+						<p>You should probably join #<a href=http://webchat.freenode.net/?channels=#bitcoin-assets&#038;nick=SandyHarris >b-a</a> and discuss the security proof there with the resident cryptozoologists. In general whitening is dimly regarded, but the claim of a lower bound on security will be very interesting.</p>
+						</li>
+
+										<li id="comment-123804" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">20</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-123804" title="">Tuesday, 5 December 2017</a>
+							</div>
+						<p>As per <a href=http://btcbase.org/log/2017-12-05#1746369 >the logs</a>, the window of opportunity here turns out to have been 22 months (February 4 2016 to December 5th 2017), an interval during which the republic failed to produce the required item. We are consequently more idebted to tradition than we needed to be or should have been.</p>
+<p>I would hope this bitter lesson will be informative <a href=http://btcbase.org/log/2017-12-02#1745606 >in the vein of</a></p>
+<blockquote><p><b>mircea_popescu</b> !~later tell apeloyee hey, do you want a job working for minigame ?<br />
+<b>jhvh1</b> <b>mircea_popescu</b> The operation succeeded.<br />
+<strong>asciilifeform</strong> had nfi minigame had jobs etc</p>
+<p><b>mircea_popescu</b> why not ? i've been trying to hire a bunch of artists for what, 5 years now ? the one thing teh republic doesn't lack is jobs.<br />
+<b>asciilifeform</b> i suppose the word has >1 meaning</p>
+<p><b>mircea_popescu</b> like what ?<br />
+<b>asciilifeform</b> well we dun have so many, afaik, 'fix X, get Q btc' sort of job.</p>
+<p><b>mircea_popescu</b> we have tons. starting with "fix your tits, get 0.02 btc" and from there on.<br />
+<b>asciilifeform</b> other than the tits<br />
+<b>asciilifeform</b> do i know about any of this ?</p>
+<p><b>mircea_popescu</b> <a href="http://btcbase.org/log/2017-12-02#1745610">http://btcbase.org/log/2017-12-02#1745610</a><br />
+<b>a111</b> Logged on 2017-12-02 22:02 <b>mircea_popescu</b> i've been trying to hire a bunch of artists for what, 5 years now ?<br />
+<b>asciilifeform</b> artist auditions are different item than the one in the q where 'fix x... get..' neh</p>
+<p><b>mircea_popescu</b> asciilifeform you personally for instance <a href="http://btcbase.org/log/2016-12-27#1591437">http://btcbase.org/log/2016-12-27#1591437</a> ; to quote from teh very boardroom of minigame earlier, "<mircea_popescu> noa. evident ca idealu' ar fi fost ca tata asta sa fi fost gata facuta din 2016, cum discutasem initial cu stan. da'... sufletu'."<br />
+<b>a111</b> Logged on 2016-12-27 22:14 <b>mircea_popescu</b> course since the nsa consulting work for minigame is going to produce ada rsa, it might be an idea to have an ~ada~ tmsr crypto lib.<br />
+<b>mircea_popescu</b> ie, it'd have been nice to have this item done last year as per original discussions. but whatever.<br />
+<b>mircea_popescu</b> asciilifeform there's no difference. artists dun wanna work, ie ON TIME and TO SPEC and ON WHAT THEY'RE TOLD TO just like erryone else.<br />
+<b>asciilifeform</b> actually now that i think about it, mircea_popescu had a crypto bounty thing also<br />
+<b>asciilifeform</b> for symmetric ciphering<br />
+asciilifeform can't turn up the link for some reason</p>
+<p><b>mircea_popescu</b> the amount of jobs awaiting workers exceeds the amount of availavble workers by a factor never before seen in human history ; not even during the saudi reign 20 years ago. not even in china. nowhere.<br />
+<b>mircea_popescu</b> take for instance <a href="http://btcbase.org/log/2017-11-22#1742032">http://btcbase.org/log/2017-11-22#1742032</a><br />
+<b>a111</b> Logged on 2017-11-22 11:41 RagnarDanneskjol: mircea_popescu I may have someone worth inviting to chan for interview in the coming days.  Most of the folks I know over there are primarily oral translators, so having to look around a bit.  Just got back yesterday -  BJ is a real shithole but the people are adorable, lots of good duck.   FYI -  'VPN AC' (Romanian) seems to be the only one working well/consistently behind the firewall (I've used many) and<br />
+<b>mircea_popescu</b> has it yet been A YEAR since the discussion of hiring a motherfcucking chinese office girl was tabled ?<br />
+asciilifeform finally did dig up the first mention of proto-ffa in l0gz : <a href="http://btcbase.org/log/2016-06-09#1479552">http://btcbase.org/log/2016-06-09#1479552</a><br />
+<b>a111</b> Logged on 2016-06-09 22:06 <b>asciilifeform</b> i discovered that mainstream finite field libs are as complicated as they are largely because they insist on growable - and, ergo, heap-allocated - nums.<br />
+<b>mircea_popescu</b> where the fuck is the office girl ?<br />
+<b>mircea_popescu</b> etcetera.<br />
+<b>asciilifeform</b> !~seen RagnarDanneskjol<br />
+<b>jhvh1</b> <b>asciilifeform</b> RagnarDanneskjol was last seen in #trilema 1 week, 3 days, 10 hours, 32 minutes, and 21 seconds ago: <b>RagnarDanneskjol</b> Everbright Bank has, by far, the lowest entry barriers  for business or tourist visitors opening new accounts.</p>
+<p><b>mircea_popescu</b> and yes, i'd much rather pour a coupla bitcents into the ground instead of paying "hiring experts" etcetera. by very far. at least when i pour it into the ground, i know what i'm doing with it as i do it. consider this schmucktard : <a href="http://btcbase.org/log/2017-10-11#1724165">http://btcbase.org/log/2017-10-11#1724165</a><br />
+<b>a111</b> Logged on 2017-10-11 20:40 BHopkins: I had to look up the current price, and the answer is yes :)<br />
+<b>asciilifeform</b> what about him</p>
+<p><b>mircea_popescu</b> nobody in his line of work has EVER made a bitcoin's worth in one year no matter what they did. but does he have enough sense to go... hmmm... i'll treat this as an advance, and use it to finance my supposedly useful work coming back with deliveries worth at least 10x that, because thaty's how useful i am, and see what happens. so... no. white man is lazy and stupid, in whatever order. the problem's not the lack of jobs. the problem's the 3rd world whore's attitude, as described in <a href=/2017/the-day-of-failure-trilemma/#selection-121.0-129.149 >that friday piece</a>. but otherwise -- everything's sough. you got tits ? make money. you can code ? make money. you can draw ? make money. you "got relations" / can pr/whatever the fuck you got ? MAKE MONEY! "oh but mp... really... i can't do anything, not usefully, not well, not within pre-glacial timeframes, not... not..." riight,<br />
+<b>asciilifeform</b> glacial at least beats nuffin... asciilifeform so far only glacial .</p>
+<p><b>mircea_popescu</b> <a href="/2015/these-fools-have-been-handed-a-technology-so-clever-so-disruptive-and-revolutionary-that-the-rulers-of-the-world-would-have-to-fully-unmask-themselves-as-ruthless-tyrants-in-order-to-suppress-it/#comment-123721">/2015/these-fools-have-been-handed-a-technology-so-clever-so-disruptive-and-revolutionary-that-the-rulers-of-the-world-would-have-to-fully-unmask-themselves-as-ruthless-tyrants-in-order-to-suppress-it/#comment-123721</a> &lt;&lt; this stupid bitch, can be arsed to spam trilema by hand, can NOT be arsed to read anything. everyone, including the very last hopeless african in the throes of death by innanition imagines th emselves a process designer. ima, dontcha know, follow the funnel they constructed, like everyone's got an apple concept store. what, and write them emails ? why. who the fuck are they, and who the fuck am i, and who adapts to whom ? recall that schmuck with the french isp, which upon examination turned out to be 0% isp and 100% a vehicle for the inept vanities and worldviews of a few idle and overcomfortable schmucks ? it's all that, all the way down.<br />
+<b>asciilifeform</b> the cocks thing ?</p>
+<p><b>mircea_popescu</b> no, recently, some grenoble thing.<br />
+<b>asciilifeform</b> the one davout dug up ?</p>
+<p><b>mircea_popescu</b> or for that matter just as recently, some german dork,  the dude with fucking options and self-determinations as to who he wants to work with. all of it, however wrapped, however excused, it's the same thing : we here in white man world are incapable of doing anything useful and don't wish to see why this'd make any difference.</mircea_popescu></p></blockquote>
+<p>even though I don't really expect much more, or much other than <a href=/2013/various-kinds-of-stickiness/#comment-112932 >the traditional response</a>. Because people are valuable and important and whatever the fuck <a href=/2017/the-practical-costs-of-hallucinated-freedom/ >hallucinated nonsense</a>.</p>
+						</li>
+
+										<li id="comment-123805" class="commentbody"><div class="commenthead"><img alt='Stanislav Datskovskiy`s avatar' src='http://www.loper-os.org/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">21</div>
+								<span class="authorlink"><a href='http://www.loper-os.org' class='url'>Stanislav Datskovskiy</a><img src="/wp-content/themes/trilema/images/insigna-tech.png" class="insigna" alt="insigna de tehnolog" height=10 width=24 /></span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-123805" title="">Tuesday, 5 December 2017</a>
+							</div>
+						<p>I feel rather stupid now for having played in a contest without a time bound declared in advance.</p>
+<p>Out of curiosity, do you intend to use Serpent forever, even after a well-founded TMSR replacement appears ?</p>
+						</li>
+
+										<li id="comment-123806" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">22</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-123806" title="">Tuesday, 5 December 2017</a>
+							</div>
+						<p>What would the need for a replacement look like ?</p>
+<p>For instance, I have no intention to ever upgrade the eulora crypto lib currently being brewed. I don't believe in upgrades, nor really <a href=/2011/nu-mai-faceti-upgrade-la-nimic-niciodata/ >ever have</a>. So in this sense, there's no need for a symmetric cipher anymore, Serpent won.</p>
+<p>There is some space for an alternate, perhaps stronger, crypto lib for usage in a republican replacement of GPG, for which FFA looks like a strong basis (and where the much belated Cramer-Shoup implementation may have a good home). It is possible this may want a symmetric cipher for some purpose, but honestly I expect it will be in the vein of (if not likely exactly) MPFHF, which is to say algorithmic rather than algebraic. <em>If at all present</em>, which seems altogether improbable currently.</p>
+<p>In short -- there was not so much known demand for this category of item, and it missed out on the little that there was.</p>
+						</li>
+
+										<li id="comment-126938" class="commentbody"><div class="commenthead"><img alt='PeterL`s avatar' src='/default_avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">23</div>
+								<span class="authorlink">PeterL</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-126938" title="">Tuesday, 30 October 2018</a>
+							</div>
+						<p>How about using keccak as a key expander?</p>
+<p>Given a message M of size m and a key K, the enciphered message E = M xor keccak(input = K, output size=m).</p>
+<p>M is then retreived as E xor keccak(K).</p>
+<p>Works with any key size and message size you want.</p>
+						</li>
+
+										<li id="comment-126940" class="adminbody"><div class="adminhead"><img alt='Mircea Popescu`s avatar' src='/avatar.png' class='avatar avatar-32 photo' height='32' width='32' />								<div class="commentcount">24</div>
+								<span class="authorlink">Mircea Popescu</span>&nbsp;								<span class=""></span>
+													<br />
+								<a class="commentlink" href="#comment-126940" title="">Tuesday, 30 October 2018</a>
+							</div>
+						<p>Your systematic dedication to lowerst-possible-effort "contributing" is starting to make you sound very much like <a href=/2018/have-you-ever-paid-for-sex/#comment-126836 >the Romanian morons</a>. </p>
+<p>This is even useful, after a fashion, in that it shows there's nothing specifically <a href=/2009/ce-inseamna-sa-fii-roman/ >Romanian</a> about the Romanian morons in question, but that their sad state is merely the necessary result of systematically following a stupid strategy (something I, and as far as I know I alone, always suspected). </p>
+<p>Because in the end that's how you build, Romanias and Uruguays and any other Orcistan : by systematically being you, by making <a href=/2012/cine-se-casatoreste/ >your sort of committments</a> to the saeculum and then attempting <a href=http://btcbase.org/log/2015-03-06#1043852 >to adapt the Republic</a> to them "as best one can", which is to say without waking up the insignificant other in the other room.</p>
+<p>It doesn't work, <a href=http://btcbase.org/log/2018-06-19#1826859 >lay off it</a>.</p>
+						</li>
+
+						</ol>
+
+
+
+	<ol class="commentlist">
+				<li class="trackbody" id="comment-142066">
+					<div class='trackhead'>
+						<div class="commentcount">25</div>
+						<span class="authorlink"><a href='/2016/introducing-permanence?b=discovery%20an&amp;e=n%20of#select' class='url'>Introducing [P]ermanence on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-142066" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] discovery and exploitation. [&#8617;]To replace SSH entirely. To be based on the eventual winner of TMSR's cipher competition. [&#8617;]The grammatical singular implies nothing about actual implementation. [&#8617;]Mention of [...]</p>
+				</li>
+
+				<li class="trackbody" id="comment-145097">
+					<div class='trackhead'>
+						<div class="commentcount">26</div>
+						<span class="authorlink"><a href='/2018/so-i-designed-a-block-chipher?b=seriously%2C%20w&amp;e=much#select' class='url'>So I designed a block chipher. on Trilema - A blog by Mircea Popescu.</a></span>&nbsp;(via Pingback)						<span class=""></span>
+						<br />
+						<a class="commentlink" href="#comment-145097" title="">Wednesday, 8 January 2020</a>
+					</div>
+					<p>[...] seriously, what can I do ?! On one hand, the item that won (by fucking default) doesn't seem to be doing all that well ; on the other hand  In short -- there was not so much [...]</p>
+				</li>
+
+	</ol>
+
+
+		<strong id="respond">Add your cents!</strong>
+ <small>&raquo; <br /><ul>If this is your first comment, it will wait to be approved. This usually takes a few hours. Subsequent comments are not delayed.</ul></small>
+			<form action="/wp-comments-post.php" method="post" id="commentform">
+	
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+					<p><input type="text" name="authord73b6bc" id="authord73b6bc" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="emaild73b6bc" id="emaild73b6bc" value="" size="22" tabindex="2" />
+						<label for="email"><small>E-Mail
+</small></label></p>
+					<p><input type="text" name="urld73b6bc" id="urld73b6bc" value="" size="22" tabindex="3" />
+
+						<label for="url"><small>Website (optional)</small></label></p>
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags:&nbsp;&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<!--- This is just a decoy ;)
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+						<label for="author"><small>Name&nbsp;(required)</small></label></p>
+					<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+
+						<label for="email"><small>E-Mail (will not be published , required)</small></label></p>
+					<p><input type="text" name="url" id="url" value="http://pest" size="22" tabindex="3" />
+
+-->
+
+				<p><textarea name="comment" id="comment" cols="60" rows="12" tabindex="4"></textarea></p>
+				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Send" />
+				<input type="hidden" name="comment_post_ID" value="64884" /></p>
+				<input type="hidden" name="comment_post_time" value="1780775513-18.97.14.89" /></p>
+
+				
+			</form>
+  		</div><div id="sidebar">
+        <div id="sidebar_top"></div>
+        <div id="sidebar1">
+                <ul>
+         
+
+<ul>
+                        <h5>Recent Comments</h5>
+      <ul>
+      	<li><a href=/2011/ce-am-pierdut-si-voi-n-ati-avut/#comment-165319 >Mircea Popescu</a> It's baaaaack!!!</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165310 >Mircea Popescu</a> Well, it's a both-ways tower defense, you build the pathway and the op...</li>
+	<li><a href=/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/#comment-165307 >Diana Coman</a>  the game went offline (it does that after five or so minutes of inactivity...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165303 >Mircea Popescu</a> Ahahaha. If we met back when I was still in that line I'd have totally...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165302 >pletzalcoatl</a> You were thinking a pallid Danny DeVito in a purple crushed velvet suit...</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165300 >Mircea Popescu</a> You're not fooling anyone, you know.</li>
+	<li><a href=/2019/forum-logs-for-05-nov-2015/#comment-165297 >Tyrone White</a> What's up to all</li>
+	<li><a href=/2021/hoe-jokes/#comment-165274 >Mircea Popescu</a> &updated.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165253 >Mircea Popescu</a> PS. s/undertaker/liquidator/ on re-read. Nfi what I was thinking.</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165251 >Mircea Popescu</a> Meh. More nudes less obscure software packages, I don't watsup or w/e.</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165250 >Mircea Popescu</a> Obscure TV actor, plenty of those. (I didn't, for instance, review the...</li>
+	<li><a href=/2021/the-apprenticeship-of-duddy-kravitz/#comment-165239 >CarpraC</a> Since this post brought up ancient actors, their experience and quality, what...</li>
+	<li><a href=/2016/lxs-ninxs/#comment-165227 >temptease</a> call me whatsapp +79910404425</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165222 >Mircea Popescu</a> Heh. Never heard of it. (I however have heard of that kinda posturing,...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165221 >Anon</a> I don't know, some kind of "help you with your finances" scam/online...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165220 >Mircea Popescu</a> No fucking idea, what is it ?</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165219 >Anon</a> In the same line, what is Intuit?</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165218 >Mircea Popescu</a> Heh. Nothing lasts forever, and the "independent woman" least of all.</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165217 >Mircea Popescu</a> Wtf is this inane nonsense! Oh, I get it, artificially interesting...</li>
+	<li><a href=/2020/kitty-freipurr-von-meow-and-other-tales-of-bring-your-own-adventure-to-tamarindo/#comment-165216 >lexy229</a> &gt; how exactly did you figure out what to do to have your avatar show up by...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165214 >anon</a> Have a laugh Description Planet Earth's most widely read blog.... Read More Tim...</li>
+	<li><a href=/2020/trilema-altogether-no-longer-showing/#comment-165212 >Mircea Popescu</a> Heh, the yearly problems of last year's. What a life.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165102 >Mircea Popescu</a> Really, it's top100-ish pretty much everywhere.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165101 >anon</a> #117 in Russia too.</li>
+	<li><a href=/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/#comment-165100 >Joshue</a> Meanwhile when it comes to being famous in Gibraltar...</li>
+      </ul>
+   
+
+        <br />
+</ul>
+        </div>
+                <div id="sidebar2">
+                <ul>
+                        <li><h5>Recent Articles</h5><ul>
+                	<li><a href='/2021/n-i-meaning-h-went-to-m-and/' title='N &#038; I (meaning H) went to M and...'>N &#038; I (meaning H) went to M and...</a></li>
+	<li><a href='/2021/royal-revolt-ii-complete-strategy-guide-also-by-very-far-the-best-on-the-internet/' title='Royal Revolt II complete strategy guide, also by very far the best on the Internet.'>Royal Revolt II complete strategy guide, also by very far the best on the Internet.</a></li>
+	<li><a href='/2021/laltra-meta-del-cielo/' title='L&#039;altra metà del cielo'>L'altra metà del cielo</a></li>
+	<li><a href='/2021/hoe-jokes/' title='Hoe Jokes'>Hoe Jokes</a></li>
+	<li><a href='/2021/the-apprenticeship-of-duddy-kravitz/' title='The Apprenticeship of Duddy Kravitz'>The Apprenticeship of Duddy Kravitz</a></li>
+	<li><a href='/2021/moe-jokes/' title='Moe Jokes'>Moe Jokes</a></li>
+	<li><a href='/2021/joe-jokes/' title='Joe Jokes'>Joe Jokes</a></li>
+	<li><a href='/2021/carried-away/' title='Carried Away'>Carried Away</a></li>
+	<li><a href='/2021/the-value-of-subhuman-life-and-other-non-themes-of-scummy-preoccupation/' title='The value of subhuman life, and other non-themes of scummy preoccupation'>The value of subhuman life, and other non-themes of scummy preoccupation</a></li>
+	<li><a href='/2021/have-you-ever-read-les-liaisons-dangereuses/' title='Have you ever read Les Liaisons dangereuses ?'>Have you ever read Les Liaisons dangereuses ?</a></li>
+	<li><a href='/2021/royal-revolt-ii-kicks-ass/' title='Royal Revolt II Kicks Ass!'>Royal Revolt II Kicks Ass!</a></li>
+	<li><a href='/2021/on-being-female-and-being-a-woman/' title='On being female, and being a woman.'>On being female, and being a woman.</a></li>
+	<li><a href='/2021/il-gatto-mammone/' title='Il gatto mammone'>Il gatto mammone</a></li>
+	<li><a href='/2021/hey-bitches-smell-my-armpits/' title='Hey bitches! Smell my armpits!'>Hey bitches! Smell my armpits!</a></li>
+	<li><a href='/2021/shield-for-murder/' title='Shield for murder'>Shield for murder</a></li>
+	<li><a href='/2021/moral-myopia/' title='Moral myopia'>Moral myopia</a></li>
+	<li><a href='/2021/amarcord/' title='Amarcord'>Amarcord</a></li>
+	<li><a href='/2021/la-minorenne/' title='La minorenne'>La minorenne</a></li>
+	<li><a href='/2021/the-deplorable-generation/' title='The deplorable generation'>The deplorable generation</a></li>
+	<li><a href='/2021/breaking-usg-president-belect-pidden-announces-plans-to-sign-epochal-factaltering-change-footnote-executive-history/' title='BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!'>BREAKING : USG President-Belect Pidden Announces Plans To Sign Epochal Factaltering Change Footnote Executive History!</a></li>
+</ul></li>
+                
+
+        
+<li class="pagenav"><h5>Pages</h5><ul><li class="page_item page-item-220"><a href="/archives-categories/" title="Archives &#038; Categories">Archives &#038; Categories</a></li>
+<li class="page_item page-item-34333"><a href="/contact-pgp/" title="Contact ; PGP">Contact ; PGP</a></li>
+<li class="page_item page-item-181"><a href="/copyright-notice/" title="Copyright Notice">Copyright Notice</a></li>
+<li class="page_item page-item-62578"><a href="/eulora-shop/" title="Eulora Shop">Eulora Shop</a></li>
+<li class="page_item page-item-94098"><a href="/in-the-press/" title="In the press">In the press</a></li>
+<li class="page_item page-item-39332"><a href="/thesaurus-vocabulary/" title="Thesaurus &#038; Vocabulary">Thesaurus &#038; Vocabulary</a></li>
+</ul></li>
+<h5>Say NO! to platforms</h5>      
+<center><a href=/2019/no-platforms/><img src=/wp-content/uploads/2019/08/no-facebook.png></img></a></center>
+
+                                                        </ul>
+        </div>
+
+        <div id="sidebar_bot">
+</div>
+
+<div id="banners">
+
+</div>
+</div>
+		</div>		
+<div id="footer">			
+<a href="/feed/" title="RSS Feed"><img src="/wp-content/themes/trilema/images/rss.jpg" alt="Subscribe RSS" class="rss"/>
+</a>		
+Copyright &copy; 2008 - 
+2026 for all text and images.			
+<br /> 
+Trilema is. Everything else's just hearsay. 
+
+
+</div>	
+</div>
+</div>
+
+	
+<script type="text/javascript">function findPos(obj) {
+  var curtop = 0;
+  while (obj && obj.offsetParent) {
+    curtop += obj.offsetTop; // todo: + webkit-transform
+    obj = obj.offsetParent;
+  }
+  return curtop;
+}
+var artificial = null;
+var prevhash = "";
+function scrollToHash() {
+  if (document.location.hash.replace(/^#/, "")==prevhash.replace(/^#/, ""))
+    return;
+  prevhash = document.location.hash;
+  if (document.location.hash.match(/#selection-[0-9.]+%/)) {
+    var p = parseFloat(document.location.hash.substring(1));
+    if (0 < p && p < 100 /*&& p%5 != 0*/) {
+      var content = document.getElementById("shash-64884")
+      var y = findPos(content) + (content.offsetHeight)*p/100;
+      window.scrollTo(0, y-16);
+    }
+  }
+
+  var adr = document.location.hash.match(/#selection-(\d+).(\d+)-(\d+).(\d+)/);
+  if (adr) {
+    var pos=0,begin=null,end=null;
+    function recur(e) {
+      if (e.nodeType==1) pos = (pos&~1)+2;
+      if (e.nodeType==3) pos = pos|1;
+      if (pos==adr[1]) begin=[e, adr[2]];
+      if (pos==adr[3]) end  =[e, adr[4]];
+      for (var i=0; i<e.childNodes.length; i++)
+        recur(e.childNodes[i]);
+      if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+        pos = (pos&~1)+2;
+    }
+    // remove old "artificial" span if any
+    if (artificial) {
+      artificial.previousSibling.data += artificial.childNodes[0].data;
+      artificial.parentNode.removeChild(artificial);
+    }
+    var content = document.getElementById("shash-64884");
+    recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+    if (begin!=null && end!=null) {
+      // scroll to selection
+      if (begin[0].nodeType==3) {
+        var text = document.createTextNode(begin[0].data.substr(0, begin[1]));
+        artificial = document.createElement("SPAN");
+        artificial.appendChild(document.createTextNode(begin[0].data.substr(begin[1])));
+
+        begin[0].parentNode.insertBefore(text, begin[0]);
+        begin[0].parentNode.replaceChild(artificial, begin[0]);
+
+        if (end[0]===begin[0])
+          end = [artificial.childNodes[0], end[1]-begin[1]];
+        begin = [artificial.childNodes[0], 0];
+        /* window.scrollTo(0, findPos(artificial)-8); */ artificial.scrollIntoView(true);
+      } else if (begin[0].nodeType==1) {
+        /* window.scrollTo(0, findPos(begin[0])-8);   */ begin[0].scrollIntoView(true);
+      }
+
+      if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        var range = document.createRange();
+        range.setStart(begin[0], begin[1]);
+        range.setEnd  (  end[0],   end[1]);
+        sel.addRange(range);
+      } else if (document.selection) { // IE
+      }
+    }
+  }
+}
+window.onhashchange = scrollToHash;
+var initScrollToHashDone = false;
+function initScrollToHash() {
+  if (!initScrollToHashDone) {
+    initScrollToHashDone = true;
+    scrollToHash();
+  }
+}
+window.onload = initScrollToHash;
+setTimeout(initScrollToHash, 500); /* onload can be delayed by counter code */
+
+//document.onselectionchange = /* only webkit has working document.onselectionchange */
+document.onmousedown = document.onmouseup = function(e) {
+  var newhash = "";
+  if (window.getSelection) {
+    var sel=window.getSelection();
+    if (!sel.isCollapsed) {
+      var pos=0,begin=[0,0],end=[0,0];
+      var range=sel.getRangeAt(0);
+      function recur(e) {
+        if (e===artificial) {
+          if (range.startContainer===e.childNodes[0]) begin=[pos, e.previousSibling.data.length+range.startOffset];
+          if (range.endContainer  ===e.childNodes[0]) end  =[pos, e.previousSibling.data.length+range.endOffset ];
+        } else {
+          if (e.nodeType==1) pos = (pos&~1)+2;
+          if (e.nodeType==3) pos = pos|1;
+          if (range.startContainer===e) begin=[pos, range.startOffset];
+          if (range.endContainer  ===e) end  =[pos, range.endOffset ];
+          for (var i=0; i<e.childNodes.length; i++)
+            recur(e.childNodes[i]);
+          if (e.childNodes.length>0 && e.lastChild.nodeType==3)
+            pos = (pos&~1)+2;
+        }
+      }
+
+      var content = document.getElementById("shash-64884");
+      recur(content.childNodes[content.childNodes[0].nodeType==3 ? 1 : 0]);
+      if (begin[0]>0 && end[0]>0) {
+        newhash = "selection-"+begin[0]+"."+begin[1]+"-"+end[0]+"."+end[1];
+      }
+    }
+  } else if (document.selection) { // IE
+  }
+
+  try {
+    var oldhash = location.hash.replace(/^#/, "");
+    if (oldhash != newhash) {
+      prevhash = newhash; /* avoid firing window.onhashchange and scrolling */
+      if (history.replaceState)
+        history.replaceState('', document.title, newhash=="" ? window.location.pathname : '#'+newhash);
+      else
+        location.hash = newhash;
+    }
+  } catch(e) {
+  }
+};
+</script></body></html>
